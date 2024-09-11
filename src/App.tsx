@@ -1,13 +1,15 @@
-import React from 'react';
-import { Button } from './components/ui/button';
+import { Toast } from '@/components/toast';
+import AuthProvider from '@/contexts/auth';
+import { RouterProvider } from 'react-router-dom';
+import { router } from '@/routes/router';
 
 const App = () => {
-  return (
-    <div>
-      <h1 className='text-3xl font-bold underline'>Hello</h1>
-      <Button variant={'outline'}>Click me</Button>
-    </div>
-  );
+	return (
+		<AuthProvider>
+			<RouterProvider router={router} />
+			<Toast />
+		</AuthProvider>
+	);
 };
 
 export default App;
