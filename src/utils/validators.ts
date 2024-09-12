@@ -14,6 +14,7 @@ export const STRING = (message = 'Required', typeError = 'Invalid String') =>
 		})
 		.trim();
 
+export const STRING_NULLABLE = STRING().nullable();
 export const STRING_REQUIRED = STRING('Required');
 export const STRING_OPTIONAL = STRING().optional();
 
@@ -23,6 +24,7 @@ export const UUID = (message = 'Required') =>
 export const UUID_REQUIRED = UUID('Required');
 export const UUID_FK = UUID().nullable();
 export const UUID_PK = UUID_REQUIRED;
+export const UUID_NULLABLE = UUID().nullable();
 
 // URL
 export const URL = (message = 'Required') => STRING(message).url('Invalid URL');
@@ -40,6 +42,7 @@ export const EMAIL = (message = 'Required') =>
 	STRING(message).email('Invalid Email');
 export const EMAIL_REQUIRED = EMAIL('Required');
 export const EMAIL_OPTIONAL = EMAIL().optional();
+export const EMAIL_NULLABLE = EMAIL().nullable();
 
 // JSON STRING
 export const JSON_STRING = zu.json();
@@ -94,6 +97,7 @@ export const PHONE_NUMBER = STRING('Required', 'Invalid Phone Number').regex(
 );
 export const PHONE_NUMBER_REQUIRED = PHONE_NUMBER;
 export const PHONE_NUMBER_OPTIONAL = PHONE_NUMBER.optional();
+export const PHONE_NUMBER_NULLABLE = PHONE_NUMBER.nullable();
 
 // PASSWORD
 export const PASSWORD = STRING_REQUIRED.min(
