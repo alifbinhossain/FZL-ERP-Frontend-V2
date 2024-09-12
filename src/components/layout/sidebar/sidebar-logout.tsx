@@ -9,9 +9,9 @@ const SidebarLogout = () => {
 	return (
 		<motion.button
 			whileTap={{ scale: 0.95 }}
-			className='text-primary-content flex w-full items-center gap-3 rounded-md bg-gradient-to-r from-accent/10 to-accent/30 px-5 py-2 text-left text-sm font-normal'
+			className='flex w-full items-center gap-3 rounded-md bg-gradient-to-r from-accent/10 to-accent/30 px-5 py-2 text-left text-sm font-normal text-primary-foreground'
 			onClick={logout}>
-			<LogOut className='text-primary-content size-6' />
+			<LogOut className='size-6 text-primary-foreground' />
 			<User />
 		</motion.button>
 	);

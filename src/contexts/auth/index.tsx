@@ -1,3 +1,4 @@
+import { ILoginData } from '@/components/auth/login/login-schema';
 import { ShowToast } from '@/components/toast';
 import { useCookie, useLocalStorage } from '@/hooks';
 import { api } from '@/lib/api';
@@ -16,7 +17,7 @@ interface IAuthContext {
 	user: IUser | null;
 	canAccess: string | null;
 	loading: boolean;
-	login: (data: unknown) => void;
+	login: (data: ILoginData) => void;
 	logout: () => void;
 }
 
@@ -63,7 +64,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 	// Login function with error handling and toast notifications
 	const login = useCallback(
-		async (data: unknown) => {
+		async (data: ILoginData) => {
 			try {
 				const response = await api.post<IAuthResponse>(
 					'/hr/user/login',

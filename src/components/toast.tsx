@@ -1,3 +1,4 @@
+import { IToast } from '@/types';
 import {
 	Slide,
 	ToastContainer,
@@ -17,19 +18,7 @@ const SuccessToast = (text: string) =>
 const WarningToast = (text: string) => toast.warn(<ToastBody {...{ text }} />);
 const ErrorToast = (text: string) => toast.error(<ToastBody {...{ text }} />);
 
-interface IShowLocalToastProps {
-	type:
-		| 'create'
-		| 'insert'
-		| 'delete'
-		| 'error'
-		| 'warning'
-		| 'update'
-		| string;
-	message: string;
-}
-
-const ShowLocalToast = ({ type, message }: IShowLocalToastProps) => {
+const ShowLocalToast = ({ type, message }: Omit<IToast, 'status'>) => {
 	switch (type) {
 		case 'create':
 		case 'insert':
@@ -48,9 +37,12 @@ const ShowLocalToast = ({ type, message }: IShowLocalToastProps) => {
 	}
 };
 
-const ShowToast = (toast: IShowLocalToastProps) => {
+const ShowToast = (toast: Omit<IToast, 'status'>) => {
 	const { type, message } = toast;
-	ShowLocalToast({ ...{ type, message } });
+	ShowLocalToast({
+		type,
+		message,
+	});
 };
 
 const DefaultConfig: ToastContainerProps = {

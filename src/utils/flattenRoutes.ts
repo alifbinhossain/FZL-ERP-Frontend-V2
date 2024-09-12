@@ -1,7 +1,9 @@
-function flattenRoutes(routes: any[]) {
-	const flattenedArray: any[] = [];
+import { IRoute } from '@/types';
 
-	function flattenRecursive(route: any) {
+function flattenRoutes(routes: IRoute[]) {
+	const flattenedArray: IRoute[] = [];
+
+	function flattenRecursive(route: IRoute) {
 		if (!route) {
 			return;
 		}
@@ -9,7 +11,7 @@ function flattenRoutes(routes: any[]) {
 		flattenedArray.push(route);
 
 		if (route.children) {
-			route.children.forEach((child: any) => flattenRecursive(child));
+			route.children.forEach((child: IRoute) => flattenRecursive(child));
 		}
 	}
 

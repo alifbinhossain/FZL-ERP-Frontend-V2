@@ -6,6 +6,7 @@ import SidebarFile from './sidebar-file';
 import useSidebar from '@/contexts/sidebar/useSidebar';
 import { cn } from '@/lib/utils';
 import { confirmRouteMatch } from '@/utils';
+import { IRoute } from '@/types';
 
 // Animation definitions for the sidebar folder
 const variants = {
@@ -46,14 +47,7 @@ const childVariants = {
 	},
 };
 
-interface ISidebarFolderProps {
-	path: string;
-	name: string;
-	children: any;
-	disableCollapse?: boolean;
-}
-
-const SidebarFolder: React.FC<ISidebarFolderProps> = (props) => {
+const SidebarFolder: React.FC<IRoute> = (props) => {
 	// Destructure props
 	const { path, name, children, disableCollapse } = props;
 
@@ -92,10 +86,10 @@ const SidebarFolder: React.FC<ISidebarFolderProps> = (props) => {
 
 	// Determine the folder's class based on its state
 	const folderClassName = cn(
-		'text-primary-content group relative z-10 flex w-full items-center justify-between gap-2 rounded-none rounded-r-md border-l-[3px] px-4 py-2 text-sm',
+		'group relative z-10 flex w-full items-center justify-between gap-2 rounded-none rounded-r-md border-l-[3px] px-4 py-2 text-sm text-primary-foreground',
 		isOpen && !isCloseAll
-			? 'text-primary-content border-secondary bg-gradient-to-r from-accent/10 to-accent/30'
-			: 'text-primary-content/70 hover:text-primary-content border-transparent hover:bg-secondary/20'
+			? 'border-secondary bg-gradient-to-r from-accent/10 to-accent/30 text-primary-foreground'
+			: 'border-transparent text-primary-foreground/70 hover:bg-secondary/20 hover:text-primary-foreground'
 	);
 
 	// Handle folder click
@@ -133,8 +127,8 @@ const SidebarFolder: React.FC<ISidebarFolderProps> = (props) => {
 					whileTap={{ scale: 0.95 }}
 					key={name}
 					onClick={() => {
-						if (!isOpen && children[0]?.path) {
-							navigate(children[0].path);
+						if (!isOpen && children![0]?.path) {
+							navigate(children![0].path);
 						}
 						handleClick();
 					}}

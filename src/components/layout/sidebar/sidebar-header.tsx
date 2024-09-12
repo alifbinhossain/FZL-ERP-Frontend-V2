@@ -10,7 +10,7 @@ const SidebarHeader = () => {
 
 	return (
 		<div>
-			<div className='relative border-b border-secondary px-4 py-6'>
+			<div className='relative border-b border-border/10 px-4 py-6'>
 				<BrandLogo />
 
 				<button
@@ -27,7 +27,7 @@ const SidebarHeader = () => {
 					<motion.button
 						whileTap={{ scale: 0.9 }}
 						onClick={() => setIsCloseAll((prev) => !prev)}
-						className='text- btn btn-square btn-ghost btn-sm text-primary-content/70'>
+						className='text- btn btn-square btn-ghost btn-sm text-primary-foreground/70'>
 						<CopyMinus className='size-4' />
 					</motion.button>
 				</div>

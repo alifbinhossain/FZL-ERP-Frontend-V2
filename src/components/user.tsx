@@ -28,7 +28,7 @@ const User = ({ avatar = false }) => {
 
 			<div className='flex flex-col items-start'>
 				<span className='truncate capitalize'>{user?.name}</span>
-				<span className='text-primary-content/70 text-[.6rem] capitalize'>
+				<span className='text-[.6rem] capitalize text-primary-foreground/70'>
 					{user?.department}
 				</span>
 			</div>

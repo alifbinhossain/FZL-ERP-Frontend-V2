@@ -1,12 +1,10 @@
-import useAuth from '@/contexts/auth/useAuth';
-import { useRHF } from '@/hooks';
-import { Input, PasswordInput } from '@/ui';
-import { LOGIN_NULL, LOGIN_SCHEMA } from '@/util/Schema';
 import { useEffect } from 'react';
+import useAuth from '@/contexts/auth/useAuth';
 import { useNavigate } from 'react-router-dom';
+import LoginForm from './login-form';
 
 const Login = () => {
-	const { user, signed, login } = useAuth();
+	const { user, signed } = useAuth();
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -14,12 +12,6 @@ const Login = () => {
 			navigate('/', { replace: true });
 		}
 	}, [signed, user, navigate]);
-
-	const { register, handleSubmit, errors } = useRHF(LOGIN_SCHEMA, LOGIN_NULL);
-
-	const onSubmit = async (data: unknown) => {
-		await login(data);
-	};
 
 	return (
 		<div className='flex min-h-screen min-w-max flex-col justify-center py-6 sm:py-12'>
@@ -32,7 +24,18 @@ const Login = () => {
 								Fortune Zipper LTD
 							</span>
 						</span>
-						<form
+						<LoginForm />
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default Login;
+
+{
+	/* <form
 							onSubmit={handleSubmit(onSubmit)}
 							noValidate
 							method='dialog'
@@ -56,12 +59,5 @@ const Login = () => {
 									Login
 								</button>
 							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-};
-
-export default Login;
+						</form> */
+}

@@ -1,11 +1,13 @@
-function filterSidebarRoutes(routes: any[]) {
+import { IRoute } from '@/types';
+
+function filterSidebarRoutes(routes: IRoute[]) {
 	// Helper function to check if a route has visible access
-	function hasVisible(route: any) {
+	function hasVisible(route: IRoute) {
 		return route.hidden !== true;
 	}
 
 	// Recursive function to filter routes and their children
-	function filterRecursive(routes: any[]) {
+	function filterRecursive(routes: IRoute[]): IRoute[] {
 		return routes.filter((route) => {
 			if (route.children) {
 				// Recursively filter children and keep only those with visible access

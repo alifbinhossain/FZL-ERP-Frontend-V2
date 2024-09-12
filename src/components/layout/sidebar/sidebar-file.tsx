@@ -1,5 +1,6 @@
 import useLayout from '@/contexts/layout/useLayout';
 import { cn } from '@/lib/utils';
+import { IRoute } from '@/types';
 import { matchUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -21,12 +22,7 @@ const variants = {
 	},
 };
 
-interface ISidebarFileProps {
-	path: string;
-	name: string;
-}
-
-const SidebarFile: React.FC<ISidebarFileProps> = ({ path, name }) => {
+const SidebarFile: React.FC<IRoute> = ({ path, name }) => {
 	const { setSidebarOpen } = useLayout();
 	const { pathname } = useLocation();
 
@@ -34,18 +30,18 @@ const SidebarFile: React.FC<ISidebarFileProps> = ({ path, name }) => {
 		<motion.li variants={variants} initial='initial' animate='animate'>
 			<NavLink
 				onClick={() => setSidebarOpen(false)}
-				to={path}
+				to={path!}
 				className={({ isActive }) =>
 					cn(
 						'relative flex w-full gap-2 rounded-r-md border-l-[3px] border-none px-4 py-2 text-sm font-normal transition-colors duration-200',
-						isActive || matchUrl(path, pathname)
-							? 'text-primary-content bg-gradient-to-r from-accent/10 to-accent/30 font-medium'
-							: 'text-primary-content/70 hover:text-primary-content hover:bg-secondary/20'
+						isActive || matchUrl(path!, pathname)
+							? 'bg-gradient-to-r from-accent/10 to-accent/30 font-medium text-primary-foreground'
+							: 'text-primary-foreground/70 hover:bg-secondary/20 hover:text-primary-foreground'
 					)
 				}>
 				<span className='block w-full truncate'>{name}</span>
 
-				{matchUrl(path, pathname) ? (
+				{matchUrl(path!, pathname) ? (
 					<motion.div
 						className='absolute inset-0 h-full w-[3px] bg-accent'
 						layoutId='active-sidebar-item'

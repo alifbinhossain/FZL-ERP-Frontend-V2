@@ -1,14 +1,8 @@
+import { IRoute } from '@/types';
 import SidebarFile from './sidebar-file';
 import SidebarFolder from './sidebar-folder';
 
-interface ISidebarItemProps {
-	path: string;
-	name: string;
-	children?: any;
-	disableCollapse?: boolean;
-}
-
-const SidebarItem: React.FC<ISidebarItemProps> = ({
+const SidebarItem: React.FC<IRoute> = ({
 	path,
 	name,
 	children,

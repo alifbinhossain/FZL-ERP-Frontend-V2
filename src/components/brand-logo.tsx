@@ -12,10 +12,10 @@ const BrandLogo: React.FC<IBrandLogoProps> = ({ className, ...props }) => {
 	return (
 		<NavLink
 			className={cn(
-				'text-primary-content flex items-center justify-center text-2xl font-bold md:text-4xl',
+				'flex items-center justify-center text-2xl font-bold text-primary-foreground md:text-4xl',
 				className
 			)}
-			to={route?.path}
+			to={route.path!}
 			{...props}>
 			FZL
 		</NavLink>
