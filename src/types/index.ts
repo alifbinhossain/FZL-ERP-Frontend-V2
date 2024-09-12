@@ -6,7 +6,7 @@ export type IAuthResponse = {
 	message: string;
 	token: string;
 	user: IUser;
-	can_access: string;
+	can_access: { [key: string]: string };
 };
 
 export type IToast = {

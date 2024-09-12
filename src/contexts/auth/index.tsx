@@ -15,7 +15,7 @@ import {
 interface IAuthContext {
 	signed: boolean;
 	user: IUser | null;
-	canAccess: string | null;
+	canAccess: { [key: string]: string } | null;
 	loading: boolean;
 	login: (data: ILoginData) => void;
 	logout: () => void;
@@ -32,7 +32,9 @@ interface AuthProviderProps {
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	// State variables for user, access, and loading state
 	const [user, setUser] = useState<IUser | null>(null);
-	const [canAccess, setCanAccess] = useState<string | null>(null);
+	const [canAccess, setCanAccess] = useState<{
+		[key: string]: string;
+	} | null>(null);
 	const [loading, setLoading] = useState(true);
 
 	// Access to cookie values and functions

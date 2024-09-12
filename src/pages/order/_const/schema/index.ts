@@ -273,3 +273,5 @@ export const PROPERTIES_NULL = {
 	created_at: '',
 	updated_at: '',
 };
+
+export type IProperties = z.infer<typeof PROPERTIES_SCHEMA>;
