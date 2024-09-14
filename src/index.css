@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		font-family: Inter, sans-serif;
+	}
+}
+@layer base {
+	body {
+		@apply border-border bg-background font-inter text-foreground;
+	}
+}
+
+@layer utilities {
+	.sb-red {
+		@apply border border-red-500;
+	}
+	.sb-green {
+		@apply border border-green-500;
+	}
+	.sb-yellow {
+		@apply border border-yellow-500;
+	}
+	.sb-blue {
+		@apply border border-blue-500;
+	}
+	.sb-purple {
+		@apply border border-purple-500;
+	}
+}
