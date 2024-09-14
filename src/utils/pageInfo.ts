@@ -2,7 +2,7 @@ export default class PageInfo {
 	constructor(
 		public title: string,
 		public url: string,
-		public tabName: string | null = null
+		public tabName: string
 	) {}
 
 	getTitle(): string {
@@ -13,7 +13,7 @@ export default class PageInfo {
 		return this.url;
 	}
 
-	getTab(): string | null {
+	getTab(): string {
 		return this.tabName;
 	}
 

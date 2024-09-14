@@ -4,7 +4,6 @@ import {
 	DoubleArrowLeftIcon,
 	DoubleArrowRightIcon,
 } from '@radix-ui/react-icons';
-import { Table } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -14,12 +13,11 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
+import useTable from '@/hooks/useTable';
 
-interface TablePaginationProps<TData> {
-	table: Table<TData>;
-}
+export function TablePagination() {
+	const { table } = useTable();
 
-export function TablePagination<TData>({ table }: TablePaginationProps<TData>) {
 	return (
 		<div className='flex items-center justify-between px-2'>
 			<div className='flex-1 text-sm text-muted-foreground'>

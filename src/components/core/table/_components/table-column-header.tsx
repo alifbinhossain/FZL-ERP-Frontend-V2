@@ -38,7 +38,7 @@ export function TableColumnHeader<TData, TValue>({
 					<Button
 						variant='ghost'
 						size='sm'
-						className='-ml-3 h-8 data-[state=open]:bg-accent'>
+						className='-ml-3 h-7 data-[state=open]:bg-base-300'>
 						<span>{title}</span>
 						{column.getIsSorted() === 'desc' ? (
 							<ArrowDownIcon className='ml-2 h-4 w-4' />

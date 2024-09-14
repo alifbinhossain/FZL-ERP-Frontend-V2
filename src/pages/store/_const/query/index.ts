@@ -2,141 +2,141 @@ import { useTQuery } from '@/hooks';
 import { materialQK, purchaseQK } from './queryKeys';
 
 // Material Section
-export const useMaterialSection = () =>
-	useTQuery({
+export const useMaterialSection = <T>() =>
+	useTQuery<T>({
 		queryKey: materialQK.section(),
 		url: '/material/section',
 	});
 
-export const useMaterialSectionByUUID = (uuid: string) =>
-	useTQuery({
+export const useMaterialSectionByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: materialQK.sectionByUUID(uuid),
 		url: `/material/section/${uuid}`,
 		enabled: !!uuid,
 	});
 
 // Material Type
-export const useMaterialType = () =>
-	useTQuery({
+export const useMaterialType = <T>() =>
+	useTQuery<T>({
 		queryKey: materialQK.type(),
 		url: '/material/type',
 	});
 
-export const useMaterialTypeByUUID = (uuid: string) =>
-	useTQuery({
+export const useMaterialTypeByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: materialQK.typeByUUID(uuid),
 		url: `/material/type/${uuid}`,
 		enabled: !!uuid,
 	});
 
 // Material Info
-export const useMaterialInfo = () =>
-	useTQuery({
+export const useMaterialInfo = <T>() =>
+	useTQuery<T>({
 		queryKey: materialQK.info(),
 		url: '/material/info',
 	});
 
-export const useMaterialInfoByUUID = (uuid: string) =>
-	useTQuery({
+export const useMaterialInfoByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: materialQK.infoByUUID(uuid),
 		url: `/material/info/${uuid}`,
 		enabled: !!uuid,
 	});
 
 // Material Trx
-export const useMaterialTrx = () =>
-	useTQuery({
+export const useMaterialTrx = <T>() =>
+	useTQuery<T>({
 		queryKey: materialQK.trx(),
 		url: '/material/trx',
 	});
 
-export const useMaterialTrxByUUID = (uuid: string) =>
-	useTQuery({
+export const useMaterialTrxByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: materialQK.trxByUUID(uuid),
 		url: `/material/trx/${uuid}`,
 		enabled: !!uuid,
 	});
 
 // Material Stock To SFG
-export const useMaterialStockToSFG = () =>
-	useTQuery({
+export const useMaterialStockToSFG = <T>() =>
+	useTQuery<T>({
 		queryKey: materialQK.stockToSGF(),
 		url: '/material/stock-to-sfg',
 	});
 
-export const useMaterialStockToSFGByUUID = (uuid: string) =>
-	useTQuery({
+export const useMaterialStockToSFGByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: materialQK.stockToSFGByUUID(uuid),
 		url: `/material/stock-to-sfg/${uuid}`,
 		enabled: !!uuid,
 	});
 
 // Purchase Vendor
-export const usePurchaseVendor = () =>
-	useTQuery({
+export const usePurchaseVendor = <T>() =>
+	useTQuery<T>({
 		queryKey: purchaseQK.vendor(),
 		url: '/purchase/vendor',
 	});
 
-export const usePurchaseVendorByUUID = (uuid: string) =>
-	useTQuery({
+export const usePurchaseVendorByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: purchaseQK.vendorByUUID(uuid),
 		url: `/purchase/vendor/${uuid}`,
 		enabled: !!uuid,
 	});
 
 // Purchase Description
-export const usePurchaseDescription = () =>
-	useTQuery({
+export const usePurchaseDescription = <T>() =>
+	useTQuery<T>({
 		queryKey: purchaseQK.description(),
 		url: '/purchase/description',
 	});
 
-export const usePurchaseDescriptionByUUID = (uuid: string) =>
-	useTQuery({
+export const usePurchaseDescriptionByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: purchaseQK.descriptionByUUID(uuid),
 		url: `/purchase/description/${uuid}`,
 		enabled: !!uuid,
 	});
 
 // Purchase Entry
-export const usePurchaseEntry = () =>
-	useTQuery({
+export const usePurchaseEntry = <T>() =>
+	useTQuery<T>({
 		queryKey: purchaseQK.entry(),
 		url: '/purchase/entry',
 	});
 
-export const usePurchaseEntryByUUID = (uuid: string) =>
-	useTQuery({
+export const usePurchaseEntryByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: purchaseQK.entryByUUID(uuid),
 		url: `/purchase/entry/${uuid}`,
 		enabled: !!uuid,
 	});
 
 // Purchase Details
-export const usePurchaseDetailsByUUID = (uuid: string) =>
-	useTQuery({
+export const usePurchaseDetailsByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: purchaseQK.detailsByUUID(uuid),
 		url: `/purchase/purchase-details/by/${uuid}`,
 		enabled: !!uuid,
 	});
 
 // Purchase Log
-export const usePurchaseLog = () =>
-	useTQuery({
+export const usePurchaseLog = <T>() =>
+	useTQuery<T>({
 		queryKey: purchaseQK.log(),
 		url: `/purchase/purchase-log`,
 	});
 
 // Material Trx Against Order
-export const useMaterialTrxAgainstOrderDescription = () =>
-	useTQuery({
+export const useMaterialTrxAgainstOrderDescription = <T>() =>
+	useTQuery<T>({
 		queryKey: materialQK.trxAgainstOrderDescription(),
 		url: '/zipper/material-trx-against-order',
 	});
 
-export const useMaterialTrxAgainstOrderDescriptionByUUID = (uuid: string) =>
-	useTQuery({
+export const useMaterialTrxAgainstOrderDescriptionByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: materialQK.trxAgainstOrderDescriptionByUUID(uuid),
 		url: `/zipper/material-trx-against-order/${uuid}`,
 		enabled: !!uuid,

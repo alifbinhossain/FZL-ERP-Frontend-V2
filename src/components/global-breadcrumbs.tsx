@@ -1,8 +1,16 @@
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { House } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
+
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbPage,
+	BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
 
 const variants = {
 	animate: {
@@ -36,7 +44,7 @@ const GlobalBreadcrumbs = () => {
 
 		if (e.match?.pathname === '/') {
 			return {
-				label: <House className='size-5' />,
+				label: <House className='size-4' />,
 				href: '/',
 			};
 		}
@@ -48,42 +56,69 @@ const GlobalBreadcrumbs = () => {
 	});
 
 	return (
-		<div className='breadcrumbs text-sm'>
-			<ul>
+		<Breadcrumb>
+			<BreadcrumbList>
 				{items?.length > 0 &&
-					items.slice(0, -1).map((item, index) => (
-						<motion.li
-							key={index}
-							variants={variants}
-							initial='initial'
-							animate='animate'>
-							{item.href ? (
-								<Link
-									to={item.href}
-									className={cn('text-secondary')}>
+					items.slice(0, -1).map((item, index) =>
+						item.href ? (
+							<motion.span
+								variants={variants}
+								initial='initial'
+								animate='animate'
+								className='flex flex-wrap items-center gap-1.5 sm:gap-2.5'
+								key={index + 'item'}>
+								<BreadcrumbItem>
+									<BreadcrumbLink
+										className={cn('text-secondary')}
+										href={item.href}>
+										{item.label}
+									</BreadcrumbLink>
+								</BreadcrumbItem>
+								<BreadcrumbSeparator />
+							</motion.span>
+						) : (
+							<motion.span
+								variants={variants}
+								initial='initial'
+								animate='animate'
+								className='flex flex-wrap items-center gap-1.5 sm:gap-2.5'
+								key={index + 'item'}>
+								<BreadcrumbItem key={index + 'item-label'}>
 									{item.label}
-								</Link>
-							) : (
-								<span className={cn('text-secondary')}>
-									{item.label}
-								</span>
-							)}
-						</motion.li>
-					))}
+								</BreadcrumbItem>
+								<BreadcrumbSeparator />
+							</motion.span>
+						)
+					)}
 
 				{items?.length > 0 && (
-					<motion.li
-						key={items.length - 1}
+					<motion.span
 						variants={variants}
 						initial='initial'
-						animate='animate'
-						className='font-medium text-primary'>
-						{items[items.length - 1].label}
-					</motion.li>
+						animate='animate'>
+						<BreadcrumbItem
+							key={items.length - 1}
+							className='font-medium text-primary'>
+							<BreadcrumbPage>
+								{items[items.length - 1].label}
+							</BreadcrumbPage>
+						</BreadcrumbItem>
+					</motion.span>
 				)}
-			</ul>
-		</div>
+			</BreadcrumbList>
+		</Breadcrumb>
 	);
 };
 
 export default GlobalBreadcrumbs;
+
+{
+	/* <motion.li
+		
+variants={variants}
+initial='initial'
+animate='animate'
+>
+
+</motion.li> */
+}

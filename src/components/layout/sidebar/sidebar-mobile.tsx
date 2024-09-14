@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import SidebarContent from './sidebar-content';
-import useLayout from '@/contexts/layout/useLayout';
+import { useLayout } from '@/hooks';
 
 const variants = {
 	open: {
@@ -28,6 +28,7 @@ const SidebarMobile = () => {
 	const { sidebarOpen } = useLayout();
 	return (
 		<motion.div
+			initial='closed'
 			variants={variants}
 			animate={sidebarOpen ? 'open' : 'closed'}
 			className='fixed right-0 top-0 z-[99999] h-screen'>

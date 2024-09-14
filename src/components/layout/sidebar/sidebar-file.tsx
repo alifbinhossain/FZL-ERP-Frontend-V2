@@ -1,4 +1,4 @@
-import useLayout from '@/contexts/layout/useLayout';
+import { useLayout } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { IRoute } from '@/types';
 import { matchUrl } from '@/utils';

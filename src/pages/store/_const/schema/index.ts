@@ -72,6 +72,7 @@ export type IMaterialStock = z.infer<typeof MATERIAL_STOCK_SCHEMA>;
 // Section
 export const SECTION_SCHEMA = z.object({
 	name: STRING_REQUIRED,
+	short_name: STRING_OPTIONAL,
 	remarks: STRING_NULLABLE,
 });
 export const SECTION_NULL = {

@@ -1,11 +1,11 @@
 const WHITE = '#FFFFFF';
 const BLACK = '0a0a0a';
-const BACKGROUND = '#f5f7fa';
+const BACKGROUND = '#f8fafc';
 const FOREGROUND = '#27374D';
 
 const BASE_100 = BACKGROUND;
-const BASE_200 = '#dfe7ec';
-const BASE_300 = '#9fb7c6';
+const BASE_200 = '#ecf1f4';
+const BASE_300 = '#d8e2e9';
 const BASE_CONTENT = FOREGROUND;
 
 const PRIMARY = '#27374D';

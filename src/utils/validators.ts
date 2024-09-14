@@ -15,7 +15,7 @@ export const STRING = (message = 'Required', typeError = 'Invalid String') =>
 		.trim();
 
 export const STRING_NULLABLE = STRING().nullable();
-export const STRING_REQUIRED = STRING('Required');
+export const STRING_REQUIRED = STRING('Required').min(1, 'Required');
 export const STRING_OPTIONAL = STRING().optional();
 
 // UUID
@@ -34,7 +34,7 @@ export const URL_OPTIONAL = URL().optional();
 // NAME
 export const NAME = (message = 'Required') =>
 	STRING(message).regex(/^[a-zA-Z0-9 ._#-/"'()]*$/, 'Invalid Name');
-export const NAME_REQUIRED = NAME('Required');
+export const NAME_REQUIRED = NAME('Required').min(1, 'Required');
 export const NAME_OPTIONAL = NAME().optional();
 
 // EMAIL

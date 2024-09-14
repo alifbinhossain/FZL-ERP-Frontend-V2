@@ -1,5 +1,5 @@
 // import { HrRoutes } from './Hr';
-// import { StoreRoutes } from './Store';
+import { StoreRoutes } from './Store';
 // import { CommercialRoutes } from './Commercial';
 // import { OrderRoutes } from './Order';
 // import { IssueRoutes } from './Issue';
@@ -18,22 +18,23 @@
 import { IRoute } from '@/types';
 import { DashboardRoutes } from './Dashboard';
 
-const privateRoutes: IRoute[] = [...DashboardRoutes];
+const privateRoutes: IRoute[] = [
+	...DashboardRoutes,
+	// ...OrderRoutes,
+	// ...LabDipRoutes,
+	// ...ThreadRoutes,
+	// ...CommercialRoutes,
+	// ...DeliveryRoutes,
+	...StoreRoutes,
+	// ...CommonRoutes,
+	// ...IssueRoutes,
+	// ...DyeingAndIronRoutes,
+	// ...NylonRoutes,
+	// ...VislonRoutes,
+	// ...MetalRoutes,
+	// ...SliderRoutes,
+	// ...HrRoutes,
+	// ...LibraryRoutes,
+];
 
 export default privateRoutes;
-
-// ...OrderRoutes,
-// ...LabDipRoutes,
-// ...ThreadRoutes,
-// ...CommercialRoutes,
-// ...DeliveryRoutes,
-// ...StoreRoutes,
-// ...CommonRoutes,
-// ...IssueRoutes,
-// ...DyeingAndIronRoutes,
-// ...NylonRoutes,
-// ...VislonRoutes,
-// ...MetalRoutes,
-// ...SliderRoutes,
-// ...HrRoutes,
-// ...LibraryRoutes,

@@ -1,8 +1,7 @@
 import { Form, FormField } from '@/components/ui/form';
 import { LOGIN_NULL, LOGIN_SCHEMA, ILoginData } from './login-schema';
-import useAuth from '@/contexts/auth/useAuth';
 import { FormInput, FormSubmit } from '@/components/core/form';
-import { useRHF } from '@/hooks';
+import { useAuth, useRHF } from '@/hooks';
 
 const LoginForm = () => {
 	const { login } = useAuth();
@@ -16,7 +15,7 @@ const LoginForm = () => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='mx-auto mt-6 flex max-w-md flex-col space-y-6 sm:mt-10 sm:space-y-8'>
+				className='mx-auto mt-6 flex max-w-md flex-col space-y-6 sm:mt-10'>
 				<FormField
 					control={form.control}
 					name='email'
@@ -29,7 +28,8 @@ const LoginForm = () => {
 						<FormInput label='Password' {...props} />
 					)}
 				/>
-				<FormSubmit />
+
+				<FormSubmit title='Login' />
 			</form>
 		</Form>
 	);

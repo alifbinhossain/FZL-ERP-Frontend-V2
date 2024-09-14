@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
+
+import { LayoutProvider } from '@/context';
 import Navbar from './navbar';
-import LayoutProvider from '@/contexts/layout';
 import Sidebar from './sidebar';
 
 const Layout = () => {

@@ -1,4 +1,4 @@
-import useLayout from '@/contexts/layout/useLayout';
+import { useLayout } from '@/hooks';
 import { motion } from 'framer-motion';
 
 import { PanelLeftOpenIcon, PanelRightOpenIcon } from 'lucide-react';

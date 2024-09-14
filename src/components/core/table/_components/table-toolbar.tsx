@@ -1,19 +1,20 @@
 'use client';
 
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { Table } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import { TableViewOptions } from './table-view-options';
 import { TableFacetedFilter } from './table-faceted-filter';
+import useTable from '@/hooks/useTable';
+import { CirclePlus, RefreshCw } from 'lucide-react';
+import { usePage } from '@/hooks';
 
-interface TableToolbarProps<TData> {
-	table: Table<TData>;
-}
+export function TableToolbar() {
+	const { createAccess } = usePage();
+	const { table, handleCreate, handleRefetch } = useTable();
 
-export function TableToolbar<TData>({ table }: TableToolbarProps<TData>) {
 	const isFiltered = table.getState().columnFilters.length > 0;
 
 	return (
@@ -23,16 +24,19 @@ export function TableToolbar<TData>({ table }: TableToolbarProps<TData>) {
 					placeholder='Filter tasks...'
 					value={
 						(table
-							.getColumn('title')
+							.getColumn('email')
 							?.getFilterValue() as string) ?? ''
 					}
 					onChange={(event) =>
 						table
-							.getColumn('title')
+							.getColumn('email')
 							?.setFilterValue(event.target.value)
 					}
 					className='h-8 w-[150px] lg:w-[250px]'
 				/>
+
+				<TableViewOptions table={table} />
+
 				{table.getColumn('status') && (
 					<TableFacetedFilter
 						column={table.getColumn('status')}
@@ -40,24 +44,34 @@ export function TableToolbar<TData>({ table }: TableToolbarProps<TData>) {
 						options={[]}
 					/>
 				)}
-				{table.getColumn('priority') && (
-					<TableFacetedFilter
-						column={table.getColumn('priority')}
-						title='Priority'
-						options={[]}
-					/>
-				)}
+
 				{isFiltered && (
 					<Button
 						variant='ghost'
 						onClick={() => table.resetColumnFilters()}
 						className='h-8 px-2 lg:px-3'>
 						Reset
-						<Cross2Icon className='ml-2 h-4 w-4' />
+						<Cross2Icon className='ml-2 size-4' />
 					</Button>
 				)}
 			</div>
-			<TableViewOptions table={table} />
+
+			<div className='flex gap-4'>
+				{handleRefetch && (
+					<Button
+						variant={'outline'}
+						size={'icon'}
+						onClick={handleRefetch}>
+						<RefreshCw className='size-4' />
+					</Button>
+				)}
+				{createAccess && (
+					<Button onClick={handleCreate} variant='accent' size={'sm'}>
+						<CirclePlus className='mr-2 size-4' />
+						New
+					</Button>
+				)}
+			</div>
 		</div>
 	);
 }

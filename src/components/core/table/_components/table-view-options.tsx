@@ -26,12 +26,12 @@ export function TableViewOptions<TData>({
 				<Button
 					variant='outline'
 					size='sm'
-					className='ml-auto hidden h-8 lg:flex'>
-					<MixerHorizontalIcon className='mr-2 h-4 w-4' />
+					className='ml-auto hidden lg:flex'>
+					<MixerHorizontalIcon className='mr-2 size-4' />
 					View
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align='end' className='w-[150px]'>
+			<DropdownMenuContent align='end' className='w-fit'>
 				<DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				{table
@@ -50,7 +50,7 @@ export function TableViewOptions<TData>({
 								onCheckedChange={(value) =>
 									column.toggleVisibility(!!value)
 								}>
-								{column.id}
+								{column.id.split('_').join(' ')}
 							</DropdownMenuCheckboxItem>
 						);
 					})}

@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api } from '@/lib/api';
-import { ShowToast } from '@/components/toast';
 import { IResponse } from '@/types';
 import { AxiosError } from 'axios';
+import { toast } from 'sonner';
 
 interface IUseTQuery {
 	queryKey: string[];
@@ -45,7 +45,8 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		},
 
 		onSuccess: (data) => {
-			ShowToast(data?.toast);
+			toast.success(data?.toast?.message);
+			// ShowToast(data?.toast);
 		},
 
 		onError: (error: AxiosError<IResponse<any>>, newUser, context) => {
@@ -53,7 +54,8 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 				data?.filter((item: any) => item.id !== context?.newData?.uuid)
 			);
 			console.error(error);
-			ShowToast(error?.response!.data?.toast);
+			toast.error(error?.response?.data?.toast?.message);
+			// ShowToast(error?.response!.data?.toast);
 		},
 
 		onSettled: (data, error, variables) => {
@@ -86,7 +88,8 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 			return { previousData: previousData };
 		},
 		onSuccess: (data) => {
-			ShowToast(data?.toast);
+			// ShowToast(data?.toast);
+			toast.success(data?.toast?.message);
 		},
 		onError: (
 			error: AxiosError<IResponse<any>>,
@@ -95,7 +98,8 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		) => {
 			queryClient.setQueryData(queryKey, context.previousData);
 			console.log(error);
-			ShowToast(error?.response!.data?.toast);
+			// ShowToast(error?.response!.data?.toast);
+			toast.error(error?.response!.data?.toast?.message);
 		},
 
 		onSettled: (data, error, variables) => {
@@ -121,11 +125,13 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 			await queryClient.cancelQueries({ queryKey });
 		},
 		onSuccess: (data) => {
-			ShowToast(data?.toast);
+			// ShowToast(data?.toast);
+			toast.success(data?.toast?.message);
 		},
 		onError: (error: AxiosError<IResponse<any>>) => {
 			console.log(error);
-			ShowToast(error?.response!.data?.toast);
+			// ShowToast(error?.response!.data?.toast);
+			toast.error(error?.response!.data?.toast?.message);
 		},
 		onSettled: (data, error, variables) => {
 			queryClient.invalidateQueries({ queryKey });

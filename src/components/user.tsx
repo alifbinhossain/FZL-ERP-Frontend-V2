@@ -1,4 +1,4 @@
-import useAuth from '@/contexts/auth/useAuth';
+import { useAuth } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { useNetworkState } from '@uidotdev/usehooks';
 
