@@ -1,9 +1,8 @@
 import { useState } from 'react';
+import { TableProvider } from '@/context';
 import {
 	ColumnDef,
 	ColumnFiltersState,
-	SortingState,
-	VisibilityState,
 	flexRender,
 	getCoreRowModel,
 	getFacetedRowModel,
@@ -11,23 +10,24 @@ import {
 	getFilteredRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
+	SortingState,
 	useReactTable,
+	VisibilityState,
 } from '@tanstack/react-table';
 
 import {
-	Table as TableComponent,
 	TableBody,
 	TableCell,
+	Table as TableComponent,
 	TableHead,
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
 
-import { TablePagination } from './_components/table-pagination';
 import { TableNavbar } from './_components/table-nav';
-import useDefaultColumns from './_helpers/useDefaultColumns';
-import { TableProvider } from '@/context';
+import { TablePagination } from './_components/table-pagination';
 import TableSkeleton from './_components/table-skeleton';
+import useDefaultColumns from './_helpers/useDefaultColumns';
 
 interface TableProps<TData, TValue> {
 	title: string;

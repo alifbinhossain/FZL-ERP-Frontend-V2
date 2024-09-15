@@ -1,8 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { api } from '@/lib/api';
 import { IResponse } from '@/types';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
+
+import { api } from '@/lib/api';
 
 interface IUseTQuery {
 	queryKey: string[];

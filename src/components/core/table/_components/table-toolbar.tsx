@@ -1,15 +1,15 @@
 'use client';
 
 import { Cross2Icon } from '@radix-ui/react-icons';
+import { CirclePlus, RefreshCw } from 'lucide-react';
+import useTable from '@/hooks/useTable';
+import { usePage } from '@/hooks';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-import { TableViewOptions } from './table-view-options';
 import { TableFacetedFilter } from './table-faceted-filter';
-import useTable from '@/hooks/useTable';
-import { CirclePlus, RefreshCw } from 'lucide-react';
-import { usePage } from '@/hooks';
+import { TableViewOptions } from './table-view-options';
 
 export function TableToolbar() {
 	const { createAccess } = usePage();

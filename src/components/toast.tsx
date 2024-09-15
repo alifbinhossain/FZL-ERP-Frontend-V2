@@ -1,10 +1,11 @@
 import { IToast } from '@/types';
 import {
 	Slide,
-	ToastContainer,
 	toast,
+	ToastContainer,
 	ToastContainerProps,
 } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.min.css';
 
 const ToastBody = ({ text }: { text: string }) => (

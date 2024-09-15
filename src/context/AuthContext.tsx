@@ -1,8 +1,3 @@
-import { ILoginData } from '@/components/auth/login/login-schema';
-import { ShowToast } from '@/components/toast';
-import { useCookie, useLocalStorage } from '@/hooks';
-import { api } from '@/lib/api';
-import { IAuthResponse, IUser } from '@/types';
 import {
 	createContext,
 	useCallback,
@@ -10,6 +5,13 @@ import {
 	useMemo,
 	useState,
 } from 'react';
+import { IAuthResponse, IUser } from '@/types';
+import { useCookie, useLocalStorage } from '@/hooks';
+
+import { ILoginData } from '@/components/auth/login/login-schema';
+import { ShowToast } from '@/components/toast';
+
+import { api } from '@/lib/api';
 
 // Define the AuthContext interface with state and functions
 interface IAuthContext {

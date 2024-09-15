@@ -1,16 +1,18 @@
 import {
+	ControllerFieldState,
+	ControllerRenderProps,
+	UseFormStateReturn,
+} from 'react-hook-form';
+
+import {
 	FormControl,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
 import { Input, InputProps } from '@/components/ui/input';
+
 import { cn } from '@/lib/utils';
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
 
 interface FormInputProps extends InputProps {
 	field: ControllerRenderProps<any, any>;

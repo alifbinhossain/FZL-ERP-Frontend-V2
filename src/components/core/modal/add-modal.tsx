@@ -1,3 +1,7 @@
+import { DevTool } from '@hookform/devtools';
+import { UseFormReturn } from 'react-hook-form';
+
+import { FormSubmit } from '@/components/core/form';
 import {
 	Dialog,
 	DialogContent,
@@ -7,10 +11,8 @@ import {
 	DialogTitle,
 } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
+
 import { cn } from '@/lib/utils';
-import { UseFormReturn } from 'react-hook-form';
-import { FormSubmit } from '@/components/core/form';
-import { DevTool } from '@hookform/devtools';
 
 interface IAddModalProps {
 	form: UseFormReturn<any, any, undefined>;

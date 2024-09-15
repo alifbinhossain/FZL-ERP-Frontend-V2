@@ -1,9 +1,12 @@
+import { useLocation } from 'react-router-dom';
+
+import BrandLogo from '@/components/brand-logo';
+import GlobalBreadcrumbs from '@/components/global-breadcrumbs';
+
+import { cn } from '@/lib/utils';
+
 import SidebarCollapse from '../sidebar/sidebar-collapse';
 import SidebarMobileToggle from '../sidebar/sidebar-mobile-toggle';
-import { useLocation } from 'react-router-dom';
-import { cn } from '@/lib/utils';
-import GlobalBreadcrumbs from '@/components/global-breadcrumbs';
-import BrandLogo from '@/components/brand-logo';
 
 const Navbar = () => {
 	const { pathname } = useLocation();

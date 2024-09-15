@@ -1,13 +1,14 @@
+import { useEffect, useMemo, useState } from 'react';
+import { IRoute } from '@/types';
+import { confirmRouteMatch } from '@/utils';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import SidebarFile from './sidebar-file';
+import { useSidebar } from '@/hooks';
 
 import { cn } from '@/lib/utils';
-import { confirmRouteMatch } from '@/utils';
-import { IRoute } from '@/types';
-import { useSidebar } from '@/hooks';
+
+import SidebarFile from './sidebar-file';
 
 // Animation definitions for the sidebar folder
 const variants = {

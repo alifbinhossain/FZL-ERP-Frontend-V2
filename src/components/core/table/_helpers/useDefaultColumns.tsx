@@ -1,7 +1,9 @@
-import { usePage } from '@/hooks';
 import { ColumnDef } from '@tanstack/react-table';
-import TableCellAction from '../_components/table-cell-action';
+import { usePage } from '@/hooks';
+
 import DateTime from '@/components/ui/date-time';
+
+import TableCellAction from '../_components/table-cell-action';
 
 const useDefaultColumns = <TData, TValue>(): ColumnDef<TData, TValue>[] => {
 	const { deleteAccess, updateAccess } = usePage();

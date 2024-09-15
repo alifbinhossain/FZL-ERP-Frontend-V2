@@ -1,9 +1,10 @@
-import { useLayout } from '@/hooks';
-import { cn } from '@/lib/utils';
 import { IRoute } from '@/types';
 import { matchUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useLayout } from '@/hooks';
+
+import { cn } from '@/lib/utils';
 
 const variants = {
 	animate: {

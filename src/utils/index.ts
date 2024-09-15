@@ -1,10 +1,10 @@
-import filterRoutes from './filterRoutes';
-import flattenRoutes from './flattenRoutes';
-import filterSidebarRoutes from './filterSidebarRoutes';
 import confirmRouteMatch from './confirmRouteMatch';
+import filterRoutes from './filterRoutes';
+import filterSidebarRoutes from './filterSidebarRoutes';
+import flattenRoutes from './flattenRoutes';
+import getDateTime from './getDateTime';
 import matchUrl from './matchUrl';
 import PageInfo from './pageInfo';
-import getDateTime from './getDateTime';
 
 export {
 	PageInfo,

@@ -4,6 +4,7 @@ import {
 	DoubleArrowLeftIcon,
 	DoubleArrowRightIcon,
 } from '@radix-ui/react-icons';
+import useTable from '@/hooks/useTable';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -13,7 +14,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import useTable from '@/hooks/useTable';
 
 export function TablePagination() {
 	const { table } = useTable();

@@ -1,11 +1,13 @@
+import { useMemo, useState } from 'react';
+import { PageProvider } from '@/context';
+import { PageInfo } from '@/utils';
+
+import { DeleteModal } from '@/components/core/modal';
 import { Table } from '@/components/core/table';
+
 import { IPaymentTableData, testColumns } from './_const/columns'; // TODO: Import columns
 import { useTest } from './_const/query'; // TODO: Import query
-import { PageProvider } from '@/context';
-import { useMemo, useState } from 'react';
-import { DeleteModal } from '@/components/core/modal';
 import AddOrUpdate from './add-or-update';
-import { PageInfo } from '@/utils';
 
 //TODO: Remove it when working with real data
 const fakePayments: IPaymentTableData[] = Array.from(

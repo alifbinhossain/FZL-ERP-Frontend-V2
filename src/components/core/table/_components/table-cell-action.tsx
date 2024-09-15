@@ -1,8 +1,9 @@
-import { Button } from '@/components/ui/button';
-import { usePage } from '@/hooks';
-import useTable from '@/hooks/useTable';
 import { CellContext } from '@tanstack/react-table';
 import { SquarePen, Trash2 } from 'lucide-react';
+import useTable from '@/hooks/useTable';
+import { usePage } from '@/hooks';
+
+import { Button } from '@/components/ui/button';
 
 interface ITableCellActionProps<TData, TValue> {
 	info: CellContext<TData, TValue>;

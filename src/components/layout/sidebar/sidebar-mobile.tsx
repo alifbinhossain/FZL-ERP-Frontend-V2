@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import SidebarContent from './sidebar-content';
 import { useLayout } from '@/hooks';
+
+import SidebarContent from './sidebar-content';
 
 const variants = {
 	open: {

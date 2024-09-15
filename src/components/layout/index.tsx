@@ -1,6 +1,6 @@
+import { LayoutProvider } from '@/context';
 import { Outlet } from 'react-router-dom';
 
-import { LayoutProvider } from '@/context';
 import Navbar from './navbar';
 import Sidebar from './sidebar';
 

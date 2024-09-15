@@ -1,7 +1,6 @@
-import { useLayout } from '@/hooks';
 import { motion } from 'framer-motion';
-
 import { PanelLeftOpenIcon, PanelRightOpenIcon } from 'lucide-react';
+import { useLayout } from '@/hooks';
 
 const SidebarCollapse = () => {
 	const { isCollapsed, setIsCollapsed } = useLayout();

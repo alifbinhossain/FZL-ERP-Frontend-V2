@@ -1,3 +1,8 @@
+import { IResponse } from '@/types';
+import { ReloadIcon } from '@radix-ui/react-icons';
+import { UseMutationResult } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -8,10 +13,6 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { IResponse } from '@/types';
-import { ReloadIcon } from '@radix-ui/react-icons';
-import { UseMutationResult } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 
 interface IDeleteModalProps {
 	deleteItem: {

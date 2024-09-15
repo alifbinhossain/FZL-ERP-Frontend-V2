@@ -1,11 +1,13 @@
+import { useMemo, useState } from 'react';
+import { PageProvider } from '@/context';
+import { PageInfo } from '@/utils';
+
+import { DeleteModal } from '@/components/core/modal';
 import { Table } from '@/components/core/table';
+
 import { ITypeTableData, typeColumns } from '../_const/columns';
 import { useMaterialType } from '../_const/query';
-import { PageProvider } from '@/context';
-import { useMemo, useState } from 'react';
-import { DeleteModal } from '@/components/core/modal';
 import AddOrUpdate from './add-or-update';
-import { PageInfo } from '@/utils';
 
 const Type = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =

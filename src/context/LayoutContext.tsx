@@ -1,6 +1,6 @@
-import { useAuth } from '@/hooks';
 import { createContext, useMemo, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '@/hooks';
 
 interface ILayoutContext {
 	isCollapsed: boolean;

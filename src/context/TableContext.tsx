@@ -1,5 +1,5 @@
-import { Table } from '@tanstack/react-table';
 import { createContext, useMemo } from 'react';
+import { Table } from '@tanstack/react-table';
 
 interface ITableContext<TDate> {
 	title: string;

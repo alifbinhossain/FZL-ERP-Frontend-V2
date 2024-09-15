@@ -1,4 +1,10 @@
 import {
+	ControllerFieldState,
+	ControllerRenderProps,
+	UseFormStateReturn,
+} from 'react-hook-form';
+
+import {
 	FormControl,
 	FormItem,
 	FormLabel,
@@ -11,12 +17,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
 
 interface FormSelectProps {
 	field: ControllerRenderProps<any, any>;

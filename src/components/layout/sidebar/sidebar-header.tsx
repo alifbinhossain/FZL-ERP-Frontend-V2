@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { CopyMinus, X } from 'lucide-react';
+import { useLayout, useSidebar } from '@/hooks';
+
 import BrandLogo from '@/components/brand-logo';
 import TooltipWrapper from '@/components/tooltip-wrapper';
-import { useLayout, useSidebar } from '@/hooks';
 
 const SidebarHeader = () => {
 	const { setSidebarOpen } = useLayout();
