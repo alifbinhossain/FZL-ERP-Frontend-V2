@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react';
-import { PageProvider } from '@/context';
+import { PageProvider, TableProvider } from '@/context';
 import { PageInfo } from '@/utils';
 
 import { DeleteModal } from '@/components/core/modal';
-import { Table } from '@/components/core/table';
 
 import { IPaymentTableData, testColumns } from './_const/columns'; // TODO: Import columns
 import { useTest } from './_const/query'; // TODO: Import query
@@ -61,6 +60,8 @@ const TestType1 = () => {
 		});
 	};
 
+	// Delete All Row Handlers
+
 	// Table Columns
 	const columns = testColumns(); // TODO: Update columns
 
@@ -68,7 +69,7 @@ const TestType1 = () => {
 		<PageProvider
 			pageName={pageInfo.getTab()}
 			pageTitle={pageInfo.getTabName()}>
-			<Table
+			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}
 				data={data ?? fakePayments} // TODO: Replace fakePayments with []

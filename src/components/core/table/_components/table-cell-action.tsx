@@ -16,12 +16,12 @@ const TableCellAction: React.FC<ITableCellActionProps<any, any>> = ({
 	const { handleUpdate, handleDelete } = useTable();
 
 	return (
-		<div className='flex w-fit items-center justify-evenly gap-4'>
+		<div className='flex w-fit items-center justify-evenly gap-1'>
 			{updateAccess && (
 				<Button
 					onClick={() => handleUpdate?.(info.row.index)}
 					size={'icon'}
-					variant={'outline'}
+					variant={'ghost'}
 					className='rounded-full'>
 					<SquarePen className='size-4' />
 				</Button>
@@ -30,7 +30,7 @@ const TableCellAction: React.FC<ITableCellActionProps<any, any>> = ({
 				<Button
 					onClick={() => handleDelete?.(info.row.index)}
 					size={'icon'}
-					variant={'destructive'}
+					variant={'ghost-destructive'}
 					className='rounded-full'>
 					<Trash2 className='size-4' />
 				</Button>

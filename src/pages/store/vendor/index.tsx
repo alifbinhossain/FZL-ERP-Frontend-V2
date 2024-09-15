@@ -1,12 +1,12 @@
-import { Table } from '@/components/core/table';
-
-import { PageProvider } from '@/context';
 import { useMemo, useState } from 'react';
-import { DeleteModal } from '@/components/core/modal';
-import AddOrUpdate from './add-or-update';
+import { PageProvider, TableProvider } from '@/context';
 import { PageInfo } from '@/utils';
-import { usePurchaseVendor } from '../_const/query';
+
+import { DeleteModal } from '@/components/core/modal';
+
 import { IVendorTableData, vendorColumns } from '../_const/columns';
+import { usePurchaseVendor } from '../_const/query';
+import AddOrUpdate from './add-or-update';
 
 const Vendor = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
@@ -54,7 +54,7 @@ const Vendor = () => {
 		<PageProvider
 			pageName={pageInfo.getTab()}
 			pageTitle={pageInfo.getTabName()}>
-			<Table
+			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}
 				data={data ?? []}

@@ -1,11 +1,12 @@
-import { Table } from '@/components/core/table';
+import { useMemo, useState } from 'react';
+import { PageProvider, TableProvider } from '@/context';
+import { PageInfo } from '@/utils';
+
+import { DeleteModal } from '@/components/core/modal';
+
 import { ISectionTableData, sectionColumns } from '../_const/columns';
 import { useMaterialSection } from '../_const/query';
-import { PageProvider } from '@/context';
-import { useMemo, useState } from 'react';
-import { DeleteModal } from '@/components/core/modal';
 import AddOrUpdate from './add-or-update';
-import { PageInfo } from '@/utils';
 
 const Section = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
@@ -53,7 +54,7 @@ const Section = () => {
 		<PageProvider
 			pageName={pageInfo.getTab()}
 			pageTitle={pageInfo.getTabName()}>
-			<Table
+			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}
 				data={data ?? []}

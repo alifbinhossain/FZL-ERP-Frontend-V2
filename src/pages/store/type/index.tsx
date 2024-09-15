@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react';
-import { PageProvider } from '@/context';
+import { PageProvider, TableProvider } from '@/context';
 import { PageInfo } from '@/utils';
 
 import { DeleteModal } from '@/components/core/modal';
-import { Table } from '@/components/core/table';
 
 import { ITypeTableData, typeColumns } from '../_const/columns';
 import { useMaterialType } from '../_const/query';
@@ -53,7 +52,7 @@ const Type = () => {
 		<PageProvider
 			pageName={pageInfo.getTab()}
 			pageTitle={pageInfo.getTabName()}>
-			<Table
+			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}
 				data={data ?? []}

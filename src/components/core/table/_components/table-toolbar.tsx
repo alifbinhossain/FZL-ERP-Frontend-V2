@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import { TableFacetedFilter } from './table-faceted-filter';
+import { TableRowDelete } from './table-row-delete';
 import { TableViewOptions } from './table-view-options';
 
 export function TableToolbar() {
@@ -37,13 +38,13 @@ export function TableToolbar() {
 
 				<TableViewOptions table={table} />
 
-				{table.getColumn('status') && (
+				{/* {table.getColumn('status') && (
 					<TableFacetedFilter
 						column={table.getColumn('status')}
 						title='Status'
 						options={[]}
 					/>
-				)}
+				)} */}
 
 				{isFiltered && (
 					<Button
@@ -57,6 +58,7 @@ export function TableToolbar() {
 			</div>
 
 			<div className='flex gap-4'>
+				<TableRowDelete />
 				{handleRefetch && (
 					<Button
 						variant={'outline'}
@@ -67,7 +69,7 @@ export function TableToolbar() {
 				)}
 				{createAccess && (
 					<Button onClick={handleCreate} variant='accent' size={'sm'}>
-						<CirclePlus className='mr-2 size-4' />
+						<CirclePlus className='size-4' />
 						New
 					</Button>
 				)}

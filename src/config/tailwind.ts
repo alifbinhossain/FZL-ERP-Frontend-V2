@@ -4,8 +4,9 @@ const BACKGROUND = '#f8fafc';
 const FOREGROUND = '#27374D';
 
 const BASE_100 = BACKGROUND;
-const BASE_200 = '#ecf1f4';
-const BASE_300 = '#d8e2e9';
+const BASE_150 = '#f4f7fa';
+const BASE_200 = '#f1f5f9';
+const BASE_300 = '#e2ebf3';
 const BASE_CONTENT = FOREGROUND;
 
 const PRIMARY = '#27374D';
@@ -45,6 +46,7 @@ const colors = {
 	BACKGROUND,
 	FOREGROUND,
 	BASE_100,
+	BASE_150,
 	BASE_200,
 	BASE_300,
 	BASE_CONTENT,

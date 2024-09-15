@@ -27,7 +27,7 @@ export function TableViewOptions<TData>({
 					variant='outline'
 					size='sm'
 					className='ml-auto hidden lg:flex'>
-					<MixerHorizontalIcon className='mr-2 size-4' />
+					<MixerHorizontalIcon className='size-4' />
 					View
 				</Button>
 			</DropdownMenuTrigger>

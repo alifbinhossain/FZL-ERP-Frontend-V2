@@ -40,7 +40,11 @@ const AddModal: React.FC<IAddModalProps> = ({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogContent
-				className={cn('w-full', isSmall && 'sm:max-w-5xl', className)}>
+				className={cn(
+					'w-full bg-background',
+					isSmall && 'sm:max-w-5xl',
+					className
+				)}>
 				<DialogHeader>
 					<DialogTitle>{title}</DialogTitle>
 					{subtitle && (
