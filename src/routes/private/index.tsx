@@ -1,5 +1,5 @@
 // import { HrRoutes } from './Hr';
-import { StoreRoutes } from './Store';
+
 // import { CommercialRoutes } from './Commercial';
 // import { OrderRoutes } from './Order';
 // import { IssueRoutes } from './Issue';
@@ -15,8 +15,11 @@ import { StoreRoutes } from './Store';
 // import { DyeingAndIronRoutes } from './DyeingAndIron';
 // import { IRoute } from '@/types';
 
+import TestType1 from '@/pages/test/type1';
 import { IRoute } from '@/types';
+
 import { DashboardRoutes } from './Dashboard';
+import { StoreRoutes } from './Store';
 
 const privateRoutes: IRoute[] = [
 	...DashboardRoutes,
@@ -35,6 +38,19 @@ const privateRoutes: IRoute[] = [
 	// ...SliderRoutes,
 	// ...HrRoutes,
 	// ...LibraryRoutes,
+
+	{
+		name: 'Test',
+		children: [
+			{
+				name: 'Type 1',
+				path: '/test/type1',
+				element: <TestType1 />,
+				page_name: 'order__info',
+				actions: ['read', 'create', 'update', 'delete'],
+			},
+		],
+	},
 ];
 
 export default privateRoutes;

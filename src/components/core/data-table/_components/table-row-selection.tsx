@@ -28,5 +28,6 @@ export function TableRowSelection<TData, TValue>(): ColumnDef<TData, TValue> {
 		),
 		enableSorting: false,
 		enableHiding: false,
+		size: 30,
 	};
 }

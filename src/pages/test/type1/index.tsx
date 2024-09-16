@@ -1,12 +1,15 @@
 import { useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
-import { PageInfo } from '@/utils';
+import { getRandomPreviousDate, PageInfo } from '@/utils';
+import { Row } from '@tanstack/react-table';
 
-import { DeleteModal } from '@/components/core/modal';
+import { DeleteAllModal, DeleteModal } from '@/components/core/modal';
 
 import { IPaymentTableData, testColumns } from './_const/columns'; // TODO: Import columns
 import { useTest } from './_const/query'; // TODO: Import query
 import AddOrUpdate from './add-or-update';
+
+import 'date-fns';
 
 //TODO: Remove it when working with real data
 const fakePayments: IPaymentTableData[] = Array.from(
@@ -16,6 +19,7 @@ const fakePayments: IPaymentTableData[] = Array.from(
 		email: `a${i}@a.com`,
 		id: `${i + 1}`,
 		status: 'success',
+		created_at: getRandomPreviousDate(30),
 	})
 );
 
@@ -40,27 +44,44 @@ const TestType1 = () => {
 	const [updatedData, setUpdatedData] = useState<IPaymentTableData | null>( // TODO: Update updatedData type
 		null
 	);
-	const handleUpdate = (id: number) => {
-		const selectedRow = fakePayments?.[id]; // TODO: Replace fakePayments?.[id] with data![id]
-		setUpdatedData(selectedRow);
+	const handleUpdate = (row: Row<IPaymentTableData>) => {
+		setUpdatedData(row.original);
 		setIsOpenAddModal(true);
 	};
 
 	// Delete Modal state
+	// Single Delete Item
 	const [deleteItem, setDeleteItem] = useState<{
 		id: string;
 		name: string;
 	} | null>(null);
 
-	const handleDelete = (id: number) => {
-		const selectedRow = fakePayments?.[id]; // TODO: Replace fakePayments?.[id] with data![id]
+	// Single Delete Handler
+	const handleDelete = (row: Row<IPaymentTableData>) => {
 		setDeleteItem({
-			id: selectedRow?.id, // TODO: Update Delete Item ID
-			name: selectedRow?.email, // TODO: Update Delete Item Name
+			id: row?.original?.id, // TODO: Update Delete Item ID
+			name: row?.original?.email, // TODO: Update Delete Item Name
 		});
 	};
 
+	// Delete All Item
+	const [deleteItems, setDeleteItems] = useState<
+		{ id: string; name: string; checked: boolean }[] | null
+	>(null);
+
 	// Delete All Row Handlers
+	const handleDeleteAll = (rows: Row<IPaymentTableData>[]) => {
+		// TODO: Update Row type
+		const selectedRows = rows.map((row) => row.original);
+
+		setDeleteItems(
+			selectedRows.map((row) => ({
+				id: row.id,
+				name: row.email,
+				checked: true,
+			})) // TODO: Update Delete Item ID & Name
+		);
+	};
 
 	// Table Columns
 	const columns = testColumns(); // TODO: Update columns
@@ -78,28 +99,32 @@ const TestType1 = () => {
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
-			/>
+				handleDeleteAll={handleDeleteAll}>
+				<AddOrUpdate
+					{...{
+						url,
+						open: isOpenAddModal,
+						setOpen: setIsOpenAddModal,
+						updatedData,
+						setUpdatedData,
+						postData,
+						updateData,
+					}}
+				/>
 
-			<AddOrUpdate
-				{...{
-					url,
-					open: isOpenAddModal,
-					setOpen: setIsOpenAddModal,
-					updatedData,
-					setUpdatedData,
-					postData,
-					updateData,
-				}}
-			/>
+				<DeleteModal
+					{...{
+						deleteItem,
+						setDeleteItem,
+						url,
+						deleteData,
+					}}
+				/>
 
-			<DeleteModal
-				{...{
-					deleteItem,
-					setDeleteItem,
-					url,
-					deleteData,
-				}}
-			/>
+				<DeleteAllModal
+					{...{ deleteItems, setDeleteItems, url, deleteData }}
+				/>
+			</TableProvider>
 		</PageProvider>
 	);
 };

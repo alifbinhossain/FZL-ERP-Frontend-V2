@@ -58,7 +58,14 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	const isUpdate = !!updatedData;
 
 	const { user } = useAuth();
-	const { data } = { data: {} }; // TODO: Replace the object with query by id (e.g. useTestById(updatedData?.id as string))
+	const { data } = {
+		data: {
+			amount: 200,
+			email: 'update@gmail.com',
+			id: '1',
+			status: 'success',
+		},
+	}; // TODO: Replace the object with query by id (e.g. useTestById(updatedData?.id as string))
 
 	const form = useRHF(TEST_SCHEMA, TEST_NULL); // TODO: Update schema here
 
@@ -70,11 +77,11 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 
 	// Reset form values when data is updated
 	useEffect(() => {
-		if (data) {
+		if (data && isUpdate) {
 			form.reset(data);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
+	}, [data, isUpdate]);
 
 	// Submit handler
 	function onSubmit(values: ITest) {

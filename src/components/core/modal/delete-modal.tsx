@@ -65,7 +65,7 @@ const DeleteModal: React.FC<IDeleteModalProps> = ({
 						{deleteItem && (deleteItem.name || deleteItem.id)}"?
 					</AlertDialogTitle>
 					<AlertDialogDescription>
-						This action cannot be undone.
+						You cannot undo this action.
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>

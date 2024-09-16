@@ -10,7 +10,7 @@ const TableSkeleton: React.FC<ITableSkeletonProps> = ({ columnsLength }) => {
 		<TableRow key={index}>
 			{Array.from({ length: columnsLength }).map((_, i) => (
 				<TableCell key={i}>
-					<Skeleton className='h-6 w-full rounded-md bg-base-200' />
+					<Skeleton className='h-6 w-full rounded-md bg-base-300' />
 				</TableCell>
 			))}
 		</TableRow>

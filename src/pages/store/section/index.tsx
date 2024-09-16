@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
 import { PageInfo } from '@/utils';
+import { Row } from '@tanstack/react-table';
 
-import { DeleteModal } from '@/components/core/modal';
+import { DeleteAllModal, DeleteModal } from '@/components/core/modal';
 
 import { ISectionTableData, sectionColumns } from '../_const/columns';
 import { useMaterialSection } from '../_const/query';
@@ -27,24 +28,42 @@ const Section = () => {
 	const [updatedData, setUpdatedData] = useState<ISectionTableData | null>(
 		null
 	);
-	const handleUpdate = (id: number) => {
-		const selectedRow = data![id];
-		setUpdatedData(selectedRow);
+	const handleUpdate = (row: Row<ISectionTableData>) => {
+		setUpdatedData(row.original);
 		setIsOpenAddModal(true);
 	};
 
 	// Delete Modal state
+	// Single Delete Item
 	const [deleteItem, setDeleteItem] = useState<{
 		id: string;
 		name: string;
 	} | null>(null);
 
-	const handleDelete = (id: number) => {
-		const selectedRow = data![id];
+	// Single Delete Handler
+	const handleDelete = (row: Row<ISectionTableData>) => {
 		setDeleteItem({
-			id: selectedRow?.uuid,
-			name: selectedRow?.name,
+			id: row?.original?.uuid,
+			name: row?.original?.name,
 		});
+	};
+
+	// Delete All Item
+	const [deleteItems, setDeleteItems] = useState<
+		{ id: string; name: string; checked: boolean }[] | null
+	>(null);
+
+	// Delete All Row Handlers
+	const handleDeleteAll = (rows: Row<ISectionTableData>[]) => {
+		const selectedRows = rows.map((row) => row.original);
+
+		setDeleteItems(
+			selectedRows.map((row) => ({
+				id: row.uuid,
+				name: row.name,
+				checked: true,
+			}))
+		);
 	};
 
 	// Table Columns
@@ -63,28 +82,32 @@ const Section = () => {
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
-			/>
+				handleDeleteAll={handleDeleteAll}>
+				<AddOrUpdate
+					{...{
+						url,
+						open: isOpenAddModal,
+						setOpen: setIsOpenAddModal,
+						updatedData,
+						setUpdatedData,
+						postData,
+						updateData,
+					}}
+				/>
 
-			<AddOrUpdate
-				{...{
-					url,
-					open: isOpenAddModal,
-					setOpen: setIsOpenAddModal,
-					updatedData,
-					setUpdatedData,
-					postData,
-					updateData,
-				}}
-			/>
+				<DeleteModal
+					{...{
+						deleteItem,
+						setDeleteItem,
+						url,
+						deleteData,
+					}}
+				/>
 
-			<DeleteModal
-				{...{
-					deleteItem,
-					setDeleteItem,
-					url,
-					deleteData,
-				}}
-			/>
+				<DeleteAllModal
+					{...{ deleteItems, setDeleteItems, url, deleteData }}
+				/>
+			</TableProvider>
 		</PageProvider>
 	);
 };

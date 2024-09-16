@@ -1,5 +1,4 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { TableColumnHeader } from '@/components/core/table/_components/table-column-header';
 
 // TODO: Replace with real data type of Table
 export type IPaymentTableData = {
@@ -17,14 +16,10 @@ export const testColumns = (): ColumnDef<IPaymentTableData>[] => [
 	},
 	{
 		accessorKey: 'email',
-		header: ({ column }) => (
-			<TableColumnHeader column={column} title='Email' />
-		),
+		header: 'Email',
 	},
 	{
 		accessorKey: 'amount',
-		header: ({ column }) => (
-			<TableColumnHeader column={column} title='Amount' />
-		),
+		header: 'Amount',
 	},
 ];

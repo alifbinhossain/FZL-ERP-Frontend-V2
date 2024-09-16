@@ -20,14 +20,14 @@ import { cn } from '@/lib/utils';
 interface TableColumnHeaderProps<TData, TValue>
 	extends React.HTMLAttributes<HTMLDivElement> {
 	column: Column<TData, TValue>;
-	title: string;
 }
 
 export function TableColumnHeader<TData, TValue>({
 	column,
-	title,
 	className,
 }: TableColumnHeaderProps<TData, TValue>) {
+	const title = column.columnDef.header as string;
+
 	if (!column.getCanSort()) {
 		return <div className={cn(className)}>{title}</div>;
 	}
@@ -39,14 +39,14 @@ export function TableColumnHeader<TData, TValue>({
 					<Button
 						variant='ghost'
 						size='sm'
-						className='-ml-3 h-7 data-[state=open]:bg-base-300'>
+						className='-ml-3 h-7 active:scale-100 data-[state=open]:bg-base-300'>
 						<span>{title}</span>
 						{column.getIsSorted() === 'desc' ? (
-							<ArrowDownIcon className='ml-2 h-4 w-4' />
+							<ArrowDownIcon className='ml-2 size-4' />
 						) : column.getIsSorted() === 'asc' ? (
-							<ArrowUpIcon className='ml-2 h-4 w-4' />
+							<ArrowUpIcon className='ml-2 size-4' />
 						) : (
-							<CaretSortIcon className='ml-2 h-4 w-4' />
+							<CaretSortIcon className='ml-2 size-4' />
 						)}
 					</Button>
 				</DropdownMenuTrigger>
@@ -61,12 +61,17 @@ export function TableColumnHeader<TData, TValue>({
 						<ArrowDownIcon className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
 						Desc
 					</DropdownMenuItem>
-					<DropdownMenuSeparator />
-					<DropdownMenuItem
-						onClick={() => column.toggleVisibility(false)}>
-						<EyeNoneIcon className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
-						Hide
-					</DropdownMenuItem>
+
+					{column.getCanHide() && (
+						<>
+							<DropdownMenuSeparator />
+							<DropdownMenuItem
+								onClick={() => column.toggleVisibility(false)}>
+								<EyeNoneIcon className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
+								Hide
+							</DropdownMenuItem>
+						</>
+					)}
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</div>

@@ -1,18 +1,19 @@
-import { AxiosError } from 'axios';
 import { useEffect } from 'react';
-
-import { useAuth, useRHF } from '@/hooks';
 import { IResponse } from '@/types';
-import { VENDOR_SCHEMA, VENDOR_NULL, IVendor } from '../_const/schema';
+import { getDateTime } from '@/utils';
+import { UseMutationResult } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { useAuth, useRHF } from '@/hooks';
 
-import { FormField } from '@/components/ui/form';
 import { FormInput } from '@/components/core/form';
 import { AddModal } from '@/components/core/modal';
-import { UseMutationResult } from '@tanstack/react-query';
-import { IVendorTableData } from '../_const/columns';
-import { getDateTime } from '@/utils';
+import { FormField } from '@/components/ui/form';
+
 import nanoid from '@/lib/nanoid';
+
+import { IVendorTableData } from '../_const/columns';
 import { usePurchaseVendorByUUID } from '../_const/query';
+import { IVendor, VENDOR_NULL, VENDOR_SCHEMA } from '../_const/schema';
 
 interface IAddOrUpdateProps {
 	url: string;
@@ -70,11 +71,11 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 
 	// Reset form values when data is updated
 	useEffect(() => {
-		if (data) {
+		if (data && isUpdate) {
 			form.reset(data);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
+	}, [data, isUpdate]);
 
 	// Submit handler
 	function onSubmit(values: IVendor) {

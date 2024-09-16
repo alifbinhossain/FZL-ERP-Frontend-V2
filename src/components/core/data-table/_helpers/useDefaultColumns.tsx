@@ -26,6 +26,7 @@ const useDefaultColumns = <TData, TValue>(): ColumnDef<TData, TValue>[] => {
 			header: 'Created',
 			enableColumnFilter: false,
 			cell: (info) => <DateTime date={info.getValue() as Date} />,
+			filterFn: 'dateRange' as any,
 		},
 		{
 			accessorKey: 'updated_at',
@@ -38,11 +39,12 @@ const useDefaultColumns = <TData, TValue>(): ColumnDef<TData, TValue>[] => {
 		? columns.concat([
 				{
 					accessorKey: 'actions',
-					header: 'Actions',
+					header: () => <p className='text-center'>Actions</p>,
 					enableColumnFilter: false,
 					enableSorting: false,
 					enableHiding: false,
 					cell: (info) => <TableCellAction info={info} />,
+					size: 60,
 				},
 			])
 		: columns;

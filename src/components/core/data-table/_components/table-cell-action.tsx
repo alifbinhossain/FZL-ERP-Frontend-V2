@@ -12,14 +12,15 @@ interface ITableCellActionProps<TData, TValue> {
 const TableCellAction: React.FC<ITableCellActionProps<any, any>> = ({
 	info,
 }) => {
+	const row = info.row;
 	const { updateAccess, deleteAccess } = usePage();
 	const { handleUpdate, handleDelete } = useTable();
 
 	return (
-		<div className='flex w-fit items-center justify-evenly gap-1'>
+		<div className='flex w-full items-center justify-center gap-1'>
 			{updateAccess && (
 				<Button
-					onClick={() => handleUpdate?.(info.row.index)}
+					onClick={() => handleUpdate?.(row)}
 					size={'icon'}
 					variant={'ghost'}
 					className='rounded-full'>
@@ -28,7 +29,7 @@ const TableCellAction: React.FC<ITableCellActionProps<any, any>> = ({
 			)}
 			{deleteAccess && (
 				<Button
-					onClick={() => handleDelete?.(info.row.index)}
+					onClick={() => handleDelete?.(row)}
 					size={'icon'}
 					variant={'ghost-destructive'}
 					className='rounded-full'>

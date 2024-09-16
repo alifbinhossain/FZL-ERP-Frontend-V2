@@ -59,13 +59,13 @@ export default {
 					DEFAULT: colors.WARNING,
 					foreground: colors.WARNING_FOREGROUND,
 				},
-				// base: {
-				// 	DEFAULT: colors.BASE_100,
-				// 	150: colors.BASE_150,
-				// 	200: colors.BASE_200,
-				// 	300: colors.BASE_300,
-				// 	content: colors.BASE_CONTENT,
-				// },
+				base: {
+					DEFAULT: colors.BASE_100,
+					150: colors.BASE_150,
+					200: colors.BASE_200,
+					300: colors.BASE_300,
+					content: colors.BASE_CONTENT,
+				},
 
 				border: colors.BORDER,
 				input: colors.INPUT,

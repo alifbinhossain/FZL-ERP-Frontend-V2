@@ -1,17 +1,19 @@
-import { AxiosError } from 'axios';
 import { useEffect } from 'react';
-
-import { useAuth, useRHF } from '@/hooks';
 import { IResponse } from '@/types';
-import { SECTION_SCHEMA, SECTION_NULL, ISection } from '../_const/schema';
-import { FormField } from '@/components/ui/form';
+import { getDateTime } from '@/utils';
+import { UseMutationResult } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { useAuth, useRHF } from '@/hooks';
+
 import { FormInput } from '@/components/core/form';
 import { AddModal } from '@/components/core/modal';
-import { UseMutationResult } from '@tanstack/react-query';
-import { ISectionTableData } from '../_const/columns';
-import { getDateTime } from '@/utils';
+import { FormField } from '@/components/ui/form';
+
 import nanoid from '@/lib/nanoid';
+
+import { ISectionTableData } from '../_const/columns';
 import { useMaterialSectionByUUID } from '../_const/query';
+import { ISection, SECTION_NULL, SECTION_SCHEMA } from '../_const/schema';
 
 interface IAddOrUpdateProps {
 	url: string;
@@ -69,11 +71,11 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 
 	// Reset form values when data is updated
 	useEffect(() => {
-		if (data) {
+		if (data && isUpdate) {
 			form.reset(data);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
+	}, [data, isUpdate]);
 
 	// Submit handler
 	function onSubmit(values: ISection) {
@@ -106,7 +108,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 		<AddModal
 			open={open}
 			setOpen={onClose}
-			title={isUpdate ? 'Update Test' : 'Add Test'}
+			title={isUpdate ? 'Update Section' : 'Add Section'}
 			form={form}
 			onSubmit={onSubmit}>
 			<FormField

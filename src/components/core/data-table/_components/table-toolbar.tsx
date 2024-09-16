@@ -1,14 +1,16 @@
 'use client';
 
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { CirclePlus, RefreshCw } from 'lucide-react';
+import { CirclePlus } from 'lucide-react';
 import useTable from '@/hooks/useTable';
 import { usePage } from '@/hooks';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
+import TableDateRange from './tabel-date-range';
 import { TableFacetedFilter } from './table-faceted-filter';
+import TableRefresh from './table-refresh';
 import { TableRowDelete } from './table-row-delete';
 import { TableViewOptions } from './table-view-options';
 
@@ -24,9 +26,7 @@ export function TableToolbar() {
 				<Input
 					placeholder='Filter tasks...'
 					value={
-						(table
-							.getColumn('email')
-							?.getFilterValue() as string) ?? ''
+						(table.getColumn('')?.getFilterValue() as string) ?? ''
 					}
 					onChange={(event) =>
 						table
@@ -35,6 +35,8 @@ export function TableToolbar() {
 					}
 					className='h-8 w-[150px] lg:w-[250px]'
 				/>
+
+				<TableDateRange />
 
 				<TableViewOptions table={table} />
 
@@ -59,14 +61,11 @@ export function TableToolbar() {
 
 			<div className='flex gap-4'>
 				<TableRowDelete />
+
 				{handleRefetch && (
-					<Button
-						variant={'outline'}
-						size={'icon'}
-						onClick={handleRefetch}>
-						<RefreshCw className='size-4' />
-					</Button>
+					<TableRefresh handleRefetch={handleRefetch} />
 				)}
+
 				{createAccess && (
 					<Button onClick={handleCreate} variant='accent' size={'sm'}>
 						<CirclePlus className='size-4' />

@@ -90,7 +90,7 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		},
 		onSuccess: (data) => {
 			// ShowToast(data?.toast);
-			toast.success(data?.toast?.message);
+			toast.info(data?.toast?.message);
 		},
 		onError: (
 			error: AxiosError<IResponse<any>>,
@@ -127,7 +127,7 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		},
 		onSuccess: (data) => {
 			// ShowToast(data?.toast);
-			toast.success(data?.toast?.message);
+			toast.error(data?.toast?.message);
 		},
 		onError: (error: AxiosError<IResponse<any>>) => {
 			console.log(error);
@@ -146,7 +146,7 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		data: data?.data,
 		toast: data?.toast,
 		// * States
-		isLoading,
+		isLoading: isLoading,
 		isError,
 		isPending,
 		isFetching,

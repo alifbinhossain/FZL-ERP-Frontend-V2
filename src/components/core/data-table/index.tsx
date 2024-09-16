@@ -10,11 +10,13 @@ import {
 	TableRow,
 } from '@/components/ui/table';
 
+import { TableColumnHeader } from './_components/table-column-header';
 import { TableNavbar } from './_components/table-nav';
 import { TablePagination } from './_components/table-pagination';
 import TableSkeleton from './_components/table-skeleton';
+import { getCommonPinningStyles } from './_helpers/getCommonPinningStyle';
 
-export function Table() {
+export function DataTable() {
 	const { table, isLoading } = useTable();
 	return (
 		<div className='space-y-4'>
@@ -25,15 +27,31 @@ export function Table() {
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
+									const content =
+										header.column.columnDef.header;
 									return (
 										<TableHead
 											key={header.id}
-											colSpan={header.colSpan}>
+											colSpan={header.colSpan}
+											style={{
+												...getCommonPinningStyles({
+													column: header.column,
+													isHeader: true,
+												}),
+											}}>
 											{header.isPlaceholder
 												? null
 												: flexRender(
-														header.column.columnDef
-															.header,
+														typeof content ===
+															'string' ? (
+															<TableColumnHeader
+																column={
+																	header.column
+																}
+															/>
+														) : (
+															content
+														),
 														header.getContext()
 													)}
 										</TableHead>
@@ -55,7 +73,13 @@ export function Table() {
 										row.getIsSelected() && 'selected'
 									}>
 									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id} className=''>
+										<TableCell
+											key={cell.id}
+											style={{
+												...getCommonPinningStyles({
+													column: cell.column,
+												}),
+											}}>
 											{flexRender(
 												cell.column.columnDef.cell,
 												cell.getContext()
