@@ -10,10 +10,15 @@ import SidebarMobileToggle from '../sidebar/sidebar-mobile-toggle';
 
 const Navbar = () => {
 	const { pathname } = useLocation();
+	const homePage = pathname === '/';
 	return (
 		<div className='w-full border-b'>
-			<div className='flex flex-col gap-2'>
-				<div className='flex items-center justify-between gap-4 bg-background px-4 py-2 md:hidden'>
+			<div className='flex flex-col'>
+				<div
+					className={cn(
+						'flex items-center justify-between gap-4 border-b bg-background px-4 py-2 md:hidden',
+						homePage && 'border-none'
+					)}>
 					<BrandLogo className={'w-fit text-primary'} />
 					<SidebarMobileToggle />
 				</div>
@@ -26,7 +31,7 @@ const Navbar = () => {
 					<div className='hidden h-full w-fit items-center border-r border-secondary/10 p-4 md:flex'>
 						<SidebarCollapse />
 					</div>
-					{pathname !== '/' && <GlobalBreadcrumbs />}
+					{!homePage && <GlobalBreadcrumbs />}
 				</div>
 			</div>
 		</div>

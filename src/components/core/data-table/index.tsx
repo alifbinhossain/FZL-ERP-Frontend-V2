@@ -11,16 +11,16 @@ import {
 } from '@/components/ui/table';
 
 import { TableColumnHeader } from './_components/table-column-header';
-import { TableNavbar } from './_components/table-nav';
 import { TablePagination } from './_components/table-pagination';
 import TableSkeleton from './_components/table-skeleton';
+import { TableToolbar } from './_components/table-toolbar';
 import { getCommonPinningStyles } from './_helpers/getCommonPinningStyle';
 
 export function DataTable() {
 	const { table, isLoading } = useTable();
 	return (
 		<div className='space-y-4'>
-			<TableNavbar />
+			<TableToolbar />
 			<div className='overflow-hidden rounded-md border border-secondary/10'>
 				<TableComponent>
 					<TableHeader>

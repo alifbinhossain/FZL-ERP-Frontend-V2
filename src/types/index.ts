@@ -41,3 +41,13 @@ export type IRoute = RouteObject & {
 	actions?: string[];
 	disableCollapse?: boolean;
 };
+
+export type ITableFacetedFilter = {
+	id: string;
+	title: string;
+	options: {
+		label: string;
+		value: string;
+		icon?: React.ComponentType<{ className?: string }>;
+	}[];
+};

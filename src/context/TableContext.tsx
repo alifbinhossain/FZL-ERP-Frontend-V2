@@ -1,9 +1,11 @@
 import { createContext, useMemo, useState } from 'react';
-import { IResponse } from '@/types';
+import { IResponse, ITableFacetedFilter } from '@/types';
+import { RankingInfo } from '@tanstack/match-sorter-utils';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import {
 	ColumnDef,
 	ColumnFiltersState,
+	FilterFn,
 	getCoreRowModel,
 	getFacetedRowModel,
 	getFacetedUniqueValues,
@@ -21,7 +23,19 @@ import { max, min } from 'date-fns';
 import { DataTable } from '@/components/core/data-table';
 import { TableRowSelection } from '@/components/core/data-table/_components/table-row-selection';
 import { dateRange } from '@/components/core/data-table/_helpers/dateRange';
+import { fuzzyFilter } from '@/components/core/data-table/_helpers/fuzzyFilter';
 import useDefaultColumns from '@/components/core/data-table/_helpers/useDefaultColumns';
+
+declare module '@tanstack/react-table' {
+	//add fuzzy filter to the filterFns
+	interface FilterFns {
+		fuzzy: FilterFn<unknown>;
+		dateRange: FilterFn<unknown>;
+	}
+	interface FilterMeta {
+		itemRank: RankingInfo;
+	}
+}
 
 interface ITableContext<TData> {
 	title: string;
@@ -36,6 +50,8 @@ interface ITableContext<TData> {
 	) => Promise<QueryObserverResult<IResponse<any>, Error>>;
 	handleDeleteAll?: (rows: Row<TData>[]) => void;
 	initialDateRange: [Date | string, Date | string];
+	globalFilterValue?: string;
+	facetedFilters?: ITableFacetedFilter[];
 }
 
 export const TableContext = createContext({} as ITableContext<any>);
@@ -56,6 +72,7 @@ interface ITableProviderProps<TData, TValue> {
 		options?: RefetchOptions
 	) => Promise<QueryObserverResult<IResponse<any>, Error>>;
 	handleDeleteAll?: (rows: Row<TData>[]) => void;
+	facetedFilters?: ITableFacetedFilter[];
 }
 
 function TableProvider<TData, TValue>({
@@ -72,6 +89,7 @@ function TableProvider<TData, TValue>({
 	handleDelete,
 	handleRefetch,
 	handleDeleteAll,
+	facetedFilters,
 }: ITableProviderProps<TData, TValue>) {
 	const tableData = useMemo(() => data, [data]);
 
@@ -93,6 +111,8 @@ function TableProvider<TData, TValue>({
 		},
 	]);
 
+	const [globalFilter, setGlobalFilter] = useState('');
+
 	const table = useReactTable({
 		data: tableData,
 		columns: enableRowSelection
@@ -106,8 +126,18 @@ function TableProvider<TData, TValue>({
 			columnVisibility,
 			rowSelection,
 			columnFilters,
+			globalFilter,
 		},
 		enableRowSelection: true,
+
+		filterFns: {
+			dateRange: (row, columnId, value) =>
+				dateRange(row, columnId, value),
+			fuzzy: fuzzyFilter,
+		},
+
+		onGlobalFilterChange: setGlobalFilter,
+		globalFilterFn: 'fuzzy',
 		onRowSelectionChange: setRowSelection,
 		onSortingChange: setSorting,
 		onColumnFiltersChange: setColumnFilters,
@@ -118,10 +148,6 @@ function TableProvider<TData, TValue>({
 		getSortedRowModel: getSortedRowModel(),
 		getFacetedRowModel: getFacetedRowModel(),
 		getFacetedUniqueValues: getFacetedUniqueValues(),
-		filterFns: {
-			dateRange: (row, columnId, value) =>
-				dateRange(row, columnId, value),
-		},
 	});
 
 	const allDates: Date[] = [];
@@ -147,6 +173,8 @@ function TableProvider<TData, TValue>({
 			handleRefetch,
 			handleDeleteAll,
 			initialDateRange: [minDate, maxDate],
+			globalFilterValue: globalFilter,
+			facetedFilters,
 		}),
 		[
 			title,
@@ -160,6 +188,8 @@ function TableProvider<TData, TValue>({
 			handleDeleteAll,
 			minDate,
 			maxDate,
+			globalFilter,
+			facetedFilters,
 		]
 	);
 	return (

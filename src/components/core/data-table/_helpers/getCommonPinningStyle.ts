@@ -34,7 +34,7 @@ export function getCommonPinningStyles<TData>({
 		right:
 			isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
 		position: isPinned ? 'sticky' : 'relative',
-		background: isHeader ? colors.BASE_200 : colors.BASE_150,
+		background: isHeader ? colors.BASE_150 : colors.BASE_100,
 		width: column.getSize(),
 		zIndex: isPinned ? 10 : 0,
 	};

@@ -518,7 +518,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 							</div>
 						</div>
 
-						<div className='bg-base-150 flex flex-col items-center justify-center py-4 lg:flex-row lg:items-start lg:py-0'>
+						<div className='flex flex-col items-center justify-center bg-base-150 py-4 lg:flex-row lg:items-start lg:py-0'>
 							{isSmallScreen && (
 								<Select
 									defaultValue={selectedPreset}
@@ -541,7 +541,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 							)}
 
 							{!isSmallScreen && (
-								<ScrollArea className='flex h-[300px] w-fit flex-col rounded-none border-r p-4 pl-3'>
+								<ScrollArea className='m-0 flex h-[300px] w-fit flex-col rounded-none border-r p-4 pl-3'>
 									{PRESETS.map((preset) => (
 										<div
 											key={preset.name}
