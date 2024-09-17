@@ -51,3 +51,15 @@ export type ITableFacetedFilter = {
 		icon?: React.ComponentType<{ className?: string }>;
 	}[];
 };
+
+export type IToolbarOptions =
+	| 'all'
+	| 'none'
+	| 'all-filter'
+	| 'view'
+	| 'date-range'
+	| 'faceted-filter'
+	| 'export-csv'
+	| 'export-pdf'
+	| 'refresh'
+	| 'new-entry';

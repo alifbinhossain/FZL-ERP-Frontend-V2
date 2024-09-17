@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 interface TableRefreshProps {
 	handleRefetch: (
 		options?: RefetchOptions
-	) => Promise<QueryObserverResult<IResponse<any>, Error>>;
+	) => Promise<QueryObserverResult<IResponse<unknown>, Error>>;
 }
 const TableRefresh: React.FC<TableRefreshProps> = ({ handleRefetch }) => {
 	const [isFetching, setIsFetching] = useState(false);

@@ -90,7 +90,7 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		},
 		onSuccess: (data) => {
 			// ShowToast(data?.toast);
-			toast.info(data?.toast?.message);
+			toast.warning(data?.toast?.message);
 		},
 		onError: (
 			error: AxiosError<IResponse<any>>,

@@ -1,7 +1,6 @@
 import { CellContext } from '@tanstack/react-table';
 import { SquarePen, Trash2 } from 'lucide-react';
-import useTable from '@/hooks/useTable';
-import { usePage } from '@/hooks';
+import { usePage, useTable } from '@/hooks';
 
 import { Button } from '@/components/ui/button';
 
@@ -9,9 +8,9 @@ interface ITableCellActionProps<TData, TValue> {
 	info: CellContext<TData, TValue>;
 }
 
-const TableCellAction: React.FC<ITableCellActionProps<any, any>> = ({
+function TableCellAction<TData, TValue>({
 	info,
-}) => {
+}: ITableCellActionProps<TData, TValue>) {
 	const row = info.row;
 	const { updateAccess, deleteAccess } = usePage();
 	const { handleUpdate, handleDelete } = useTable();
@@ -38,6 +37,6 @@ const TableCellAction: React.FC<ITableCellActionProps<any, any>> = ({
 			)}
 		</div>
 	);
-};
+}
 
 export default TableCellAction;

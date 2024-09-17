@@ -4,7 +4,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 export function TableRowSelection<TData, TValue>(): ColumnDef<TData, TValue> {
 	return {
-		id: 'select',
+		id: 'row-selection',
 		header: ({ table }) => (
 			<Checkbox
 				checked={
@@ -28,6 +28,6 @@ export function TableRowSelection<TData, TValue>(): ColumnDef<TData, TValue> {
 		),
 		enableSorting: false,
 		enableHiding: false,
-		size: 30,
+		size: 60,
 	};
 }

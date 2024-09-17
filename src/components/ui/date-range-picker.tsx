@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useRef, useState, type FC } from 'react';
 import { Calendar as CalendarIcon } from 'lucide-react';
 

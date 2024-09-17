@@ -1,5 +1,5 @@
 import { createContext, useMemo, useState } from 'react';
-import { IResponse, ITableFacetedFilter } from '@/types';
+import { IResponse, ITableFacetedFilter, IToolbarOptions } from '@/types';
 import { RankingInfo } from '@tanstack/match-sorter-utils';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import {
@@ -13,6 +13,7 @@ import {
 	getPaginationRowModel,
 	getSortedRowModel,
 	Row,
+	RowData,
 	SortingState,
 	Table,
 	useReactTable,
@@ -20,13 +21,19 @@ import {
 } from '@tanstack/react-table';
 import { max, min } from 'date-fns';
 
-import { DataTable } from '@/components/core/data-table';
+import DataTable from '@/components/core/data-table';
 import { TableRowSelection } from '@/components/core/data-table/_components/table-row-selection';
 import { dateRange } from '@/components/core/data-table/_helpers/dateRange';
 import { fuzzyFilter } from '@/components/core/data-table/_helpers/fuzzyFilter';
 import useDefaultColumns from '@/components/core/data-table/_helpers/useDefaultColumns';
 
 declare module '@tanstack/react-table' {
+	//allows us to define custom properties for our columns
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	interface ColumnMeta<TData extends RowData, TValue> {
+		filterVariant?: 'text' | 'range' | 'select' | 'dateRange';
+	}
+
 	//add fuzzy filter to the filterFns
 	interface FilterFns {
 		fuzzy: FilterFn<unknown>;
@@ -52,6 +59,7 @@ interface ITableContext<TData> {
 	initialDateRange: [Date | string, Date | string];
 	globalFilterValue?: string;
 	facetedFilters?: ITableFacetedFilter[];
+	toolbarOptions?: IToolbarOptions[];
 }
 
 export const TableContext = createContext({} as ITableContext<any>);
@@ -73,6 +81,7 @@ interface ITableProviderProps<TData, TValue> {
 	) => Promise<QueryObserverResult<IResponse<any>, Error>>;
 	handleDeleteAll?: (rows: Row<TData>[]) => void;
 	facetedFilters?: ITableFacetedFilter[];
+	toolbarOptions?: IToolbarOptions[];
 }
 
 function TableProvider<TData, TValue>({
@@ -90,9 +99,9 @@ function TableProvider<TData, TValue>({
 	handleRefetch,
 	handleDeleteAll,
 	facetedFilters,
+	toolbarOptions = ['all'],
 }: ITableProviderProps<TData, TValue>) {
 	const tableData = useMemo(() => data, [data]);
-
 	const tableColumns = useMemo(() => columns, [columns]);
 	const defaultColumns = useDefaultColumns<TData, TValue>();
 	const renderColumns = enableDefaultColumns
@@ -161,8 +170,8 @@ function TableProvider<TData, TValue>({
 	const minDate = min(allDates);
 	const maxDate = max(allDates);
 
-	const value = useMemo(
-		(): ITableContext<TData> => ({
+	const value = useMemo<ITableContext<TData>>(
+		() => ({
 			title,
 			subtitle,
 			isLoading,
@@ -175,6 +184,8 @@ function TableProvider<TData, TValue>({
 			initialDateRange: [minDate, maxDate],
 			globalFilterValue: globalFilter,
 			facetedFilters,
+			toolbarOptions:
+				toolbarOptions.length > 0 ? toolbarOptions : ['all'],
 		}),
 		[
 			title,
@@ -190,6 +201,7 @@ function TableProvider<TData, TValue>({
 			maxDate,
 			globalFilter,
 			facetedFilters,
+			toolbarOptions,
 		]
 	);
 	return (

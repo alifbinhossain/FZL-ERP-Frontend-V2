@@ -53,12 +53,14 @@ const AddModal: React.FC<IAddModalProps> = ({
 				</DialogHeader>
 
 				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)}>
+					<form
+						onSubmit={form.handleSubmit(onSubmit)}
+						className='relative'>
 						<div className='space-y-3'>{children}</div>
 						<DialogFooter className='mt-6'>
 							<FormSubmit className='w-full' title='Save' />
 						</DialogFooter>
-						{/* <DevTool control={form.control} placement='top-left' /> */}
+						<DevTool control={form.control} placement='top-left' />
 					</form>
 				</Form>
 			</DialogContent>

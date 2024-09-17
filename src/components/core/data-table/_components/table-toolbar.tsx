@@ -1,21 +1,52 @@
-'use client';
-
+import React, { useCallback } from 'react';
+import { IToolbarOptions } from '@/types';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { CirclePlus } from 'lucide-react';
-import useTable from '@/hooks/useTable';
-import { usePage } from '@/hooks';
+import { usePage, useTable } from '@/hooks';
 
 import { Button } from '@/components/ui/button';
 import DebouncedInput from '@/components/ui/debounce-input';
-import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 
-import TableDateRange from './tabel-date-range';
+import TableAllFilter from './table-all-filter';
+import TableExportCSV from './table-export-csv';
 import { TableFacetedFilter } from './table-faceted-filter';
+import TableHeaderDateRange from './table-global-date-range';
 import TableRefresh from './table-refresh';
 import { TableRowDelete } from './table-row-delete';
 import TableTitle from './table-title';
 import { TableViewOptions } from './table-view-options';
 
+// Interface for ToolbarComponent props
+interface ToolbarComponentProps {
+	option: IToolbarOptions;
+	render: () => React.ReactNode;
+}
+
+/**
+ * ToolbarComponent - Renders a toolbar item based on the provided option
+ * @param option - The toolbar option to check
+ * @param render - Function to render the toolbar item
+ */
+const ToolbarComponent: React.FC<ToolbarComponentProps> = React.memo(
+	({ option, render }) => {
+		const { toolbarOptions } = useTable();
+
+		if (
+			toolbarOptions?.includes(option) ||
+			toolbarOptions?.includes('all')
+		) {
+			return render();
+		}
+		return null;
+	}
+);
+
+ToolbarComponent.displayName = 'ToolbarComponent';
+
+/**
+ * TableToolbar - Main component for rendering the table toolbar
+ */
 export function TableToolbar() {
 	const { createAccess } = usePage();
 	const {
@@ -30,78 +61,125 @@ export function TableToolbar() {
 
 	const isFiltered = table.getState().columnFilters.length > 0;
 
+	// Memoize the callback for resetting column filters
+	const resetColumnFilters = useCallback(
+		() => table.resetColumnFilters(),
+		[table]
+	);
+
+	// Memoize the callback for setting global filter
+	const setGlobalFilter = useCallback(
+		(value: string | number) => table.setGlobalFilter(value),
+		[table]
+	);
+
+	/**
+	 * Renders the left section of the toolbar
+	 */
+	const renderLeftSection = useCallback(
+		() => (
+			<div className='flex flex-1 items-center space-x-2'>
+				<ToolbarComponent
+					option='all-filter'
+					render={() =>
+						table
+							.getAllColumns()
+							.filter((column) => column.getCanFilter()).length >
+							0 && <TableAllFilter />
+					}
+				/>
+				<ToolbarComponent
+					option='view'
+					render={() => <TableViewOptions table={table} />}
+				/>
+				<ToolbarComponent
+					option='date-range'
+					render={() => <TableHeaderDateRange />}
+				/>
+				<ToolbarComponent
+					option='faceted-filter'
+					render={() =>
+						facetedFilters?.map((filter) => {
+							const column = table.getColumn(filter.id);
+							return column ? (
+								<TableFacetedFilter
+									key={filter.id}
+									column={column}
+									title={filter.title}
+									options={filter.options}
+								/>
+							) : null;
+						})
+					}
+				/>
+				{isFiltered && (
+					<Button
+						variant='ghost-destructive'
+						onClick={resetColumnFilters}
+						className='h-8'>
+						Reset
+						<Cross2Icon className='ml-2 size-4' />
+					</Button>
+				)}
+				<Separator orientation='vertical' className='h-6' />
+
+				<ToolbarComponent
+					option='export-csv'
+					render={() => <TableExportCSV />}
+				/>
+			</div>
+		),
+		[table, facetedFilters, isFiltered, resetColumnFilters]
+	);
+
+	/**
+	 * Renders the right section of the toolbar
+	 */
+	const renderRightSection = useCallback(
+		() => (
+			<div className='flex gap-4'>
+				<TableRowDelete />
+				<ToolbarComponent
+					option='refresh'
+					render={() =>
+						handleRefetch && (
+							<TableRefresh handleRefetch={handleRefetch} />
+						)
+					}
+				/>
+				<ToolbarComponent
+					option='new-entry'
+					render={() =>
+						createAccess && (
+							<Button
+								onClick={handleCreate}
+								variant='accent'
+								size='sm'>
+								<CirclePlus className='size-4' />
+								New
+							</Button>
+						)
+					}
+				/>
+			</div>
+		),
+		[handleRefetch, createAccess, handleCreate]
+	);
+
 	return (
 		<div className='mb-4 flex w-full flex-col overflow-hidden'>
 			<div className='mb-4 flex w-full flex-col justify-between gap-2 border-b pb-4 lg:flex-row lg:items-end'>
 				<TableTitle title={title} subtitle={subtitle} />
+				<DebouncedInput
+					value={globalFilterValue ?? ''}
+					onChange={setGlobalFilter}
+					className='h-10 w-full max-w-[200px] lg:max-w-[300px]'
+					placeholder='Search...'
+				/>
 			</div>
 			<div className='flex items-center justify-between'>
-				<div className='flex flex-1 items-center space-x-2'>
-					<DebouncedInput
-						value={globalFilterValue ?? ''}
-						onChange={(value) =>
-							table.setGlobalFilter(String(value))
-						}
-						className='h-8 w-full max-w-[200px] lg:w-[250px]'
-						placeholder='Search...'
-					/>
-					{/* <Input
-					placeholder='Filter tasks...'
-					value={
-						(table.getColumn('')?.getFilterValue() as string) ?? ''
-					}
-					onChange={(event) =>
-						table
-							.getColumn('email')
-							?.setFilterValue(event.target.value)
-					}
-					className='h-8 w-[150px] lg:w-[250px]'
-				/> */}
-					<TableDateRange />
-					<TableViewOptions table={table} />
-
-					{facetedFilters &&
-						facetedFilters?.length > 0 &&
-						facetedFilters.map((filter) => {
-							if (table.getColumn(filter.id)) {
-								return (
-									<TableFacetedFilter
-										column={table.getColumn(filter.id)}
-										title={filter.title}
-										options={filter.options}
-									/>
-								);
-							} else return null;
-						})}
-
-					{isFiltered && (
-						<Button
-							variant='ghost'
-							onClick={() => table.resetColumnFilters()}
-							className='h-8 px-2 lg:px-3'>
-							Reset
-							<Cross2Icon className='ml-2 size-4' />
-						</Button>
-					)}
-				</div>
-
-				<div className='flex gap-4'>
-					<TableRowDelete />
-
-					{handleRefetch && (
-						<TableRefresh handleRefetch={handleRefetch} />
-					)}
-
-					{createAccess && (
-						<Button
-							onClick={handleCreate}
-							variant='accent'
-							size={'sm'}>
-							<CirclePlus className='size-4' />
-							New
-						</Button>
-					)}
-				</div>
+				{renderLeftSection()}
+				{renderRightSection()}
 			</div>
 		</div>
 	);

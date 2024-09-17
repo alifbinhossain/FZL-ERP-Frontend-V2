@@ -4,7 +4,6 @@ import { colors } from '@/config/tailwind';
 
 export function getCommonPinningStyles<TData>({
 	column,
-	withBorder = true,
 	isHeader = false,
 }: {
 	column: Column<TData>;
@@ -23,19 +22,18 @@ export function getCommonPinningStyles<TData>({
 		isPinned === 'right' && column.getIsFirstColumn('right');
 
 	return {
-		boxShadow: withBorder
-			? isLastLeftPinnedColumn
-				? `-4px 0 40px -4px ${colors.BORDER} inset`
-				: isFirstRightPinnedColumn
-					? `4px 0 3px -3px ${colors.BORDER}  inset`
-					: undefined
-			: undefined,
+		boxShadow: isLastLeftPinnedColumn
+			? `-4px 0 3px -3px ${colors.BORDER}  inset`
+			: isFirstRightPinnedColumn
+				? `4px 0 3px -3px ${colors.BORDER}  inset`
+				: undefined,
 		left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
 		right:
 			isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
+		opacity: isPinned ? 0.95 : 1,
 		position: isPinned ? 'sticky' : 'relative',
-		background: isHeader ? colors.BASE_150 : colors.BASE_100,
 		width: column.getSize(),
-		zIndex: isPinned ? 10 : 0,
+		background: isHeader ? colors.BASE_150 : colors.BASE_100,
+		zIndex: isPinned ? 1 : 0,
 	};
 }

@@ -6,12 +6,10 @@ import { Row } from '@tanstack/react-table';
 import { DeleteAllModal, DeleteModal } from '@/components/core/modal';
 
 import { IPaymentTableData, testColumns } from './_const/columns'; // TODO: Import columns
-import { useTest } from './_const/query'; // TODO: Import query
-import AddOrUpdate from './add-or-update';
-
-import 'date-fns';
 
 import { type1FacetedFilters } from './_const/columns/facetedFilters';
+import { useTest } from './_const/query'; // TODO: Import query
+import AddOrUpdate from './add-or-update';
 
 //TODO: Remove it when working with real data
 const fakePayments: IPaymentTableData[] = Array.from(

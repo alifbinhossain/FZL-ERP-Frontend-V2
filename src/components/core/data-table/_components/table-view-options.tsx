@@ -1,8 +1,6 @@
-'use client';
-
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
-import { MixerHorizontalIcon } from '@radix-ui/react-icons';
 import { Table } from '@tanstack/react-table';
+import { Columns2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -23,11 +21,8 @@ export function TableViewOptions<TData>({
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button
-					variant='outline'
-					size='sm'
-					className='ml-auto hidden lg:flex'>
-					<MixerHorizontalIcon className='size-4' />
+				<Button variant='outline' size='sm' className='hidden lg:flex'>
+					<Columns2 className='size-4' />
 					View
 				</Button>
 			</DropdownMenuTrigger>

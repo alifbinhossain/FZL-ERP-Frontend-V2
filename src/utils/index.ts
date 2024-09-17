@@ -3,6 +3,7 @@ import filterRoutes from './filterRoutes';
 import filterSidebarRoutes from './filterSidebarRoutes';
 import flattenRoutes from './flattenRoutes';
 import getDateTime from './getDateTime';
+import getFlatHeader from './getFlatHeader';
 import { getRandomPreviousDate } from './getRandomPreviousDate';
 import matchUrl from './matchUrl';
 import PageInfo from './pageInfo';
@@ -16,4 +17,5 @@ export {
 	matchUrl,
 	getDateTime,
 	getRandomPreviousDate,
+	getFlatHeader,
 };

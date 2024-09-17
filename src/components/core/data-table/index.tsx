@@ -1,5 +1,5 @@
 import { flexRender } from '@tanstack/react-table';
-import useTable from '@/hooks/useTable';
+import { useTable } from '@/hooks';
 
 import {
 	TableBody,
@@ -16,11 +16,11 @@ import TableSkeleton from './_components/table-skeleton';
 import { TableToolbar } from './_components/table-toolbar';
 import { getCommonPinningStyles } from './_helpers/getCommonPinningStyle';
 
-export function DataTable() {
-	const { table, isLoading } = useTable();
+function DataTable() {
+	const { table, isLoading, toolbarOptions } = useTable();
 	return (
 		<div className='space-y-4'>
-			<TableToolbar />
+			{toolbarOptions?.includes('none') ? null : <TableToolbar />}
 			<div className='overflow-hidden rounded-md border border-secondary/10'>
 				<TableComponent>
 					<TableHeader>
@@ -104,3 +104,5 @@ export function DataTable() {
 		</div>
 	);
 }
+
+export default DataTable;

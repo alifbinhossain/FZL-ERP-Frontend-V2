@@ -21,5 +21,8 @@ export const testColumns = (): ColumnDef<IPaymentTableData>[] => [
 	{
 		accessorKey: 'amount',
 		header: 'Amount',
+		meta: {
+			filterVariant: 'range', // TODO: Update filter variant for column level filtering
+		},
 	},
 ];

@@ -3,7 +3,7 @@ import { Row } from '@tanstack/react-table';
 export const dateRange = <TData>(
 	row: Row<TData>,
 	columnId: string,
-	value: any
+	value: [Date, Date]
 ): boolean => {
 	const date = new Date(row.getValue(columnId));
 

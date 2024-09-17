@@ -5,6 +5,7 @@ import {
 	EyeNoneIcon,
 } from '@radix-ui/react-icons';
 import { Column } from '@tanstack/react-table';
+import { ListFilter, Pin, PinOff } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -14,8 +15,15 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from '@/components/ui/popover';
 
 import { cn } from '@/lib/utils';
+
+import TableColumnFilter from './table-column-filter';
 
 interface TableColumnHeaderProps<TData, TValue>
 	extends React.HTMLAttributes<HTMLDivElement> {
@@ -33,7 +41,7 @@ export function TableColumnHeader<TData, TValue>({
 	}
 
 	return (
-		<div className={cn('flex items-center space-x-2', className)}>
+		<div className={cn('flex items-center', className)}>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button
@@ -42,38 +50,76 @@ export function TableColumnHeader<TData, TValue>({
 						className='-ml-3 h-7 active:scale-100 data-[state=open]:bg-base-300'>
 						<span>{title}</span>
 						{column.getIsSorted() === 'desc' ? (
-							<ArrowDownIcon className='ml-2 size-4' />
+							<ArrowDownIcon className='size-4' />
 						) : column.getIsSorted() === 'asc' ? (
-							<ArrowUpIcon className='ml-2 size-4' />
+							<ArrowUpIcon className='size-4' />
 						) : (
-							<CaretSortIcon className='ml-2 size-4' />
+							<CaretSortIcon className='size-4' />
 						)}
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align='start'>
 					<DropdownMenuItem
 						onClick={() => column.toggleSorting(false)}>
-						<ArrowUpIcon className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
+						<ArrowUpIcon className='mr-2 size-3.5 text-muted-foreground/70' />
 						Asc
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						onClick={() => column.toggleSorting(true)}>
-						<ArrowDownIcon className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
+						<ArrowDownIcon className='mr-2 size-3.5 text-muted-foreground/70' />
 						Desc
 					</DropdownMenuItem>
 
+					<DropdownMenuSeparator />
+
+					{column.getCanPin() && (
+						<DropdownMenuItem
+							onClick={() => {
+								if (column.getIsPinned() === 'left') {
+									column.pin(false);
+								} else {
+									column.pin('left');
+								}
+							}}>
+							{column.getIsPinned() === 'left' ? (
+								<PinOff className='mr-2 size-3.5 text-muted-foreground/70' />
+							) : (
+								<Pin
+									className={
+										'mr-2 size-3.5 text-muted-foreground/70'
+									}
+								/>
+							)}
+							<span>
+								{column.getIsPinned() === 'left'
+									? 'Unpin'
+									: 'Pin to left'}
+							</span>
+						</DropdownMenuItem>
+					)}
+
 					{column.getCanHide() && (
-						<>
-							<DropdownMenuSeparator />
-							<DropdownMenuItem
-								onClick={() => column.toggleVisibility(false)}>
-								<EyeNoneIcon className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
-								Hide
-							</DropdownMenuItem>
-						</>
+						<DropdownMenuItem
+							onClick={() => column.toggleVisibility(false)}>
+							<EyeNoneIcon className='mr-2 size-3.5 text-muted-foreground/70' />
+							Hide
+						</DropdownMenuItem>
 					)}
 				</DropdownMenuContent>
 			</DropdownMenu>
+
+			{column.getCanFilter() ? (
+				<Popover>
+					<PopoverTrigger asChild>
+						<Button variant='ghost' size={'icon'}>
+							<ListFilter className='size-4' />
+						</Button>
+					</PopoverTrigger>
+					<PopoverContent className='w-fit bg-background p-2'>
+						<TableColumnFilter column={column} />
+					</PopoverContent>
+				</Popover>
+			) : null}
 		</div>
 	);
 }

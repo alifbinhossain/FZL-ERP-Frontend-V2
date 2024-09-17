@@ -1,6 +1,6 @@
 const WHITE = '#FFFFFF';
 const BLACK = '0a0a0a';
-const BACKGROUND = '#f8fafc';
+const BACKGROUND = '#fbfcfd';
 const FOREGROUND = '#27374D';
 
 const BASE_100 = BACKGROUND;

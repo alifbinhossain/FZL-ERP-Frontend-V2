@@ -1,8 +1,8 @@
-import useTable from '@/hooks/useTable';
+import { useTable } from '@/hooks';
 
 import { DateRangePicker } from '@/components/ui/date-range-picker';
 
-const TableDateRange = () => {
+const TableGlobalDateRange = () => {
 	const { table, initialDateRange } = useTable();
 	const column = table.getColumn('created_at');
 	const columnFilterValue = column?.getFilterValue() as [Date, Date];
@@ -11,7 +11,7 @@ const TableDateRange = () => {
 		<DateRangePicker
 			initialDateFrom={columnFilterValue?.[0] || initialDateRange[0]}
 			initialDateTo={columnFilterValue?.[1] || initialDateRange[1]}
-			align={'start'}
+			align={'center'}
 			onUpdate={({ range }) => {
 				column?.setFilterValue((old: [Date, Date]) => [
 					new Date(range.from),
@@ -22,4 +22,4 @@ const TableDateRange = () => {
 	);
 };
 
-export default TableDateRange;
+export default TableGlobalDateRange;
