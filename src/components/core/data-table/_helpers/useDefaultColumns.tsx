@@ -42,20 +42,23 @@ const useDefaultColumns = <TData, TValue>(): ColumnDef<TData, TValue>[] => {
 				filterVariant: 'dateRange',
 			},
 		},
+
+		{
+			id: 'actions',
+			accessorKey: 'actions',
+			header: () => <p className='text-center'>Actions</p>,
+			enableColumnFilter: false,
+			enableSorting: false,
+			enableHiding: false,
+			cell: (info) => <TableCellAction info={info} />,
+			size: 60,
+			meta: {
+				hidden: !updateAccess && !deleteAccess,
+			},
+		},
 	];
-	return updateAccess || deleteAccess
-		? columns.concat([
-				{
-					accessorKey: 'actions',
-					header: () => <p className='text-center'>Actions</p>,
-					enableColumnFilter: false,
-					enableSorting: false,
-					enableHiding: false,
-					cell: (info) => <TableCellAction info={info} />,
-					size: 60,
-				},
-			])
-		: columns;
+
+	return columns;
 };
 
 export default useDefaultColumns;

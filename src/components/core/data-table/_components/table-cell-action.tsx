@@ -19,6 +19,7 @@ function TableCellAction<TData, TValue>({
 		<div className='flex w-full items-center justify-center gap-1'>
 			{updateAccess && (
 				<Button
+					aria-label='Edit Row'
 					onClick={() => handleUpdate?.(row)}
 					size={'icon'}
 					variant={'ghost'}
@@ -28,6 +29,7 @@ function TableCellAction<TData, TValue>({
 			)}
 			{deleteAccess && (
 				<Button
+					aria-label='Delete Row'
 					onClick={() => handleDelete?.(row)}
 					size={'icon'}
 					variant={'ghost-destructive'}

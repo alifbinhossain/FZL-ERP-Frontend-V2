@@ -27,7 +27,11 @@ const LoginForm = () => {
 					control={form.control}
 					name='pass'
 					render={(props) => (
-						<FormInput label='Password' {...props} />
+						<FormInput
+							type='password'
+							label='Password'
+							{...props}
+						/>
 					)}
 				/>
 

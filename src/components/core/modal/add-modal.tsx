@@ -46,10 +46,19 @@ const AddModal: React.FC<IAddModalProps> = ({
 					className
 				)}>
 				<DialogHeader>
-					<DialogTitle>{title}</DialogTitle>
-					{subtitle && (
-						<DialogDescription>{subtitle}</DialogDescription>
-					)}
+					<DialogTitle
+						aria-label='Modal Title'
+						aria-description='Modal Title'
+						aria-describedby='Modal Title'>
+						{title}
+					</DialogTitle>
+					<DialogDescription
+						className={cn(!subtitle && 'sr-only')}
+						aria-label='Modal Subtitle'
+						aria-description='Modal Subtitle'
+						aria-describedby='Modal Subtitle'>
+						{subtitle && subtitle}
+					</DialogDescription>
 				</DialogHeader>
 
 				<Form {...form}>

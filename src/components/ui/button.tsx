@@ -41,21 +41,58 @@ const buttonVariants = cva(
 	}
 );
 
+interface IconProps {
+	Icon: React.ElementType;
+	iconPlacement: 'left' | 'right';
+}
+
+interface IconRefProps {
+	Icon?: never;
+	iconPlacement?: undefined;
+}
+
 export interface ButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
 		VariantProps<typeof buttonVariants> {
 	asChild?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-	({ className, variant, size, asChild = false, ...props }, ref) => {
+export type ButtonIconProps = IconProps | IconRefProps;
+
+const Button = React.forwardRef<
+	HTMLButtonElement,
+	ButtonProps & ButtonIconProps
+>(
+	(
+		{
+			className,
+			variant,
+			size,
+			asChild = false,
+			Icon,
+			iconPlacement,
+			...props
+		},
+		ref
+	) => {
 		const Comp = asChild ? Slot : 'button';
 		return (
 			<Comp
 				className={cn(buttonVariants({ variant, size, className }))}
 				ref={ref}
-				{...props}
-			/>
+				{...props}>
+				{Icon && iconPlacement === 'left' && (
+					<div className='w-5 pr-2 transition-all duration-200'>
+						<Icon />
+					</div>
+				)}
+				{props.children}
+				{Icon && iconPlacement === 'right' && (
+					<div className='w-5 pr-2 transition-all duration-200'>
+						<Icon />
+					</div>
+				)}
+			</Comp>
 		);
 	}
 );

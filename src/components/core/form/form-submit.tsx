@@ -12,7 +12,11 @@ const FormSubmit: React.FC<
 		formState: { isSubmitting, isDirty },
 	} = useFormContext();
 	return (
-		<Button disabled={!isDirty || isSubmitting} type='submit' {...props}>
+		<Button
+			aria-label='Submit Form'
+			disabled={!isDirty || isSubmitting}
+			type='submit'
+			{...props}>
 			{isSubmitting && (
 				<ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
 			)}

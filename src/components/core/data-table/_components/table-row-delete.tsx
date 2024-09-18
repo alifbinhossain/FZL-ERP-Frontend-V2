@@ -12,6 +12,7 @@ export function TableRowDelete() {
 
 	return (
 		<Button
+			aria-label='Delete Selected Rows'
 			onClick={() => {
 				handleDeleteAll!(selectedRows);
 			}}

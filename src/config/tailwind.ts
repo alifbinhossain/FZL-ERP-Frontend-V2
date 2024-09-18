@@ -1,7 +1,7 @@
 const WHITE = '#FFFFFF';
 const BLACK = '0a0a0a';
 const BACKGROUND = '#fbfcfd';
-const FOREGROUND = '#27374D';
+const FOREGROUND = '#222831';
 
 const BASE_100 = BACKGROUND;
 const BASE_150 = '#f4f7fa';
@@ -9,9 +9,9 @@ const BASE_200 = '#f1f5f9';
 const BASE_300 = '#e2ebf3';
 const BASE_CONTENT = FOREGROUND;
 
-const PRIMARY = '#27374D';
+const PRIMARY = '#222831';
 const PRIMARY_FOREGROUND = '#f2f5f8';
-const SECONDARY = '#526D82';
+const SECONDARY = '#393E46';
 const SECONDARY_FOREGROUND = '#f2f5f8';
 const SECONDARY_LIGHT = '#9DB2BF';
 

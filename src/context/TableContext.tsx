@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from 'react';
+import { createContext, useLayoutEffect, useMemo, useState } from 'react';
 import { IResponse, ITableFacetedFilter, IToolbarOptions } from '@/types';
 import { RankingInfo } from '@tanstack/match-sorter-utils';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
@@ -32,6 +32,7 @@ declare module '@tanstack/react-table' {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	interface ColumnMeta<TData extends RowData, TValue> {
 		filterVariant?: 'text' | 'range' | 'select' | 'dateRange';
+		hidden?: boolean;
 	}
 
 	//add fuzzy filter to the filterFns
@@ -82,6 +83,7 @@ interface ITableProviderProps<TData, TValue> {
 	handleDeleteAll?: (rows: Row<TData>[]) => void;
 	facetedFilters?: ITableFacetedFilter[];
 	toolbarOptions?: IToolbarOptions[];
+	defaultVisibleColumns?: VisibilityState;
 }
 
 function TableProvider<TData, TValue>({
@@ -100,7 +102,11 @@ function TableProvider<TData, TValue>({
 	handleDeleteAll,
 	facetedFilters,
 	toolbarOptions = ['all'],
+	defaultVisibleColumns = {},
 }: ITableProviderProps<TData, TValue>) {
+	const [isMounted, setIsMounted] = useState(false);
+
+	// react table hook, and other codes...
 	const tableData = useMemo(() => data, [data]);
 	const tableColumns = useMemo(() => columns, [columns]);
 	const defaultColumns = useDefaultColumns<TData, TValue>();
@@ -108,10 +114,15 @@ function TableProvider<TData, TValue>({
 		? tableColumns.concat(defaultColumns)
 		: tableColumns;
 
+	const visibleColumns = renderColumns.filter(
+		(column) => !column.meta?.hidden
+	);
+
 	const [rowSelection, setRowSelection] = useState({});
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
-		{}
+		defaultVisibleColumns
 	);
+
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [sorting, setSorting] = useState<SortingState>([
 		{
@@ -122,11 +133,16 @@ function TableProvider<TData, TValue>({
 
 	const [globalFilter, setGlobalFilter] = useState('');
 
+	// Fix error on react table, when the table is not mounted
+	useLayoutEffect(() => {
+		setIsMounted(true);
+	}, []);
+
 	const table = useReactTable({
 		data: tableData,
 		columns: enableRowSelection
-			? [TableRowSelection<TData, TValue>(), ...renderColumns]
-			: renderColumns,
+			? [TableRowSelection<TData, TValue>(), ...visibleColumns]
+			: visibleColumns,
 		initialState: {
 			columnPinning: { right: ['actions'] },
 		},
@@ -204,6 +220,10 @@ function TableProvider<TData, TValue>({
 			toolbarOptions,
 		]
 	);
+
+	// Fix error on react table, when the table is not mounted
+	if (!isMounted) return null;
+
 	return (
 		<TableContext.Provider value={value}>
 			<DataTable />

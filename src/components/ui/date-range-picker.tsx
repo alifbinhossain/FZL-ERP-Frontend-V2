@@ -319,6 +319,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 		isSelected: boolean;
 	}): JSX.Element => (
 		<Button
+			aria-label={label}
 			size={'sm'}
 			className={cn(
 				'flex w-full justify-start text-left',
@@ -360,7 +361,10 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 				setIsOpen(open);
 			}}>
 			<PopoverTrigger asChild>
-				<Button size={'sm'} variant='outline'>
+				<Button
+					aria-label='Open date range picker'
+					size={'sm'}
+					variant='outline'>
 					<CalendarIcon className='size-4' />
 					<div className='text-right'>
 						<div>
@@ -588,6 +592,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 
 				<div className='flex justify-end gap-4 border-t px-4 py-4'>
 					<Button
+						aria-label='Cancel'
 						onClick={() => {
 							setIsOpen(false);
 							resetValues();
@@ -596,6 +601,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 						Cancel
 					</Button>
 					<Button
+						aria-label='Apply'
 						variant={'accent'}
 						onClick={() => {
 							setIsOpen(false);

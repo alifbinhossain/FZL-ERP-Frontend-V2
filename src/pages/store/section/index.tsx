@@ -1,17 +1,22 @@
-import { useMemo, useState } from 'react';
+import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
 import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
 
-import { DeleteAllModal, DeleteModal } from '@/components/core/modal';
+import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { ISectionTableData, sectionColumns } from '../_const/columns';
 import { useMaterialSection } from '../_const/query';
-import AddOrUpdate from './add-or-update';
+
+const AddOrUpdate = lazy(() => import('./add-or-update'));
+const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
+const DeleteAllModal = lazy(
+	() => import('@/components/core/modal/delete-all-modal')
+);
 
 const Section = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useMaterialSection<ISectionTableData[]>();
+		useMaterialSection<ISectionTableData[]>(); // TODO: Update query
 
 	const pageInfo = useMemo(
 		() => new PageInfo('Section', url, 'store__section'),
@@ -55,6 +60,7 @@ const Section = () => {
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<ISectionTableData>[]) => {
+		// TODO: Update Row type
 		const selectedRows = rows.map((row) => row.original);
 
 		setDeleteItems(
@@ -83,30 +89,36 @@ const Section = () => {
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
 				handleDeleteAll={handleDeleteAll}>
-				<AddOrUpdate
-					{...{
-						url,
-						open: isOpenAddModal,
-						setOpen: setIsOpenAddModal,
-						updatedData,
-						setUpdatedData,
-						postData,
-						updateData,
-					}}
-				/>
+				{renderSuspenseModals([
+					<AddOrUpdate
+						{...{
+							url,
+							open: isOpenAddModal,
+							setOpen: setIsOpenAddModal,
+							updatedData,
+							setUpdatedData,
+							postData,
+							updateData,
+						}}
+					/>,
 
-				<DeleteModal
-					{...{
-						deleteItem,
-						setDeleteItem,
-						url,
-						deleteData,
-					}}
-				/>
-
-				<DeleteAllModal
-					{...{ deleteItems, setDeleteItems, url, deleteData }}
-				/>
+					<DeleteModal
+						{...{
+							deleteItem,
+							setDeleteItem,
+							url,
+							deleteData,
+						}}
+					/>,
+					<DeleteAllModal
+						{...{
+							deleteItems,
+							setDeleteItems,
+							url,
+							deleteData,
+						}}
+					/>,
+				])}
 			</TableProvider>
 		</PageProvider>
 	);

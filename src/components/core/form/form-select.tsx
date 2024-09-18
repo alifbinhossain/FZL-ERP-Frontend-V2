@@ -36,9 +36,9 @@ const FormSelect: React.FC<FormSelectProps> = ({
 	options,
 }) => {
 	return (
-		<FormItem>
+		<FormItem className='space-y-1'>
 			<FormLabel className='capitalize'>
-				{label || field.name}{' '}
+				{label || field.name.replace('_', ' ')}{' '}
 				{optional ? <span className='text-xs'>(Optional)</span> : ''}
 			</FormLabel>
 			<FormControl>

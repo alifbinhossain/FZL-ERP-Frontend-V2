@@ -28,6 +28,7 @@ const TableRefresh: React.FC<TableRefreshProps> = ({ handleRefetch }) => {
 	return (
 		<TooltipWrapper message='Refresh data'>
 			<Button
+				aria-label='Refresh Data'
 				disabled={isFetching}
 				variant={'outline'}
 				size={'sm'}

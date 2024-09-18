@@ -1,12 +1,15 @@
 // * Store
 
-import Section from '@/pages/store/section';
-import Type from '@/pages/store/type';
-import Vendor from '@/pages/store/vendor';
+import { lazy } from 'react';
+import { IRoute } from '@/types';
+
+const Section = lazy(() => import('@/pages/store/section'));
+const Type = lazy(() => import('@/pages/store/type'));
+const Vendor = lazy(() => import('@/pages/store/vendor'));
 
 // * Purchase
 
-export const StoreRoutes = [
+const StoreRoutes: IRoute[] = [
 	{
 		name: 'Store',
 		children: [
@@ -97,3 +100,4 @@ export const StoreRoutes = [
 		],
 	},
 ];
+export default StoreRoutes;

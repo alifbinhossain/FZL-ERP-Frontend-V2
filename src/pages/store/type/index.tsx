@@ -1,15 +1,20 @@
-import { useMemo, useState } from 'react';
+import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
 import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
 
-import { DeleteAllModal, DeleteModal } from '@/components/core/modal';
+import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { ITypeTableData, typeColumns } from '../_const/columns';
 import { useMaterialType } from '../_const/query';
-import AddOrUpdate from './add-or-update';
 
-const TestType1 = () => {
+const AddOrUpdate = lazy(() => import('./add-or-update'));
+const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
+const DeleteAllModal = lazy(
+	() => import('@/components/core/modal/delete-all-modal')
+);
+
+const Type = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
 		useMaterialType<ITypeTableData[]>();
 
@@ -81,33 +86,39 @@ const TestType1 = () => {
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
 				handleDeleteAll={handleDeleteAll}>
-				<AddOrUpdate
-					{...{
-						url,
-						open: isOpenAddModal,
-						setOpen: setIsOpenAddModal,
-						updatedData,
-						setUpdatedData,
-						postData,
-						updateData,
-					}}
-				/>
+				{renderSuspenseModals([
+					<AddOrUpdate
+						{...{
+							url,
+							open: isOpenAddModal,
+							setOpen: setIsOpenAddModal,
+							updatedData,
+							setUpdatedData,
+							postData,
+							updateData,
+						}}
+					/>,
 
-				<DeleteModal
-					{...{
-						deleteItem,
-						setDeleteItem,
-						url,
-						deleteData,
-					}}
-				/>
-
-				<DeleteAllModal
-					{...{ deleteItems, setDeleteItems, url, deleteData }}
-				/>
+					<DeleteModal
+						{...{
+							deleteItem,
+							setDeleteItem,
+							url,
+							deleteData,
+						}}
+					/>,
+					<DeleteAllModal
+						{...{
+							deleteItems,
+							setDeleteItems,
+							url,
+							deleteData,
+						}}
+					/>,
+				])}
 			</TableProvider>
 		</PageProvider>
 	);
 };
 
-export default TestType1;
+export default Type;

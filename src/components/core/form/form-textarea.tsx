@@ -31,7 +31,7 @@ const FormTextarea: React.FC<FormTextareaProps> = ({
 	className,
 }) => {
 	return (
-		<FormItem>
+		<FormItem className='space-y-1'>
 			<FormLabel className='capitalize'>
 				{label || field.name}{' '}
 				{optional ? <span className='text-xs'>(Optional)</span> : ''}

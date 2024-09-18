@@ -70,6 +70,7 @@ const GlobalBreadcrumbs = () => {
 								key={index + 'item'}>
 								<BreadcrumbItem>
 									<BreadcrumbLink
+										aria-label='breadcrumb'
 										className={cn('text-secondary')}
 										href={item.href}>
 										{item.label}
@@ -112,14 +113,3 @@ const GlobalBreadcrumbs = () => {
 };
 
 export default GlobalBreadcrumbs;
-
-{
-	/* <motion.li
-		
-variants={variants}
-initial='initial'
-animate='animate'
->
-
-</motion.li> */
-}

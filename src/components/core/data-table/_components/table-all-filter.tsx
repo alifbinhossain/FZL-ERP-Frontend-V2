@@ -23,7 +23,11 @@ const TableAllFilter = () => {
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
-				<Button variant='outline' size='sm' className='hidden lg:flex'>
+				<Button
+					aria-label='Filters All Columns'
+					variant='outline'
+					size='sm'
+					className='hidden lg:flex'>
 					<MixerHorizontalIcon className='size-4' />
 					Filters
 				</Button>

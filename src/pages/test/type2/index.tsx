@@ -2,10 +2,16 @@ import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
 import { getRandomPreviousDate, PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
+import { useAccess } from '@/hooks';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { IPaymentTableData, test1Columns } from '../_const/columns'; // TODO: Import columns
+import {
+	IActionMaterialTrx,
+	IPaymentTableData,
+	test2Columns,
+} from '../_const/columns';
+// TODO: Import columns
 
 import { type1FacetedFilters } from '../_const/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
 import { useTest } from '../_const/query'; // TODO: Import query
@@ -15,6 +21,7 @@ const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
 const DeleteAllModal = lazy(
 	() => import('@/components/core/modal/delete-all-modal')
 );
+const AgainstTrx = lazy(() => import('./against-trx'));
 
 //TODO: Remove it when working with real data
 const fakePayments: IPaymentTableData[] = Array.from(
@@ -35,8 +42,14 @@ const TestType1 = () => {
 
 	// TODO: Update Page Info (Title, Url and Tab Name)
 	const pageInfo = useMemo(
-		() => new PageInfo('Test 1', url, 'order__info'),
+		() => new PageInfo('Test 2', url, 'store__stock'),
 		[url]
+	);
+
+	const pageAccess = useAccess(pageInfo.getTab() as string) as string[];
+	const actionTrxAccess = pageAccess.includes('click_action'); // TODO: Update Action Trx Access
+	const actionTrxAgainstOrderAccess = pageAccess.includes(
+		'click_trx_against_order' // TODO: Update Action Trx Against Order Access
 	);
 
 	// Add/Update Modal state
@@ -88,8 +101,45 @@ const TestType1 = () => {
 		);
 	};
 
+	// Action Trx Modal state
+	const [isOpenActionTrxModal, setIsOpenActionTrxModal] = useState(false);
+	const [updateActionTrxData, setUpdateActionTrxData] =
+		useState<IActionMaterialTrx | null>(null);
+
+	const handleAgainstTrx = (row: Row<IPaymentTableData>) => {
+		// TODO: Update Action Trx Data type
+		setUpdateActionTrxData({
+			uuid: row.original.id,
+			name: row.original.email,
+			stock: row.original.amount,
+		});
+		setIsOpenActionTrxModal(true);
+	};
+
+	// Action Against Order Modal state
+	const [isOpenActionAgainstOrderModal, setIsOpenActionAgainstOrderModal] =
+		useState(false);
+	const [updateActionAgainstOrderData, setUpdateActionAgainstOrderData] =
+		useState<IActionMaterialTrx | null>(null);
+
+	const handleAgainstOrder = (row: Row<IPaymentTableData>) => {
+		// TODO: Update Action Against Order Data type
+		setUpdateActionAgainstOrderData({
+			uuid: row.original.id,
+			name: row.original.email,
+			stock: row.original.amount,
+		});
+		setIsOpenActionAgainstOrderModal(true);
+		alert('Action against order');
+	};
+
 	// Table Columns
-	const columns = test1Columns(); // TODO: Update columns
+	const columns = test2Columns({
+		actionTrxAccess,
+		actionTrxAgainstOrderAccess,
+		handleAgainstTrx,
+		handleAgainstOrder,
+	}); // TODO: Update columns
 
 	return (
 		<PageProvider
@@ -134,6 +184,17 @@ const TestType1 = () => {
 							setDeleteItems,
 							url,
 							deleteData,
+						}}
+					/>,
+
+					<AgainstTrx
+						{...{
+							open: isOpenActionTrxModal,
+							setOpen: setIsOpenActionTrxModal,
+							updatedData: updateActionTrxData,
+							setUpdatedData: setUpdateActionTrxData,
+							postData,
+							url: '/test/trx', // TODO: Update URL
 						}}
 					/>,
 				])}

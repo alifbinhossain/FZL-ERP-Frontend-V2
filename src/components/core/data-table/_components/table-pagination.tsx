@@ -32,7 +32,9 @@ export function TablePagination() {
 						onValueChange={(value) => {
 							table.setPageSize(Number(value));
 						}}>
-						<SelectTrigger className='h-8 w-[70px]'>
+						<SelectTrigger
+							aria-label='Rows per page'
+							className='h-8 w-[70px]'>
 							<SelectValue
 								placeholder={
 									table.getState().pagination.pageSize
@@ -56,6 +58,7 @@ export function TablePagination() {
 				</div>
 				<div className='flex items-center space-x-2'>
 					<Button
+						aria-label='Go to first page'
 						variant='outline'
 						className='hidden h-8 w-8 p-0 lg:flex'
 						onClick={() => table.setPageIndex(0)}
@@ -64,6 +67,7 @@ export function TablePagination() {
 						<DoubleArrowLeftIcon className='h-4 w-4' />
 					</Button>
 					<Button
+						aria-label='Go to previous page'
 						variant='outline'
 						className='h-8 w-8 p-0'
 						onClick={() => table.previousPage()}
@@ -72,6 +76,7 @@ export function TablePagination() {
 						<ChevronLeftIcon className='h-4 w-4' />
 					</Button>
 					<Button
+						aria-label='Go to next page'
 						variant='outline'
 						className='h-8 w-8 p-0'
 						onClick={() => table.nextPage()}
@@ -80,6 +85,7 @@ export function TablePagination() {
 						<ChevronRightIcon className='h-4 w-4' />
 					</Button>
 					<Button
+						aria-label='Go to last page'
 						variant='outline'
 						className='hidden h-8 w-8 p-0 lg:flex'
 						onClick={() =>

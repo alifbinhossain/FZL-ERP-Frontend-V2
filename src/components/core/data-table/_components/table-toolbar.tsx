@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { IToolbarOptions } from '@/types';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { CirclePlus } from 'lucide-react';
+import { CirclePlus, SearchIcon } from 'lucide-react';
 import { usePage, useTable } from '@/hooks';
 
 import { Button } from '@/components/ui/button';
@@ -114,6 +114,7 @@ export function TableToolbar() {
 				/>
 				{isFiltered && (
 					<Button
+						aria-label='Reset filters'
 						variant='ghost-destructive'
 						onClick={resetColumnFilters}
 						className='h-8'>
@@ -152,6 +153,7 @@ export function TableToolbar() {
 					render={() =>
 						createAccess && (
 							<Button
+								aria-label='Create new entry'
 								onClick={handleCreate}
 								variant='accent'
 								size='sm'>
@@ -171,6 +173,7 @@ export function TableToolbar() {
 			<div className='mb-4 flex w-full flex-col justify-between gap-2 border-b pb-4 lg:flex-row lg:items-end'>
 				<TableTitle title={title} subtitle={subtitle} />
 				<DebouncedInput
+					icon={<SearchIcon className='size-5 text-secondary/50' />}
 					value={globalFilterValue ?? ''}
 					onChange={setGlobalFilter}
 					className='h-10 w-full max-w-[200px] lg:max-w-[300px]'

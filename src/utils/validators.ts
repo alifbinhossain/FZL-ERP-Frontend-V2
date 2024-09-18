@@ -89,6 +89,7 @@ export const NUMBER_DOUBLE = (message = 'Required') =>
 	});
 export const NUMBER_DOUBLE_REQUIRED = NUMBER_DOUBLE('Required');
 export const NUMBER_DOUBLE_OPTIONAL = NUMBER_DOUBLE().optional();
+export const NUMBER_DOUBLE_NULLABLE = NUMBER_DOUBLE().nullable();
 
 // PHONE NUMBER
 export const PHONE_NUMBER = STRING('Required', 'Invalid Phone Number').regex(

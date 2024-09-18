@@ -1,5 +1,5 @@
 import { createContext, useMemo, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/hooks';
 
 interface ILayoutContext {
@@ -18,6 +18,7 @@ interface ILayoutProps {
 const LayoutProvider: React.FC<ILayoutProps> = ({ children }) => {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 	const [isCollapsed, setIsCollapsed] = useState(false);
+	const pathName = useLocation().pathname;
 
 	const value = useMemo((): ILayoutContext => {
 		return {
@@ -38,7 +39,7 @@ const LayoutProvider: React.FC<ILayoutProps> = ({ children }) => {
 
 	// If the user is not signed in, redirect to the login page
 	if (!signed) {
-		return <Navigate to='/login' replace={true} />;
+		return <Navigate to={`/login?redirect=${pathName}`} replace={true} />;
 	}
 
 	return (

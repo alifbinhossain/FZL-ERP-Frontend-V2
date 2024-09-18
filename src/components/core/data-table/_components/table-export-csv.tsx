@@ -41,8 +41,14 @@ const TableExportCSV = () => {
 
 	return (
 		<CSVLink
+			aria-label='Export to CSV'
+			role='button'
 			type='button'
-			className={buttonVariants({ variant: 'secondary', size: 'sm' })}
+			className={buttonVariants({
+				variant: 'secondary',
+				size: 'sm',
+				className: 'h-7',
+			})}
 			data={csvData}
 			filename={filename}>
 			<FileSpreadsheet className='size-4' />

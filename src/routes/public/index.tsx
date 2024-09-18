@@ -1,4 +1,5 @@
 import Login from '@/pages/public/login';
+import NotFound from '@/pages/public/not-found';
 
 const publicRoutes = [
 	{
@@ -9,14 +10,14 @@ const publicRoutes = [
 	// 	path: '/no-access',
 	// 	element: <NoAccess />,
 	// },
-	// {
-	// 	path: '/not-found',
-	// 	element: <NotFound />,
-	// },
-	// {
-	// 	path: '*',
-	// 	element: <NotFound />,
-	// },
+	{
+		path: '/not-found',
+		element: <NotFound />,
+	},
+	{
+		path: '*',
+		element: <NotFound />,
+	},
 ];
 
 export default publicRoutes;

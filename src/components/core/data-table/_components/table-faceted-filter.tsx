@@ -44,6 +44,7 @@ export function TableFacetedFilter<TData, TValue>({
 		<Popover>
 			<PopoverTrigger asChild>
 				<Button
+					aria-label={title}
 					variant='outline'
 					size='sm'
 					className='h-8 border-dashed'>

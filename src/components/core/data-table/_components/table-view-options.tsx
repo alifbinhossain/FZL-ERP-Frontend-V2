@@ -21,7 +21,11 @@ export function TableViewOptions<TData>({
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant='outline' size='sm' className='hidden lg:flex'>
+				<Button
+					aria-label='View Options'
+					variant='outline'
+					size='sm'
+					className='hidden lg:flex'>
 					<Columns2 className='size-4' />
 					View
 				</Button>

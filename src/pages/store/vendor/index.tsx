@@ -1,13 +1,18 @@
-import { useMemo, useState } from 'react';
+import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
 import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
 
-import { DeleteAllModal, DeleteModal } from '@/components/core/modal';
+import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { IVendorTableData, vendorColumns } from '../_const/columns';
 import { usePurchaseVendor } from '../_const/query';
-import AddOrUpdate from './add-or-update';
+
+const AddOrUpdate = lazy(() => import('./add-or-update'));
+const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
+const DeleteAllModal = lazy(
+	() => import('@/components/core/modal/delete-all-modal')
+);
 
 const Vendor = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
@@ -83,30 +88,36 @@ const Vendor = () => {
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
 				handleDeleteAll={handleDeleteAll}>
-				<AddOrUpdate
-					{...{
-						url,
-						open: isOpenAddModal,
-						setOpen: setIsOpenAddModal,
-						updatedData,
-						setUpdatedData,
-						postData,
-						updateData,
-					}}
-				/>
+				{renderSuspenseModals([
+					<AddOrUpdate
+						{...{
+							url,
+							open: isOpenAddModal,
+							setOpen: setIsOpenAddModal,
+							updatedData,
+							setUpdatedData,
+							postData,
+							updateData,
+						}}
+					/>,
 
-				<DeleteModal
-					{...{
-						deleteItem,
-						setDeleteItem,
-						url,
-						deleteData,
-					}}
-				/>
-
-				<DeleteAllModal
-					{...{ deleteItems, setDeleteItems, url, deleteData }}
-				/>
+					<DeleteModal
+						{...{
+							deleteItem,
+							setDeleteItem,
+							url,
+							deleteData,
+						}}
+					/>,
+					<DeleteAllModal
+						{...{
+							deleteItems,
+							setDeleteItems,
+							url,
+							deleteData,
+						}}
+					/>,
+				])}
 			</TableProvider>
 		</PageProvider>
 	);

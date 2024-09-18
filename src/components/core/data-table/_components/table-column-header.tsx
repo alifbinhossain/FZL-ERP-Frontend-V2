@@ -45,6 +45,7 @@ export function TableColumnHeader<TData, TValue>({
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button
+						aria-label='Sort Column'
 						variant='ghost'
 						size='sm'
 						className='-ml-3 h-7 active:scale-100 data-[state=open]:bg-base-300'>
@@ -111,7 +112,10 @@ export function TableColumnHeader<TData, TValue>({
 			{column.getCanFilter() ? (
 				<Popover>
 					<PopoverTrigger asChild>
-						<Button variant='ghost' size={'icon'}>
+						<Button
+							aria-label='Column Filter'
+							variant='ghost'
+							size={'icon'}>
 							<ListFilter className='size-4' />
 						</Button>
 					</PopoverTrigger>
