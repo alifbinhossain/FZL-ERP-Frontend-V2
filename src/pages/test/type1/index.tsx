@@ -5,8 +5,9 @@ import { Row } from '@tanstack/react-table';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { IPaymentTableData, test1Columns } from '../_const/columns'; // TODO: Import columns
+import { test1Columns } from '../_const/columns'; // TODO: Import columns
 
+import { IPaymentTableData } from '../_const/columns/columns.type';
 import { type1FacetedFilters } from '../_const/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
 import { useTest } from '../_const/query'; // TODO: Import query
 

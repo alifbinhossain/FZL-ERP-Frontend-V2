@@ -2,13 +2,7 @@ import { ColumnDef, Row } from '@tanstack/react-table';
 
 import TableTransfer from '@/components/core/data-table/_components/table-transfer';
 
-// TODO: Replace with real data type of Table
-export type IPaymentTableData = {
-	id: string;
-	amount: number;
-	status: 'pending' | 'processing' | 'success' | 'failed';
-	email: string;
-};
+import { IPaymentTableData } from './columns.type';
 
 // TODO: Replace with real data columns of Table
 export const test1Columns = (): ColumnDef<IPaymentTableData>[] => [
@@ -30,11 +24,6 @@ export const test1Columns = (): ColumnDef<IPaymentTableData>[] => [
 ];
 
 // TODO: Replace with real data type of Table
-export type IActionMaterialTrx = {
-	uuid: string;
-	name: string;
-	stock: number;
-};
 
 export function test2Columns({
 	actionTrxAgainstOrderAccess,

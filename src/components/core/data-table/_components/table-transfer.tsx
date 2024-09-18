@@ -13,14 +13,16 @@ function TableTransfer<TData, TValue>({
 	...props
 }: TableTransferProps<TData, TValue>) {
 	return (
-		<Button
-			variant={'accent'}
-			size={'icon'}
-			className='rounded-full'
-			onClick={onClick}
-			{...props}>
-			<Repeat className='size-4' />
-		</Button>
+		<div className='flex size-full items-center justify-center'>
+			<Button
+				variant={'accent'}
+				size={'icon'}
+				className='size-7 rounded-full'
+				onClick={onClick}
+				{...props}>
+				<Repeat className='size-4' />
+			</Button>
+		</div>
 	);
 }
 

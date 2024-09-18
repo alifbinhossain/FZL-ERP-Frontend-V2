@@ -6,13 +6,14 @@ import { useAccess } from '@/hooks';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import {
-	IActionMaterialTrx,
-	IPaymentTableData,
-	test2Columns,
-} from '../_const/columns';
-// TODO: Import columns
+import { test2Columns } from '../_const/columns'; // TODO: Import columns
 
+// TODO: Import columns type
+import {
+	IActionTrx,
+	IActionTrxAgainstOrder,
+	IPaymentTableData,
+} from '../_const/columns/columns.type';
 import { type1FacetedFilters } from '../_const/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
 import { useTest } from '../_const/query'; // TODO: Import query
 
@@ -22,6 +23,7 @@ const DeleteAllModal = lazy(
 	() => import('@/components/core/modal/delete-all-modal')
 );
 const AgainstTrx = lazy(() => import('./against-trx'));
+const AgainstOrderTransfer = lazy(() => import('./against-order-transfer'));
 
 //TODO: Remove it when working with real data
 const fakePayments: IPaymentTableData[] = Array.from(
@@ -104,7 +106,7 @@ const TestType1 = () => {
 	// Action Trx Modal state
 	const [isOpenActionTrxModal, setIsOpenActionTrxModal] = useState(false);
 	const [updateActionTrxData, setUpdateActionTrxData] =
-		useState<IActionMaterialTrx | null>(null);
+		useState<IActionTrx | null>(null);
 
 	const handleAgainstTrx = (row: Row<IPaymentTableData>) => {
 		// TODO: Update Action Trx Data type
@@ -120,7 +122,7 @@ const TestType1 = () => {
 	const [isOpenActionAgainstOrderModal, setIsOpenActionAgainstOrderModal] =
 		useState(false);
 	const [updateActionAgainstOrderData, setUpdateActionAgainstOrderData] =
-		useState<IActionMaterialTrx | null>(null);
+		useState<IActionTrxAgainstOrder | null>(null);
 
 	const handleAgainstOrder = (row: Row<IPaymentTableData>) => {
 		// TODO: Update Action Against Order Data type
@@ -130,7 +132,6 @@ const TestType1 = () => {
 			stock: row.original.amount,
 		});
 		setIsOpenActionAgainstOrderModal(true);
-		alert('Action against order');
 	};
 
 	// Table Columns
@@ -194,7 +195,17 @@ const TestType1 = () => {
 							updatedData: updateActionTrxData,
 							setUpdatedData: setUpdateActionTrxData,
 							postData,
-							url: '/test/trx', // TODO: Update URL
+							url: '/material/trx', // TODO: Update URL
+						}}
+					/>,
+					<AgainstOrderTransfer
+						{...{
+							open: isOpenActionAgainstOrderModal,
+							setOpen: setIsOpenActionAgainstOrderModal,
+							updatedData: updateActionAgainstOrderData,
+							setUpdatedData: setUpdateActionAgainstOrderData,
+							postData,
+							url: '/zipper/material-trx-against-order', // TODO: Update URL
 						}}
 					/>,
 				])}

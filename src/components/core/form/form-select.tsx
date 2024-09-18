@@ -18,6 +18,11 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 
+export interface IFormSelectOption {
+	label: string;
+	value: string;
+}
+
 interface FormSelectProps {
 	field: ControllerRenderProps<any, any>;
 	fieldState: ControllerFieldState;
@@ -25,7 +30,7 @@ interface FormSelectProps {
 	label?: string;
 	placeholder?: string;
 	optional?: boolean;
-	options: { label: string; value: string }[];
+	options: IFormSelectOption[];
 }
 
 const FormSelect: React.FC<FormSelectProps> = ({
@@ -38,7 +43,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
 	return (
 		<FormItem className='space-y-1'>
 			<FormLabel className='capitalize'>
-				{label || field.name.replace('_', ' ')}{' '}
+				{label || field.name.split('_').join(' ')}{' '}
 				{optional ? <span className='text-xs'>(Optional)</span> : ''}
 			</FormLabel>
 			<FormControl>

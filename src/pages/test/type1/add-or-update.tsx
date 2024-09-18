@@ -11,7 +11,7 @@ import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { IPaymentTableData } from '../_const/columns'; // TODO: Update type here
+import { IPaymentTableData } from '../_const/columns/columns.type'; // TODO: Import columns type
 import { ITest, TEST_NULL, TEST_SCHEMA } from '../_const/schema'; // TODO: Import Schema
 
 interface IAddOrUpdateProps {
@@ -84,7 +84,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	}, [data, isUpdate]);
 
 	// Submit handler
-	function onSubmit(values: ITest) {
+	async function onSubmit(values: ITest) {
 		// TODO: Update type here
 		// Do something with the form values.
 		// ✅ This will be type-safe and validated.
@@ -92,7 +92,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 
 		if (isUpdate) {
 			// UPDATE ITEM
-			updateData.mutate({
+			updateData.mutateAsync({
 				url: `${url}/${updatedData?.id}`, // TODO: Update url here if needed
 				updatedData: {
 					...values,
@@ -102,7 +102,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			});
 		} else {
 			// ADD NEW ITEM
-			postData.mutate({
+			postData.mutateAsync({
 				url, // TODO: Update url here if needed
 				newData: {
 					...values,

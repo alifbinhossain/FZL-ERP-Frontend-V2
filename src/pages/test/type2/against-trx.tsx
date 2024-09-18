@@ -10,7 +10,7 @@ import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { IActionMaterialTrx } from '../_const/columns'; // TODO: Update type here
+import { IActionTrx } from '../_const/columns/columns.type'; // TODO: Import Columns Type
 import {
 	ITestStock,
 	TEST_STOCK_NULL,
@@ -19,13 +19,13 @@ import {
 
 // TODO: Import Schema
 
-interface IAddOrUpdateProps {
+interface IAgainstTrxProps {
 	url: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	updatedData?: IActionMaterialTrx | null; // TODO: Update type here
+	updatedData?: IActionTrx | null; // TODO: Update type here
 	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<IActionMaterialTrx | null> // TODO: Update type here
+		React.SetStateAction<IActionTrx | null> // TODO: Update type here
 	>;
 	postData: UseMutationResult<
 		IResponse<any>,
@@ -40,7 +40,7 @@ interface IAddOrUpdateProps {
 	>;
 }
 
-const AgainstTrx: React.FC<IAddOrUpdateProps> = ({
+const AgainstTrx: React.FC<IAgainstTrxProps> = ({
 	url,
 	open,
 	setOpen,
@@ -71,8 +71,8 @@ const AgainstTrx: React.FC<IAddOrUpdateProps> = ({
 		console.log(values);
 
 		if (isUpdate) {
-			await postData.mutate({
-				url, // TODO: Update url here if needed
+			await postData.mutateAsync({
+				url,
 				newData: {
 					...values,
 					material_uuid: updatedData.uuid, // TODO: Update New Data
