@@ -1,4 +1,3 @@
-import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { House } from 'lucide-react';
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
@@ -11,6 +10,8 @@ import {
 	BreadcrumbPage,
 	BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+
+import { cn } from '@/lib/utils';
 
 const variants = {
 	animate: {
@@ -69,6 +70,7 @@ const GlobalBreadcrumbs = () => {
 								key={index + 'item'}>
 								<BreadcrumbItem>
 									<BreadcrumbLink
+										aria-label='breadcrumb'
 										className={cn('text-secondary')}
 										href={item.href}>
 										{item.label}
@@ -111,14 +113,3 @@ const GlobalBreadcrumbs = () => {
 };
 
 export default GlobalBreadcrumbs;
-
-{
-	/* <motion.li
-		
-variants={variants}
-initial='initial'
-animate='animate'
->
-
-</motion.li> */
-}

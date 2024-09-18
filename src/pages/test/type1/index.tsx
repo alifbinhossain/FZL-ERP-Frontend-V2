@@ -1,11 +1,21 @@
-import { Table } from '@/components/core/table';
-import { IPaymentTableData, testColumns } from './_const/columns'; // TODO: Import columns
-import { useTest } from './_const/query'; // TODO: Import query
-import { PageProvider } from '@/context';
-import { useMemo, useState } from 'react';
-import { DeleteModal } from '@/components/core/modal';
-import AddOrUpdate from './add-or-update';
-import { PageInfo } from '@/utils';
+import { lazy, useMemo, useState } from 'react';
+import { PageProvider, TableProvider } from '@/context';
+import { getRandomPreviousDate, PageInfo } from '@/utils';
+import { Row } from '@tanstack/react-table';
+
+import renderSuspenseModals from '@/utils/renderSuspenseModals';
+
+import { test1Columns } from '../_const/columns'; // TODO: Import columns
+
+import { IPaymentTableData } from '../_const/columns/columns.type';
+import { type1FacetedFilters } from '../_const/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
+import { useTest } from '../_const/query'; // TODO: Import query
+
+const AddOrUpdate = lazy(() => import('./add-or-update'));
+const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
+const DeleteAllModal = lazy(
+	() => import('@/components/core/modal/delete-all-modal')
+);
 
 //TODO: Remove it when working with real data
 const fakePayments: IPaymentTableData[] = Array.from(
@@ -15,6 +25,7 @@ const fakePayments: IPaymentTableData[] = Array.from(
 		email: `a${i}@a.com`,
 		id: `${i + 1}`,
 		status: 'success',
+		created_at: getRandomPreviousDate(30),
 	})
 );
 
@@ -25,7 +36,7 @@ const TestType1 = () => {
 
 	// TODO: Update Page Info (Title, Url and Tab Name)
 	const pageInfo = useMemo(
-		() => new PageInfo('Test', url, 'order__info'),
+		() => new PageInfo('Test 1', url, 'order__info'),
 		[url]
 	);
 
@@ -39,34 +50,53 @@ const TestType1 = () => {
 	const [updatedData, setUpdatedData] = useState<IPaymentTableData | null>( // TODO: Update updatedData type
 		null
 	);
-	const handleUpdate = (id: number) => {
-		const selectedRow = fakePayments?.[id]; // TODO: Replace fakePayments?.[id] with data![id]
-		setUpdatedData(selectedRow);
+	const handleUpdate = (row: Row<IPaymentTableData>) => {
+		setUpdatedData(row.original);
 		setIsOpenAddModal(true);
 	};
 
 	// Delete Modal state
+	// Single Delete Item
 	const [deleteItem, setDeleteItem] = useState<{
 		id: string;
 		name: string;
 	} | null>(null);
 
-	const handleDelete = (id: number) => {
-		const selectedRow = fakePayments?.[id]; // TODO: Replace fakePayments?.[id] with data![id]
+	// Single Delete Handler
+	const handleDelete = (row: Row<IPaymentTableData>) => {
 		setDeleteItem({
-			id: selectedRow?.id, // TODO: Update Delete Item ID
-			name: selectedRow?.email, // TODO: Update Delete Item Name
+			id: row?.original?.id, // TODO: Update Delete Item ID
+			name: row?.original?.email, // TODO: Update Delete Item Name
 		});
 	};
 
+	// Delete All Item
+	const [deleteItems, setDeleteItems] = useState<
+		{ id: string; name: string; checked: boolean }[] | null
+	>(null);
+
+	// Delete All Row Handlers
+	const handleDeleteAll = (rows: Row<IPaymentTableData>[]) => {
+		// TODO: Update Row type
+		const selectedRows = rows.map((row) => row.original);
+
+		setDeleteItems(
+			selectedRows.map((row) => ({
+				id: row.id,
+				name: row.email,
+				checked: true,
+			})) // TODO: Update Delete Item ID & Name
+		);
+	};
+
 	// Table Columns
-	const columns = testColumns(); // TODO: Update columns
+	const columns = test1Columns(); // TODO: Update columns
 
 	return (
 		<PageProvider
 			pageName={pageInfo.getTab()}
 			pageTitle={pageInfo.getTabName()}>
-			<Table
+			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}
 				data={data ?? fakePayments} // TODO: Replace fakePayments with []
@@ -75,28 +105,40 @@ const TestType1 = () => {
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
-			/>
+				handleDeleteAll={handleDeleteAll}
+				// TODO: Update facetedFilters (OPTIONAL)
+				facetedFilters={type1FacetedFilters}>
+				{renderSuspenseModals([
+					<AddOrUpdate
+						{...{
+							url,
+							open: isOpenAddModal,
+							setOpen: setIsOpenAddModal,
+							updatedData,
+							setUpdatedData,
+							postData,
+							updateData,
+						}}
+					/>,
 
-			<AddOrUpdate
-				{...{
-					url,
-					open: isOpenAddModal,
-					setOpen: setIsOpenAddModal,
-					updatedData,
-					setUpdatedData,
-					postData,
-					updateData,
-				}}
-			/>
-
-			<DeleteModal
-				{...{
-					deleteItem,
-					setDeleteItem,
-					url,
-					deleteData,
-				}}
-			/>
+					<DeleteModal
+						{...{
+							deleteItem,
+							setDeleteItem,
+							url,
+							deleteData,
+						}}
+					/>,
+					<DeleteAllModal
+						{...{
+							deleteItems,
+							setDeleteItems,
+							url,
+							deleteData,
+						}}
+					/>,
+				])}
+			</TableProvider>
 		</PageProvider>
 	);
 };

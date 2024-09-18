@@ -1,8 +1,3 @@
-import { ILoginData } from '@/components/auth/login/login-schema';
-import { ShowToast } from '@/components/toast';
-import { useCookie, useLocalStorage } from '@/hooks';
-import { api } from '@/lib/api';
-import { IAuthResponse, IUser } from '@/types';
 import {
 	createContext,
 	useCallback,
@@ -10,6 +5,13 @@ import {
 	useMemo,
 	useState,
 } from 'react';
+import { IAuthResponse, IUser } from '@/types';
+import { toast } from 'sonner';
+import { useCookie, useLocalStorage } from '@/hooks';
+
+import { ILoginData } from '@/components/auth/login/login-schema';
+
+import { api } from '@/lib/api';
 
 // Define the AuthContext interface with state and functions
 interface IAuthContext {
@@ -30,7 +32,8 @@ interface AuthProviderProps {
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-	// State variables for user, access, and loading state
+	// State variables for redirectUrl, user, access, and loading state
+	const [redirectUrl, setRedirectUrl] = useState('/');
 	const [user, setUser] = useState<IUser | null>(null);
 	const [canAccess, setCanAccess] = useState<{
 		[key: string]: string;
@@ -50,6 +53,17 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	} = useCookie('user');
 	const [userCanAccess, updateUserCanAccess, removeUserCanAccess] =
 		useLocalStorage('can_access', '');
+
+	useEffect(() => {
+		if (!user) {
+			setRedirectUrl(
+				new URLSearchParams(window.location.search).get('redirect') ||
+					'/'
+			);
+		} else {
+			setRedirectUrl('/');
+		}
+	}, [redirectUrl, user]);
 
 	// Effect hook to load data from cookies on mount
 	useEffect(() => {
@@ -81,19 +95,23 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				setCanAccess(can_access);
 
 				if (token && user) {
-					window.location.href = '/';
+					toast.success('Logged in successfully');
+
+					window.location.href = redirectUrl;
 					return;
 				}
 
-				ShowToast({
-					type: response?.data?.type,
-					message: response?.data?.message,
-				});
+				// ShowToast({
+				// 	type: response?.data?.type,
+				// 	message: response?.data?.message,
+				// });
+				toast.error(response?.data?.message);
 			} catch (error: any) {
-				ShowToast(error.response);
+				// ShowToast(error.response);
+				toast.error(error?.response?.data?.message);
 			}
 		},
-		[updateAuthCookie, updateUserCanAccess, updateUserCookie]
+		[updateAuthCookie, updateUserCanAccess, updateUserCookie, redirectUrl]
 	);
 
 	// Logout function that clears cookies and state
@@ -105,8 +123,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	}, [deleteAuthCookie, deleteUserCookie, removeUserCanAccess]);
 
 	// Memoized value for the AuthContext with derived state properties
-	const value = useMemo(
-		(): IAuthContext => ({
+	const value = useMemo<IAuthContext>(
+		() => ({
 			signed: !!user,
 			user,
 			canAccess,

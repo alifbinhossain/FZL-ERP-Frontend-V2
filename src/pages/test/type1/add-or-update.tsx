@@ -1,17 +1,18 @@
-import { AxiosError } from 'axios';
 import { useEffect } from 'react';
-
-import { useAuth, useRHF } from '@/hooks';
 import { IResponse } from '@/types';
-import { TEST_SCHEMA, TEST_NULL, ITest } from './_const/schema'; // TODO: Import Schema
+import { getDateTime } from '@/utils';
+import { UseMutationResult } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { useAuth, useRHF } from '@/hooks';
 
-import { FormField } from '@/components/ui/form';
 import { FormInput } from '@/components/core/form';
 import { AddModal } from '@/components/core/modal';
-import { UseMutationResult } from '@tanstack/react-query';
-import { IPaymentTableData } from './_const/columns'; // TODO: Update type here
-import { getDateTime } from '@/utils';
+import { FormField } from '@/components/ui/form';
+
 import nanoid from '@/lib/nanoid';
+
+import { IPaymentTableData } from '../_const/columns/columns.type'; // TODO: Import columns type
+import { ITest, TEST_NULL, TEST_SCHEMA } from '../_const/schema'; // TODO: Import Schema
 
 interface IAddOrUpdateProps {
 	url: string;
@@ -57,7 +58,14 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	const isUpdate = !!updatedData;
 
 	const { user } = useAuth();
-	const { data } = { data: {} }; // TODO: Replace the object with query by id (e.g. useTestById(updatedData?.id as string))
+	const { data } = {
+		data: {
+			amount: 200,
+			email: 'update@gmail.com',
+			id: '1',
+			status: 'success',
+		},
+	}; // TODO: Replace the object with query by id (e.g. useTestById(updatedData?.id as string))
 
 	const form = useRHF(TEST_SCHEMA, TEST_NULL); // TODO: Update schema here
 
@@ -69,14 +77,14 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 
 	// Reset form values when data is updated
 	useEffect(() => {
-		if (data) {
+		if (data && isUpdate) {
 			form.reset(data);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
+	}, [data, isUpdate]);
 
 	// Submit handler
-	function onSubmit(values: ITest) {
+	async function onSubmit(values: ITest) {
 		// TODO: Update type here
 		// Do something with the form values.
 		// ✅ This will be type-safe and validated.
@@ -84,7 +92,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 
 		if (isUpdate) {
 			// UPDATE ITEM
-			updateData.mutate({
+			updateData.mutateAsync({
 				url: `${url}/${updatedData?.id}`, // TODO: Update url here if needed
 				updatedData: {
 					...values,
@@ -94,7 +102,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			});
 		} else {
 			// ADD NEW ITEM
-			postData.mutate({
+			postData.mutateAsync({
 				url, // TODO: Update url here if needed
 				newData: {
 					...values,
@@ -114,6 +122,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			title={isUpdate ? 'Update Test' : 'Add Test'} // TODO: Update title
 			form={form}
 			onSubmit={onSubmit}>
+			{/* // TODO: Update form fields ⬇️ */}
 			<FormField
 				control={form.control}
 				name='email'

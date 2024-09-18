@@ -1,6 +1,7 @@
-import { cn } from '@/lib/utils';
 import { sidebarRoutes } from '@/routes';
 import { NavLink } from 'react-router-dom';
+
+import { cn } from '@/lib/utils';
 
 interface IBrandLogoProps {
 	className?: string;

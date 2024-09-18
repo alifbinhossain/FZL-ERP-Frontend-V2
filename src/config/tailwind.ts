@@ -1,22 +1,23 @@
 const WHITE = '#FFFFFF';
 const BLACK = '0a0a0a';
-const BACKGROUND = '#f8fafc';
-const FOREGROUND = '#27374D';
+const BACKGROUND = '#fbfcfd';
+const FOREGROUND = '#222831';
 
 const BASE_100 = BACKGROUND;
-const BASE_200 = '#ecf1f4';
-const BASE_300 = '#d8e2e9';
+const BASE_150 = '#f4f7fa';
+const BASE_200 = '#f1f5f9';
+const BASE_300 = '#e2ebf3';
 const BASE_CONTENT = FOREGROUND;
 
-const PRIMARY = '#27374D';
+const PRIMARY = '#222831';
 const PRIMARY_FOREGROUND = '#f2f5f8';
-const SECONDARY = '#526D82';
+const SECONDARY = '#393E46';
 const SECONDARY_FOREGROUND = '#f2f5f8';
 const SECONDARY_LIGHT = '#9DB2BF';
 
 const CARD = WHITE;
 const CARD_FOREGROUND = BLACK;
-const POPOVER = WHITE;
+const POPOVER = BACKGROUND;
 const POPOVER_FOREGROUND = BLACK;
 
 const MUTED = '#f5f5f5';
@@ -45,6 +46,7 @@ const colors = {
 	BACKGROUND,
 	FOREGROUND,
 	BASE_100,
+	BASE_150,
 	BASE_200,
 	BASE_300,
 	BASE_CONTENT,

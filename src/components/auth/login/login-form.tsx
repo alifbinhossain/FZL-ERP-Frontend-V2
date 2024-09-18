@@ -1,7 +1,9 @@
-import { Form, FormField } from '@/components/ui/form';
-import { LOGIN_NULL, LOGIN_SCHEMA, ILoginData } from './login-schema';
-import { FormInput, FormSubmit } from '@/components/core/form';
 import { useAuth, useRHF } from '@/hooks';
+
+import { FormInput, FormSubmit } from '@/components/core/form';
+import { Form, FormField } from '@/components/ui/form';
+
+import { ILoginData, LOGIN_NULL, LOGIN_SCHEMA } from './login-schema';
 
 const LoginForm = () => {
 	const { login } = useAuth();
@@ -25,7 +27,11 @@ const LoginForm = () => {
 					control={form.control}
 					name='pass'
 					render={(props) => (
-						<FormInput label='Password' {...props} />
+						<FormInput
+							type='password'
+							label='Password'
+							{...props}
+						/>
 					)}
 				/>
 

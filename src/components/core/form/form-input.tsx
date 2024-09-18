@@ -1,47 +1,84 @@
 import {
+	ControllerFieldState,
+	ControllerRenderProps,
+	UseFormStateReturn,
+} from 'react-hook-form';
+
+import {
 	FormControl,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
 import { Input, InputProps } from '@/components/ui/input';
+import { PasswordInput } from '@/components/ui/password-input';
+
 import { cn } from '@/lib/utils';
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
 
 interface FormInputProps extends InputProps {
 	field: ControllerRenderProps<any, any>;
 	fieldState: ControllerFieldState;
 	formState: UseFormStateReturn<any>;
 	label?: string;
+	subLabel?: string;
 	placeholder?: string;
 	optional?: boolean;
+	icon?: React.ReactNode;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
 	field,
 	label,
+	subLabel,
 	placeholder = 'Write here',
 	optional = false,
 	type,
 	className,
+	icon,
 }) => {
 	return (
-		<FormItem className='space-y-0.5'>
-			<FormLabel className='capitalize'>
-				{label || field.name.replace('_', ' ')}{' '}
-				{optional ? <span className='text-xs'>(Optional)</span> : ''}
+		<FormItem className='space-y-1'>
+			<FormLabel className='flex items-center justify-between capitalize'>
+				<span>
+					{label || field.name.replace('_', ' ')}{' '}
+					{optional ? (
+						<span className='text-xs'>(Optional)</span>
+					) : (
+						''
+					)}
+				</span>
+				{subLabel && <span className='text-xs'>{subLabel}</span>}
 			</FormLabel>
+
 			<FormControl>
-				<Input
-					className={cn(className)}
-					placeholder={placeholder}
-					type={type}
-					{...field}
-				/>
+				{type === 'password' ? (
+					<PasswordInput
+						className={cn(className)}
+						placeholder={placeholder}
+						icon={icon}
+						{...field}
+					/>
+				) : type === 'number' ? (
+					<Input
+						className={cn(className)}
+						placeholder={placeholder}
+						type={'number'}
+						icon={icon}
+						{...field}
+						onChange={(e) => {
+							field.onChange(Number(e.target.value));
+						}}
+						value={field.value === 0 ? '' : Number(field.value)}
+					/>
+				) : (
+					<Input
+						className={cn(className)}
+						placeholder={placeholder}
+						type={type}
+						icon={icon}
+						{...field}
+					/>
+				)}
 			</FormControl>
 			<FormMessage />
 		</FormItem>

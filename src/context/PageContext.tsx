@@ -1,5 +1,5 @@
-import { useAccess } from '@/hooks';
 import { createContext, useEffect, useMemo } from 'react';
+import { useAccess } from '@/hooks';
 
 interface IPageContext {
 	pageName: string;

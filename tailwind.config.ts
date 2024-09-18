@@ -1,5 +1,6 @@
-import { colors } from './src/config/tailwind';
 import tailwindAnimate from 'tailwindcss-animate';
+
+import { colors } from './src/config/tailwind';
 
 /** @type {import('tailwindcss').Config} */
 
@@ -59,7 +60,8 @@ export default {
 					foreground: colors.WARNING_FOREGROUND,
 				},
 				base: {
-					default: colors.BASE_100,
+					DEFAULT: colors.BASE_100,
+					150: colors.BASE_150,
 					200: colors.BASE_200,
 					300: colors.BASE_300,
 					content: colors.BASE_CONTENT,
@@ -75,6 +77,16 @@ export default {
 					4: colors.CHART_4,
 					5: colors.CHART_5,
 				},
+			},
+
+			keyframes: {
+				shine: {
+					from: { backgroundPosition: '200% 0' },
+					to: { backgroundPosition: '-200% 0' },
+				},
+			},
+			animation: {
+				shine: 'shine 8s ease-in-out infinite',
 			},
 		},
 	},

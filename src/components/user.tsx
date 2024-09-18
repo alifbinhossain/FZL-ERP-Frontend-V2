@@ -1,6 +1,7 @@
-import { useAuth } from '@/hooks';
-import { cn } from '@/lib/utils';
 import { useNetworkState } from '@uidotdev/usehooks';
+import { useAuth } from '@/hooks';
+
+import { cn } from '@/lib/utils';
 
 const User = ({ avatar = false }) => {
 	const { user } = useAuth();

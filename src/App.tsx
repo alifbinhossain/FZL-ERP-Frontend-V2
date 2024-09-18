@@ -1,7 +1,10 @@
+// prettier-ignore
 import { Toast } from '@/components/toast';
-import { RouterProvider } from 'react-router-dom';
-import { router } from '@/routes/router';
+
 import { AuthProvider } from '@/context';
+import { router } from '@/routes/router';
+import { RouterProvider } from 'react-router-dom';
+
 import { Toaster } from '@/components/ui/sonner';
 
 const App = () => {

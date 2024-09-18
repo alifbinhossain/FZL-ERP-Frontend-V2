@@ -1,5 +1,11 @@
+import { IRoute } from '@/types';
+
+import { DashboardRoutes } from './Dashboard';
+import StoreRoutes from './Store';
+import TestRoutes from './Test';
+
 // import { HrRoutes } from './Hr';
-import { StoreRoutes } from './Store';
+
 // import { CommercialRoutes } from './Commercial';
 // import { OrderRoutes } from './Order';
 // import { IssueRoutes } from './Issue';
@@ -14,9 +20,6 @@ import { StoreRoutes } from './Store';
 // import { LabDipRoutes } from './LabDip';
 // import { DyeingAndIronRoutes } from './DyeingAndIron';
 // import { IRoute } from '@/types';
-
-import { IRoute } from '@/types';
-import { DashboardRoutes } from './Dashboard';
 
 const privateRoutes: IRoute[] = [
 	...DashboardRoutes,
@@ -35,6 +38,7 @@ const privateRoutes: IRoute[] = [
 	// ...SliderRoutes,
 	// ...HrRoutes,
 	// ...LibraryRoutes,
+	...TestRoutes,
 ];
 
 export default privateRoutes;

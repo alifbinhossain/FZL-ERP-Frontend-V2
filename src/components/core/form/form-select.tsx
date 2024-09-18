@@ -1,4 +1,10 @@
 import {
+	ControllerFieldState,
+	ControllerRenderProps,
+	UseFormStateReturn,
+} from 'react-hook-form';
+
+import {
 	FormControl,
 	FormItem,
 	FormLabel,
@@ -12,11 +18,10 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
+export interface IFormSelectOption {
+	label: string;
+	value: string;
+}
 
 interface FormSelectProps {
 	field: ControllerRenderProps<any, any>;
@@ -25,7 +30,7 @@ interface FormSelectProps {
 	label?: string;
 	placeholder?: string;
 	optional?: boolean;
-	options: { label: string; value: string }[];
+	options: IFormSelectOption[];
 }
 
 const FormSelect: React.FC<FormSelectProps> = ({
@@ -36,9 +41,9 @@ const FormSelect: React.FC<FormSelectProps> = ({
 	options,
 }) => {
 	return (
-		<FormItem>
+		<FormItem className='space-y-1'>
 			<FormLabel className='capitalize'>
-				{label || field.name}{' '}
+				{label || field.name.split('_').join(' ')}{' '}
 				{optional ? <span className='text-xs'>(Optional)</span> : ''}
 			</FormLabel>
 			<FormControl>

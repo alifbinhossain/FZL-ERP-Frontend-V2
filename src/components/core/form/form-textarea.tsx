@@ -1,16 +1,18 @@
 import {
+	ControllerFieldState,
+	ControllerRenderProps,
+	UseFormStateReturn,
+} from 'react-hook-form';
+
+import {
 	FormControl,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
 import { Textarea, TextareaProps } from '@/components/ui/textarea';
+
 import { cn } from '@/lib/utils';
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
 
 interface FormTextareaProps extends TextareaProps {
 	field: ControllerRenderProps<any, any>;
@@ -29,7 +31,7 @@ const FormTextarea: React.FC<FormTextareaProps> = ({
 	className,
 }) => {
 	return (
-		<FormItem>
+		<FormItem className='space-y-1'>
 			<FormLabel className='capitalize'>
 				{label || field.name}{' '}
 				{optional ? <span className='text-xs'>(Optional)</span> : ''}

@@ -1,11 +1,18 @@
-import { Table } from '@/components/core/table';
+import { lazy, useMemo, useState } from 'react';
+import { PageProvider, TableProvider } from '@/context';
+import { PageInfo } from '@/utils';
+import { Row } from '@tanstack/react-table';
+
+import renderSuspenseModals from '@/utils/renderSuspenseModals';
+
 import { ITypeTableData, typeColumns } from '../_const/columns';
 import { useMaterialType } from '../_const/query';
-import { PageProvider } from '@/context';
-import { useMemo, useState } from 'react';
-import { DeleteModal } from '@/components/core/modal';
-import AddOrUpdate from './add-or-update';
-import { PageInfo } from '@/utils';
+
+const AddOrUpdate = lazy(() => import('./add-or-update'));
+const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
+const DeleteAllModal = lazy(
+	() => import('@/components/core/modal/delete-all-modal')
+);
 
 const Type = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
@@ -24,24 +31,42 @@ const Type = () => {
 	};
 
 	const [updatedData, setUpdatedData] = useState<ITypeTableData | null>(null);
-	const handleUpdate = (id: number) => {
-		const selectedRow = data![id];
-		setUpdatedData(selectedRow);
+	const handleUpdate = (row: Row<ITypeTableData>) => {
+		setUpdatedData(row.original);
 		setIsOpenAddModal(true);
 	};
 
 	// Delete Modal state
+	// Single Delete Item
 	const [deleteItem, setDeleteItem] = useState<{
 		id: string;
 		name: string;
 	} | null>(null);
 
-	const handleDelete = (id: number) => {
-		const selectedRow = data![id];
+	// Single Delete Handler
+	const handleDelete = (row: Row<ITypeTableData>) => {
 		setDeleteItem({
-			id: selectedRow?.uuid,
-			name: selectedRow?.name,
+			id: row?.original?.uuid,
+			name: row?.original?.name,
 		});
+	};
+
+	// Delete All Item
+	const [deleteItems, setDeleteItems] = useState<
+		{ id: string; name: string; checked: boolean }[] | null
+	>(null);
+
+	// Delete All Row Handlers
+	const handleDeleteAll = (rows: Row<ITypeTableData>[]) => {
+		const selectedRows = rows.map((row) => row.original);
+
+		setDeleteItems(
+			selectedRows.map((row) => ({
+				id: row.uuid,
+				name: row.name,
+				checked: true,
+			}))
+		);
 	};
 
 	// Table Columns
@@ -51,7 +76,7 @@ const Type = () => {
 		<PageProvider
 			pageName={pageInfo.getTab()}
 			pageTitle={pageInfo.getTabName()}>
-			<Table
+			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}
 				data={data ?? []}
@@ -60,28 +85,38 @@ const Type = () => {
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
-			/>
+				handleDeleteAll={handleDeleteAll}>
+				{renderSuspenseModals([
+					<AddOrUpdate
+						{...{
+							url,
+							open: isOpenAddModal,
+							setOpen: setIsOpenAddModal,
+							updatedData,
+							setUpdatedData,
+							postData,
+							updateData,
+						}}
+					/>,
 
-			<AddOrUpdate
-				{...{
-					url,
-					open: isOpenAddModal,
-					setOpen: setIsOpenAddModal,
-					updatedData,
-					setUpdatedData,
-					postData,
-					updateData,
-				}}
-			/>
-
-			<DeleteModal
-				{...{
-					deleteItem,
-					setDeleteItem,
-					url,
-					deleteData,
-				}}
-			/>
+					<DeleteModal
+						{...{
+							deleteItem,
+							setDeleteItem,
+							url,
+							deleteData,
+						}}
+					/>,
+					<DeleteAllModal
+						{...{
+							deleteItems,
+							setDeleteItems,
+							url,
+							deleteData,
+						}}
+					/>,
+				])}
+			</TableProvider>
 		</PageProvider>
 	);
 };

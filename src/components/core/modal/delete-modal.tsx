@@ -1,3 +1,8 @@
+import { IResponse } from '@/types';
+import { ReloadIcon } from '@radix-ui/react-icons';
+import { UseMutationResult } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -8,10 +13,6 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { IResponse } from '@/types';
-import { ReloadIcon } from '@radix-ui/react-icons';
-import { UseMutationResult } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 
 interface IDeleteModalProps {
 	deleteItem: {
@@ -64,7 +65,7 @@ const DeleteModal: React.FC<IDeleteModalProps> = ({
 						{deleteItem && (deleteItem.name || deleteItem.id)}"?
 					</AlertDialogTitle>
 					<AlertDialogDescription>
-						This action cannot be undone.
+						You cannot undo this action.
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>

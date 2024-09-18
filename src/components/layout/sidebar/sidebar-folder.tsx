@@ -1,13 +1,14 @@
+import { useEffect, useMemo, useState } from 'react';
+import { IRoute } from '@/types';
+import { confirmRouteMatch } from '@/utils';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import SidebarFile from './sidebar-file';
+import { useSidebar } from '@/hooks';
 
 import { cn } from '@/lib/utils';
-import { confirmRouteMatch } from '@/utils';
-import { IRoute } from '@/types';
-import { useSidebar } from '@/hooks';
+
+import SidebarFile from './sidebar-file';
 
 // Animation definitions for the sidebar folder
 const variants = {
@@ -89,7 +90,7 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 	const folderClassName = cn(
 		'group relative z-10 flex w-full items-center justify-between gap-2 rounded-none rounded-r-md border-l-[3px] px-4 py-2 text-sm text-primary-foreground',
 		isOpen && !isCloseAll
-			? 'border-secondary bg-gradient-to-r from-accent/10 to-accent/30 text-primary-foreground'
+			? 'border-accent/20 bg-gradient-to-r from-accent/5 to-accent/10 text-primary-foreground'
 			: 'border-transparent text-primary-foreground/70 hover:bg-secondary/20 hover:text-primary-foreground'
 	);
 
@@ -100,7 +101,7 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 	};
 
 	return (
-		<motion.ul
+		<motion.li
 			variants={variants}
 			initial='initial'
 			animate='animate'
@@ -145,19 +146,21 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 			)}
 
 			{/* Render children if the folder is open */}
-			<motion.ul
+			<motion.div
 				variants={childVariants}
 				animate={isOpen ? 'open' : 'closed'}
-				className='space-y-1 border-l-[1px] border-secondary/40 pl-3 pt-1'>
-				{children?.map((child: any, index: number) => {
-					if (child?.children) {
-						return <SidebarFolder key={index} {...child} />;
-					} else {
-						return <SidebarFile key={index} {...child} />;
-					}
-				})}
-			</motion.ul>
-		</motion.ul>
+				className='pl-3'>
+				<ul className='space-y-1 border-l border-accent/10 pt-1'>
+					{children?.map((child: any, index: number) => {
+						if (child?.children) {
+							return <SidebarFolder key={index} {...child} />;
+						} else {
+							return <SidebarFile key={index} {...child} />;
+						}
+					})}
+				</ul>
+			</motion.div>
+		</motion.li>
 	);
 };
 

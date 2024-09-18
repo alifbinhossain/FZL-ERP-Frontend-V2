@@ -1,8 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { api } from '@/lib/api';
 import { IResponse } from '@/types';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
+
+import { api } from '@/lib/api';
 
 interface IUseTQuery {
 	queryKey: string[];
@@ -89,7 +90,7 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		},
 		onSuccess: (data) => {
 			// ShowToast(data?.toast);
-			toast.success(data?.toast?.message);
+			toast.warning(data?.toast?.message);
 		},
 		onError: (
 			error: AxiosError<IResponse<any>>,
@@ -126,7 +127,7 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		},
 		onSuccess: (data) => {
 			// ShowToast(data?.toast);
-			toast.success(data?.toast?.message);
+			toast.error(data?.toast?.message);
 		},
 		onError: (error: AxiosError<IResponse<any>>) => {
 			console.log(error);
@@ -145,7 +146,7 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		data: data?.data,
 		toast: data?.toast,
 		// * States
-		isLoading,
+		isLoading: isLoading,
 		isError,
 		isPending,
 		isFetching,

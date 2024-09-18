@@ -41,3 +41,25 @@ export type IRoute = RouteObject & {
 	actions?: string[];
 	disableCollapse?: boolean;
 };
+
+export type ITableFacetedFilter = {
+	id: string;
+	title: string;
+	options: {
+		label: string;
+		value: string;
+		icon?: React.ComponentType<{ className?: string }>;
+	}[];
+};
+
+export type IToolbarOptions =
+	| 'all'
+	| 'none'
+	| 'all-filter'
+	| 'view'
+	| 'date-range'
+	| 'faceted-filter'
+	| 'export-csv'
+	| 'export-pdf'
+	| 'refresh'
+	| 'new-entry';

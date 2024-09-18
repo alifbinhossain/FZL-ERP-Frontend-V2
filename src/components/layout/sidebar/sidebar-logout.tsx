@@ -1,7 +1,8 @@
-import User from '@/components/user';
-import { useAuth } from '@/hooks';
 import { motion } from 'framer-motion';
 import { LogOut } from 'lucide-react';
+import { useAuth } from '@/hooks';
+
+import User from '@/components/user';
 
 const SidebarLogout = () => {
 	const { logout } = useAuth();

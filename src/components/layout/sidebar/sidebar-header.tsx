@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { CopyMinus, X } from 'lucide-react';
+import { useLayout, useSidebar } from '@/hooks';
+
 import BrandLogo from '@/components/brand-logo';
 import TooltipWrapper from '@/components/tooltip-wrapper';
-import { useLayout, useSidebar } from '@/hooks';
+import { buttonVariants } from '@/components/ui/button';
 
 const SidebarHeader = () => {
 	const { setSidebarOpen } = useLayout();
@@ -27,9 +29,13 @@ const SidebarHeader = () => {
 			<div className='flex justify-end px-2 py-2'>
 				<TooltipWrapper message='Collapse Folders'>
 					<motion.button
+						aria-label='Collapse Folders'
 						whileTap={{ scale: 0.9 }}
 						onClick={() => setIsCloseAll((prev) => !prev)}
-						className='text- btn btn-square btn-ghost btn-sm text-primary-foreground/70'>
+						className={buttonVariants({
+							variant: 'default',
+							size: 'icon',
+						})}>
 						<CopyMinus className='size-4' />
 					</motion.button>
 				</TooltipWrapper>
