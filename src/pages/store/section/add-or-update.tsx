@@ -5,13 +5,13 @@ import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useAuth, useRHF } from '@/hooks';
 
-import { FormInput } from '@/components/core/form';
+import CoreForm from '@/components/core/form';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { ISectionTableData } from '../_const/columns';
+import { ISectionTableData } from '../_const/columns/columns.type';
 import { useMaterialSectionByUUID } from '../_const/query';
 import { ISection, SECTION_NULL, SECTION_SCHEMA } from '../_const/schema';
 
@@ -114,17 +114,17 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			<FormField
 				control={form.control}
 				name='name'
-				render={(props) => <FormInput {...props} />}
+				render={(props) => <CoreForm.Input {...props} />}
 			/>
 			<FormField
 				control={form.control}
 				name='short_name'
-				render={(props) => <FormInput {...props} />}
+				render={(props) => <CoreForm.Input {...props} />}
 			/>
 			<FormField
 				control={form.control}
 				name='remarks'
-				render={(props) => <FormInput {...props} />}
+				render={(props) => <CoreForm.Textarea {...props} />}
 			/>
 		</AddModal>
 	);

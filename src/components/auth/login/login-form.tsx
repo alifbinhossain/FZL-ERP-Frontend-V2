@@ -1,6 +1,6 @@
 import { useAuth, useRHF } from '@/hooks';
 
-import { FormInput, FormSubmit } from '@/components/core/form';
+import CoreForm from '@/components/core/form';
 import { Form, FormField } from '@/components/ui/form';
 
 import { ILoginData, LOGIN_NULL, LOGIN_SCHEMA } from './login-schema';
@@ -21,13 +21,15 @@ const LoginForm = () => {
 				<FormField
 					control={form.control}
 					name='email'
-					render={(props) => <FormInput type='email' {...props} />}
+					render={(props) => (
+						<CoreForm.Input type='email' {...props} />
+					)}
 				/>
 				<FormField
 					control={form.control}
 					name='pass'
 					render={(props) => (
-						<FormInput
+						<CoreForm.Input
 							type='password'
 							label='Password'
 							{...props}
@@ -35,7 +37,7 @@ const LoginForm = () => {
 					)}
 				/>
 
-				<FormSubmit title='Login' />
+				<CoreForm.Submit title='Login' />
 			</form>
 		</Form>
 	);

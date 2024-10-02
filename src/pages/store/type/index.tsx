@@ -5,7 +5,8 @@ import { Row } from '@tanstack/react-table';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { ITypeTableData, typeColumns } from '../_const/columns';
+import { typeColumns } from '../_const/columns';
+import { ITypeTableData } from '../_const/columns/columns.type';
 import { useMaterialType } from '../_const/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));

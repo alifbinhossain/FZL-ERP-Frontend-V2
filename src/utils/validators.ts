@@ -10,7 +10,6 @@ export const STRING = (message = 'Required', typeError = 'Invalid String') =>
 		.string({
 			required_error: message,
 			invalid_type_error: typeError,
-			message,
 		})
 		.trim();
 
@@ -53,7 +52,6 @@ export const JSON_STRING_OPTION = JSON_STRING.optional();
 export const BOOLEAN = (message = 'Required') =>
 	z.boolean({
 		required_error: message,
-		message,
 	});
 export const BOOLEAN_REQUIRED = BOOLEAN('Required');
 export const BOOLEAN_DEFAULT_VALUE = (value: boolean) =>
@@ -75,18 +73,19 @@ export const NUMBER = (message = 'Required') =>
 	z
 		.number({
 			required_error: message,
-			message,
 		})
-		.int('Invalid Integer Number');
+		.int()
+		.nonnegative();
 export const NUMBER_REQUIRED = NUMBER('Required');
 export const NUMBER_OPTIONAL = NUMBER().optional();
 
 // NUMBER (double)
 export const NUMBER_DOUBLE = (message = 'Required') =>
-	z.number({
-		required_error: message,
-		message,
-	});
+	z
+		.number({
+			required_error: message,
+		})
+		.nonnegative();
 export const NUMBER_DOUBLE_REQUIRED = NUMBER_DOUBLE('Required');
 export const NUMBER_DOUBLE_OPTIONAL = NUMBER_DOUBLE().optional();
 export const NUMBER_DOUBLE_NULLABLE = NUMBER_DOUBLE().nullable();

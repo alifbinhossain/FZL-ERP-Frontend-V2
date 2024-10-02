@@ -9,3 +9,10 @@ export const useTest = <T>() =>
 		url: '/test',
 		enabled: false,
 	});
+
+export const useTestByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
+		queryKey: testQK.byUUID(uuid),
+		url: `/test/${uuid}`,
+		enabled: false,
+	});

@@ -21,6 +21,7 @@ interface FormTextareaProps extends TextareaProps {
 	label?: string;
 	placeholder?: string;
 	optional?: boolean;
+	disableLabel?: boolean;
 }
 
 const FormTextarea: React.FC<FormTextareaProps> = ({
@@ -29,13 +30,20 @@ const FormTextarea: React.FC<FormTextareaProps> = ({
 	placeholder = 'Write here',
 	optional = false,
 	className,
+	disableLabel,
 }) => {
 	return (
-		<FormItem className='space-y-1'>
-			<FormLabel className='capitalize'>
-				{label || field.name}{' '}
-				{optional ? <span className='text-xs'>(Optional)</span> : ''}
-			</FormLabel>
+		<FormItem className='space-y-1.5'>
+			{!disableLabel && (
+				<FormLabel className='flex items-center justify-between capitalize'>
+					{label || field.name}{' '}
+					{optional ? (
+						<span className='text-xs'>(Optional)</span>
+					) : (
+						''
+					)}
+				</FormLabel>
+			)}
 			<FormControl>
 				<Textarea
 					className={cn(className)}

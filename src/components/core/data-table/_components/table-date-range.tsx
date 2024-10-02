@@ -2,7 +2,7 @@ import { useTable } from '@/hooks';
 
 import { DateRangePicker } from '@/components/ui/date-range-picker';
 
-const TableGlobalDateRange = () => {
+const TableDateRange = () => {
 	const { table, initialDateRange } = useTable();
 	const column = table.getColumn('created_at');
 	const columnFilterValue = column?.getFilterValue() as [Date, Date];
@@ -22,4 +22,4 @@ const TableGlobalDateRange = () => {
 	);
 };
 
-export default TableGlobalDateRange;
+export default TableDateRange;

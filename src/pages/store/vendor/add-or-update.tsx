@@ -5,13 +5,13 @@ import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useAuth, useRHF } from '@/hooks';
 
-import { FormInput } from '@/components/core/form';
+import CoreForm from '@/components/core/form';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { IVendorTableData } from '../_const/columns';
+import { IVendorTableData } from '../_const/columns/columns.type';
 import { usePurchaseVendorByUUID } from '../_const/query';
 import { IVendor, VENDOR_NULL, VENDOR_SCHEMA } from '../_const/schema';
 
@@ -114,34 +114,34 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			<FormField
 				control={form.control}
 				name='name'
-				render={(props) => <FormInput {...props} />}
+				render={(props) => <CoreForm.Input {...props} />}
 			/>
 			<FormField
 				control={form.control}
 				name='contact_name'
-				render={(props) => <FormInput label='Person' {...props} />}
+				render={(props) => <CoreForm.Input label='Person' {...props} />}
 			/>
 			<FormField
 				control={form.control}
 				name='contact_number'
 				render={(props) => (
-					<FormInput label='Phone Number' {...props} />
+					<CoreForm.Input label='Phone Number' {...props} />
 				)}
 			/>
 			<FormField
 				control={form.control}
 				name='email'
-				render={(props) => <FormInput {...props} />}
+				render={(props) => <CoreForm.Input {...props} />}
 			/>
 			<FormField
 				control={form.control}
 				name='office_address'
-				render={(props) => <FormInput {...props} />}
+				render={(props) => <CoreForm.Input {...props} />}
 			/>
 			<FormField
 				control={form.control}
 				name='remarks'
-				render={(props) => <FormInput {...props} />}
+				render={(props) => <CoreForm.Textarea {...props} />}
 			/>
 		</AddModal>
 	);

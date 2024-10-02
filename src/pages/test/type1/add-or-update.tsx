@@ -5,7 +5,7 @@ import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useAuth, useRHF } from '@/hooks';
 
-import { FormInput } from '@/components/core/form';
+import CoreForm from '@/components/core/form';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
@@ -126,7 +126,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			<FormField
 				control={form.control}
 				name='email'
-				render={(props) => <FormInput {...props} />}
+				render={(props) => <CoreForm.Input {...props} />}
 			/>
 		</AddModal>
 	);

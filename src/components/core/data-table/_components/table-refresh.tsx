@@ -7,6 +7,8 @@ import { toast } from 'sonner';
 import TooltipWrapper from '@/components/tooltip-wrapper';
 import { Button } from '@/components/ui/button';
 
+import { cn } from '@/lib/utils';
+
 interface TableRefreshProps {
 	handleRefetch: (
 		options?: RefetchOptions
@@ -17,13 +19,19 @@ const TableRefresh: React.FC<TableRefreshProps> = ({ handleRefetch }) => {
 
 	const handleClick = async () => {
 		setIsFetching(true);
-		toast.promise(handleRefetch, {
-			finally: () => setIsFetching(false),
-			loading: 'Refreshing...',
-			success: 'Data refreshed successfully',
-			error: 'Failed to refresh data',
-			duration: 1500,
-		});
+
+		try {
+			const result = await handleRefetch();
+
+			if (result.error?.message) {
+				throw new Error(result.error?.message);
+			}
+			toast.success('Data refreshed successfully');
+		} catch (error: any) {
+			toast.error(error?.message as string);
+		} finally {
+			setIsFetching(false);
+		}
 	};
 	return (
 		<TooltipWrapper message='Refresh data'>
@@ -33,7 +41,9 @@ const TableRefresh: React.FC<TableRefreshProps> = ({ handleRefetch }) => {
 				variant={'outline'}
 				size={'sm'}
 				onClick={handleClick}>
-				<RefreshCw className='size-4' />
+				<RefreshCw
+					className={cn('size-4', isFetching && 'animate-spin')}
+				/>
 				Refresh
 			</Button>
 		</TooltipWrapper>

@@ -5,7 +5,8 @@ import { Row } from '@tanstack/react-table';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { IVendorTableData, vendorColumns } from '../_const/columns';
+import { vendorColumns } from '../_const/columns';
+import { IVendorTableData } from '../_const/columns/columns.type';
 import { usePurchaseVendor } from '../_const/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));

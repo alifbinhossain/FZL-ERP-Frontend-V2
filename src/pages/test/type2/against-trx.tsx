@@ -4,7 +4,7 @@ import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useAuth, useRHF } from '@/hooks';
 
-import { FormInput, FormSelect, FormTextarea } from '@/components/core/form';
+import CoreForm from '@/components/core/form';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
@@ -97,7 +97,7 @@ const AgainstTrx: React.FC<IAgainstTrxProps> = ({
 				control={form.control}
 				name='trx_to'
 				render={(props) => (
-					<FormSelect
+					<CoreForm.Select
 						placeholder='Select Transaction Area'
 						options={getTransactionArea}
 						{...props}
@@ -109,7 +109,7 @@ const AgainstTrx: React.FC<IAgainstTrxProps> = ({
 				control={form.control}
 				name='trx_quantity'
 				render={(props) => (
-					<FormInput
+					<CoreForm.Input
 						label={`Trx Quantity`}
 						type={'number'}
 						subLabel={`Max: ${updatedData?.stock}`}
@@ -122,7 +122,7 @@ const AgainstTrx: React.FC<IAgainstTrxProps> = ({
 			<FormField
 				control={form.control}
 				name='remarks'
-				render={(props) => <FormTextarea {...props} />}
+				render={(props) => <CoreForm.Textarea {...props} />}
 			/>
 		</AddModal>
 	);

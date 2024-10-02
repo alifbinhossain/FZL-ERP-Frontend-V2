@@ -7,7 +7,7 @@ import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { test1Columns } from '../_const/columns'; // TODO: Import columns
 
-import { IPaymentTableData } from '../_const/columns/columns.type';
+import { IPaymentTableData } from '../_const/columns/columns.type'; // TODO: Import columns type
 import { type1FacetedFilters } from '../_const/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
 import { useTest } from '../_const/query'; // TODO: Import query
 
@@ -50,6 +50,7 @@ const TestType1 = () => {
 	const [updatedData, setUpdatedData] = useState<IPaymentTableData | null>( // TODO: Update updatedData type
 		null
 	);
+
 	const handleUpdate = (row: Row<IPaymentTableData>) => {
 		setUpdatedData(row.original);
 		setIsOpenAddModal(true);

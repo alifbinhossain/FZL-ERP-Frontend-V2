@@ -9,9 +9,9 @@ import DebouncedInput from '@/components/ui/debounce-input';
 import { Separator } from '@/components/ui/separator';
 
 import TableAllFilter from './table-all-filter';
+import TableDateRange from './table-date-range';
 import TableExportCSV from './table-export-csv';
 import { TableFacetedFilter } from './table-faceted-filter';
-import TableHeaderDateRange from './table-global-date-range';
 import TableRefresh from './table-refresh';
 import { TableRowDelete } from './table-row-delete';
 import TableTitle from './table-title';
@@ -94,7 +94,7 @@ export function TableToolbar() {
 				/>
 				<ToolbarComponent
 					option='date-range'
-					render={() => <TableHeaderDateRange />}
+					render={() => <TableDateRange />}
 				/>
 				<ToolbarComponent
 					option='faceted-filter'

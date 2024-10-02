@@ -1,4 +1,5 @@
 import { filterRoutes, filterSidebarRoutes, flattenRoutes } from '@/utils';
+
 import privateRoutes from './private';
 
 //* all private routes
