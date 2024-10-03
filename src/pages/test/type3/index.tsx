@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { test1Columns } from '../_const/columns'; // TODO: Import columns
+import { test3Columns } from '../_const/columns'; // TODO: Import columns
 
 import { IPaymentTableData } from '../_const/columns/columns.type';
 import { type1FacetedFilters } from '../_const/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
@@ -82,7 +82,7 @@ const TestType1 = () => {
 	};
 
 	// Table Columns
-	const columns = test1Columns(); // TODO: Update columns
+	const columns = test3Columns(); // TODO: Update columns
 
 	return (
 		<PageProvider

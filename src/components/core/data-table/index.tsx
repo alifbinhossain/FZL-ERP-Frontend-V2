@@ -10,18 +10,25 @@ import {
 	TableRow,
 } from '@/components/ui/table';
 
+import { cn } from '@/lib/utils';
+
 import { TableColumnHeader } from './_components/table-column-header';
 import { TablePagination } from './_components/table-pagination';
 import TableSkeleton from './_components/table-skeleton';
+import TableTitleHeader from './_components/table-title-header';
 import { TableToolbar } from './_components/table-toolbar';
 import { getCommonPinningStyles } from './_helpers/getCommonPinningStyle';
 
 function DataTable() {
-	const { table, isLoading, toolbarOptions } = useTable();
+	const { table, isLoading, isOnlyTitle } = useTable();
 	return (
-		<div className='space-y-4'>
-			{toolbarOptions?.includes('none') ? null : <TableToolbar />}
-			<div className='overflow-hidden rounded-md border border-secondary/10'>
+		<div>
+			{isOnlyTitle === true ? <TableTitleHeader /> : <TableToolbar />}
+			<div
+				className={cn(
+					'mb-4 overflow-hidden border border-secondary/10',
+					isOnlyTitle ? 'rounded-b-md' : 'rounded-md'
+				)}>
 				<TableComponent>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (

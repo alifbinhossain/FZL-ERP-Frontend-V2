@@ -16,3 +16,10 @@ export const useTestByUUID = <T>(uuid: string) =>
 		url: `/test/${uuid}`,
 		enabled: false,
 	});
+
+export const useTestDetailsByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
+		queryKey: testQK.detailsByUUID(uuid),
+		url: `/test/${uuid}/details`,
+		enabled: false,
+	});

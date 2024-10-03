@@ -48,6 +48,7 @@ declare module '@tanstack/react-table' {
 interface ITableContext<TData> {
 	title: string;
 	subtitle?: string;
+	isOnlyTitle?: boolean;
 	table: Table<TData>;
 	isLoading?: boolean;
 	handleCreate?: () => void;
@@ -61,6 +62,8 @@ interface ITableContext<TData> {
 	globalFilterValue?: string;
 	facetedFilters?: ITableFacetedFilter[];
 	toolbarOptions?: IToolbarOptions[];
+	enableRowSelection?: boolean;
+	enableDefaultColumns?: boolean;
 }
 
 export const TableContext = createContext({} as ITableContext<any>);
@@ -68,6 +71,7 @@ export const TableContext = createContext({} as ITableContext<any>);
 interface ITableProviderProps<TData, TValue> {
 	title: string;
 	subtitle?: string;
+	isOnlyTitle?: boolean;
 	children?: React.ReactNode;
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
@@ -89,6 +93,7 @@ interface ITableProviderProps<TData, TValue> {
 function TableProvider<TData, TValue>({
 	title,
 	subtitle,
+	isOnlyTitle = false,
 	children,
 	columns,
 	data,
@@ -190,6 +195,7 @@ function TableProvider<TData, TValue>({
 		() => ({
 			title,
 			subtitle,
+			isOnlyTitle,
 			isLoading,
 			table,
 			handleCreate,
@@ -202,10 +208,13 @@ function TableProvider<TData, TValue>({
 			facetedFilters,
 			toolbarOptions:
 				toolbarOptions.length > 0 ? toolbarOptions : ['all'],
+			enableRowSelection,
+			enableDefaultColumns,
 		}),
 		[
 			title,
 			subtitle,
+			isOnlyTitle,
 			isLoading,
 			table,
 			handleCreate,
@@ -218,6 +227,8 @@ function TableProvider<TData, TValue>({
 			globalFilter,
 			facetedFilters,
 			toolbarOptions,
+			enableRowSelection,
+			enableDefaultColumns,
 		]
 	);
 

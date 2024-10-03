@@ -107,7 +107,7 @@ const AddOrUpdate = () => {
 						invalidatePurchaseDetails();
 						// invalidateMaterialInfo();
 						// invalidatePurchaseLog();
-						// navigate(`/store/receive/${id}`);
+						navigate(`/store/receive/${id}`);
 					});
 			} catch (err) {
 				console.error(`Error with Promise.all: ${err}`);
@@ -169,8 +169,7 @@ const AddOrUpdate = () => {
 				.then(() => form.reset(RECEIVE_NULL))
 				.then(() => {
 					// invalidateMaterialInfo();
-					// navigate(`/store/receive/${new_purchase_description_uuid}`);
-					navigate(`/store/receive`);
+					navigate(`/store/receive/${new_purchase_description_uuid}`);
 				});
 		} catch (err) {
 			console.error(`Error with Promise.all: ${err}`);

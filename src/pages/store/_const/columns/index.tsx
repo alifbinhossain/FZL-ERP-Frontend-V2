@@ -1,8 +1,10 @@
 import { ColumnDef, Row } from '@tanstack/react-table';
 
 import TableTransfer from '@/components/core/data-table/_components/table-transfer';
+import { LinkOnly } from '@/components/link';
 
 import {
+	IReceiveDetailsEntry,
 	IReceiveTableData,
 	ISectionTableData,
 	IStockTableData,
@@ -180,14 +182,13 @@ export const receiveColumns = (): ColumnDef<IReceiveTableData>[] => [
 		enableColumnFilter: false,
 		cell: (info) => {
 			const { uuid } = info.row.original;
-			return <span>{info.getValue<string>()}</span>;
-			// return (
-			// 	<LinkOnly
-			// 		uri='/store/receive'
-			// 		id={uuid}
-			// 		title={info.getValue()}
-			// 	/>
-			// );
+
+			return (
+				<LinkOnly
+					uri={`/store/receive/${uuid}`}
+					title={info.getValue<string>()}
+				/>
+			);
 		},
 	},
 	{
@@ -209,5 +210,33 @@ export const receiveColumns = (): ColumnDef<IReceiveTableData>[] => [
 		cell: (info) => {
 			return info.getValue() == 1 ? 'Local' : 'LC';
 		},
+	},
+];
+
+// Receive Details Entry
+export const receiveEntryColumns = (): ColumnDef<IReceiveDetailsEntry>[] => [
+	{
+		accessorKey: 'material_name',
+		header: 'Material',
+		enableColumnFilter: false,
+		cell: (info) => info.getValue(),
+	},
+	{
+		accessorKey: 'quantity',
+		header: 'Quantity',
+		enableColumnFilter: false,
+		cell: (info) => info.getValue(),
+	},
+	{
+		accessorKey: 'unit',
+		header: 'Unit',
+		enableColumnFilter: false,
+		cell: (info) => info.getValue(),
+	},
+	{
+		accessorKey: 'price',
+		header: 'Price',
+		enableColumnFilter: false,
+		cell: (info) => info.getValue(),
 	},
 ];

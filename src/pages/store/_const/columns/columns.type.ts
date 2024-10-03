@@ -57,4 +57,38 @@ export type IReceiveTableData = {
 	is_local: number;
 	lc_number: string;
 	challan_number: string;
+	created_by: string;
+	created_by_name: string;
+	created_at: string;
+	updated_at: string;
+	remarks: string;
+};
+
+export type IReceiveDetailsEntry = {
+	uuid: string;
+	purchase_description_uuid: string;
+	material_uuid: string;
+	material_name: string;
+	unit: string;
+	quantity: number;
+	price: number;
+	created_at: string;
+	updated_at: string;
+	remarks: string;
+};
+
+export type IReceiveDetails = {
+	uuid: string;
+	purchase_id: string;
+	vendor_uuid: string;
+	vendor_name: string;
+	is_local: number;
+	lc_number: string;
+	challan_number: string;
+	created_by: string;
+	created_by_name: string;
+	created_at: string;
+	updated_at: string;
+	remarks: string;
+	purchase: IReceiveDetailsEntry[];
 };

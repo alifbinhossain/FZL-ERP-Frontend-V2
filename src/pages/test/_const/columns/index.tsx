@@ -1,8 +1,9 @@
 import { ColumnDef, Row } from '@tanstack/react-table';
 
 import TableTransfer from '@/components/core/data-table/_components/table-transfer';
+import { LinkOnly } from '@/components/link';
 
-import { IPaymentTableData } from './columns.type';
+import { IPaymentTableData, ITestDetailsEntry } from './columns.type';
 
 // TODO: Replace with real data columns of Table
 export const test1Columns = (): ColumnDef<IPaymentTableData>[] => [
@@ -24,7 +25,6 @@ export const test1Columns = (): ColumnDef<IPaymentTableData>[] => [
 ];
 
 // TODO: Replace with real data type of Table
-
 export function test2Columns({
 	actionTrxAgainstOrderAccess,
 	actionTrxAccess,
@@ -90,3 +90,44 @@ export function test2Columns({
 		},
 	];
 }
+
+// TODO: Replace with real data columns of Table
+export const test3Columns = (): ColumnDef<IPaymentTableData>[] => [
+	{
+		accessorKey: 'id',
+		header: 'ID',
+		cell: (info) => (
+			<LinkOnly
+				uri={`/test/type3/${info.getValue()}`}
+				title={`Details - ${info.getValue()}`}
+			/>
+		),
+	},
+	{
+		accessorKey: 'status',
+		header: 'Status',
+	},
+	{
+		accessorKey: 'email',
+		header: 'Email',
+	},
+	{
+		accessorKey: 'amount',
+		header: 'Amount',
+		meta: {
+			filterVariant: 'range', // TODO: Update filter variant for column level filtering
+		},
+	},
+];
+
+// TODO: Replace with real data type of Table
+export const testEntryColumns = (): ColumnDef<ITestDetailsEntry>[] => [
+	{
+		accessorKey: 'name',
+		header: 'Name',
+	},
+	{
+		accessorKey: 'stock',
+		header: 'Stock',
+	},
+];

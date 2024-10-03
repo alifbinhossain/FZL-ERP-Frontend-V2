@@ -16,14 +16,18 @@ import {
 } from '@/components/ui/select';
 
 export function TablePagination() {
-	const { table } = useTable();
+	const { table, enableRowSelection } = useTable();
 
 	return (
 		<div className='flex w-full items-center justify-between overflow-hidden px-2'>
-			<div className='flex-1 text-sm text-muted-foreground'>
-				{table.getFilteredSelectedRowModel().rows.length} of{' '}
-				{table.getFilteredRowModel().rows.length} row(s) selected.
-			</div>
+			{enableRowSelection === true ? (
+				<div className='flex-1 text-sm text-muted-foreground'>
+					{table.getFilteredSelectedRowModel().rows.length} of{' '}
+					{table.getFilteredRowModel().rows.length} row(s) selected.
+				</div>
+			) : (
+				<div></div>
+			)}
 			<div className='flex items-center space-x-6 lg:space-x-8'>
 				<div className='flex items-center space-x-2'>
 					<p className='text-sm font-medium'>Rows per page</p>

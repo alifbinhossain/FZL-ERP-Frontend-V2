@@ -12,6 +12,8 @@ const ReceiveAddOrUpdate = lazy(
 	() => import('@/pages/store/receive/add-or-update')
 );
 
+const ReceiveDetails = lazy(() => import('@/pages/store/receive/details'));
+
 const StoreRoutes: IRoute[] = [
 	{
 		name: 'Store',
@@ -60,14 +62,14 @@ const StoreRoutes: IRoute[] = [
 				actions: ['create', 'read', 'update'],
 				disableCollapse: true,
 				children: [
-					// {
-					// 	name: 'Details',
-					// 	path: '/store/receive/:purchase_description_uuid',
-					// 	element: <PurchaseInd />,
-					// 	hidden: true,
-					// 	page_name: 'store__receive_by_uuid',
-					// 	actions: ['create', 'read', 'update'],
-					// },
+					{
+						name: 'Details',
+						path: '/store/receive/:id',
+						element: <ReceiveDetails />,
+						hidden: true,
+						page_name: 'store__receive_by_uuid',
+						actions: ['create', 'read', 'update'],
+					},
 					{
 						name: 'Entry',
 						path: '/store/receive/add',

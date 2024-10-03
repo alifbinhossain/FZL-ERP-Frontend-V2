@@ -53,6 +53,7 @@ export function TableToolbar() {
 		title,
 		subtitle,
 		table,
+		toolbarOptions,
 		handleCreate,
 		handleRefetch,
 		globalFilterValue,
@@ -180,10 +181,12 @@ export function TableToolbar() {
 					placeholder='Search...'
 				/>
 			</div>
-			<div className='flex items-center justify-between'>
-				{renderLeftSection()}
-				{renderRightSection()}
-			</div>
+			{toolbarOptions?.includes('none') ? null : (
+				<div className='flex items-center justify-between'>
+					{renderLeftSection()}
+					{renderRightSection()}
+				</div>
+			)}
 		</div>
 	);
 }
