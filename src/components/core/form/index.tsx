@@ -1,6 +1,23 @@
+import FormAddEditWrapper from './form-add-edit-wrapper';
+import FormDynamicFields from './form-dynamic-fields';
 import FormInput from './form-input';
+import FormJoinInputSelect from './form-join-input-select';
+import FormJoinInputUnit from './form-join-input-unit';
+import FormSection from './form-section';
 import FormSelect from './form-select';
 import FormSubmit from './form-submit';
 import FormTextarea from './form-textarea';
 
-export { FormInput, FormTextarea, FormSelect, FormSubmit };
+const Form = {
+	Input: FormInput,
+	Textarea: FormTextarea,
+	Select: FormSelect,
+	Submit: FormSubmit,
+	Section: FormSection,
+	JoinInputUnit: FormJoinInputUnit,
+	JoinInputSelect: FormJoinInputSelect,
+	DynamicFields: FormDynamicFields,
+	AddEditWrapper: FormAddEditWrapper,
+};
+
+export default Form;

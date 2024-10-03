@@ -12,7 +12,7 @@ const App = () => {
 		<AuthProvider>
 			<RouterProvider router={router} />
 			<Toast />
-			<Toaster richColors position={'top-center'} expand={false} />
+			<Toaster richColors position={'top-center'} expand={true} />
 		</AuthProvider>
 	);
 };

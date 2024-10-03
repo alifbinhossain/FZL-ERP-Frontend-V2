@@ -4,7 +4,7 @@ import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useAuth, useRHF } from '@/hooks';
 
-import { FormInput, FormSelect, FormTextarea } from '@/components/core/form';
+import CoreForm from '@/components/core/form';
 import { IFormSelectOption } from '@/components/core/form/form-select';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
@@ -53,7 +53,6 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 	const isUpdate = !!updatedData;
 
 	const { user } = useAuth();
-
 	const form = useRHF(
 		TEST_TRX_AGAINST_ORDER_SCHEMA({
 			minStock: 1,
@@ -105,7 +104,7 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 				control={form.control}
 				name='order_description_uuid'
 				render={(props) => (
-					<FormSelect
+					<CoreForm.Select
 						label='Order'
 						placeholder='Select an Order'
 						options={order!}
@@ -118,7 +117,7 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 				control={form.control}
 				name='trx_to'
 				render={(props) => (
-					<FormSelect
+					<CoreForm.Select
 						placeholder='Select Transaction Area'
 						options={getTransactionArea}
 						{...props}
@@ -130,7 +129,7 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 				control={form.control}
 				name='trx_quantity'
 				render={(props) => (
-					<FormInput
+					<CoreForm.Input
 						label={`Trx Quantity`}
 						type={'number'}
 						subLabel={`Max: ${updatedData?.stock}`}
@@ -143,7 +142,7 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 			<FormField
 				control={form.control}
 				name='remarks'
-				render={(props) => <FormTextarea {...props} />}
+				render={(props) => <CoreForm.Textarea {...props} />}
 			/>
 		</AddModal>
 	);

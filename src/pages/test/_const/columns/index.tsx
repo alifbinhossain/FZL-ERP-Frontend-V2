@@ -47,6 +47,7 @@ export function test2Columns({
 		},
 
 		{
+			accessorKey: 'action_trx',
 			id: 'action_trx',
 			header: 'Test Trx', // TODO: Update header name
 			enableColumnFilter: false,
@@ -64,6 +65,7 @@ export function test2Columns({
 		},
 
 		{
+			accessorKey: 'action_trx_against_order',
 			id: 'action_trx_against_order',
 			header: 'Trx Against Order',
 			enableColumnFilter: false,

@@ -11,6 +11,9 @@
 		"xabikos.reactsnippets",
 		"bradlc.vscode-tailwindcss",
 		"infeng.vscode-react-typescript",
-		"moalamri.inline-fold"
+		"moalamri.inline-fold",
+		"wayou.vscode-todo-highlight",
+		"naumovs.color-highlight",
+		"aaron-bond.better-comments"
 	]
 }

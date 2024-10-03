@@ -24,6 +24,7 @@ interface FormInputProps extends InputProps {
 	placeholder?: string;
 	optional?: boolean;
 	icon?: React.ReactNode;
+	disableLabel?: boolean;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -35,20 +36,24 @@ const FormInput: React.FC<FormInputProps> = ({
 	type,
 	className,
 	icon,
+	disabled = false,
+	disableLabel,
 }) => {
 	return (
-		<FormItem className='space-y-1'>
-			<FormLabel className='flex items-center justify-between capitalize'>
-				<span>
-					{label || field.name.replace('_', ' ')}{' '}
-					{optional ? (
-						<span className='text-xs'>(Optional)</span>
-					) : (
-						''
-					)}
-				</span>
-				{subLabel && <span className='text-xs'>{subLabel}</span>}
-			</FormLabel>
+		<FormItem className='space-y-1.5'>
+			{!disableLabel && (
+				<FormLabel className='flex items-center justify-between capitalize'>
+					<span>
+						{label || field.name.replace('_', ' ')}{' '}
+						{optional ? (
+							<span className='text-xs'>(Optional)</span>
+						) : (
+							''
+						)}
+					</span>
+					{subLabel && <span className='text-xs'>{subLabel}</span>}
+				</FormLabel>
+			)}
 
 			<FormControl>
 				{type === 'password' ? (
@@ -56,19 +61,18 @@ const FormInput: React.FC<FormInputProps> = ({
 						className={cn(className)}
 						placeholder={placeholder}
 						icon={icon}
+						disabled={disabled}
 						{...field}
 					/>
 				) : type === 'number' ? (
 					<Input
 						className={cn(className)}
 						placeholder={placeholder}
-						type={'number'}
 						icon={icon}
 						{...field}
-						onChange={(e) => {
-							field.onChange(Number(e.target.value));
+						onBlur={(e) => {
+							field.onChange(+e.target.value);
 						}}
-						value={field.value === 0 ? '' : Number(field.value)}
 					/>
 				) : (
 					<Input
@@ -76,6 +80,7 @@ const FormInput: React.FC<FormInputProps> = ({
 						placeholder={placeholder}
 						type={type}
 						icon={icon}
+						disabled={disabled}
 						{...field}
 					/>
 				)}

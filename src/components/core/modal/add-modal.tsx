@@ -1,7 +1,7 @@
 import { DevTool } from '@hookform/devtools';
 import { UseFormReturn } from 'react-hook-form';
 
-import { FormSubmit } from '@/components/core/form';
+import CoreForm from '@/components/core/form';
 import {
 	Dialog,
 	DialogContent,
@@ -67,7 +67,7 @@ const AddModal: React.FC<IAddModalProps> = ({
 						className='relative'>
 						<div className='space-y-3'>{children}</div>
 						<DialogFooter className='mt-6'>
-							<FormSubmit className='w-full' title='Save' />
+							<CoreForm.Submit className='w-full' title='Save' />
 						</DialogFooter>
 						<DevTool control={form.control} placement='top-left' />
 					</form>

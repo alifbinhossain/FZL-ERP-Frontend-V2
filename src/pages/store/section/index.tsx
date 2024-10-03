@@ -5,7 +5,8 @@ import { Row } from '@tanstack/react-table';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { ISectionTableData, sectionColumns } from '../_const/columns';
+import { sectionColumns } from '../_const/columns';
+import { ISectionTableData } from '../_const/columns/columns.type';
 import { useMaterialSection } from '../_const/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
@@ -60,7 +61,6 @@ const Section = () => {
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<ISectionTableData>[]) => {
-		// TODO: Update Row type
 		const selectedRows = rows.map((row) => row.original);
 
 		setDeleteItems(

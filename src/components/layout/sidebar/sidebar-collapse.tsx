@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { PanelLeftOpenIcon, PanelRightOpenIcon } from 'lucide-react';
 import { useLayout } from '@/hooks';
 
+import TooltipWrapper from '@/components/tooltip-wrapper';
 import { buttonVariants } from '@/components/ui/button';
 
 const SidebarCollapse = () => {
@@ -18,11 +19,13 @@ const SidebarCollapse = () => {
 			onClick={() => {
 				setIsCollapsed((prev) => !prev);
 			}}>
-			{isCollapsed ? (
-				<PanelLeftOpenIcon className='size-6' />
-			) : (
-				<PanelRightOpenIcon className='size-6' />
-			)}
+			<TooltipWrapper message='Toggle Sidebar (Ctrl+Q)'>
+				{isCollapsed ? (
+					<PanelLeftOpenIcon className='size-6' />
+				) : (
+					<PanelRightOpenIcon className='size-6' />
+				)}
+			</TooltipWrapper>
 		</motion.button>
 	);
 };

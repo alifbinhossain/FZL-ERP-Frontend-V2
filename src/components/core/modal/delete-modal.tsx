@@ -50,8 +50,8 @@ const DeleteModal: React.FC<IDeleteModalProps> = ({
 		await deleteData.mutateAsync({
 			url: `${url}/${deleteItem?.id}`,
 			onClose: () => {
-				setDeleteItem(null);
 				onClose?.();
+				setDeleteItem(null);
 			},
 		});
 	};

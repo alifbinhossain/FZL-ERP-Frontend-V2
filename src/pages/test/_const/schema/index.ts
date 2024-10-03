@@ -3,6 +3,7 @@ import { z } from 'zod';
 import {
 	NUMBER_DOUBLE_REQUIRED,
 	STRING_NULLABLE,
+	STRING_OPTIONAL,
 	STRING_REQUIRED,
 } from '@/utils/validators';
 
@@ -15,6 +16,34 @@ export const TEST_NULL = {
 	email: '',
 };
 export type ITest = z.infer<typeof TEST_SCHEMA>;
+
+// TODO: Remove this demo schema and add all the schemas like this
+export const TEST_SCHEMA_3 = z.object({
+	company_name: STRING_REQUIRED,
+	company_address: STRING_REQUIRED,
+	company_phone: STRING_REQUIRED,
+	company_email: STRING_REQUIRED,
+	company_size: STRING_REQUIRED,
+	employees: z.array(
+		z.object({
+			uuid: STRING_OPTIONAL,
+			name: STRING_REQUIRED,
+			email: STRING_REQUIRED,
+			phone: STRING_REQUIRED,
+			designation: STRING_REQUIRED,
+			department: STRING_REQUIRED,
+		})
+	),
+});
+export const TEST_NULL_3 = {
+	company_name: '',
+	company_address: 'Hello',
+	company_phone: '',
+	company_email: 'fortune@gmail.com',
+	company_size: 'small',
+	employees: [],
+};
+export type ITest3 = z.infer<typeof TEST_SCHEMA_3>;
 
 // TODO: Remove this demo schema and add all the schemas like this
 export const TEST_STOCK_SCHEMA = (
