@@ -29,7 +29,7 @@ const Receive = () => {
 	const handleCreate = () => navigate('/store/receive/add');
 
 	const handleUpdate = (row: Row<IReceiveTableData>) => {
-		navigate(`/store/receive/${row.original.uuid}/edit`);
+		navigate(`/store/receive/${row.original.uuid}/update`);
 	};
 
 	// Delete Modal state

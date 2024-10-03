@@ -8,8 +8,8 @@ const Section = lazy(() => import('@/pages/store/section'));
 const Type = lazy(() => import('@/pages/store/type'));
 const Vendor = lazy(() => import('@/pages/store/vendor'));
 const Receive = lazy(() => import('@/pages/store/receive'));
-const ReceiveAddOrEdit = lazy(
-	() => import('@/pages/store/receive/add-or-edit')
+const ReceiveAddOrUpdate = lazy(
+	() => import('@/pages/store/receive/add-or-update')
 );
 
 const StoreRoutes: IRoute[] = [
@@ -71,15 +71,15 @@ const StoreRoutes: IRoute[] = [
 					{
 						name: 'Entry',
 						path: '/store/receive/add',
-						element: <ReceiveAddOrEdit />,
+						element: <ReceiveAddOrUpdate />,
 						hidden: true,
 						page_name: 'store__receive_entry',
 						actions: ['create', 'read', 'update'],
 					},
 					{
 						name: 'Entry',
-						path: '/store/receive/:id/edit',
-						element: <ReceiveAddOrEdit />,
+						path: '/store/receive/:id/update',
+						element: <ReceiveAddOrUpdate />,
 						hidden: true,
 						page_name: 'store__receive_update',
 						actions: ['create', 'read', 'update'],

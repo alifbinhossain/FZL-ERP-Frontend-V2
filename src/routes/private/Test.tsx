@@ -4,7 +4,9 @@ import { IRoute } from '@/types';
 const TestType1 = lazy(() => import('@/pages/test/type1'));
 const TestType2 = lazy(() => import('@/pages/test/type2'));
 const TestType3 = lazy(() => import('@/pages/test/type3'));
-const TestType3Add = lazy(() => import('@/pages/test/type3/add-or-edit'));
+const TestType3AddOrUpdate = lazy(
+	() => import('@/pages/test/type3/add-or-update')
+);
 
 const TestRoutes: IRoute[] = [
 	{
@@ -35,15 +37,15 @@ const TestRoutes: IRoute[] = [
 					{
 						name: 'Add',
 						path: '/test/type3/add',
-						element: <TestType3Add />,
+						element: <TestType3AddOrUpdate />,
 						page_name: 'order__info',
 						actions: ['read', 'create', 'update', 'delete'],
 						hidden: true,
 					},
 					{
 						name: 'Edit',
-						path: '/test/type3/:id/edit',
-						element: <TestType3Add />,
+						path: '/test/type3/:id/update',
+						element: <TestType3AddOrUpdate />,
 						page_name: 'order__info',
 						actions: ['read', 'create', 'update', 'delete'],
 						hidden: true,

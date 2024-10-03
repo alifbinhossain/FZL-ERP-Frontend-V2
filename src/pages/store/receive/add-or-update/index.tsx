@@ -19,11 +19,11 @@ import useGenerateFieldDefs from './useGenerateFieldDefs';
 
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
 
-const AddOrEdit = () => {
+const AddOrUpdate = () => {
 	const { user } = useAuth();
 	const navigate = useNavigate();
 	const { id } = useParams();
-	const isEdit = !!id;
+	const isUpdate = !!id;
 
 	const {
 		url: purchaseDescriptionUrl,
@@ -47,17 +47,17 @@ const AddOrEdit = () => {
 	});
 
 	useEffect(() => {
-		if (isEdit && data) {
+		if (isUpdate && data) {
 			form.reset(data);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data, isEdit]);
+	}, [data, isUpdate]);
 
 	async function onSubmit(values: IReceive) {
 		/* -------------------------------------------------------------------------- */
 		/*                                EDIT PURCHASE                               */
 		/* -------------------------------------------------------------------------- */
-		if (isEdit) {
+		if (isUpdate) {
 			const purchase_description_data = {
 				...values,
 				updated_at: getDateTime(),
@@ -215,7 +215,7 @@ const AddOrEdit = () => {
 
 	return (
 		<CoreForm.AddEditWrapper
-			title={isEdit ? 'Edit Purchase' : 'Add Purchase'}
+			title={isUpdate ? 'Edit Purchase' : 'Add Purchase'}
 			form={form}
 			onSubmit={onSubmit}>
 			<Header />
@@ -256,4 +256,4 @@ const AddOrEdit = () => {
 	);
 };
 
-export default AddOrEdit;
+export default AddOrUpdate;

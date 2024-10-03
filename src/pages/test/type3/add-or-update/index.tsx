@@ -15,11 +15,11 @@ import useGenerateFieldDefs from './useGenerateFieldDefs';
 
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
 
-const AddOrEdit = () => {
+const AddOrUpdate = () => {
 	const { user } = useAuth();
 	const navigate = useNavigate();
 	const { id } = useParams();
-	const isEdit = !!id;
+	const isUpdate = !!id;
 
 	const { url: testUrl, updateData, postData, deleteData } = useTest(); // TODO: Update Query
 
@@ -35,17 +35,17 @@ const AddOrEdit = () => {
 	});
 
 	useEffect(() => {
-		if (isEdit && data) {
+		if (isUpdate && data) {
 			form.reset(data);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data, isEdit]);
+	}, [data, isUpdate]);
 
 	async function onSubmit(values: ITest3) {
 		/* -------------------------------------------------------------------------- */
-		/*                                  EDIT TEST                                 */
+		/*                                 UPDATE TEST                                */
 		/* -------------------------------------------------------------------------- */
-		if (isEdit) {
+		if (isUpdate) {
 			// TODO: Update variable name ⬇️
 			const test_data = {
 				...values,
@@ -206,7 +206,7 @@ const AddOrEdit = () => {
 
 	return (
 		<CoreForm.AddEditWrapper
-			title={isEdit ? 'Edit Test' : 'Add Test'} // TODO: Update title
+			title={isUpdate ? 'Edit Test' : 'Add Test'} // TODO: Update title
 			form={form}
 			onSubmit={onSubmit}>
 			<Header />
@@ -248,4 +248,4 @@ const AddOrEdit = () => {
 	);
 };
 
-export default AddOrEdit;
+export default AddOrUpdate;

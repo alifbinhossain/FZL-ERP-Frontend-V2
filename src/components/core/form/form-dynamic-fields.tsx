@@ -64,6 +64,7 @@ interface DynamicFieldsProps {
 	form: UseFormReturn<any>;
 	fieldName: string;
 	fieldDefs: FieldDef[];
+	extraButtons?: React.ReactNode[];
 	handleAdd?: () => void;
 	fields: FieldArrayWithId<any>[];
 }
@@ -73,6 +74,7 @@ const FormDynamicFields = ({
 	form,
 	fieldName,
 	fieldDefs,
+	extraButtons,
 	handleAdd,
 	fields,
 }: DynamicFieldsProps) => {
@@ -83,14 +85,18 @@ const FormDynamicFields = ({
 					{title || 'Dynamic Fields'}
 				</h3>
 
-				<div>
+				<div className='flex items-center gap-2'>
+					{extraButtons &&
+						extraButtons.length > 0 &&
+						extraButtons.map((button) => button)}
+
 					{handleAdd && (
 						<Button
 							onClick={handleAdd}
 							type='button'
 							variant={'accent'}
 							size={'xs'}
-							className='gap-1 bg-transparent bg-gradient-to-r from-accent/80 to-accent/70'>
+							className='gap-1 rounded bg-transparent bg-gradient-to-r from-accent/80 to-accent/70'>
 							<Plus className='size-4' />
 							New
 						</Button>

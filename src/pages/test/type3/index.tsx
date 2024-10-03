@@ -44,7 +44,7 @@ const TestType1 = () => {
 	const handleCreate = () => navigate('/test/type3/add'); // TODO: Update route
 
 	const handleUpdate = (row: Row<IPaymentTableData>) => {
-		navigate(`/test/type3/${row.original.id}/edit`); // TODO: Update route
+		navigate(`/test/type3/${row.original.id}/update`); // TODO: Update route
 	};
 
 	// Delete Modal state
