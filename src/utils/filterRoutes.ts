@@ -31,8 +31,7 @@ function filterRoutes(routes: IRoute[]) {
 		});
 	}
 
-	const cloneRoutes = routes.map((e) => ({ ...e }));
-	return filterRecursive(cloneRoutes);
+	return filterRecursive(routes);
 }
 
 export default filterRoutes;

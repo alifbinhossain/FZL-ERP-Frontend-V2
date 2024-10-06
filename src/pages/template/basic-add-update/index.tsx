@@ -30,13 +30,14 @@ const fakePayments: IPaymentTableData[] = Array.from(
 );
 
 // TODO: Update Component Name
-const TestType1 = () => {
+const BasicAddUpdate = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
 		useTest<IPaymentTableData[]>(); // TODO: Update query
 
 	// TODO: Update Page Info (Title, Url and Tab Name)
 	const pageInfo = useMemo(
-		() => new PageInfo('Test 1', url, 'order__info'),
+		() =>
+			new PageInfo('Basic Add Update', url, 'template__basic_add_update'),
 		[url]
 	);
 
@@ -144,4 +145,4 @@ const TestType1 = () => {
 	);
 };
 
-export default TestType1;
+export default BasicAddUpdate;

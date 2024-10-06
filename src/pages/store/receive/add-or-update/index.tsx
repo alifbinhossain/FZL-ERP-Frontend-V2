@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth, useRHF } from '@/hooks';
 
 import CoreForm from '@/components/core/form';
-import FormDynamicFields from '@/components/core/form/form-dynamic-fields';
 
 import nanoid from '@/lib/nanoid';
 
@@ -218,7 +217,7 @@ const AddOrUpdate = () => {
 			form={form}
 			onSubmit={onSubmit}>
 			<Header />
-			<FormDynamicFields
+			<CoreForm.DynamicFields
 				title='Purchase'
 				form={form}
 				fieldName='purchase'

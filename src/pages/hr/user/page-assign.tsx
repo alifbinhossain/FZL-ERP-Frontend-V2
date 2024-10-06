@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { allFlatRoutes, allPrivateRoutes } from '@/routes';
 import { IResponse, IRoute } from '@/types';
-import { getDateTime } from '@/utils';
+import { flattenRoutes, getDateTime } from '@/utils';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { Search } from 'lucide-react';
@@ -56,19 +56,23 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 		useState<IRoute[]>(allFlatRoutes);
 	const ALL_PAGE_NAMES = allPrivateRoutes.map((item) => item.name);
 
-	const ALL_PAGE_ACTIONS = useMemo(() => {
-		return filteredRoutes.filter(
+	const allPageActions = useMemo(() => {
+		return allFlatRoutes.filter(
 			(item) => item.actions !== undefined && item.actions.length > 0
 		);
-	}, [filteredRoutes]);
+	}, []);
 
 	const filteredPageActions = useMemo(() => {
-		return ALL_PAGE_ACTIONS.filter(({ page_name }) =>
-			page_name?.toLowerCase().includes(searchPageName.toLowerCase())
-		);
-	}, [ALL_PAGE_ACTIONS, searchPageName]);
+		return filteredRoutes
+			.filter(
+				(item) => item.actions !== undefined && item.actions.length > 0
+			)
+			.filter(({ page_name }) =>
+				page_name?.toLowerCase().includes(searchPageName.toLowerCase())
+			);
+	}, [filteredRoutes, searchPageName]);
 
-	const PAGE_ACTIONS = ALL_PAGE_ACTIONS.reduce(
+	const PAGE_ACTIONS_SCHEMA = allPageActions.reduce(
 		(
 			acc: {
 				[key: string]: z.ZodType<any>;
@@ -89,18 +93,17 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 			setFilteredRoutes(allFlatRoutes);
 		} else {
 			setFilteredRoutes(
-				allPrivateRoutes.find((item) => item.name === selectPageName)
-					?.children || [
-					{
-						...allPrivateRoutes[0],
-					},
-				]
+				flattenRoutes(
+					allPrivateRoutes.filter(
+						(item) => item.name === selectPageName
+					)
+				)
 			);
 		}
 	}, [selectPageName]);
 
 	const PAGE_ASSIGN_SCHEMA = z.object({
-		...PAGE_ACTIONS,
+		...PAGE_ACTIONS_SCHEMA,
 	});
 
 	const PAGE_ASSIGN_NULL = {};
@@ -159,6 +162,9 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 
 	// Submit handler
 	async function onSubmit(values: { [key: string]: boolean }) {
+		console.log({
+			values,
+		});
 		const result: { [key: string]: string[] } = {};
 
 		Object.entries(values).forEach(([key, value]) => {
@@ -231,7 +237,9 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 						return (
 							<div
 								key={page_name}
-								className='flex flex-col gap-2 rounded-md border p-3 pt-2 transition-colors duration-300 ease-in-out hover:bg-base-150'>
+								className={cn(
+									'flex flex-col gap-2 rounded-md border p-3 pt-2 transition-colors duration-300 ease-in-out hover:bg-base-150'
+								)}>
 								<div className='flex items-center justify-between'>
 									<Link
 										to={path!}

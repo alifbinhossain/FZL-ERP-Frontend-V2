@@ -1,6 +1,6 @@
 import { filterRoutes, filterSidebarRoutes, flattenRoutes } from '@/utils';
 
-import privateRoutes from './private';
+import { privateRoutes, privateRoutesClone } from './private';
 
 //* all private routes
 export const allPrivateRoutes = privateRoutes;
@@ -9,7 +9,8 @@ export const allPrivateRoutes = privateRoutes;
 export const allFlatRoutes = flattenRoutes(allPrivateRoutes);
 
 //* filtered routes which has read access
-export const filteredRoutes = filterRoutes(allPrivateRoutes);
+// export const filteredRoutes = allPrivateRoutes;
+export const filteredRoutes = filterRoutes(privateRoutesClone);
 
 //* flatten routes which has read access
 export const flatRoutes = flattenRoutes(filteredRoutes);

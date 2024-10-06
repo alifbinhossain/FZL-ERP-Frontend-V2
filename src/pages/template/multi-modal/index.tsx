@@ -38,13 +38,13 @@ const fakePayments: IPaymentTableData[] = Array.from(
 );
 
 // TODO: Update Component Name
-const TestType1 = () => {
+const MultiModal = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
 		useTest<IPaymentTableData[]>(); // TODO: Update query
 
 	// TODO: Update Page Info (Title, Url and Tab Name)
 	const pageInfo = useMemo(
-		() => new PageInfo('Test 2', url, 'store__stock'),
+		() => new PageInfo('Multi Modal', url, 'template__multi_modal'),
 		[url]
 	);
 
@@ -214,4 +214,4 @@ const TestType1 = () => {
 	);
 };
 
-export default TestType1;
+export default MultiModal;
