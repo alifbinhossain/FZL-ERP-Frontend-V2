@@ -118,11 +118,13 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			form={form}
 			onSubmit={onSubmit}>
 			{/* // TODO: Update form fields ⬇️ */}
-			<FormField
-				control={form.control}
-				name='email'
-				render={(props) => <CoreForm.Input {...props} />}
-			/>
+			<div className='grid grid-cols-1'>
+				<FormField
+					control={form.control}
+					name='email'
+					render={(props) => <CoreForm.Input {...props} />}
+				/>
+			</div>
 		</AddModal>
 	);
 };
