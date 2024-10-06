@@ -1,6 +1,6 @@
 import { ColumnDef, Row } from '@tanstack/react-table';
 
-import TableTransfer from '@/components/core/data-table/_components/table-transfer';
+import Transfer from '@/components/buttons/transfer';
 import { LinkOnly } from '@/components/link';
 
 import { IPaymentTableData, ITestDetailsEntry } from './columns.type';
@@ -53,10 +53,7 @@ export function test2Columns({
 			enableColumnFilter: false,
 			enableSorting: false,
 			cell: (info) => (
-				<TableTransfer
-					info={info}
-					onClick={() => handleAgainstTrx(info.row)}
-				/>
+				<Transfer onClick={() => handleAgainstTrx(info.row)} />
 			),
 			size: 40,
 			meta: {
@@ -71,10 +68,7 @@ export function test2Columns({
 			enableColumnFilter: false,
 			enableSorting: false,
 			cell: (info) => (
-				<TableTransfer
-					info={info}
-					onClick={() => handleAgainstOrder(info.row)}
-				/>
+				<Transfer onClick={() => handleAgainstOrder(info.row)} />
 			),
 			size: 40,
 			meta: {

@@ -58,9 +58,9 @@ const AgainstTrx: React.FC<IAgainstTrxProps> = ({
 	); // TODO: Update schema here
 
 	const onClose = () => {
-		setOpen((prev) => !prev);
 		setUpdatedData?.(null);
 		form.reset(TEST_STOCK_NULL); // TODO: Update schema here
+		setOpen((prev) => !prev);
 	};
 
 	// Submit handler

@@ -3,7 +3,7 @@ import { IRoute } from '@/types';
 import { confirmRouteMatch } from '@/utils';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSidebar } from '@/hooks';
 
 import { cn } from '@/lib/utils';
@@ -53,8 +53,6 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 	// Destructure props
 	const { path, name, children, disableCollapse } = props;
 
-	// Use navigation and sidebar context
-	const navigate = useNavigate();
 	const {
 		path: { pathname },
 		isCloseAll,
@@ -128,12 +126,7 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 				<motion.button
 					whileTap={{ scale: 0.95 }}
 					key={name}
-					onClick={() => {
-						if (!isOpen && children![0]?.path) {
-							navigate(children![0].path);
-						}
-						handleClick();
-					}}
+					onClick={handleClick}
 					className={folderClassName}>
 					<span className='truncate'>{name}</span>
 					<ChevronRight

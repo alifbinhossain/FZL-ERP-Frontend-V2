@@ -26,7 +26,7 @@ const TableTitleHeader = () => {
 				icon={<SearchIcon className='size-5 text-white/50' />}
 				value={globalFilterValue ?? ''}
 				onChange={setGlobalFilter}
-				className='h-10 w-full max-w-[200px] border-accent/50 bg-gradient-to-r from-accent/50 to-accent/60 text-white lg:max-w-[300px]'
+				className='h-10 w-full max-w-[200px] border-accent/10 bg-gradient-to-r from-accent/20 to-accent/30 text-white lg:max-w-[300px]'
 				placeholder='Search...'
 			/>
 		</div>

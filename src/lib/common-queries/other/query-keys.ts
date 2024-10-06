@@ -51,6 +51,9 @@ const otherQK = {
 	//Department
 	department: () => [...otherQK.all(), 'department'],
 
+	//Designation
+	designation: () => [...otherQK.all(), 'designation'],
+
 	// Party
 	party: () => [...otherQK.all(), 'party'],
 

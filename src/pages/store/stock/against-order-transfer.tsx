@@ -60,9 +60,9 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 	);
 
 	const onClose = () => {
-		setOpen((prev) => !prev);
 		setUpdatedData?.(null);
 		form.reset(MATERIAL_TRX_AGAINST_ORDER_NULL);
+		setOpen((prev) => !prev);
 	};
 
 	const { data: order } = useOtherOrderDescription<IFormSelectOption[]>();

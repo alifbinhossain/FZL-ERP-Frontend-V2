@@ -153,6 +153,13 @@ export const useOtherDepartment = <T>() =>
 		url: `/other/department/value/label`,
 	});
 
+// GET OTHER DESIGNATION
+export const useOtherDesignation = <T>() =>
+	useTQuery<T>({
+		queryKey: otherQK.designation(),
+		url: `/other/designation/value/label`,
+	});
+
 // GET OTHER LAB DIP
 export const useOtherLabDip = <T>() =>
 	useTQuery<T>({

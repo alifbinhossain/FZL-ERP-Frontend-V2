@@ -64,9 +64,9 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	const form = useRHF(SECTION_SCHEMA, SECTION_NULL);
 
 	const onClose = () => {
-		setOpen((prev) => !prev);
 		setUpdatedData?.(null);
 		form.reset(SECTION_NULL);
+		setOpen((prev) => !prev);
 	};
 
 	// Reset form values when data is updated

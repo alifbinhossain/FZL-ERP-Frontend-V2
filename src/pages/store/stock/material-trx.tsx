@@ -59,9 +59,9 @@ const MaterialTrx: React.FC<IMaterialTrxProps> = ({
 	);
 
 	const onClose = () => {
-		setOpen((prev) => !prev);
 		setUpdatedData?.(null);
 		form.reset(MATERIAL_STOCK_NULL);
+		setOpen((prev) => !prev);
 	};
 
 	// Submit handler

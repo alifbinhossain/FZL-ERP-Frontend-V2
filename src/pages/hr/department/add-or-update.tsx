@@ -11,17 +11,25 @@ import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { ITypeTableData } from '../_const/columns/columns.type';
-import { useMaterialTypeByUUID } from '../_const/query';
-import { ISection, SECTION_NULL, SECTION_SCHEMA } from '../_const/schema';
+import { IDepartmentTableData } from '../_const/columns/columns.type';
+import {
+	useHrDepartmentsByUUID,
+	useHrDesignations,
+	useHrUsers,
+} from '../_const/query';
+import {
+	DEPARTMENT_NULL,
+	DEPARTMENT_SCHEMA,
+	IDepartment,
+} from '../_const/schema';
 
 interface IAddOrUpdateProps {
 	url: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	updatedData?: ITypeTableData | null;
+	updatedData?: IDepartmentTableData | null;
 	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<ITypeTableData | null>
+		React.SetStateAction<IDepartmentTableData | null>
 	>;
 	postData: UseMutationResult<
 		IResponse<any>,
@@ -59,13 +67,19 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	const isUpdate = !!updatedData;
 
 	const { user } = useAuth();
-	const { data } = useMaterialTypeByUUID(updatedData?.uuid as string);
+	const { invalidateQuery: invalidateUsers } = useHrUsers();
+	const { invalidateQuery: invalidateDesignations } = useHrDesignations();
+	const { data } = useHrDepartmentsByUUID<IDepartmentTableData>(
+		updatedData?.uuid as string
+	);
 
-	const form = useRHF(SECTION_SCHEMA, SECTION_NULL);
+	const form = useRHF(DEPARTMENT_SCHEMA, DEPARTMENT_NULL);
 
 	const onClose = () => {
 		setUpdatedData?.(null);
-		form.reset(SECTION_NULL);
+		form.reset(DEPARTMENT_NULL);
+		invalidateUsers();
+		invalidateDesignations();
 		setOpen((prev) => !prev);
 	};
 
@@ -78,10 +92,10 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	}, [data, isUpdate]);
 
 	// Submit handler
-	function onSubmit(values: ISection) {
+	async function onSubmit(values: IDepartment) {
 		if (isUpdate) {
 			// UPDATE ITEM
-			updateData.mutate({
+			updateData.mutateAsync({
 				url: `${url}/${updatedData?.uuid}`,
 				updatedData: {
 					...values,
@@ -91,7 +105,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			});
 		} else {
 			// ADD NEW ITEM
-			postData.mutate({
+			postData.mutateAsync({
 				url,
 				newData: {
 					...values,
@@ -108,17 +122,12 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 		<AddModal
 			open={open}
 			setOpen={onClose}
-			title={isUpdate ? 'Update Type' : 'Add Type'}
+			title={isUpdate ? 'Update Department' : 'Add Department'}
 			form={form}
 			onSubmit={onSubmit}>
 			<FormField
 				control={form.control}
-				name='name'
-				render={(props) => <CoreForm.Input {...props} />}
-			/>
-			<FormField
-				control={form.control}
-				name='short_name'
+				name='department'
 				render={(props) => <CoreForm.Input {...props} />}
 			/>
 			<FormField

@@ -1,10 +1,9 @@
 import { IRoute } from '@/types';
 
 import { DashboardRoutes } from './Dashboard';
+import HrRoutes from './Hr';
 import StoreRoutes from './Store';
 import TestRoutes from './Test';
-
-// import { HrRoutes } from './Hr';
 
 // import { CommercialRoutes } from './Commercial';
 // import { OrderRoutes } from './Order';
@@ -36,7 +35,7 @@ const privateRoutes: IRoute[] = [
 	// ...VislonRoutes,
 	// ...MetalRoutes,
 	// ...SliderRoutes,
-	// ...HrRoutes,
+	...HrRoutes,
 	// ...LibraryRoutes,
 	...TestRoutes,
 ];

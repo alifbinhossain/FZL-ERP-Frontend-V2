@@ -12,6 +12,8 @@ import { FormField } from '@/components/ui/form';
 import nanoid from '@/lib/nanoid';
 
 import { IPaymentTableData } from '../_const/columns/columns.type'; // TODO: Import Columns Type
+
+import { useTestByUUID } from '../_const/query';
 import { ITest, TEST_NULL, TEST_SCHEMA } from '../_const/schema'; // TODO: Import Schema
 
 interface IAddOrUpdateProps {
@@ -58,21 +60,14 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	const isUpdate = !!updatedData;
 
 	const { user } = useAuth();
-	const { data } = {
-		data: {
-			amount: 200,
-			email: 'update@gmail.com',
-			id: '1',
-			status: 'success',
-		},
-	}; // TODO: Replace the object with query by id (e.g. useTestById(updatedData?.id as string))
+	const { data } = useTestByUUID(updatedData?.id as string); // TODO: Replace the query with the actual query
 
 	const form = useRHF(TEST_SCHEMA, TEST_NULL); // TODO: Update schema here
 
 	const onClose = () => {
-		setOpen((prev) => !prev);
 		setUpdatedData?.(null);
 		form.reset(TEST_NULL); // TODO: Update schema here
+		setOpen((prev) => !prev);
 	};
 
 	// Reset form values when data is updated

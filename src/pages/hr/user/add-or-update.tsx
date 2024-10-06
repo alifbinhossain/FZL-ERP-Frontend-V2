@@ -11,22 +11,22 @@ import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
 import {
-	useOtherMaterialSection,
-	useOtherMaterialType,
+	useOtherDepartment,
+	useOtherDesignation,
 } from '@/lib/common-queries/other';
 import nanoid from '@/lib/nanoid';
 
-import { IStockTableData } from '../_const/columns/columns.type';
-import { useMaterialInfoByUUID } from '../_const/query';
-import { IMaterial, MATERIAL_NULL, MATERIAL_SCHEMA } from '../_const/schema';
+import { IUserTableData } from '../_const/columns/columns.type';
+import { useHrUsersByUUID } from '../_const/query';
+import { IUser, USER_NULL, USER_SCHEMA } from '../_const/schema';
 
 interface IAddOrUpdateProps {
 	url: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	updatedData?: IStockTableData | null;
+	updatedData?: IUserTableData | null;
 	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<IStockTableData | null>
+		React.SetStateAction<IUserTableData | null>
 	>;
 	postData: UseMutationResult<
 		IResponse<any>,
@@ -64,15 +64,16 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	const isUpdate = !!updatedData;
 
 	const { user } = useAuth();
-	const { data } = useMaterialInfoByUUID(updatedData?.uuid as string);
-	const { data: section } = useOtherMaterialSection<IFormSelectOption[]>();
-	const { data: materialType } = useOtherMaterialType<IFormSelectOption[]>();
+	const { data } = useHrUsersByUUID(updatedData?.uuid as string);
+	const { data: departmentData } = useOtherDepartment<IFormSelectOption[]>();
+	const { data: designationData } =
+		useOtherDesignation<IFormSelectOption[]>();
 
-	const form = useRHF(MATERIAL_SCHEMA, MATERIAL_NULL);
+	const form = useRHF(USER_SCHEMA(isUpdate) as any, USER_NULL);
 
 	const onClose = () => {
 		setUpdatedData?.(null);
-		form.reset(MATERIAL_NULL);
+		form.reset(USER_NULL);
 		setOpen((prev) => !prev);
 	};
 
@@ -85,7 +86,8 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	}, [data, isUpdate]);
 
 	// Submit handler
-	async function onSubmit(values: IMaterial) {
+	async function onSubmit(values: IUser) {
+		console.log({ values });
 		if (isUpdate) {
 			// UPDATE ITEM
 			await updateData.mutateAsync({
@@ -111,51 +113,39 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 		}
 	}
 
-	const unitOptions: IFormSelectOption[] = [
-		{ label: 'kg', value: 'kg' },
-		{ label: 'Litre', value: 'ltr' },
-		{ label: 'Meter', value: 'mtr' },
-		{ label: 'Piece', value: 'pcs' },
-	];
-
 	return (
 		<AddModal
+			isSmall
 			open={open}
 			setOpen={onClose}
-			title={isUpdate ? 'Update Stock' : 'Add Stock'}
+			title={isUpdate ? 'Update User' : 'Add User'}
 			form={form}
-			onSubmit={onSubmit}
-			className='max-w-4xl'>
-			<CoreForm.Section>
+			onSubmit={onSubmit}>
+			<div className='grid grid-cols-2 gap-4'>
 				<FormField
 					control={form.control}
-					name='section_uuid'
+					name='department_uuid'
 					render={(props) => (
 						<CoreForm.Select
-							label='Section'
-							placeholder='Select Section'
-							isDisabled={!!updatedData?.uuid}
-							options={section!}
+							label='Department'
+							placeholder='Select Department'
+							options={departmentData!}
 							{...props}
 						/>
 					)}
 				/>
 				<FormField
 					control={form.control}
-					name='type_uuid'
+					name='designation_uuid'
 					render={(props) => (
 						<CoreForm.Select
-							label='Type'
-							placeholder='Select Material Type'
-							isDisabled={!!updatedData?.uuid}
-							options={materialType!}
+							label='Designation'
+							placeholder='Select Designation'
+							options={designationData!}
 							{...props}
 						/>
 					)}
 				/>
-			</CoreForm.Section>
-
-			<CoreForm.Section className='md:grid-cols-3'>
 				<FormField
 					control={form.control}
 					name='name'
@@ -163,37 +153,52 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 				/>
 				<FormField
 					control={form.control}
-					name='short_name'
+					name='email'
 					render={(props) => <CoreForm.Input {...props} />}
 				/>
 				<FormField
 					control={form.control}
-					name='threshold'
-					render={(props) => (
-						<CoreForm.JoinInputSelect
-							type='number'
-							selectField={{
-								name: 'unit',
-								options: unitOptions,
-							}}
-							{...props}
-						/>
-					)}
+					name='ext'
+					render={(props) => <CoreForm.Input {...props} />}
 				/>
-			</CoreForm.Section>
+				<FormField
+					control={form.control}
+					name='phone'
+					render={(props) => <CoreForm.Input {...props} />}
+				/>
+			</div>
+			{!isUpdate && (
+				<div className='grid grid-cols-2 gap-4'>
+					<FormField
+						control={form.control}
+						name='pass'
+						render={(props) => (
+							<CoreForm.Input
+								label='Password'
+								type={'password'}
+								{...props}
+							/>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name='repeatPass'
+						render={(props) => (
+							<CoreForm.Input
+								label='Repeat Password'
+								type={'password'}
+								{...props}
+							/>
+						)}
+					/>
+				</div>
+			)}
 
-			<CoreForm.Section>
-				<FormField
-					control={form.control}
-					name='remarks'
-					render={(props) => <CoreForm.Textarea {...props} />}
-				/>
-				<FormField
-					control={form.control}
-					name='description'
-					render={(props) => <CoreForm.Textarea {...props} />}
-				/>
-			</CoreForm.Section>
+			<FormField
+				control={form.control}
+				name='remarks'
+				render={(props) => <CoreForm.Textarea {...props} />}
+			/>
 		</AddModal>
 	);
 };

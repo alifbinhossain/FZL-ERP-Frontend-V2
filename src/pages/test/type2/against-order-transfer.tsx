@@ -62,9 +62,9 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 	); // TODO: Update schema here
 
 	const onClose = () => {
-		setOpen((prev) => !prev);
 		setUpdatedData?.(null);
 		form.reset(TEST_TRX_AGAINST_ORDER_NULL); // TODO: Update schema here
+		setOpen((prev) => !prev);
 	};
 
 	const { data: order } = useOtherOrderDescription<IFormSelectOption[]>();
