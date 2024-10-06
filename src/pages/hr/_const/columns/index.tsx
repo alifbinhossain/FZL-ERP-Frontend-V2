@@ -2,16 +2,15 @@ import { ColumnDef, Row } from '@tanstack/react-table';
 
 import PageAssign from '@/components/buttons/page-assign';
 import ResetPassword from '@/components/buttons/reset-password';
-import { LinkOnly } from '@/components/link';
 import { Switch } from '@/components/ui/switch';
 
 import {
 	IDepartmentTableData,
 	IDesignationTableData,
-	ITestDetailsEntry,
 	IUserTableData,
 } from './columns.type';
 
+// Department Columns
 export const departmentColumns = (): ColumnDef<IDepartmentTableData>[] => [
 	{
 		accessorKey: 'department',
@@ -20,6 +19,8 @@ export const departmentColumns = (): ColumnDef<IDepartmentTableData>[] => [
 		cell: (info) => info.getValue(),
 	},
 ];
+
+// Designation Columns
 export const designationColumns = (): ColumnDef<IDesignationTableData>[] => [
 	{
 		accessorKey: 'designation',
@@ -29,6 +30,7 @@ export const designationColumns = (): ColumnDef<IDesignationTableData>[] => [
 	},
 ];
 
+// User Columns
 export function userColumns({
 	pageAssignAccess,
 	resetPasswordAccess,
@@ -135,44 +137,3 @@ export function userColumns({
 		},
 	];
 }
-
-// TODO: Replace with real data columns of Table
-export const test3Columns = (): ColumnDef<IDepartmentTableData>[] => [
-	{
-		accessorKey: 'id',
-		header: 'ID',
-		cell: (info) => (
-			<LinkOnly
-				uri={`/test/type3/${info.getValue()}`}
-				title={`Details - ${info.getValue()}`}
-			/>
-		),
-	},
-	{
-		accessorKey: 'status',
-		header: 'Status',
-	},
-	{
-		accessorKey: 'email',
-		header: 'Email',
-	},
-	{
-		accessorKey: 'amount',
-		header: 'Amount',
-		meta: {
-			filterVariant: 'range', // TODO: Update filter variant for column level filtering
-		},
-	},
-];
-
-// TODO: Replace with real data type of Table
-export const testEntryColumns = (): ColumnDef<ITestDetailsEntry>[] => [
-	{
-		accessorKey: 'name',
-		header: 'Name',
-	},
-	{
-		accessorKey: 'stock',
-		header: 'Stock',
-	},
-];

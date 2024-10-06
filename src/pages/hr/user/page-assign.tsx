@@ -14,7 +14,7 @@ import { AddModal } from '@/components/core/modal';
 import { Checkbox } from '@/components/ui/checkbox';
 import DebouncedInput from '@/components/ui/debounce-input';
 import { FormField } from '@/components/ui/form';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { cn } from '@/lib/utils';
 
@@ -203,12 +203,14 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 			<Tabs value={selectPageName} className='w-full'>
 				<TabsList className='flex w-full justify-start bg-base-200'>
 					<TabsTrigger
+						type={'button'}
 						value={'all'}
 						onClick={() => setSelectPageName('all')}>
 						All
 					</TabsTrigger>
 					{ALL_PAGE_NAMES.map((item) => (
 						<TabsTrigger
+							type={'button'}
 							className={cn('capitalize')}
 							onClick={() => setSelectPageName(item)}
 							key={item}
@@ -217,8 +219,6 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 						</TabsTrigger>
 					))}
 				</TabsList>
-				<TabsContent value='account'>Account</TabsContent>
-				<TabsContent value='password'> Password</TabsContent>
 			</Tabs>
 
 			<div className='h-80 space-y-2.5 overflow-auto rounded-md p-2 shadow-xl'>

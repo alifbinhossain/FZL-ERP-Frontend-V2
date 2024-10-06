@@ -1,3 +1,6 @@
+import { firstRoute } from '@/routes';
+import { useNavigate } from 'react-router-dom';
+
 import { Button } from '@/components/ui/button';
 
 function V1() {
@@ -27,6 +30,7 @@ function V1() {
 }
 
 function V3() {
+	const navigate = useNavigate();
 	return (
 		<div className='flex h-screen flex-col items-center justify-center gap-12 py-8'>
 			<svg
@@ -57,9 +61,15 @@ function V3() {
 					Sorry, we can't find this page you are looking for.
 				</p>
 				<Button
-					aria-label='Go Back'
-					onClick={() => window.history.back()}>
-					Go Back
+					aria-label='Go Home'
+					onClick={() => {
+						if (firstRoute.path) {
+							navigate(firstRoute?.path);
+						} else {
+							navigate('/login');
+						}
+					}}>
+					Go Home
 				</Button>
 			</div>
 		</div>
