@@ -37,7 +37,7 @@ const privateRoutes: IRoute[] = [
 	// ...SliderRoutes,
 	...HrRoutes,
 	// ...LibraryRoutes,
-	...TestRoutes,
+	// ...TestRoutes,
 ];
 
 export default privateRoutes;

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { allFlatRoutes } from '@/routes';
-import { IResponse } from '@/types';
+import { useEffect, useMemo, useState } from 'react';
+import { allFlatRoutes, allPrivateRoutes } from '@/routes';
+import { IResponse, IRoute } from '@/types';
 import { getDateTime } from '@/utils';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
@@ -14,6 +14,9 @@ import { AddModal } from '@/components/core/modal';
 import { Checkbox } from '@/components/ui/checkbox';
 import DebouncedInput from '@/components/ui/debounce-input';
 import { FormField } from '@/components/ui/form';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+import { cn } from '@/lib/utils';
 
 import { IPageAssign } from '../_const/columns/columns.type';
 import { useHrCanAccess } from '../_const/query';
@@ -46,13 +49,24 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 	updateData,
 }) => {
 	const { data } = useHrCanAccess<any>(updatedData?.uuid as string);
-	const ALL_PAGE_ACTIONS = allFlatRoutes.filter(
-		(item) => item.actions !== undefined && item.actions.length > 0
-	);
+
 	const [searchPageName, setSearchPageName] = useState('');
-	const filteredPageActions = ALL_PAGE_ACTIONS.filter(({ page_name }) =>
-		page_name?.toLowerCase().includes(searchPageName.toLowerCase())
-	);
+	const [selectPageName, setSelectPageName] = useState<string>('all');
+	const [filteredRoutes, setFilteredRoutes] =
+		useState<IRoute[]>(allFlatRoutes);
+	const ALL_PAGE_NAMES = allPrivateRoutes.map((item) => item.name);
+
+	const ALL_PAGE_ACTIONS = useMemo(() => {
+		return filteredRoutes.filter(
+			(item) => item.actions !== undefined && item.actions.length > 0
+		);
+	}, [filteredRoutes]);
+
+	const filteredPageActions = useMemo(() => {
+		return ALL_PAGE_ACTIONS.filter(({ page_name }) =>
+			page_name?.toLowerCase().includes(searchPageName.toLowerCase())
+		);
+	}, [ALL_PAGE_ACTIONS, searchPageName]);
 
 	const PAGE_ACTIONS = ALL_PAGE_ACTIONS.reduce(
 		(
@@ -69,6 +83,21 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 		},
 		{}
 	);
+
+	useEffect(() => {
+		if (selectPageName === 'all') {
+			setFilteredRoutes(allFlatRoutes);
+		} else {
+			setFilteredRoutes(
+				allPrivateRoutes.find((item) => item.name === selectPageName)
+					?.children || [
+					{
+						...allPrivateRoutes[0],
+					},
+				]
+			);
+		}
+	}, [selectPageName]);
 
 	const PAGE_ASSIGN_SCHEMA = z.object({
 		...PAGE_ACTIONS,
@@ -165,8 +194,32 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 				width='mb-4'
 				placeholder='Search Page Name...'
 				value={searchPageName ?? ''}
-				onChange={(val) => setSearchPageName(val as string)}
+				onChange={(val) => {
+					setSelectPageName('all');
+					setSearchPageName(val as string);
+				}}
 			/>
+
+			<Tabs value={selectPageName} className='w-full'>
+				<TabsList className='flex w-full justify-start bg-base-200'>
+					<TabsTrigger
+						value={'all'}
+						onClick={() => setSelectPageName('all')}>
+						All
+					</TabsTrigger>
+					{ALL_PAGE_NAMES.map((item) => (
+						<TabsTrigger
+							className={cn('capitalize')}
+							onClick={() => setSelectPageName(item)}
+							key={item}
+							value={item}>
+							{item}
+						</TabsTrigger>
+					))}
+				</TabsList>
+				<TabsContent value='account'>Account</TabsContent>
+				<TabsContent value='password'> Password</TabsContent>
+			</Tabs>
 
 			<div className='h-80 space-y-2.5 overflow-auto rounded-md p-2 shadow-xl'>
 				{filteredPageActions.length === 0 ? (
@@ -178,7 +231,7 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 						return (
 							<div
 								key={page_name}
-								className='flex flex-col gap-2 rounded-md border p-3 pt-1 transition-colors duration-300 ease-in-out hover:bg-base-150'>
+								className='flex flex-col gap-2 rounded-md border p-3 pt-2 transition-colors duration-300 ease-in-out hover:bg-base-150'>
 								<div className='flex items-center justify-between'>
 									<Link
 										to={path!}

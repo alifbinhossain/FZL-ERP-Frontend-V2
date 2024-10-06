@@ -24,6 +24,7 @@ interface FormCheckboxProps extends CheckboxProps {
 	optional?: boolean;
 	icon?: React.ReactNode;
 	disableLabel?: boolean;
+	labelClassName?: string;
 }
 
 const FormCheckbox: React.FC<FormCheckboxProps> = ({
@@ -33,9 +34,10 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
 	className,
 	disabled = false,
 	disableLabel,
+	labelClassName,
 }) => {
 	return (
-		<FormItem className='flex items-center gap-1 space-y-0'>
+		<FormItem className='flex items-center gap-1.5 space-y-0'>
 			<FormControl className=''>
 				<Checkbox
 					className={cn('size-4', className)}
@@ -46,7 +48,11 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
 			</FormControl>
 
 			{!disableLabel && (
-				<FormLabel className='m-0 cursor-pointer p-0 capitalize'>
+				<FormLabel
+					className={cn(
+						'flex items-center gap-1 capitalize',
+						labelClassName
+					)}>
 					{label || field.name.replace('_', ' ')}{' '}
 					{optional ? (
 						<span className='text-xs'>(Optional)</span>
