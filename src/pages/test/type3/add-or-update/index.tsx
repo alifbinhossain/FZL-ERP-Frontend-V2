@@ -8,8 +8,8 @@ import CoreForm from '@/components/core/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { useTest, useTestByUUID } from '../../_const/query';
-import { ITest3, TEST_NULL_3, TEST_SCHEMA_3 } from '../../_const/schema';
+import { useTest, useTestByUUID } from '../../_config/query';
+import { ITest3, TEST_NULL_3, TEST_SCHEMA_3 } from '../../_config/schema';
 import Header from './header';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 

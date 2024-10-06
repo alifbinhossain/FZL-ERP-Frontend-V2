@@ -5,9 +5,9 @@ import { Row } from '@tanstack/react-table';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { sectionColumns } from '../_const/columns';
-import { ISectionTableData } from '../_const/columns/columns.type';
-import { useMaterialSection } from '../_const/query';
+import { sectionColumns } from '../_config/columns';
+import { ISectionTableData } from '../_config/columns/columns.type';
+import { useMaterialSection } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
@@ -17,7 +17,7 @@ const DeleteAllModal = lazy(
 
 const Section = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useMaterialSection<ISectionTableData[]>(); // TODO: Update query
+		useMaterialSection<ISectionTableData[]>();
 
 	const pageInfo = useMemo(
 		() => new PageInfo('Section', url, 'store__section'),

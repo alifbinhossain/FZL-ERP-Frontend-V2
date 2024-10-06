@@ -6,13 +6,13 @@ import { useAccess } from '@/hooks';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { userColumns } from '../_const/columns';
+import { userColumns } from '../_config/columns';
 import {
 	IPageAssign,
 	IResetPassword,
 	IUserTableData,
-} from '../_const/columns/columns.type';
-import { useHrUsers } from '../_const/query';
+} from '../_config/columns/columns.type';
+import { useHrUsers } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
 const ResetPassword = lazy(() => import('./reset-password'));

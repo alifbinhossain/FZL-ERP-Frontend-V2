@@ -5,9 +5,9 @@ import { Row } from '@tanstack/react-table';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { vendorColumns } from '../_const/columns';
-import { IVendorTableData } from '../_const/columns/columns.type';
-import { usePurchaseVendor } from '../_const/query';
+import { vendorColumns } from '../_config/columns';
+import { IVendorTableData } from '../_config/columns/columns.type';
+import { usePurchaseVendor } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));

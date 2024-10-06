@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { test3Columns } from '../_const/columns'; // TODO: Import columns
+import { test3Columns } from '../_config/columns'; // TODO: Import columns
 
-import { IPaymentTableData } from '../_const/columns/columns.type';
-import { type1FacetedFilters } from '../_const/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
-import { useTest } from '../_const/query'; // TODO: Import query
+import { IPaymentTableData } from '../_config/columns/columns.type';
+import { type1FacetedFilters } from '../_config/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
+import { useTest } from '../_config/query'; // TODO: Import query
 
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
 const DeleteAllModal = lazy(

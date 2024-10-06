@@ -10,12 +10,12 @@ import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { IActionTrx } from '../_const/columns/columns.type'; // TODO: Import Columns Type
+import { IActionTrx } from '../_config/columns/columns.type'; // TODO: Import Columns Type
 import {
 	ITestStock,
 	TEST_STOCK_NULL,
 	TEST_STOCK_SCHEMA,
-} from '../_const/schema';
+} from '../_config/schema';
 
 // TODO: Import Schema
 

@@ -11,10 +11,10 @@ import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { IPaymentTableData } from '../_const/columns/columns.type'; // TODO: Import Columns Type
+import { IPaymentTableData } from '../_config/columns/columns.type'; // TODO: Import Columns Type
 
-import { useTestByUUID } from '../_const/query';
-import { ITest, TEST_NULL, TEST_SCHEMA } from '../_const/schema'; // TODO: Import Schema
+import { useTestByUUID } from '../_config/query';
+import { ITest, TEST_NULL, TEST_SCHEMA } from '../_config/schema'; // TODO: Import Schema
 
 interface IAddOrUpdateProps {
 	url: string;

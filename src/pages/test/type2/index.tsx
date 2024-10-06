@@ -6,16 +6,16 @@ import { useAccess } from '@/hooks';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { test2Columns } from '../_const/columns'; // TODO: Import columns
+import { test2Columns } from '../_config/columns'; // TODO: Import columns
 
 // TODO: Import columns type
 import {
 	IActionTrx,
 	IActionTrxAgainstOrder,
 	IPaymentTableData,
-} from '../_const/columns/columns.type';
-import { type1FacetedFilters } from '../_const/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
-import { useTest } from '../_const/query'; // TODO: Import query
+} from '../_config/columns/columns.type';
+import { type1FacetedFilters } from '../_config/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
+import { useTest } from '../_config/query'; // TODO: Import query
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));

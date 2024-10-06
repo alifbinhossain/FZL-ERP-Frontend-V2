@@ -11,13 +11,13 @@ import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { IDesignationTableData } from '../_const/columns/columns.type';
-import { useHrDesignationByUUID, useHrUsers } from '../_const/query';
+import { IDesignationTableData } from '../_config/columns/columns.type';
+import { useHrDesignationByUUID, useHrUsers } from '../_config/query';
 import {
 	DESIGNATION_NULL,
 	DESIGNATION_SCHEMA,
 	IDesignation,
-} from '../_const/schema';
+} from '../_config/schema';
 
 interface IAddOrUpdateProps {
 	url: string;

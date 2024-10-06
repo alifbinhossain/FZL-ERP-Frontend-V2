@@ -16,9 +16,9 @@ import {
 } from '@/lib/common-queries/other';
 import nanoid from '@/lib/nanoid';
 
-import { IUserTableData } from '../_const/columns/columns.type';
-import { useHrUsersByUUID } from '../_const/query';
-import { IUser, USER_NULL, USER_SCHEMA } from '../_const/schema';
+import { IUserTableData } from '../_config/columns/columns.type';
+import { useHrUsersByUUID } from '../_config/query';
+import { IUser, USER_NULL, USER_SCHEMA } from '../_config/schema';
 
 interface IAddOrUpdateProps {
 	url: string;

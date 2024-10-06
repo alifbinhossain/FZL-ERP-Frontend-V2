@@ -11,9 +11,9 @@ import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { IVendorTableData } from '../_const/columns/columns.type';
-import { usePurchaseVendorByUUID } from '../_const/query';
-import { IVendor, VENDOR_NULL, VENDOR_SCHEMA } from '../_const/schema';
+import { IVendorTableData } from '../_config/columns/columns.type';
+import { usePurchaseVendorByUUID } from '../_config/query';
+import { IVendor, VENDOR_NULL, VENDOR_SCHEMA } from '../_config/schema';
 
 interface IAddOrUpdateProps {
 	url: string;

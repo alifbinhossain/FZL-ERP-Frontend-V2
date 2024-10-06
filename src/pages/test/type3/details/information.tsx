@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import SectionContainer from '@/components/section-container';
 import TableList, { ITableListItems } from '@/components/table-list';
 
-import { ITestDetails } from '../../_const/columns/columns.type'; // TODO: update data type
+import { ITestDetails } from '../../_config/columns/columns.type'; // TODO: update data type
 
 const Information: React.FC<{ data: ITestDetails }> = ({ data }) => {
 	// TODO: update the renderItems to match the data type

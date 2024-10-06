@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { ITestDetails } from '../../_const/columns/columns.type'; // TODO: replace with details data type
-import { useTestDetailsByUUID } from '../../_const/query'; // TODO: replace with details query
+import { ITestDetails } from '../../_config/columns/columns.type'; // TODO: replace with details data type
+import { useTestDetailsByUUID } from '../../_config/query'; // TODO: replace with details query
 import EntryTable from './entry-table';
 import Information from './information';
 

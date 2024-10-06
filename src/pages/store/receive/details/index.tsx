@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { IReceiveDetails } from '../../_const/columns/columns.type';
-import { usePurchaseDetailsByUUID } from '../../_const/query';
+import { IReceiveDetails } from '../../_config/columns/columns.type';
+import { usePurchaseDetailsByUUID } from '../../_config/query';
 import EntryTable from './entry-table';
 import Information from './information';
 

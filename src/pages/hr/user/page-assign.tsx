@@ -18,8 +18,8 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { cn } from '@/lib/utils';
 
-import { IPageAssign } from '../_const/columns/columns.type';
-import { useHrCanAccess } from '../_const/query';
+import { IPageAssign } from '../_config/columns/columns.type';
+import { useHrCanAccess } from '../_config/query';
 
 interface IPageAssignProps {
 	url: string;

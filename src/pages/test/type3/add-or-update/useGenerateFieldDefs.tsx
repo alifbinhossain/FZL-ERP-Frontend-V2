@@ -4,7 +4,7 @@ import FieldActionButton from '@/components/buttons/field-action-button';
 import { FieldDef } from '@/components/core/form/form-dynamic-fields';
 import { IFormSelectOption } from '@/components/core/form/form-select';
 
-import { ITest3 } from '../../_const/schema';
+import { ITest3 } from '../../_config/schema';
 
 interface IGenerateFieldDefsProps {
 	copy: (index: number) => void;

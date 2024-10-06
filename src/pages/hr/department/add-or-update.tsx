@@ -11,17 +11,17 @@ import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { IDepartmentTableData } from '../_const/columns/columns.type';
+import { IDepartmentTableData } from '../_config/columns/columns.type';
 import {
 	useHrDepartmentsByUUID,
 	useHrDesignations,
 	useHrUsers,
-} from '../_const/query';
+} from '../_config/query';
 import {
 	DEPARTMENT_NULL,
 	DEPARTMENT_SCHEMA,
 	IDepartment,
-} from '../_const/schema';
+} from '../_config/schema';
 
 interface IAddOrUpdateProps {
 	url: string;

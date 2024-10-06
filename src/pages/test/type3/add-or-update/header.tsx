@@ -4,7 +4,7 @@ import CoreForm from '@/components/core/form';
 import { IFormSelectOption } from '@/components/core/form/form-select';
 import { FormField } from '@/components/ui/form';
 
-import { ITest3 } from '../../_const/schema';
+import { ITest3 } from '../../_config/schema';
 
 // TODO: Update this component according to the schema ⬇️
 const Header = () => {

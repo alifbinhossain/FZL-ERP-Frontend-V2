@@ -12,14 +12,14 @@ import { FormField } from '@/components/ui/form';
 import { useOtherOrderDescription } from '@/lib/common-queries/other';
 import nanoid from '@/lib/nanoid';
 
-import { IActionTrxAgainstOrder } from '../_const/columns/columns.type'; // TODO: Import Columns Type
+import { IActionTrxAgainstOrder } from '../_config/columns/columns.type'; // TODO: Import Columns Type
 
 // TODO: Import Schema
 import {
 	ITestTrxAgainstOrder,
 	TEST_TRX_AGAINST_ORDER_NULL,
 	TEST_TRX_AGAINST_ORDER_SCHEMA,
-} from '../_const/schema';
+} from '../_config/schema';
 
 interface IAgainstOrderTransferProps {
 	url: string;

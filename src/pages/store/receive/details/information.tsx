@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import SectionContainer from '@/components/section-container';
 import TableList, { ITableListItems } from '@/components/table-list';
 
-import { IReceiveDetails } from '../../_const/columns/columns.type';
+import { IReceiveDetails } from '../../_config/columns/columns.type';
 
 const Information: React.FC<{ data: IReceiveDetails }> = ({ data }) => {
 	const renderItems = (): ITableListItems => {

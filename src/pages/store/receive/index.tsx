@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { receiveColumns } from '../_const/columns';
-import { IReceiveTableData } from '../_const/columns/columns.type';
-import { usePurchaseDescription } from '../_const/query';
+import { receiveColumns } from '../_config/columns';
+import { IReceiveTableData } from '../_config/columns/columns.type';
+import { usePurchaseDescription } from '../_config/query';
 
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
 const DeleteAllModal = lazy(

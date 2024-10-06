@@ -8,12 +8,12 @@ import CoreForm from '@/components/core/form';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
-import { IResetPassword } from '../_const/columns/columns.type';
+import { IResetPassword } from '../_config/columns/columns.type';
 import {
 	IResetPasswordSchema,
 	RESET_PASSWORD_NULL,
 	RESET_PASSWORD_SCHEMA,
-} from '../_const/schema';
+} from '../_config/schema';
 
 interface IResetPasswordProps {
 	url: string;

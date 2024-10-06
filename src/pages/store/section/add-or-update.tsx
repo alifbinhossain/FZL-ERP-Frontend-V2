@@ -11,9 +11,9 @@ import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { ISectionTableData } from '../_const/columns/columns.type';
-import { useMaterialSectionByUUID } from '../_const/query';
-import { ISection, SECTION_NULL, SECTION_SCHEMA } from '../_const/schema';
+import { ISectionTableData } from '../_config/columns/columns.type';
+import { useMaterialSectionByUUID } from '../_config/query';
+import { ISection, SECTION_NULL, SECTION_SCHEMA } from '../_config/schema';
 
 interface IAddOrUpdateProps {
 	url: string;

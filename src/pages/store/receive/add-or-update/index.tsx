@@ -12,8 +12,8 @@ import nanoid from '@/lib/nanoid';
 import {
 	usePurchaseDescription,
 	usePurchaseDetailsByUUID,
-} from '../../_const/query';
-import { IReceive, RECEIVE_NULL, RECEIVE_SCHEMA } from '../../_const/schema';
+} from '../../_config/query';
+import { IReceive, RECEIVE_NULL, RECEIVE_SCHEMA } from '../../_config/schema';
 import Header from './header';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 
