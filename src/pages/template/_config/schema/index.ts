@@ -13,7 +13,7 @@ export const TEST_SCHEMA = z.object({
 });
 export const TEST_NULL = {
 	uuid: null,
-	email: '',
+	email: 'alif@example.com',
 };
 export type ITest = z.infer<typeof TEST_SCHEMA>;
 

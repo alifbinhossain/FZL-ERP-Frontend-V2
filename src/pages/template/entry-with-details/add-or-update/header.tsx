@@ -42,7 +42,7 @@ const Header = () => {
 				control={form.control}
 				name='company_size'
 				render={(props) => (
-					<CoreForm.Select
+					<CoreForm.ReactSelect
 						label='Company Size'
 						placeholder='Select Company Size'
 						options={options!}

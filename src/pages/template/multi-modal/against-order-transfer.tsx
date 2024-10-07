@@ -104,7 +104,7 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 				control={form.control}
 				name='order_description_uuid'
 				render={(props) => (
-					<CoreForm.Select
+					<CoreForm.ReactSelect
 						label='Order'
 						placeholder='Select an Order'
 						options={order!}
@@ -117,7 +117,7 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 				control={form.control}
 				name='trx_to'
 				render={(props) => (
-					<CoreForm.Select
+					<CoreForm.ReactSelect
 						placeholder='Select Transaction Area'
 						options={getTransactionArea}
 						{...props}

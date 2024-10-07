@@ -201,7 +201,10 @@ const FormDynamicFields = ({
 													control={form.control}
 													name={`${fieldName}.${fieldIndex}.${fieldDef.accessorKey}`}
 													render={(props) => (
-														<CoreForm.Select
+														<CoreForm.ReactSelect
+															menuPortalTarget={
+																document.body
+															}
 															options={
 																fieldDef.options
 															}

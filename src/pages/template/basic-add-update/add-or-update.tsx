@@ -118,11 +118,26 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			form={form}
 			onSubmit={onSubmit}>
 			{/* // TODO: Update form fields ⬇️ */}
-			<div className='grid grid-cols-1'>
+			<div className='grid grid-cols-1 gap-4'>
 				<FormField
 					control={form.control}
 					name='email'
-					render={(props) => <CoreForm.Input {...props} />}
+					render={(props) => (
+						<CoreForm.ReactSelect
+							// isMulti
+							options={[
+								{
+									label: 'alif@example.com',
+									value: 'alif@example.com',
+								},
+								{
+									label: 'kQO3H@example.com',
+									value: 'kQO3H@example.com',
+								},
+							]}
+							{...props}
+						/>
+					)}
 				/>
 			</div>
 		</AddModal>

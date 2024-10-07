@@ -22,7 +22,7 @@ const Header = () => {
 				control={form.control}
 				name='vendor_uuid'
 				render={(props) => (
-					<CoreForm.Select
+					<CoreForm.ReactSelect
 						options={vendor || []}
 						label='Vendor'
 						placeholder='Select Vendor'
@@ -34,7 +34,7 @@ const Header = () => {
 				control={form.control}
 				name='is_local'
 				render={(props) => (
-					<CoreForm.Select
+					<CoreForm.ReactSelect
 						valueType='number'
 						options={purchaseOptions}
 						label='Local/Import'
