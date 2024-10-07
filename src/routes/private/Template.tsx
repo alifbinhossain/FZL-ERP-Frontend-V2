@@ -17,14 +17,14 @@ const TemplateRoutes: IRoute[] = [
 		children: [
 			{
 				name: 'Basic Add Update',
-				path: '/test/type1',
+				path: '/template/basic-add-update',
 				element: <BasicAddUpdate />,
 				page_name: 'template__basic_add_update',
 				actions: ['read', 'create', 'update', 'delete'],
 			},
 			{
 				name: 'Multi Modal',
-				path: '/test/type2',
+				path: '/template/multi-modal',
 				element: <MultiModal />,
 				page_name: 'template__multi_modal',
 				actions: [
@@ -38,7 +38,7 @@ const TemplateRoutes: IRoute[] = [
 			},
 			{
 				name: 'Entry With Details',
-				path: '/test/type3',
+				path: '/template/entry-with-details',
 				element: <Entry />,
 				actions: ['read', 'create', 'update', 'delete'],
 				page_name: 'template__entry',
@@ -46,7 +46,7 @@ const TemplateRoutes: IRoute[] = [
 				children: [
 					{
 						name: 'Add',
-						path: '/test/type3/add',
+						path: '/template/entry-with-details/add',
 						element: <EntryAddOrUpdate />,
 						page_name: 'template__entry_add',
 						actions: ['read'],
@@ -54,7 +54,7 @@ const TemplateRoutes: IRoute[] = [
 					},
 					{
 						name: 'Update',
-						path: '/test/type3/:id/update',
+						path: '/template/entry-with-details/:id/update',
 						element: <EntryAddOrUpdate />,
 						page_name: 'template__entry_update',
 						actions: ['read'],
@@ -62,7 +62,7 @@ const TemplateRoutes: IRoute[] = [
 					},
 					{
 						name: 'Details',
-						path: '/test/type3/:id',
+						path: '/template/entry-with-details/:id',
 						element: <EntryDetails />,
 						page_name: 'template__entry_details',
 						actions: ['read'],
