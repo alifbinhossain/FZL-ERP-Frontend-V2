@@ -10,12 +10,12 @@ import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
 
-import { IStockActionTrx } from '../_const/columns/columns.type';
+import { IStockActionTrx } from '../_config/columns/columns.type';
 import {
 	IMaterialStock,
 	MATERIAL_STOCK_NULL,
 	MATERIAL_STOCK_SCHEMA,
-} from '../_const/schema';
+} from '../_config/schema';
 
 interface IMaterialTrxProps {
 	url: string;
@@ -59,9 +59,9 @@ const MaterialTrx: React.FC<IMaterialTrxProps> = ({
 	);
 
 	const onClose = () => {
-		setOpen((prev) => !prev);
 		setUpdatedData?.(null);
 		form.reset(MATERIAL_STOCK_NULL);
+		setOpen((prev) => !prev);
 	};
 
 	// Submit handler

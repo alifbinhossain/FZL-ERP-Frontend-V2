@@ -53,6 +53,7 @@ export function TableToolbar() {
 		title,
 		subtitle,
 		table,
+		toolbarOptions,
 		handleCreate,
 		handleRefetch,
 		globalFilterValue,
@@ -176,14 +177,16 @@ export function TableToolbar() {
 					icon={<SearchIcon className='size-5 text-secondary/50' />}
 					value={globalFilterValue ?? ''}
 					onChange={setGlobalFilter}
-					className='h-10 w-full max-w-[200px] lg:max-w-[300px]'
+					className='h-10 w-full lg:max-w-[300px]'
 					placeholder='Search...'
 				/>
 			</div>
-			<div className='flex items-center justify-between'>
-				{renderLeftSection()}
-				{renderRightSection()}
-			</div>
+			{toolbarOptions?.includes('none') ? null : (
+				<div className='flex items-center justify-between'>
+					{renderLeftSection()}
+					{renderRightSection()}
+				</div>
+			)}
 		</div>
 	);
 }

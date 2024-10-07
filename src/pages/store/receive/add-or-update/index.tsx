@@ -5,15 +5,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth, useRHF } from '@/hooks';
 
 import CoreForm from '@/components/core/form';
-import FormDynamicFields from '@/components/core/form/form-dynamic-fields';
 
 import nanoid from '@/lib/nanoid';
 
 import {
 	usePurchaseDescription,
 	usePurchaseDetailsByUUID,
-} from '../../_const/query';
-import { IReceive, RECEIVE_NULL, RECEIVE_SCHEMA } from '../../_const/schema';
+} from '../../_config/query';
+import { IReceive, RECEIVE_NULL, RECEIVE_SCHEMA } from '../../_config/schema';
 import Header from './header';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 
@@ -107,7 +106,7 @@ const AddOrUpdate = () => {
 						invalidatePurchaseDetails();
 						// invalidateMaterialInfo();
 						// invalidatePurchaseLog();
-						// navigate(`/store/receive/${id}`);
+						navigate(`/store/receive/${id}`);
 					});
 			} catch (err) {
 				console.error(`Error with Promise.all: ${err}`);
@@ -169,8 +168,7 @@ const AddOrUpdate = () => {
 				.then(() => form.reset(RECEIVE_NULL))
 				.then(() => {
 					// invalidateMaterialInfo();
-					// navigate(`/store/receive/${new_purchase_description_uuid}`);
-					navigate(`/store/receive`);
+					navigate(`/store/receive/${new_purchase_description_uuid}`);
 				});
 		} catch (err) {
 			console.error(`Error with Promise.all: ${err}`);
@@ -219,7 +217,7 @@ const AddOrUpdate = () => {
 			form={form}
 			onSubmit={onSubmit}>
 			<Header />
-			<FormDynamicFields
+			<CoreForm.DynamicFields
 				title='Purchase'
 				form={form}
 				fieldName='purchase'

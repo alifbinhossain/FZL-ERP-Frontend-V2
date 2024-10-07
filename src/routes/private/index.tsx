@@ -1,10 +1,10 @@
 import { IRoute } from '@/types';
+import { cloneDeep } from 'lodash';
 
 import { DashboardRoutes } from './Dashboard';
+import HrRoutes from './Hr';
 import StoreRoutes from './Store';
-import TestRoutes from './Test';
-
-// import { HrRoutes } from './Hr';
+import TemplateRoutes from './Template';
 
 // import { CommercialRoutes } from './Commercial';
 // import { OrderRoutes } from './Order';
@@ -36,9 +36,11 @@ const privateRoutes: IRoute[] = [
 	// ...VislonRoutes,
 	// ...MetalRoutes,
 	// ...SliderRoutes,
-	// ...HrRoutes,
+	...HrRoutes,
 	// ...LibraryRoutes,
-	...TestRoutes,
+	...TemplateRoutes,
 ];
 
-export default privateRoutes;
+const privateRoutesClone = cloneDeep(privateRoutes);
+
+export { privateRoutes, privateRoutesClone };

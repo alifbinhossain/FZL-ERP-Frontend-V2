@@ -6,13 +6,13 @@ import { useAccess } from '@/hooks';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
-import { stockColumns } from '../_const/columns';
+import { stockColumns } from '../_config/columns';
 import {
 	IStockActionTrx,
 	IStockActionTrxAgainstOrder,
 	IStockTableData,
-} from '../_const/columns/columns.type';
-import { useMaterialInfo } from '../_const/query';
+} from '../_config/columns/columns.type';
+import { useMaterialInfo } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));

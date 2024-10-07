@@ -6,7 +6,7 @@ import { IFormSelectOption } from '@/components/core/form/form-select';
 
 import { useOtherMaterial } from '@/lib/common-queries/other';
 
-import { IReceive } from '../../_const/schema';
+import { IReceive } from '../../_config/schema';
 
 interface IGenerateFieldDefsProps {
 	copy: (index: number) => void;

@@ -12,12 +12,12 @@ import { FormField } from '@/components/ui/form';
 import { useOtherOrderDescription } from '@/lib/common-queries/other';
 import nanoid from '@/lib/nanoid';
 
-import { IStockActionTrxAgainstOrder } from '../_const/columns/columns.type';
+import { IStockActionTrxAgainstOrder } from '../_config/columns/columns.type';
 import {
 	IMaterialTrxAgainstOrder,
 	MATERIAL_TRX_AGAINST_ORDER_NULL,
 	MATERIAL_TRX_AGAINST_ORDER_SCHEMA,
-} from '../_const/schema';
+} from '../_config/schema';
 
 interface IAgainstOrderTransferProps {
 	url: string;
@@ -60,9 +60,9 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 	);
 
 	const onClose = () => {
-		setOpen((prev) => !prev);
 		setUpdatedData?.(null);
 		form.reset(MATERIAL_TRX_AGAINST_ORDER_NULL);
+		setOpen((prev) => !prev);
 	};
 
 	const { data: order } = useOtherOrderDescription<IFormSelectOption[]>();

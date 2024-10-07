@@ -16,9 +16,9 @@ import {
 } from '@/lib/common-queries/other';
 import nanoid from '@/lib/nanoid';
 
-import { IStockTableData } from '../_const/columns/columns.type';
-import { useMaterialInfoByUUID } from '../_const/query';
-import { IMaterial, MATERIAL_NULL, MATERIAL_SCHEMA } from '../_const/schema';
+import { IStockTableData } from '../_config/columns/columns.type';
+import { useMaterialInfoByUUID } from '../_config/query';
+import { IMaterial, MATERIAL_NULL, MATERIAL_SCHEMA } from '../_config/schema';
 
 interface IAddOrUpdateProps {
 	url: string;
@@ -71,9 +71,9 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	const form = useRHF(MATERIAL_SCHEMA, MATERIAL_NULL);
 
 	const onClose = () => {
-		setOpen((prev) => !prev);
 		setUpdatedData?.(null);
 		form.reset(MATERIAL_NULL);
+		setOpen((prev) => !prev);
 	};
 
 	// Reset form values when data is updated

@@ -6,7 +6,7 @@ import { FormField } from '@/components/ui/form';
 
 import { useOtherVendor } from '@/lib/common-queries/other';
 
-import { IReceive } from '../../_const/schema';
+import { IReceive } from '../../_config/schema';
 
 const Header = () => {
 	const form = useFormContext<IReceive>();
