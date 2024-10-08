@@ -131,7 +131,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 					control={form.control}
 					name='section_uuid'
 					render={(props) => (
-						<CoreForm.Select
+						<CoreForm.ReactSelect
 							label='Section'
 							placeholder='Select Section'
 							isDisabled={!!updatedData?.uuid}
@@ -144,7 +144,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 					control={form.control}
 					name='type_uuid'
 					render={(props) => (
-						<CoreForm.Select
+						<CoreForm.ReactSelect
 							label='Type'
 							placeholder='Select Material Type'
 							isDisabled={!!updatedData?.uuid}

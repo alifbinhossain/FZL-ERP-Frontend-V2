@@ -92,7 +92,7 @@ export const test3Columns = (): ColumnDef<IPaymentTableData>[] => [
 		header: 'ID',
 		cell: (info) => (
 			<LinkOnly
-				uri={`/test/type3/${info.getValue()}`}
+				uri={`/template/entry-with-details/${info.getValue()}`}
 				title={`Details - ${info.getValue()}`}
 			/>
 		),

@@ -41,10 +41,10 @@ const EntryWithDetails = () => {
 		[url]
 	);
 
-	const handleCreate = () => navigate('/test/type3/add'); // TODO: Update route
+	const handleCreate = () => navigate('/template/entry-with-details/add'); // TODO: Update route
 
 	const handleUpdate = (row: Row<IPaymentTableData>) => {
-		navigate(`/test/type3/${row.original.id}/update`); // TODO: Update route
+		navigate(`/template/entry-with-details/${row.original.id}/update`); // TODO: Update route
 	};
 
 	// Delete Modal state

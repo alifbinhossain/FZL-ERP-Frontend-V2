@@ -97,7 +97,7 @@ const AgainstTrx: React.FC<IAgainstTrxProps> = ({
 				control={form.control}
 				name='trx_to'
 				render={(props) => (
-					<CoreForm.Select
+					<CoreForm.ReactSelect
 						placeholder='Select Transaction Area'
 						options={getTransactionArea}
 						{...props}

@@ -126,7 +126,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 					control={form.control}
 					name='department_uuid'
 					render={(props) => (
-						<CoreForm.Select
+						<CoreForm.ReactSelect
 							label='Department'
 							placeholder='Select Department'
 							options={departmentData!}
@@ -138,7 +138,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 					control={form.control}
 					name='designation_uuid'
 					render={(props) => (
-						<CoreForm.Select
+						<CoreForm.ReactSelect
 							label='Designation'
 							placeholder='Select Designation'
 							options={designationData!}

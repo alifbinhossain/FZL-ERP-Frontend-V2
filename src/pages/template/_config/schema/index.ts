@@ -13,7 +13,7 @@ export const TEST_SCHEMA = z.object({
 });
 export const TEST_NULL = {
 	uuid: null,
-	email: '',
+	email: 'alif@example.com',
 };
 export type ITest = z.infer<typeof TEST_SCHEMA>;
 
@@ -37,10 +37,10 @@ export const TEST_SCHEMA_3 = z.object({
 });
 export const TEST_NULL_3 = {
 	company_name: '',
-	company_address: 'Hello',
+	company_address: '',
 	company_phone: '',
-	company_email: 'fortune@gmail.com',
-	company_size: 'small',
+	company_email: '',
+	company_size: '',
 	employees: [],
 };
 export type ITest3 = z.infer<typeof TEST_SCHEMA_3>;
