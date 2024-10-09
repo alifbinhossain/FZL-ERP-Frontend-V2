@@ -12,19 +12,16 @@ const useDefaultColumns = <TData, TValue>(): ColumnDef<TData, TValue>[] => {
 		{
 			accessorKey: 'remarks',
 			header: 'Remarks',
-			enableColumnFilter: false,
 			cell: (info) => info.getValue(),
 		},
 		{
 			accessorKey: 'created_by_name',
 			header: 'Created By',
-			enableColumnFilter: false,
 			cell: (info) => info.getValue(),
 		},
 		{
 			accessorKey: 'created_at',
 			header: 'Created At',
-			enableColumnFilter: false,
 			enablePinning: false,
 			cell: (info) => <DateTime date={info.getValue() as Date} />,
 			filterFn: 'dateRange',
@@ -36,7 +33,6 @@ const useDefaultColumns = <TData, TValue>(): ColumnDef<TData, TValue>[] => {
 			accessorKey: 'updated_at',
 			header: 'Updated At',
 			enablePinning: false,
-			enableColumnFilter: false,
 			cell: (info) => <DateTime date={info.getValue() as Date} />,
 			meta: {
 				filterVariant: 'dateRange',

@@ -166,6 +166,7 @@ const AddOrUpdate = () => {
 
 	const handleAdd = () => {
 		// TODO: Update field names
+
 		append({
 			name: '',
 			email: '',
@@ -195,12 +196,13 @@ const AddOrUpdate = () => {
 	// Copy Handler
 	const handleCopy = (index: number) => {
 		// TODO: Update fields ⬇️
+		const field = form.watch('employees')[index];
 		append({
-			name: fields[index].name,
-			email: fields[index].email,
-			phone: fields[index].phone,
-			designation: fields[index].designation,
-			department: fields[index].department,
+			name: field.name,
+			email: field.email,
+			phone: field.phone,
+			designation: field.designation,
+			department: field.department,
 		});
 	};
 

@@ -25,7 +25,8 @@ type FieldCustom = {
 };
 
 type FieldText = {
-	type: 'text';
+	type: 'input';
+	inputType?: 'text' | 'number';
 	placeholder?: string;
 };
 type FieldNumber = {
@@ -169,12 +170,15 @@ const FormDynamicFields = ({
 												/>
 											)}
 
-											{fieldDef.type === 'text' && (
+											{fieldDef.type === 'input' && (
 												<FormField
 													control={form.control}
 													name={`${fieldName}.${fieldIndex}.${fieldDef.accessorKey}`}
 													render={(props) => (
 														<CoreForm.Input
+															type={
+																fieldDef.inputType
+															}
 															disableLabel
 															{...props}
 														/>

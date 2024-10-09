@@ -47,17 +47,17 @@ const useGenerateFieldDefs = ({
 		{
 			header: 'Name',
 			accessorKey: 'name',
-			type: 'text',
+			type: 'input',
 		},
 		{
 			header: 'Email',
 			accessorKey: 'email',
-			type: 'text',
+			type: 'input',
 		},
 		{
 			header: 'Phone',
 			accessorKey: 'phone',
-			type: 'text',
+			type: 'input',
 		},
 		{
 			header: 'Designation',

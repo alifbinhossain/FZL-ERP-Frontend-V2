@@ -11,8 +11,7 @@ import {
 export const TEST_SCHEMA = z.object({
 	email: STRING_REQUIRED,
 });
-export const TEST_NULL = {
-	uuid: null,
+export const TEST_NULL: Partial<ITest> = {
 	email: 'alif@example.com',
 };
 export type ITest = z.infer<typeof TEST_SCHEMA>;
@@ -58,7 +57,7 @@ export const TEST_STOCK_SCHEMA = (
 		remarks: STRING_NULLABLE,
 	});
 
-export const TEST_STOCK_NULL = {
+export const TEST_STOCK_NULL: Partial<ITestStock> = {
 	trx_to: '',
 	trx_quantity: 0,
 	remarks: '',
@@ -81,7 +80,7 @@ export const TEST_TRX_AGAINST_ORDER_SCHEMA = (
 		remarks: STRING_NULLABLE,
 	});
 
-export const TEST_TRX_AGAINST_ORDER_NULL = {
+export const TEST_TRX_AGAINST_ORDER_NULL: Partial<ITestTrxAgainstOrder> = {
 	order_description_uuid: '',
 	trx_to: '',
 	trx_quantity: 0,

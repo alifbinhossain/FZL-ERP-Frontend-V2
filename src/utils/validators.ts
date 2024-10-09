@@ -78,6 +78,7 @@ export const NUMBER = (message = 'Required') =>
 		.nonnegative();
 export const NUMBER_REQUIRED = NUMBER('Required');
 export const NUMBER_OPTIONAL = NUMBER().optional();
+export const NUMBER_NULLABLE = NUMBER().nullable();
 
 // NUMBER (double)
 export const NUMBER_DOUBLE = (message = 'Required') =>

@@ -15,7 +15,7 @@ export const DEPARTMENT_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const DEPARTMENT_NULL = {
+export const DEPARTMENT_NULL: Partial<IDepartment> = {
 	department: '',
 	remarks: null,
 };
@@ -28,7 +28,7 @@ export const DESIGNATION_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const DESIGNATION_NULL = {
+export const DESIGNATION_NULL: Partial<IDesignation> = {
 	designation: '',
 	remarks: null,
 };
@@ -65,7 +65,7 @@ export const USER_SCHEMA = (isUpdate: boolean) => {
 		});
 };
 
-export const USER_NULL = {
+export const USER_NULL: Partial<IUser> = {
 	name: '',
 	email: '',
 	department_uuid: '',
@@ -88,7 +88,7 @@ export const RESET_PASSWORD_SCHEMA = z
 		path: ['repeatPass'],
 	});
 
-export const RESET_PASSWORD_NULL = {
+export const RESET_PASSWORD_NULL: Partial<IResetPasswordSchema> = {
 	pass: '',
 	repeatPass: '',
 };
