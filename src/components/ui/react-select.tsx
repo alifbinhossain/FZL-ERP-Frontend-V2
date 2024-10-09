@@ -39,7 +39,7 @@ const classNames: ClassNamesConfig = {
 		'bg-base overflow-hidden  rounded shadow-2xl text-sm border border-input p-1',
 	option: ({ isFocused, isSelected }) =>
 		cn(
-			'text-base-foreground rounded px-2 py-1.5 text-sm',
+			'rounded px-3 py-1.5 text-sm text-foreground',
 			isFocused && 'bg-base-200',
 			isSelected && 'before:mr-1 before:content-["✔"]'
 		),
@@ -81,7 +81,7 @@ const ReactSelect: React.FC<Props> = ({
 					<components.DropdownIndicator {...props}>
 						<ChevronDown
 							className={cn(
-								'size-5 transform text-primary transition-transform duration-300',
+								'size-5 transform text-secondary/50 transition-transform duration-300',
 								props.selectProps.menuIsOpen && 'rotate-90'
 							)}
 						/>

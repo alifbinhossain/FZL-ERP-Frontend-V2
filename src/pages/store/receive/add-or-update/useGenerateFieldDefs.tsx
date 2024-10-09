@@ -34,12 +34,6 @@ const useGenerateFieldDefs = ({
 		{
 			header: 'Quantity',
 			accessorKey: 'quantity',
-			type: 'number',
-			className: 'min-w-[100px]',
-		},
-		{
-			header: 'Price',
-			accessorKey: 'price',
 			type: 'join-input-unit',
 			unit: (index: number) =>
 				material?.find(
@@ -47,13 +41,19 @@ const useGenerateFieldDefs = ({
 						item.value.toString() ===
 						watch?.(`purchase.${index}.material_uuid`)
 				)?.unit || '',
+			className: 'min-w-[100px]',
+		},
+		{
+			header: 'Price',
+			accessorKey: 'price',
+			type: 'input',
 			inputType: 'number',
 			className: 'min-w-[100px]',
 		},
 		{
 			header: 'Remarks',
 			accessorKey: 'remarks',
-			type: 'text',
+			type: 'input',
 			className: 'min-w-[200px]',
 		},
 		{

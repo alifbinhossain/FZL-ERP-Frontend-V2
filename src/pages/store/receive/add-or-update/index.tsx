@@ -41,10 +41,6 @@ const AddOrUpdate = () => {
 		name: 'purchase',
 	});
 
-	console.log({
-		errors: form.formState.errors,
-	});
-
 	useEffect(() => {
 		if (isUpdate && data) {
 			form.reset(data);
@@ -203,13 +199,16 @@ const AddOrUpdate = () => {
 
 	// Copy Handler
 	const handleCopy = (index: number) => {
+		const field = form.watch('purchase')[index];
 		append({
-			material_uuid: fields[index].material_uuid,
-			remarks: fields[index].remarks,
-			quantity: fields[index].quantity,
-			price: fields[index].price,
+			material_uuid: field.material_uuid,
+			remarks: field.remarks,
+			quantity: field.quantity,
+			price: field.price,
 		});
 	};
+
+	// return <Test />;
 
 	return (
 		<CoreForm.AddEditWrapper

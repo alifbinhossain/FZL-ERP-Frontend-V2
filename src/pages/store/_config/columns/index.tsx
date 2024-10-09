@@ -52,7 +52,7 @@ export const typeColumns = (): ColumnDef<ITypeTableData>[] => [
 	{
 		accessorKey: 'short_name',
 		header: 'Short Name',
-		enableColumnFilter: false,
+		// enableColumnFilter: false,
 		cell: (info) => info.getValue(),
 	},
 ];
@@ -62,13 +62,13 @@ export const sectionColumns = (): ColumnDef<ISectionTableData>[] => [
 	{
 		accessorKey: 'name',
 		header: 'Name',
-		enableColumnFilter: false,
+		// enableColumnFilter: false,
 		cell: (info) => info.getValue(),
 	},
 	{
 		accessorKey: 'short_name',
 		header: 'Short Name',
-		enableColumnFilter: false,
+		// enableColumnFilter: false,
 		cell: (info) => info.getValue(),
 	},
 ];

@@ -92,8 +92,7 @@ export const SECTION_SCHEMA = z.object({
 	short_name: STRING_NULLABLE,
 	remarks: STRING_NULLABLE,
 });
-export const SECTION_NULL = {
-	uuid: null,
+export const SECTION_NULL: Partial<ISection> = {
 	name: '',
 	short_name: '',
 	remarks: '',
@@ -110,8 +109,7 @@ export const VENDOR_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const VENDOR_NULL = {
-	uuid: null,
+export const VENDOR_NULL: Partial<IVendor> = {
 	name: '',
 	contact_number: '',
 	email: '',
@@ -144,7 +142,7 @@ export const RECEIVE_SCHEMA = z
 		path: ['challan_number'],
 	});
 
-export const RECEIVE_NULL = {
+export const RECEIVE_NULL: Partial<IReceive> = {
 	is_local: 1,
 	challan_number: null,
 	lc_number: null,
