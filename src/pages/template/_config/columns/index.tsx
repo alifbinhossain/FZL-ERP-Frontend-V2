@@ -47,11 +47,8 @@ export function test2Columns({
 		},
 
 		{
-			accessorKey: 'action_trx',
 			id: 'action_trx',
 			header: 'Test Trx', // TODO: Update header name
-			enableColumnFilter: false,
-			enableSorting: false,
 			cell: (info) => (
 				<Transfer onClick={() => handleAgainstTrx(info.row)} />
 			),
@@ -62,11 +59,8 @@ export function test2Columns({
 		},
 
 		{
-			accessorKey: 'action_trx_against_order',
 			id: 'action_trx_against_order',
 			header: 'Trx Against Order',
-			enableColumnFilter: false,
-			enableSorting: false,
 			cell: (info) => (
 				<Transfer onClick={() => handleAgainstOrder(info.row)} />
 			),
