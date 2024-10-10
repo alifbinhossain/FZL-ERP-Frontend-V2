@@ -2,7 +2,7 @@ import { IResponse } from '@/types';
 import { getDateTime } from '@/utils';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { useRHF } from '@/hooks';
+import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
 import { AddModal } from '@/components/core/modal';

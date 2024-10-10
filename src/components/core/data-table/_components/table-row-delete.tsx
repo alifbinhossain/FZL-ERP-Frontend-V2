@@ -1,5 +1,5 @@
 import { Trash2 } from 'lucide-react';
-import { useTable } from '@/hooks';
+import useTable from '@/hooks/useTable';
 
 import { Button } from '@/components/ui/button';
 

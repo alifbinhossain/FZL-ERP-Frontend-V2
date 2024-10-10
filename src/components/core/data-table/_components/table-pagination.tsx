@@ -4,7 +4,7 @@ import {
 	DoubleArrowLeftIcon,
 	DoubleArrowRightIcon,
 } from '@radix-ui/react-icons';
-import { useTable } from '@/hooks';
+import useTable from '@/hooks/useTable';
 
 import { Button } from '@/components/ui/button';
 import {

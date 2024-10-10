@@ -2,7 +2,8 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { getDateTime } from '@/utils';
 import { useFieldArray } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAuth, useRHF } from '@/hooks';
+import useAuth from '@/hooks/useAuth';
+import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
 

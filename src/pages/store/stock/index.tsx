@@ -2,7 +2,7 @@ import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
 import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
-import { useAccess } from '@/hooks';
+import useAccess from '@/hooks/useAccess';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 

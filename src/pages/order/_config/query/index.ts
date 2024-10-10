@@ -1,4 +1,5 @@
-import { useTQuery } from '@/hooks';
+import useTQuery from '@/hooks/useTQuery';
+
 import { orderQK } from './queryKeys';
 
 // Details

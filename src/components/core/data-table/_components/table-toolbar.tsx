@@ -2,7 +2,8 @@ import React, { useCallback } from 'react';
 import { IToolbarOptions } from '@/types';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { CirclePlus, SearchIcon } from 'lucide-react';
-import { usePage, useTable } from '@/hooks';
+import usePage from '@/hooks/usePage';
+import useTable from '@/hooks/useTable';
 
 import { Button } from '@/components/ui/button';
 import DebouncedInput from '@/components/ui/debounce-input';

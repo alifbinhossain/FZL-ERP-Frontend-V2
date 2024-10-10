@@ -1,7 +1,7 @@
 import { createContext, useMemo, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '@/hooks';
+import useAuth from '@/hooks/useAuth';
 
 interface ILayoutContext {
 	isCollapsed: boolean;

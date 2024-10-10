@@ -7,7 +7,7 @@ import { BaseEditorComponent, HotColumn, HotTable } from '@handsontable/react';
 import { DevTool } from '@hookform/devtools';
 import { registerAllModules } from 'handsontable/registry';
 import { useFieldArray } from 'react-hook-form';
-import { useRHF } from '@/hooks';
+import useRHF from '@/hooks/useRHF';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';

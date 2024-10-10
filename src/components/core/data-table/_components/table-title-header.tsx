@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { SearchIcon } from 'lucide-react';
-import { useTable } from '@/hooks';
+import useTable from '@/hooks/useTable';
 
 import DebouncedInput from '@/components/ui/debounce-input';
 

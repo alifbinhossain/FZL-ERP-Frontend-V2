@@ -7,7 +7,8 @@ import {
 } from 'react';
 import { IAuthResponse, IUser } from '@/types';
 import { toast } from 'sonner';
-import { useCookie, useLocalStorage } from '@/hooks';
+import useCookie from '@/hooks/useCookie';
+import { useLocalStorage } from '@/hooks/useStorage';
 
 import { ILoginData } from '@/components/auth/login/login-schema';
 

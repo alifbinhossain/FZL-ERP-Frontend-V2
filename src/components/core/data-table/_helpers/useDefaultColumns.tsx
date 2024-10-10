@@ -1,5 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { usePage } from '@/hooks';
+import usePage from '@/hooks/usePage';
 
 import DateTime from '@/components/ui/date-time';
 

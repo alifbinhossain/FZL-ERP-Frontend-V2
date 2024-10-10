@@ -2,7 +2,7 @@ import { IRoute } from '@/types';
 import { matchUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
-import { useLayout } from '@/hooks';
+import useLayout from '@/hooks/useLayout';
 
 import { cn } from '@/lib/utils';
 

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { CopyMinus, X } from 'lucide-react';
-import { useLayout, useSidebar } from '@/hooks';
+import useLayout from '@/hooks/useLayout';
+import useSidebar from '@/hooks/useSidebar';
 
 import BrandLogo from '@/components/brand-logo';
 import TooltipWrapper from '@/components/tooltip-wrapper';
