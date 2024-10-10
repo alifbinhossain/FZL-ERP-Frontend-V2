@@ -1,5 +1,6 @@
-import { FORTUNE_ZIP_EMAIL_PATTERN, PASSWORD } from '@/utils/validators';
 import { z } from 'zod';
+
+import { FORTUNE_ZIP_EMAIL_PATTERN, PASSWORD } from '@/utils/validators';
 
 export const LOGIN_SCHEMA = z.object({
 	email: FORTUNE_ZIP_EMAIL_PATTERN,

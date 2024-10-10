@@ -20,7 +20,7 @@ interface IAuthContext {
 	user: IUser | null;
 	canAccess: { [key: string]: string } | null;
 	loading: boolean;
-	login: (data: ILoginData) => void;
+	login: (data: ILoginData) => Promise<void>;
 	logout: () => void;
 }
 

@@ -8,7 +8,7 @@ import {
 	STRING_REQUIRED,
 } from '@/utils/validators';
 
-// Material Order Against Edit Schema
+// RM Material Order Against Edit Schema
 export const RM_MATERIAL_ORDER_AGAINST_EDIT_SCHEMA = z.object({
 	trx_quantity: NUMBER_DOUBLE_REQUIRED,
 	remarks: STRING_NULLABLE,
@@ -23,7 +23,7 @@ export type IRMMaterialOrderAgainstEdit = z.infer<
 	typeof RM_MATERIAL_ORDER_AGAINST_EDIT_SCHEMA
 >;
 
-// Material Used Edit Schema
+// RM Material Used Edit Schema
 export const RM_MATERIAL_USED_EDIT_SCHEMA = z.object({
 	used_quantity: NUMBER_DOUBLE_REQUIRED,
 	wastage: NUMBER_DOUBLE_NULLABLE,
@@ -37,7 +37,7 @@ export const RM_MATERIAL_USED_EDIT_NULL: Partial<IRMMaterialUsedEdit> = {
 
 export type IRMMaterialUsedEdit = z.infer<typeof RM_MATERIAL_USED_EDIT_SCHEMA>;
 
-// Material Used Schema
+// RM Material Used Schema
 export const RM_MATERIAL_USED_SCHEMA = z.object({
 	remaining: NUMBER_DOUBLE_REQUIRED,
 	wastage: NUMBER_DOUBLE_NULLABLE,
@@ -82,3 +82,67 @@ export const SFG_PRODUCTION_LOG_NULL: Partial<ISFGProductionLog> = {
 };
 
 export type ISFGProductionLog = z.infer<typeof SFG_PRODUCTION_LOG_SCHEMA>;
+
+// SFG Production in KG Schema
+export const SFG_PRODUCTION_SCHEMA_IN_KG = z.object({
+	production_quantity_in_kg: NUMBER_DOUBLE_REQUIRED.gt(0, 'More Than 0'),
+	// wastage: NUMBER_DOUBLE.min(0, 'Minimum of 0')
+	// 	.nullable()
+	// 	.transform((value, originalValue) =>
+	// 		String(originalValue).trim() === '' ? 0 : value
+	// 	),
+	wastage: NUMBER_DOUBLE_REQUIRED, // TODO: Fix this
+	remarks: STRING_NULLABLE,
+});
+
+export const SFG_PRODUCTION_SCHEMA_IN_KG_NULL: Partial<ISFGProductionSchemaInKg> =
+	{
+		remarks: null,
+	};
+
+export type ISFGProductionSchemaInKg = z.infer<
+	typeof SFG_PRODUCTION_SCHEMA_IN_KG
+>;
+
+// SFG Production in PCS Schema
+export const SFG_PRODUCTION_SCHEMA_IN_PCS = z.object({
+	production_quantity: NUMBER_REQUIRED.gt(0, 'More Than 0'),
+	// wastage: NUMBER_DOUBLE.min(0, 'Minimum of 0')
+	// 	.nullable()
+	// 	.transform((value, originalValue) =>
+	// 		String(originalValue).trim() === '' ? 0 : value
+	// 	),
+	wastage: NUMBER_DOUBLE_REQUIRED, // TODO: Fix this
+	remarks: STRING_NULLABLE,
+});
+
+export const SFG_PRODUCTION_SCHEMA_IN_PCS_NULL: Partial<ISFGProductionSchemaInPcs> =
+	{};
+
+export type ISFGProductionSchemaInPcs = z.infer<
+	typeof SFG_PRODUCTION_SCHEMA_IN_PCS
+>;
+
+// SFG Production Schema
+export const SFG_PRODUCTION_SCHEMA = z
+	.object({})
+	.and(SFG_PRODUCTION_SCHEMA_IN_KG)
+	.and(SFG_PRODUCTION_SCHEMA_IN_PCS);
+
+export const SFG_PRODUCTION_NULL: Partial<ISFGProduction> = {
+	remarks: null,
+};
+
+export type ISFGProduction = z.infer<typeof SFG_PRODUCTION_SCHEMA>;
+
+// SFG Transfer Log Schema
+export const SFG_TRX_SCHEMA = z.object({
+	trx_quantity: NUMBER_DOUBLE_REQUIRED.gt(0),
+	remarks: STRING_NULLABLE,
+});
+
+export const SFG_TRX_NULL: Partial<ISFGTrx> = {
+	remarks: null,
+};
+
+export type ISFGTrx = z.infer<typeof SFG_TRX_SCHEMA>;
