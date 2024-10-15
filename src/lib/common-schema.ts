@@ -146,3 +146,45 @@ export const SFG_TRX_NULL: Partial<ISFGTrx> = {
 };
 
 export type ISFGTrx = z.infer<typeof SFG_TRX_SCHEMA>;
+
+// SFG Transaction Schema in KG
+export const SFG_TRANSACTION_SCHEMA_IN_KG = z.object({
+	trx_quantity_in_kg: NUMBER_REQUIRED,
+	remarks: STRING_NULLABLE,
+});
+
+export const SFG_TRANSACTION_SCHEMA_IN_KG_NULL: Partial<ISFGTransactionSchemaInKg> =
+	{
+		remarks: null,
+	};
+
+export type ISFGTransactionSchemaInKg = z.infer<
+	typeof SFG_TRANSACTION_SCHEMA_IN_KG
+>;
+
+// SFG Transaction Schema in PCS
+export const SFG_TRANSACTION_SCHEMA_IN_PCS = z.object({
+	trx_quantity: NUMBER_REQUIRED.gt(0, 'More Than 0'),
+	remarks: STRING_NULLABLE,
+});
+
+export const SFG_TRANSACTION_SCHEMA_IN_PCS_NULL: Partial<ISFGTransactionSchemaInPcs> =
+	{
+		remarks: null,
+	};
+
+export type ISFGTransactionSchemaInPcs = z.infer<
+	typeof SFG_TRANSACTION_SCHEMA_IN_PCS
+>;
+
+// SFG Transaction Schema
+export const SFG_TRANSACTION_SCHEMA = z
+	.object({})
+	.and(SFG_TRANSACTION_SCHEMA_IN_KG)
+	.and(SFG_TRANSACTION_SCHEMA_IN_PCS);
+
+export const SFG_TRANSACTION_SCHEMA_NULL: Partial<ISFGTransactionSchema> = {
+	remarks: null,
+};
+
+export type ISFGTransactionSchema = z.infer<typeof SFG_TRANSACTION_SCHEMA>;
