@@ -98,7 +98,7 @@ function TableProvider<TData, TValue>({
 	columns,
 	data,
 	isLoading,
-	enableRowSelection = true,
+	enableRowSelection = false,
 	enableDefaultColumns = true,
 	handleCreate,
 	handleUpdate,

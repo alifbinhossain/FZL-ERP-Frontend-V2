@@ -15,6 +15,7 @@ import {
 } from '../../_config/query';
 import { IReceive, RECEIVE_NULL, RECEIVE_SCHEMA } from '../../_config/schema';
 import Header from './header';
+import Test from './test';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
@@ -209,7 +210,7 @@ const AddOrUpdate = () => {
 		});
 	};
 
-	// return <Test />;
+	return <Test />;
 
 	return (
 		<CoreForm.AddEditWrapper
@@ -229,6 +230,8 @@ const AddOrUpdate = () => {
 				handleAdd={handleAdd}
 				fields={fields}
 			/>
+
+			<Test />
 
 			<Suspense fallback={null}>
 				<DeleteModal
