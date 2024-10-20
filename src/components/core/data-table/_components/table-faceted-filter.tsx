@@ -40,6 +40,10 @@ export function TableFacetedFilter<TData, TValue>({
 	const facets = column?.getFacetedUniqueValues();
 	const selectedValues = new Set(column?.getFilterValue() as string[]);
 
+	console.log({
+		selectedValues,
+	});
+
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
@@ -112,6 +116,7 @@ export function TableFacetedFilter<TData, TValue>({
 											}
 											const filterValues =
 												Array.from(selectedValues);
+
 											column?.setFilterValue(
 												filterValues.length
 													? filterValues

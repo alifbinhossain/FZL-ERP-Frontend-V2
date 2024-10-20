@@ -11,12 +11,12 @@ import { Plus } from 'lucide-react';
 import { useFieldArray } from 'react-hook-form';
 import useRHF from '@/hooks/useRHF';
 
-import CoreForm from '@/components/core/form';
 import { IFormSelectOption } from '@/components/core/form/form-select';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import ReactSelect from '@/components/ui/react-select';
 
+import { cn } from '@/lib/utils';
 import { STRING_REQUIRED } from '@/utils/validators';
 
 registerAllModules();
@@ -50,20 +50,29 @@ interface ITestProps {
 	extraButtons?: React.ReactNode[];
 }
 
-// an editor component
-class EditorComponent extends BaseEditorComponent {
-	mainElementRef: RefObject<HTMLDivElement>;
+interface IProps {
+	options: IFormSelectOption[];
+}
 
-	constructor(props: BaseEditorComponent['props']) {
+// an editor component
+class EditorComponent extends BaseEditorComponent<IProps> {
+	mainElementRef: RefObject<HTMLDivElement>;
+	options: IFormSelectOption[];
+
+	constructor(props: BaseEditorComponent<IProps>['props']) {
 		super(props);
 
 		this.mainElementRef = createRef();
 		this.state = {
 			value: '',
 		};
+		this.options = this.props.options;
 	}
 
 	setValue(value: any, callback: (() => void) | undefined) {
+		console.log({
+			element: this?.props?.emitEditorInstance,
+		});
 		this.setState((_state, _props) => {
 			return { value };
 		}, callback);
@@ -109,28 +118,9 @@ class EditorComponent extends BaseEditorComponent {
 		this.mainElementRef.current.style.top = `${
 			tdPosition.top + window.pageYOffset
 		}px`;
-	}
 
-	setLowerCase() {
-		this.setState(
-			(state, props) => {
-				return { value: this.state.value.toString().toLowerCase() };
-			},
-			() => {
-				this.finishEditing();
-			}
-		);
-	}
-
-	setUpperCase() {
-		this.setState(
-			(state, props) => {
-				return { value: this.state.value.toString().toUpperCase() };
-			},
-			() => {
-				this.finishEditing();
-			}
-		);
+		this.mainElementRef.current.style.width = `${tdPosition.width}px`;
+		this.mainElementRef.current.style.height = `${tdPosition.height}px`;
 	}
 
 	stopMousedownPropagation(e: MouseEvent) {
@@ -143,11 +133,8 @@ class EditorComponent extends BaseEditorComponent {
 				style={{
 					display: 'none',
 					position: 'absolute',
-					left: 0,
-					top: 0,
-					width: 'fit-content',
-					minWidth: '200px',
-					// width: this.mainElementRef.current?.offsetWidth,
+					// width: 'fit-content',
+					// minWidth: '200px',
 					background: '#fff',
 					border: '1px solid #000',
 					padding: '4px',
@@ -157,17 +144,10 @@ class EditorComponent extends BaseEditorComponent {
 				onMouseDown={this.stopMousedownPropagation as any}
 				id='editorElement'>
 				<ReactSelect
-					value={this.state.value}
-					options={[
-						{
-							value: 'hello',
-							label: 'Hello',
-						},
-						{
-							value: 'world',
-							label: 'World',
-						},
-					]}
+					value={this.options.find(
+						(option) => option.value === this.state.value
+					)}
+					options={this.options}
 					onChange={(value: any) => {
 						this.setValue(value?.value, () => {
 							this.finishEditing();
@@ -176,31 +156,43 @@ class EditorComponent extends BaseEditorComponent {
 				/>
 			</div>
 		);
-		return (
-			<div
-				style={{
-					display: 'none',
-					position: 'absolute',
-					left: 0,
-					top: 0,
-					background: '#fff',
-					border: '1px solid #000',
-					padding: '15px',
-					zIndex: 999,
-				}}
-				ref={this.mainElementRef}
-				onMouseDown={this.stopMousedownPropagation as any}
-				id='editorElement'>
-				<button onClick={this.setLowerCase.bind(this)}>
-					{this.state.value.toLowerCase()}
-				</button>
-				<button onClick={this.setUpperCase.bind(this)}>
-					{this.state.value.toUpperCase()}
-				</button>
-			</div>
-		);
 	}
 }
+
+type RendererProps = {
+	TD?: HTMLTableCellElement;
+	value?: string | number;
+	row?: number;
+	col?: number;
+	cellProperties?: Handsontable.CellProperties;
+};
+
+const RendererComponent = (props: RendererProps) => {
+	// the available renderer-related props are:
+	// - `row` (row index)
+	// - `col` (column index)
+	// - `prop` (column property name)
+	// - `TD` (the HTML cell element)
+	// - `cellProperties` (the `cellProperties` object for the edited cell)
+
+	return (
+		<div className='p-2'>
+			<ReactSelect
+			// classNames={{
+			// 	control: (base) => cn(base),
+			// }}
+			/>
+		</div>
+	);
+	return (
+		<>
+			<i style={{ color: '#a9a9a9' }}>
+				Row: {props.row}, column: {props.col},
+			</i>{' '}
+			value: {props.value}
+		</>
+	);
+};
 
 const Test: React.FC<ITestProps> = ({ title, extraButtons }) => {
 	const form = useRHF(TEST_SCHEMA, TEST_NULL);
@@ -301,7 +293,17 @@ const Test: React.FC<ITestProps> = ({ title, extraButtons }) => {
 					>
 						{Object.keys(data[0]).map((key) => (
 							<HotColumn key={key} data={key}>
-								<EditorComponent hot-editor />
+								<EditorComponent
+									hot-editor
+									options={[
+										{
+											label: 'Name',
+											value: 'name',
+										},
+									]}
+								/>
+
+								<RendererComponent hot-renderer />
 							</HotColumn>
 						))}
 					</HotTable>

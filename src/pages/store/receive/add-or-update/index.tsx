@@ -210,7 +210,7 @@ const AddOrUpdate = () => {
 		});
 	};
 
-	return <Test />;
+	// return <Test />;
 
 	return (
 		<CoreForm.AddEditWrapper
@@ -230,8 +230,6 @@ const AddOrUpdate = () => {
 				handleAdd={handleAdd}
 				fields={fields}
 			/>
-
-			<Test />
 
 			<Suspense fallback={null}>
 				<DeleteModal
