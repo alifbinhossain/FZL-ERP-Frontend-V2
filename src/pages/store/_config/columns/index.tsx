@@ -28,6 +28,7 @@ export const vendorColumns = (): ColumnDef<IVendorTableData>[] => [
 		accessorKey: 'contact_number',
 		header: 'Phone',
 		cell: (info) => info.getValue(),
+		enableColumnFilter: false,
 	},
 	{
 		accessorKey: 'email',
@@ -127,6 +128,7 @@ export function stockColumns({
 			size: 40,
 			meta: {
 				hidden: !actionTrxAccess,
+				disableFullFilter: true,
 			},
 		},
 
@@ -139,6 +141,7 @@ export function stockColumns({
 			size: 40,
 			meta: {
 				hidden: !actionTrxAgainstOrderAccess,
+				disableFullFilter: true,
 			},
 		},
 		{

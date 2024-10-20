@@ -55,6 +55,7 @@ export function test2Columns({
 			size: 40,
 			meta: {
 				hidden: !actionTrxAccess,
+				disableFullFilter: true, // NOTE:Always disable full filter when its action
 			},
 		},
 
@@ -67,6 +68,7 @@ export function test2Columns({
 			size: 40,
 			meta: {
 				hidden: !actionTrxAgainstOrderAccess,
+				disableFullFilter: true, // NOTE:Always disable full filter when its action
 			},
 		},
 		{

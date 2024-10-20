@@ -33,6 +33,7 @@ declare module '@tanstack/react-table' {
 	interface ColumnMeta<TData extends RowData, TValue> {
 		filterVariant?: 'text' | 'range' | 'select' | 'dateRange';
 		hidden?: boolean;
+		disableFullFilter?: boolean;
 	}
 
 	//add fuzzy filter to the filterFns

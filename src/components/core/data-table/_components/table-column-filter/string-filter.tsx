@@ -23,7 +23,8 @@ function StringFilter<TData, TValue>({
 		<div className='flex flex-col gap-1'>
 			{showLabel && (
 				<label className='text-sm font-medium capitalize'>
-					{column.id?.split('_').join(' ')}
+					{column.columnDef.header?.toString() ||
+						column.id?.split('_').join(' ')}
 				</label>
 			)}
 			<datalist id={column.id + 'list'}>

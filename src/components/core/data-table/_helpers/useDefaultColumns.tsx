@@ -50,6 +50,7 @@ const useDefaultColumns = <TData, TValue>(): ColumnDef<TData, TValue>[] => {
 			size: 60,
 			meta: {
 				hidden: !updateAccess && !deleteAccess,
+				disableFullFilter: true,
 			},
 		},
 	];
