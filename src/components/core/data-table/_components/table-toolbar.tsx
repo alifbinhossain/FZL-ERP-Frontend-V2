@@ -2,7 +2,8 @@ import React, { useCallback } from 'react';
 import { IToolbarOptions } from '@/types';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { CirclePlus, SearchIcon } from 'lucide-react';
-import { usePage, useTable } from '@/hooks';
+import usePage from '@/hooks/usePage';
+import useTable from '@/hooks/useTable';
 
 import { Button } from '@/components/ui/button';
 import DebouncedInput from '@/components/ui/debounce-input';
@@ -116,11 +117,11 @@ export function TableToolbar() {
 				{isFiltered && (
 					<Button
 						aria-label='Reset filters'
-						variant='ghost-destructive'
+						variant='outline-destructive'
 						onClick={resetColumnFilters}
 						className='h-8'>
 						Reset
-						<Cross2Icon className='ml-2 size-4' />
+						<Cross2Icon className='size-4' />
 					</Button>
 				)}
 				<Separator orientation='vertical' className='h-6' />

@@ -2,7 +2,8 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { getDateTime } from '@/utils';
 import { useFieldArray } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAuth, useRHF } from '@/hooks';
+import useAuth from '@/hooks/useAuth';
+import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
 
@@ -14,6 +15,7 @@ import {
 } from '../../_config/query';
 import { IReceive, RECEIVE_NULL, RECEIVE_SCHEMA } from '../../_config/schema';
 import Header from './header';
+import Test from './test';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));

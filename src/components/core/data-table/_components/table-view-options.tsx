@@ -23,7 +23,7 @@ export function TableViewOptions<TData>({
 			<DropdownMenuTrigger asChild>
 				<Button
 					aria-label='View Options'
-					variant='outline'
+					variant='gradient'
 					size='sm'
 					className='hidden lg:flex'>
 					<Columns2 className='size-4' />

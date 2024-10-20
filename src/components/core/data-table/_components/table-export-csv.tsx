@@ -2,7 +2,7 @@ import { getFlatHeader } from '@/utils';
 import { format } from 'date-fns';
 import { FileSpreadsheet } from 'lucide-react';
 import { CSVLink } from 'react-csv';
-import { useTable } from '@/hooks';
+import useTable from '@/hooks/useTable';
 
 import { buttonVariants } from '@/components/ui/button';
 

@@ -1,6 +1,7 @@
 import { CellContext } from '@tanstack/react-table';
 import { SquarePen, Trash2 } from 'lucide-react';
-import { usePage, useTable } from '@/hooks';
+import usePage from '@/hooks/usePage';
+import useTable from '@/hooks/useTable';
 
 import { Button } from '@/components/ui/button';
 

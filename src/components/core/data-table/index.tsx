@@ -1,5 +1,5 @@
 import { flexRender } from '@tanstack/react-table';
-import { useTable } from '@/hooks';
+import useTable from '@/hooks/useTable';
 
 import {
 	TableBody,
@@ -26,7 +26,7 @@ function DataTable() {
 			{isOnlyTitle === true ? <TableTitleHeader /> : <TableToolbar />}
 			<div
 				className={cn(
-					'mb-4 overflow-hidden border border-secondary/10',
+					'overflow-hidden border border-secondary/10',
 					isOnlyTitle ? 'rounded-b-md' : 'rounded-md'
 				)}>
 				<TableComponent>
@@ -106,8 +106,9 @@ function DataTable() {
 						)}
 					</TableBody>
 				</TableComponent>
+
+				<TablePagination />
 			</div>
-			<TablePagination />
 		</div>
 	);
 }

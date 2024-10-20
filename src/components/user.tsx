@@ -1,5 +1,5 @@
 import { useNetworkState } from '@uidotdev/usehooks';
-import { useAuth } from '@/hooks';
+import useAuth from '@/hooks/useAuth';
 
 import { cn } from '@/lib/utils';
 

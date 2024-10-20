@@ -1,4 +1,4 @@
-import { useTable } from '@/hooks';
+import useTable from '@/hooks/useTable';
 
 import { DateRangePicker } from '@/components/ui/date-range-picker';
 

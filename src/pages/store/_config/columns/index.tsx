@@ -28,6 +28,7 @@ export const vendorColumns = (): ColumnDef<IVendorTableData>[] => [
 		accessorKey: 'contact_number',
 		header: 'Phone',
 		cell: (info) => info.getValue(),
+		enableColumnFilter: false,
 	},
 	{
 		accessorKey: 'email',
@@ -120,31 +121,27 @@ export function stockColumns({
 
 		{
 			id: 'action_trx',
-			accessorKey: 'action_trx',
 			header: 'Material Trx',
-			enableColumnFilter: false,
-			enableSorting: false,
 			cell: (info) => (
 				<Transfer onClick={() => handleAgainstTrx(info.row)} />
 			),
 			size: 40,
 			meta: {
 				hidden: !actionTrxAccess,
+				disableFullFilter: true,
 			},
 		},
 
 		{
 			id: 'action_trx_against_order',
-			accessorKey: 'action_trx_against_order',
 			header: 'Trx Against Order',
-			enableColumnFilter: false,
-			enableSorting: false,
 			cell: (info) => (
 				<Transfer onClick={() => handleAgainstOrder(info.row)} />
 			),
 			size: 40,
 			meta: {
 				hidden: !actionTrxAgainstOrderAccess,
+				disableFullFilter: true,
 			},
 		},
 		{

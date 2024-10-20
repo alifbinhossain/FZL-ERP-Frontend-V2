@@ -3,7 +3,6 @@ import { cn } from '@/lib/utils';
 interface TableTitleProps {
 	title: string;
 	subtitle?: string;
-	disableSubtitle?: boolean;
 	titleClassName?: string;
 	subtitleClassName?: string;
 }
@@ -11,7 +10,6 @@ interface TableTitleProps {
 const TableTitle: React.FC<TableTitleProps> = ({
 	title,
 	subtitle,
-	disableSubtitle,
 	titleClassName,
 	subtitleClassName,
 }) => {
@@ -25,13 +23,13 @@ const TableTitle: React.FC<TableTitleProps> = ({
 					)}>
 					{title}
 				</h1>
-				{!disableSubtitle && (
+				{subtitle && (
 					<p
 						className={cn(
 							'mt-0.5 text-sm capitalize text-secondary',
 							subtitleClassName
 						)}>
-						{subtitle || 'See all records in one place'}
+						{subtitle}
 					</p>
 				)}
 			</div>

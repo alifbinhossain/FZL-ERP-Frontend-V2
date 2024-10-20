@@ -1,32 +1,31 @@
 import { IRoute } from '@/types';
 import { cloneDeep } from 'lodash';
 
+import CommercialRoutes from './Commercial';
 import { DashboardRoutes } from './Dashboard';
 import HrRoutes from './Hr';
 import StoreRoutes from './Store';
 import TemplateRoutes from './Template';
 
-// import { CommercialRoutes } from './Commercial';
-// import { OrderRoutes } from './Order';
-// import { IssueRoutes } from './Issue';
-// import { CommonRoutes } from './Common';
-// import { MetalRoutes } from './Metal';
-// import { NylonRoutes } from './Nylon';
-// import { VislonRoutes } from './Vislon';
-// import { SliderRoutes } from './Slider';
-// import { LibraryRoutes } from './Library';
-// import { DeliveryRoutes } from './Delivery';
-// import { ThreadRoutes } from './Thread';
-// import { LabDipRoutes } from './LabDip';
-// import { DyeingAndIronRoutes } from './DyeingAndIron';
-// import { IRoute } from '@/types';
+// import  OrderRoutes  from './Order';
+// import  IssueRoutes  from './Issue';
+// import  CommonRoutes  from './Common';
+// import  MetalRoutes  from './Metal';
+// import  NylonRoutes  from './Nylon';
+// import  VislonRoutes  from './Vislon';
+// import  SliderRoutes  from './Slider';
+// import  LibraryRoutes  from './Library';
+// import  DeliveryRoutes  from './Delivery';
+// import  ThreadRoutes  from './Thread';
+// import  LabDipRoutes  from './LabDip';
+// import  DyeingAndIronRoutes  from './DyeingAndIron';
 
 const privateRoutes: IRoute[] = [
 	...DashboardRoutes,
 	// ...OrderRoutes,
 	// ...LabDipRoutes,
 	// ...ThreadRoutes,
-	// ...CommercialRoutes,
+	...CommercialRoutes,
 	// ...DeliveryRoutes,
 	...StoreRoutes,
 	// ...CommonRoutes,

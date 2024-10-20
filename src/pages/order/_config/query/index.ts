@@ -1,138 +1,156 @@
-import { useTQuery } from '@/hooks';
+import useTQuery from '@/hooks/useTQuery';
+
 import { orderQK } from './queryKeys';
 
-// Details
-export const useOrderDetails = () =>
-	useTQuery({
-		queryKey: orderQK.detail(),
+// * Details * //
+export const useOrderDetails = <T>() =>
+	useTQuery<T>({
+		queryKey: orderQK.details(),
 		url: '/zipper/order/details',
 	});
 
-export const useOrderDetailsByUUID = (uuid: string) =>
-	useTQuery({
-		queryKey: orderQK.detailByUUID(uuid),
+export const useOrderDetailsByQuery = <T>(query: string) =>
+	useTQuery<T>({
+		queryKey: orderQK.detailsByQuery(query),
+		url: `/zipper/order/details${query}`,
+		enabled: !!query,
+	});
+
+export const useOrderDetailsByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
+		queryKey: orderQK.detailsByUUID(uuid),
 		url: `/zipper/order-detail/${uuid}`,
+		enabled: !!uuid,
 	});
 
-export const useOrderDetailsByOrderNumber = (orderNumber: string) =>
-	useTQuery({
-		queryKey: orderQK.detailByOrderNumber(orderNumber),
+export const useOrderDetailsByOrderNumber = <T>(orderNumber: string) =>
+	useTQuery<T>({
+		queryKey: orderQK.detailsByOrderNumber(orderNumber),
 		url: `/zipper/order/details/single-order/by/${orderNumber}`,
+		enabled: !!orderNumber,
 	});
 
-// Description
-export const useOrderDescription = () =>
-	useTQuery({
+// * Description * //
+export const useOrderDescription = <T>() =>
+	useTQuery<T>({
 		queryKey: orderQK.description(),
 		url: '/zipper/order-description',
 	});
 
-export const useOrderDescriptionByUUID = (uuid: string) =>
-	useTQuery({
+export const useOrderDescriptionByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: orderQK.descriptionByUUID(uuid),
 		url: `/zipper/order-description/${uuid}`,
+		enabled: !!uuid,
 	});
 
-// Entry
-export const useOrderEntry = () =>
-	useTQuery({
+// * Entry * //
+export const useOrderEntries = <T>() =>
+	useTQuery<T>({
 		queryKey: orderQK.entry(),
 		url: '/zipper/order-entry',
 	});
 
-export const useOrderEntryByUUID = (uuid: string) =>
-	useTQuery({
+export const useOrderEntriesByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: orderQK.entryByUUID(uuid),
 		url: `/zipper/order-entry/${uuid}`,
+		enabled: !!uuid,
 	});
 
-// Buyer
-export const useOrderBuyer = () =>
-	useTQuery({
+// * Buyer * //
+export const useOrderBuyer = <T>() =>
+	useTQuery<T>({
 		queryKey: orderQK.buyer(),
 		url: '/public/buyer',
 	});
 
-export const useOrderBuyerByUUID = (uuid: string) =>
-	useTQuery({
+export const useOrderBuyerByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: orderQK.buyerByUUID(uuid),
 		url: `/public/buyer/${uuid}`,
+		enabled: !!uuid,
 	});
 
-// Party
-export const useOrderParty = () =>
-	useTQuery({
+//*Party */
+export const useOrderParty = <T>() =>
+	useTQuery<T>({
 		queryKey: orderQK.party(),
 		url: '/public/party',
 	});
-export const useOrderPartyByUUID = (uuid: string) =>
-	useTQuery({
+export const useOrderPartyByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: orderQK.partyByUUID(uuid),
 		url: `/public/party/${uuid}`,
+		enabled: !!uuid,
 	});
 
-// Marketing
-export const useOrderMarketing = () =>
-	useTQuery({
+// * Marketing * //
+export const useOrderMarketing = <T>() =>
+	useTQuery<T>({
 		queryKey: orderQK.marketing(),
 		url: '/public/marketing',
 	});
 
-export const useOrderMarketingByUUID = (uuid: string) =>
-	useTQuery({
+export const useOrderMarketingByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: orderQK.marketingByUUID(uuid),
 		url: `/public/marketing/${uuid}`,
+		enabled: !!uuid,
 	});
 
-// Factory
-export const useOrderFactory = () =>
-	useTQuery({
+// * Factory * //
+export const useOrderFactory = <T>() =>
+	useTQuery<T>({
 		queryKey: orderQK.factory(),
 		url: '/public/factory',
 	});
 
-export const useOrderFactoryByUUID = (uuid: string) =>
-	useTQuery({
+export const useOrderFactoryByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
 		queryKey: orderQK.factoryByUUID(uuid),
 		url: `/public/factory/${uuid}`,
+		enabled: !!uuid,
 	});
 
-// Merchandiser
-export const useOrderMerchandiser = () =>
-	useTQuery({
+// * Merchandiser * //
+export const useOrderMerchandiser = <T>() =>
+	useTQuery<T>({
 		queryKey: orderQK.merchandiser(),
 		url: '/public/merchandiser',
 	});
 
-export const useOrderMerchandiserByUUID = (uuid: string) => {
-	useTQuery({
+export const useOrderMerchandiserByUUID = <T>(uuid: string) => {
+	useTQuery<T>({
 		queryKey: orderQK.merchandiserByUUID(uuid),
 		url: `/public/merchandiser/${uuid}`,
+		enabled: !!uuid,
 	});
 };
-
-// Property
-export const useOrderProperty = () =>
-	useTQuery({
-		queryKey: orderQK.property(),
+// * Properties * //
+export const useOrderProperties = <T>() =>
+	useTQuery<T>({
+		queryKey: orderQK.properties(),
 		url: '/public/properties',
 	});
-export const useOrderPropertyByUUID = (uuid: string) =>
-	useTQuery({
-		queryKey: orderQK.propertyByUUID(uuid),
+export const useOrderPropertiesByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
+		queryKey: orderQK.propertiesByUUID(uuid),
 		url: `/public/properties/${uuid}`,
+		enabled: !!uuid,
 	});
 
-// Info
-export const useOrderInfo = () =>
-	useTQuery({
+// * Info * //
+export const useOrderInfo = <T>() =>
+	useTQuery<T>({
 		queryKey: orderQK.info(),
 		url: '/zipper/order-info',
 	});
 
-export const useOrderInfoByUUID = (uuid: string) => {
-	useTQuery({
+export const useOrderInfoByUUID = <T>(uuid: string) => {
+	useTQuery<T>({
 		queryKey: orderQK.infoByUUID(uuid),
 		url: `/zipper/order-info/${uuid}`,
+		enabled: !!uuid,
 	});
 };

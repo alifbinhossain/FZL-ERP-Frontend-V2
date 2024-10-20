@@ -47,32 +47,28 @@ export function test2Columns({
 		},
 
 		{
-			accessorKey: 'action_trx',
 			id: 'action_trx',
 			header: 'Test Trx', // TODO: Update header name
-			enableColumnFilter: false,
-			enableSorting: false,
 			cell: (info) => (
 				<Transfer onClick={() => handleAgainstTrx(info.row)} />
 			),
 			size: 40,
 			meta: {
 				hidden: !actionTrxAccess,
+				disableFullFilter: true, // NOTE:Always disable full filter when its action
 			},
 		},
 
 		{
-			accessorKey: 'action_trx_against_order',
 			id: 'action_trx_against_order',
 			header: 'Trx Against Order',
-			enableColumnFilter: false,
-			enableSorting: false,
 			cell: (info) => (
 				<Transfer onClick={() => handleAgainstOrder(info.row)} />
 			),
 			size: 40,
 			meta: {
 				hidden: !actionTrxAgainstOrderAccess,
+				disableFullFilter: true, // NOTE:Always disable full filter when its action
 			},
 		},
 		{

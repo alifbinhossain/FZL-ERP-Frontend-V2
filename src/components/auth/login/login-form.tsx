@@ -1,4 +1,5 @@
-import { useAuth, useRHF } from '@/hooks';
+import useAuth from '@/hooks/useAuth';
+import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
 import { Form, FormField } from '@/components/ui/form';

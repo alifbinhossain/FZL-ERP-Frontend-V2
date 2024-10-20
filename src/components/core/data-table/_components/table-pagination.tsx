@@ -4,7 +4,7 @@ import {
 	DoubleArrowLeftIcon,
 	DoubleArrowRightIcon,
 } from '@radix-ui/react-icons';
-import { useTable } from '@/hooks';
+import useTable from '@/hooks/useTable';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -15,20 +15,20 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 
+import PaginateButtons from '../_helpers/paginate-buttons';
+
 export function TablePagination() {
 	const { table, enableRowSelection } = useTable();
 
 	return (
-		<div className='flex w-full items-center justify-between overflow-hidden px-2'>
+		<div className='flex w-full items-center justify-between overflow-hidden border-t border-secondary/10 px-6 py-3'>
 			{enableRowSelection === true ? (
 				<div className='flex-1 text-sm text-muted-foreground'>
 					{table.getFilteredSelectedRowModel().rows.length} of{' '}
 					{table.getFilteredRowModel().rows.length} row(s) selected.
 				</div>
-			) : (
-				<div></div>
-			)}
-			<div className='flex items-center space-x-6 lg:space-x-8'>
+			) : null}
+			<div className='flex flex-1 items-center justify-between space-x-6 lg:space-x-8'>
 				<div className='flex items-center space-x-2'>
 					<p className='text-sm font-medium'>Rows per page</p>
 					<Select
@@ -56,10 +56,19 @@ export function TablePagination() {
 						</SelectContent>
 					</Select>
 				</div>
-				<div className='flex w-[100px] items-center justify-center text-sm font-medium'>
+
+				<PaginateButtons
+					onChange={(index) => {
+						table.setPageIndex(index);
+					}}
+					initialPage={table.getState().pagination.pageIndex}
+					currentPage={table.getState().pagination.pageIndex}
+					totalPages={table.getPageCount()}
+				/>
+				{/* <div className='flex w-[100px] items-center justify-center text-sm font-medium'>
 					Page {table.getState().pagination.pageIndex + 1} of{' '}
 					{table.getPageCount()}
-				</div>
+				</div> */}
 				<div className='flex items-center space-x-2'>
 					<Button
 						aria-label='Go to first page'

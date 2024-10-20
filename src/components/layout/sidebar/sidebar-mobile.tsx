@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useLayout } from '@/hooks';
+import useLayout from '@/hooks/useLayout';
 
 import SidebarContent from './sidebar-content';
 

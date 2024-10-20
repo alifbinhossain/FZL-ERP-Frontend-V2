@@ -7,7 +7,7 @@ import { AxiosError } from 'axios';
 import { Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { z } from 'zod';
-import { useRHF } from '@/hooks';
+import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
 import { AddModal } from '@/components/core/modal';

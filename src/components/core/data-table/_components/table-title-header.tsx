@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { SearchIcon } from 'lucide-react';
-import { useTable } from '@/hooks';
+import useTable from '@/hooks/useTable';
 
 import DebouncedInput from '@/components/ui/debounce-input';
 
@@ -20,7 +20,6 @@ const TableTitleHeader = () => {
 			<TableTitle
 				title={title}
 				titleClassName='text-2xl font-semibold capitalize leading-tight text-primary-foreground md:text-3xl'
-				disableSubtitle
 			/>
 			<DebouncedInput
 				icon={<SearchIcon className='size-5 text-white/50' />}

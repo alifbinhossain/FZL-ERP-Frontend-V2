@@ -3,7 +3,7 @@ import { IResponse } from '@/types';
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { useTable } from '@/hooks';
+import useTable from '@/hooks/useTable';
 
 import {
 	AlertDialog,

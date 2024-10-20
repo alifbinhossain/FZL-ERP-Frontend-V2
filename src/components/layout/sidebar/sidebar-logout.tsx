@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { LogOut } from 'lucide-react';
-import { useAuth } from '@/hooks';
+import useAuth from '@/hooks/useAuth';
 
 import User from '@/components/user';
 
