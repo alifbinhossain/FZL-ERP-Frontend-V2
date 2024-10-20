@@ -117,11 +117,11 @@ export function TableToolbar() {
 				{isFiltered && (
 					<Button
 						aria-label='Reset filters'
-						variant='ghost-destructive'
+						variant='outline-destructive'
 						onClick={resetColumnFilters}
 						className='h-8'>
 						Reset
-						<Cross2Icon className='ml-2 size-4' />
+						<Cross2Icon className='size-4' />
 					</Button>
 				)}
 				<Separator orientation='vertical' className='h-6' />

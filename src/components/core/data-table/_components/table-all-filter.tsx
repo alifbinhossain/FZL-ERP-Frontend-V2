@@ -1,4 +1,5 @@
 import { MixerHorizontalIcon } from '@radix-ui/react-icons';
+import { X } from 'lucide-react';
 import useTable from '@/hooks/useTable';
 
 import { Button } from '@/components/ui/button';
@@ -68,6 +69,7 @@ const TableAllFilter = () => {
 							size='sm'
 							onClick={() => table.resetColumnFilters()}>
 							Reset
+							<X className='size-4' />
 						</Button>
 					)}
 				</SheetFooter>
