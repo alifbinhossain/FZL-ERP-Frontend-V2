@@ -49,7 +49,7 @@ export function TableFacetedFilter<TData, TValue>({
 			<PopoverTrigger asChild>
 				<Button
 					aria-label={title}
-					variant='outline'
+					variant='gradient'
 					size='sm'
 					className='h-8 border-dashed'>
 					<PlusCircledIcon className='mr-2 h-4 w-4' />

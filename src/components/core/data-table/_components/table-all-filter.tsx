@@ -30,7 +30,7 @@ const TableAllFilter = () => {
 			<SheetTrigger asChild>
 				<Button
 					aria-label='Filters All Columns'
-					variant='outline'
+					variant='gradient'
 					size='sm'
 					className='hidden lg:flex'>
 					<MixerHorizontalIcon className='size-4' />

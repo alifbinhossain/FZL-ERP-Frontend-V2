@@ -32,7 +32,9 @@ function SelectFilter<TData, TValue>({
 		<div className='flex flex-col gap-1'>
 			{showLabel && (
 				<label className='text-sm font-medium capitalize'>
-					{column.id?.split('_').join(' ')}
+					{typeof column.columnDef.header === 'string'
+						? column.columnDef.header
+						: column.id?.split('_').join(' ')}
 				</label>
 			)}
 

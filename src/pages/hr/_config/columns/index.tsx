@@ -113,6 +113,7 @@ export function userColumns({
 			size: 40,
 			meta: {
 				hidden: !resetPasswordAccess,
+				disableFullFilter: true,
 			},
 		},
 
@@ -133,6 +134,7 @@ export function userColumns({
 			size: 40,
 			meta: {
 				hidden: !pageAssignAccess,
+				disableFullFilter: true,
 			},
 		},
 	];
