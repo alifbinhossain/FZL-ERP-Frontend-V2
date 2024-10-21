@@ -1,3 +1,5 @@
+import { IParams } from '@/types';
+
 export const orderQK = {
 	all: () => ['order'],
 
@@ -46,6 +48,11 @@ export const orderQK = {
 
 	// merchandisers
 	merchandiser: () => [...orderQK.all(), 'merchandisers'],
+	merchandiserQuery: ({ start_date, end_date }: IParams) => [
+		...orderQK.merchandiser(),
+		start_date,
+		end_date,
+	],
 	merchandiserByUUID: (uuid: string) => [...orderQK.merchandiser(), uuid],
 
 	//Party

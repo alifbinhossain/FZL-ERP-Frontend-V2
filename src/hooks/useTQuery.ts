@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { api } from '@/lib/api';
 
 interface IUseTQuery {
-	queryKey: string[];
+	queryKey: (string | number | Date)[];
 	url: string;
 	enabled?: boolean;
 }
@@ -145,6 +145,8 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		// * Data
 		data: data?.data,
 		toast: data?.toast,
+		pagination: data?.pagination || null,
+
 		// * States
 		isLoading: isLoading,
 		isError,
