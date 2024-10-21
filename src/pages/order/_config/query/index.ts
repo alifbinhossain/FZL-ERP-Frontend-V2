@@ -1,4 +1,7 @@
+import useDateRange from '@/hooks/useDateRange';
 import useTQuery from '@/hooks/useTQuery';
+
+import addUrlParams from '@/utils/addUrlParams';
 
 import { orderQK } from './queryKeys';
 
@@ -114,19 +117,32 @@ export const useOrderFactoryByUUID = <T>(uuid: string) =>
 	});
 
 // * Merchandiser * //
-export const useOrderMerchandiser = <T>() =>
-	useTQuery<T>({
-		queryKey: orderQK.merchandiser(),
-		url: '/public/merchandiser',
+// export const useOrderMerchandiser = <T>() => {
+// 	const { limit, page } = useQueryParams();
+// 	return useTQuery<T>({
+// 		queryKey: orderQK.merchandiserPagination({ limit, page }),
+// 		url: addUrlParams('/public/merchandiser', { limit, page }),
+// 	});
+// };
+export const useOrderMerchandiser = <T>() => {
+	const { start_date, end_date, formatted_start_date, formatted_end_date } =
+		useDateRange();
+	return useTQuery<T>({
+		queryKey: orderQK.merchandiserQuery({ start_date, end_date }),
+		url: addUrlParams(`/public/merchandiser`, {
+			start_date: formatted_start_date,
+			end_date: formatted_end_date,
+		}),
 	});
+};
 
-export const useOrderMerchandiserByUUID = <T>(uuid: string) => {
+export const useOrderMerchandiserByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
 		queryKey: orderQK.merchandiserByUUID(uuid),
 		url: `/public/merchandiser/${uuid}`,
 		enabled: !!uuid,
 	});
-};
+
 // * Properties * //
 export const useOrderProperties = <T>() =>
 	useTQuery<T>({

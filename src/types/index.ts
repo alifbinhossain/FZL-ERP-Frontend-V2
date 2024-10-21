@@ -25,6 +25,18 @@ export type IToast = {
 export type IResponse<T> = {
 	toast: IToast;
 	data: T;
+	pagination: {
+		total_record: number;
+		current_page: number;
+		total_page: number;
+		next_page: number | null;
+		prev_page: number | null;
+	};
+};
+
+export type IParams = {
+	start_date: Date | string;
+	end_date: Date | string;
 };
 
 export type IUser = {

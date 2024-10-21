@@ -71,6 +71,8 @@ interface Preset {
 
 // Define presets
 const PRESETS: Preset[] = [
+	{ name: 'lastThreeMonths', label: '3 Months' },
+	{ name: 'lastSixMonths', label: '6 Months' },
 	{ name: 'today', label: 'Today' },
 	{ name: 'yesterday', label: 'Yesterday' },
 	{ name: 'last7', label: 'Last 7 days' },
@@ -80,6 +82,7 @@ const PRESETS: Preset[] = [
 	{ name: 'lastWeek', label: 'Last Week' },
 	{ name: 'thisMonth', label: 'This Month' },
 	{ name: 'lastMonth', label: 'Last Month' },
+	{ name: 'thisYear', label: 'This Year' },
 ];
 
 /** The DateRangePicker component allows a user to select a range of dates */
@@ -204,15 +207,38 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 				from.setHours(0, 0, 0, 0);
 				to.setHours(23, 59, 59, 999);
 				break;
+
 			case 'thisMonth':
 				from.setDate(1);
 				from.setHours(0, 0, 0, 0);
 				to.setHours(23, 59, 59, 999);
 				break;
+
 			case 'lastMonth':
 				from.setMonth(from.getMonth() - 1);
 				from.setDate(1);
 				from.setHours(0, 0, 0, 0);
+				to.setDate(0);
+				to.setHours(23, 59, 59, 999);
+				break;
+
+			case 'lastThreeMonths':
+				from.setDate(from.getDate() - 89);
+				from.setHours(0, 0, 0, 0);
+				to.setHours(23, 59, 59, 999);
+				break;
+
+			case 'lastSixMonths':
+				from.setDate(from.getDate() - 179);
+				from.setHours(0, 0, 0, 0);
+				to.setHours(23, 59, 59, 999);
+				break;
+
+			case 'thisYear':
+				from.setMonth(0);
+				from.setDate(1);
+				from.setHours(0, 0, 0, 0);
+				to.setMonth(12);
 				to.setDate(0);
 				to.setHours(23, 59, 59, 999);
 				break;
