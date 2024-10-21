@@ -1,10 +1,20 @@
 import { lazy } from 'react';
 import { IRoute } from '@/types';
 
+const Merchandiser = lazy(() => import('@/pages/order/merchandiser'));
+
 const OrderRoutes: IRoute[] = [
 	{
 		name: 'Order',
-		children: [],
+		children: [
+			{
+				name: 'Merchandiser',
+				path: '/order/merchandiser',
+				element: <Merchandiser />,
+				page_name: 'order__merchandiser',
+				actions: ['create', 'read', 'update', 'delete'],
+			},
+		],
 	},
 ];
 export default OrderRoutes;

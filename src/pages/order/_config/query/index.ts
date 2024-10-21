@@ -120,13 +120,13 @@ export const useOrderMerchandiser = <T>() =>
 		url: '/public/merchandiser',
 	});
 
-export const useOrderMerchandiserByUUID = <T>(uuid: string) => {
+export const useOrderMerchandiserByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
 		queryKey: orderQK.merchandiserByUUID(uuid),
 		url: `/public/merchandiser/${uuid}`,
 		enabled: !!uuid,
 	});
-};
+
 // * Properties * //
 export const useOrderProperties = <T>() =>
 	useTQuery<T>({
