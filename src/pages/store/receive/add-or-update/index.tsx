@@ -216,7 +216,7 @@ const AddOrUpdate = () => {
 			onSubmit={onSubmit}>
 			<Header />
 			<CoreForm.DynamicFields
-				viewAs={'spreadsheet'}
+				viewAs={'default'}
 				title='Purchase'
 				form={form}
 				fieldName='purchase'

@@ -28,7 +28,7 @@ const buttonVariants = cva(
 				link: 'text-primary underline-offset-4 hover:underline',
 				gradient: 'bg-gradient text-foreground border',
 				'gradient-accent':
-					'!bg-gradient-to-r !from-accent !to-accent !text-accent-foreground',
+					'!bg-gradient-to-r !from-accent/80 !to-accent/70 !text-accent-foreground',
 			},
 			size: {
 				default: 'h-10 px-4 py-2',

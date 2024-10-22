@@ -17,7 +17,7 @@ const Header = () => {
 	];
 
 	return (
-		<CoreForm.Section title='Information' className='md:grid-cols-2'>
+		<CoreForm.Section title='Information' className='lg:grid-cols-4'>
 			<FormField
 				control={form.control}
 				name='vendor_uuid'
@@ -55,11 +55,13 @@ const Header = () => {
 				name='challan_number'
 				render={(props) => <CoreForm.Input {...props} />}
 			/>
-			<FormField
-				control={form.control}
-				name='remarks'
-				render={(props) => <CoreForm.Textarea {...props} />}
-			/>
+			<div className='col-span-1 sm:col-span-2 lg:col-span-4'>
+				<FormField
+					control={form.control}
+					name='remarks'
+					render={(props) => <CoreForm.Textarea {...props} />}
+				/>
+			</div>
 		</CoreForm.Section>
 	);
 };

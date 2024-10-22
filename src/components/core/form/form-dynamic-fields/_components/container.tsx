@@ -6,13 +6,13 @@ import { Button } from '@/components/ui/button';
 import { DynamicFieldsProps } from '..';
 
 interface IProps
-	extends Pick<DynamicFieldsProps, 'handleAdd' | 'extraButtons' | 'title'> {
+	extends Pick<DynamicFieldsProps, 'handleAdd' | 'extraHeader' | 'title'> {
 	children: React.ReactNode;
 }
 
 const DynamicFieldContainer: React.FC<IProps> = ({
 	title,
-	extraButtons,
+	extraHeader,
 	handleAdd,
 	children,
 }) => {
@@ -23,18 +23,15 @@ const DynamicFieldContainer: React.FC<IProps> = ({
 					{title || 'Dynamic Fields'}
 				</h3>
 
-				<div className='flex items-center gap-2'>
-					{extraButtons &&
-						extraButtons.length > 0 &&
-						extraButtons.map((button) => button)}
-
+				<div className='flex items-center gap-4'>
+					{extraHeader}
 					{handleAdd && (
 						<Button
 							onClick={handleAdd}
 							type='button'
-							variant={'accent'}
+							variant={'gradient-accent'}
 							size={'xs'}
-							className='gap-1 rounded bg-transparent bg-gradient-to-r from-accent/80 to-accent/70'>
+							className='gap-1 rounded'>
 							<Plus className='size-4' />
 							New
 						</Button>

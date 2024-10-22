@@ -15,8 +15,8 @@ type FieldCustom = {
 };
 
 type FieldText = {
-	type: 'input';
-	inputType?: 'text' | 'number';
+	type: 'text';
+	// inputType?: 'text' | 'number';
 	placeholder?: string;
 };
 type FieldNumber = {
@@ -57,7 +57,7 @@ export interface DynamicFieldsProps {
 	form: UseFormReturn<any>;
 	fieldName: string;
 	fieldDefs: FieldDef[];
-	extraButtons?: React.ReactNode[];
+	extraHeader?: React.ReactNode;
 	handleAdd?: () => void;
 	fields: FieldArrayWithId<any>[];
 	viewAs?: 'default' | 'spreadsheet';
@@ -67,7 +67,7 @@ const FormDynamicFields = (props: DynamicFieldsProps) => {
 	return (
 		<DynamicFieldContainer
 			title={props.title}
-			extraButtons={props.extraButtons}
+			extraHeader={props.extraHeader}
 			handleAdd={props.handleAdd}>
 			{props.viewAs === 'spreadsheet' ? (
 				<SpreadsheetDynamicFields {...props} />

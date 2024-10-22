@@ -52,13 +52,14 @@ const SpreadsheetDynamicFields: React.FC<
 					changes?.forEach(([row, prop, oldValue, newValue]) => {
 						const field = fieldDefs.find(
 							(field) => field.accessorKey === prop
-						) as any;
+						);
 						form.setValue(
 							`${fieldName}.${row}.${prop}`,
-							field.inputType === 'number' ? +newValue : newValue,
+							field?.type === 'number' ? +newValue : newValue,
 							{
 								shouldDirty: true,
 								shouldTouch: true,
+								shouldValidate: true,
 							}
 						);
 					});
@@ -68,19 +69,20 @@ const SpreadsheetDynamicFields: React.FC<
 				{fieldDefs
 					.filter((field) => !field.hidden)
 					.map((field) => {
-						if (field.type === 'input' || field.type === 'number') {
-							return (
-								<HotColumn
-									key={field.accessorKey}
-									data={field.accessorKey}>
-									<CustomRenderer
-										hot-renderer
-										field={field}
-										fieldName={fieldName}
-									/>
-								</HotColumn>
-							);
-						}
+						// if (field.type === 'text' || field.type === 'number') {
+						// 	return (
+						// 		<HotColumn
+						// 			className={'sb-blue'}
+						// 			key={field.accessorKey}
+						// 			data={field.accessorKey}>
+						// 			<CustomRenderer
+						// 				hot-renderer
+						// 				field={field}
+						// 				fieldName={fieldName}
+						// 			/>
+						// 		</HotColumn>
+						// 	);
+						// }
 
 						if (field.type === 'readOnly') {
 							return (
@@ -94,7 +96,8 @@ const SpreadsheetDynamicFields: React.FC<
 						return (
 							<HotColumn
 								key={field.accessorKey}
-								data={field.accessorKey}>
+								data={field.accessorKey}
+								readOnly={field.type === 'custom'}>
 								<CustomEditor hot-editor field={field} />
 								<CustomRenderer
 									hot-renderer

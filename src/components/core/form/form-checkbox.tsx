@@ -5,6 +5,7 @@ import {
 	UseFormStateReturn,
 } from 'react-hook-form';
 
+import { buttonVariants } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
 	FormControl,
@@ -25,6 +26,7 @@ interface FormCheckboxProps extends CheckboxProps {
 	icon?: React.ReactNode;
 	disableLabel?: boolean;
 	labelClassName?: string;
+	isBoxed?: boolean;
 }
 
 const FormCheckbox: React.FC<FormCheckboxProps> = ({
@@ -35,15 +37,33 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
 	disabled = false,
 	disableLabel,
 	labelClassName,
+	isBoxed = false,
+	checked,
+	onCheckedChange,
 }) => {
 	return (
-		<FormItem className='flex items-center gap-1.5 space-y-0'>
+		<FormItem
+			className={cn(
+				'flex items-center gap-1.5 space-y-0',
+				isBoxed &&
+					buttonVariants({
+						variant: 'gradient-accent',
+						size: 'sm',
+						className:
+							'gap-1.5 rounded transition-none active:scale-100',
+					})
+			)}>
 			<FormControl className=''>
 				<Checkbox
-					className={cn('size-4', className)}
+					className={cn(
+						'size-[18px]',
+						isBoxed &&
+							'rounded-full border-2 border-accent-foreground/50',
+						className
+					)}
 					disabled={disabled}
-					checked={field.value}
-					onCheckedChange={field.onChange}
+					checked={checked ?? field.value}
+					onCheckedChange={onCheckedChange ?? field.onChange}
 				/>
 			</FormControl>
 
@@ -51,6 +71,7 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
 				<FormLabel
 					className={cn(
 						'flex items-center gap-1 capitalize',
+						isBoxed && 'cursor-pointer text-white',
 						labelClassName
 					)}>
 					{label || field.name.replace('_', ' ')}{' '}

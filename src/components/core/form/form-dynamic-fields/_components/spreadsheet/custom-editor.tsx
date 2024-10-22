@@ -15,11 +15,15 @@ interface ICustomEditorProps {
 // Custom Editor Component
 class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 	mainElementRef: RefObject<HTMLDivElement>;
+	selectElementRef: RefObject<HTMLSelectElement>;
+	inputElementRef: RefObject<HTMLInputElement>;
 	field: FieldDef;
 	constructor(props: BaseEditorComponent<ICustomEditorProps>['props']) {
 		super(props);
 
 		this.mainElementRef = createRef();
+		this.selectElementRef = createRef();
+		this.inputElementRef = createRef();
 		this.state = {
 			value: '',
 		};
@@ -40,6 +44,8 @@ class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 	open() {
 		if (!this.mainElementRef.current) return;
 		this.mainElementRef.current.style.display = 'block';
+		this.selectElementRef.current?.focus();
+		this.inputElementRef.current?.focus();
 	}
 
 	close() {
@@ -97,6 +103,10 @@ class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 					onMouseDown={this.stopMousedownPropagation as any}
 					id='editorElement'>
 					<ReactSelect
+						extraControlClassName='!rounded-none'
+						openMenuOnFocus
+						autoFocus
+						ref={this.selectElementRef}
 						placeholder={
 							this.props.field.placeholder || 'Select an option'
 						}
@@ -114,8 +124,11 @@ class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 			);
 		}
 
-		if (this.props.field.type === 'input') {
-			const inputType = this.props.field.inputType || 'text';
+		if (
+			this.props.field.type === 'text' ||
+			this.props.field.type === 'number'
+		) {
+			const inputType = this.props.field.type;
 			return (
 				<div
 					style={{
@@ -129,7 +142,8 @@ class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 					onMouseDown={this.stopMousedownPropagation as any}
 					id='editorElement'>
 					<Input
-						autoFocus
+						ref={this.inputElementRef}
+						className='w-full rounded-none border-none'
 						placeholder={this.props.field.placeholder}
 						defaultValue={this.state.value}
 						onChange={(e) => {

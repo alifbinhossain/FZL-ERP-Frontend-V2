@@ -127,7 +127,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			form={form}
 			onSubmit={onSubmit}
 			className='max-w-4xl'>
-			<CoreForm.Section>
+			<CoreForm.Section className='lg:grid-cols-2'>
 				<FormField
 					control={form.control}
 					name='section_uuid'
@@ -156,7 +156,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 				/>
 			</CoreForm.Section>
 
-			<CoreForm.Section className='md:grid-cols-3'>
+			<CoreForm.Section>
 				<FormField
 					control={form.control}
 					name='name'
@@ -183,7 +183,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 				/>
 			</CoreForm.Section>
 
-			<CoreForm.Section>
+			<CoreForm.Section className='lg:grid-cols-2'>
 				<FormField
 					control={form.control}
 					name='remarks'

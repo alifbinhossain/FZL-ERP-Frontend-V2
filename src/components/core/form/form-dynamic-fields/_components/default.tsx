@@ -105,7 +105,7 @@ const DefaultDynamicFields: React.FC<
 													)}
 
 													{fieldDef.type ===
-														'input' && (
+														'text' && (
 														<FormField
 															control={
 																form.control
@@ -114,7 +114,7 @@ const DefaultDynamicFields: React.FC<
 															render={(props) => (
 																<CoreForm.Input
 																	type={
-																		fieldDef.inputType
+																		'text'
 																	}
 																	disableLabel
 																	placeholder={

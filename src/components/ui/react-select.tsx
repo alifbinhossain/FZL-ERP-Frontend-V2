@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { ChevronDown, X } from 'lucide-react';
 import Select, {
 	ClassNamesConfig,
@@ -48,57 +49,118 @@ const classNames = (extraControlClassName?: string): ClassNamesConfig => ({
 		'text-destructive text-sm p-2 bg-destructive/5 border border-destructive/20 rounded',
 });
 
-const ReactSelect: React.FC<Props & { extraControlClassName?: string }> = ({
-	options,
-	placeholder,
-	isMulti = false,
-	isClearable = true,
-	isSearchable = true,
-	isDisabled = false,
-	extraControlClassName,
-	...props
-}) => {
-	return (
-		<Select
-			unstyled
-			classNamePrefix={'react-select-'}
-			classNames={classNames(extraControlClassName)}
-			styles={selectStyles}
-			components={{
-				ClearIndicator: (props) => (
-					<components.ClearIndicator
-						className='mr-1 border-r border-r-input pr-1'
-						{...props}>
-						<X className='size-5 font-medium text-destructive' />
-					</components.ClearIndicator>
-				),
+export type Ref = any;
 
-				MultiValueRemove: (props) => (
-					<components.MultiValueRemove {...props}>
-						<X className='ml-1 size-4 font-medium text-destructive' />
-					</components.MultiValueRemove>
-				),
+const ReactSelect = forwardRef<Ref, Props & { extraControlClassName?: string }>(
+	(
+		{
+			options,
+			placeholder,
+			isMulti = false,
+			isClearable = true,
+			isSearchable = true,
+			isDisabled = false,
+			extraControlClassName,
+			...props
+		},
+		ref
+	) => {
+		return (
+			<Select
+				ref={ref}
+				unstyled
+				classNamePrefix={'react-select-'}
+				classNames={classNames(extraControlClassName)}
+				styles={selectStyles}
+				components={{
+					ClearIndicator: (props) => (
+						<components.ClearIndicator
+							className='mr-1 border-r border-r-input pr-1'
+							{...props}>
+							<X className='size-5 font-medium text-destructive' />
+						</components.ClearIndicator>
+					),
 
-				DropdownIndicator: (props) => (
-					<components.DropdownIndicator {...props}>
-						<ChevronDown
-							className={cn(
-								'size-5 transform text-secondary/50 transition-transform duration-300',
-								props.selectProps.menuIsOpen && 'rotate-90'
-							)}
-						/>
-					</components.DropdownIndicator>
-				),
-			}}
-			isMulti={isMulti}
-			isDisabled={isDisabled}
-			isClearable={isClearable}
-			isSearchable={isSearchable}
-			options={options}
-			placeholder={placeholder}
-			{...props}
-		/>
-	);
-};
+					MultiValueRemove: (props) => (
+						<components.MultiValueRemove {...props}>
+							<X className='ml-1 size-4 font-medium text-destructive' />
+						</components.MultiValueRemove>
+					),
+
+					DropdownIndicator: (props) => (
+						<components.DropdownIndicator {...props}>
+							<ChevronDown
+								className={cn(
+									'size-5 transform text-secondary/50 transition-transform duration-300',
+									props.selectProps.menuIsOpen && 'rotate-90'
+								)}
+							/>
+						</components.DropdownIndicator>
+					),
+				}}
+				isMulti={isMulti}
+				isDisabled={isDisabled}
+				isClearable={isClearable}
+				isSearchable={isSearchable}
+				options={options}
+				placeholder={placeholder}
+				{...props}
+			/>
+		);
+	}
+);
+
+// const ReactSelect: React.FC<Props & { extraControlClassName?: string }> = ({
+// 	options,
+// 	placeholder,
+// 	isMulti = false,
+// 	isClearable = true,
+// 	isSearchable = true,
+// 	isDisabled = false,
+// 	extraControlClassName,
+// 	...props
+// }) => {
+// 	return (
+// 		<Select
+// 			unstyled
+// 			classNamePrefix={'react-select-'}
+// 			classNames={classNames(extraControlClassName)}
+// 			styles={selectStyles}
+// 			components={{
+// 				ClearIndicator: (props) => (
+// 					<components.ClearIndicator
+// 						className='mr-1 border-r border-r-input pr-1'
+// 						{...props}>
+// 						<X className='size-5 font-medium text-destructive' />
+// 					</components.ClearIndicator>
+// 				),
+
+// 				MultiValueRemove: (props) => (
+// 					<components.MultiValueRemove {...props}>
+// 						<X className='ml-1 size-4 font-medium text-destructive' />
+// 					</components.MultiValueRemove>
+// 				),
+
+// 				DropdownIndicator: (props) => (
+// 					<components.DropdownIndicator {...props}>
+// 						<ChevronDown
+// 							className={cn(
+// 								'size-5 transform text-secondary/50 transition-transform duration-300',
+// 								props.selectProps.menuIsOpen && 'rotate-90'
+// 							)}
+// 						/>
+// 					</components.DropdownIndicator>
+// 				),
+// 			}}
+// 			isMulti={isMulti}
+// 			isDisabled={isDisabled}
+// 			isClearable={isClearable}
+// 			isSearchable={isSearchable}
+// 			options={options}
+// 			placeholder={placeholder}
+// 			{...props}
+// 		/>
+// 	);
+// };
 
 export default ReactSelect;

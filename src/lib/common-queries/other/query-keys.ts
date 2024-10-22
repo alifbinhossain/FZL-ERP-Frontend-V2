@@ -42,6 +42,9 @@ const otherQK = {
 	//Slider Item
 	sliderItem: () => [...otherQK.all(), 'slider-item'],
 
+	//Slider Item
+	threadCountLength: () => [...otherQK.all(), 'thread-count-length'],
+
 	//LC
 	lcByPartyUUID: (uuid: string) => [...otherQK.all(), 'lc-by-party', uuid],
 

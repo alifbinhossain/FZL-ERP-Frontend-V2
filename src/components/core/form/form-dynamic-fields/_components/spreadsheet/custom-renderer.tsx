@@ -1,11 +1,13 @@
 import { ErrorMessage } from '@hookform/error-message';
 import Handsontable from 'handsontable';
+import { ChevronDown } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 
 import { FieldDef } from '@/components/core/form/form-dynamic-fields';
-import { Input } from '@/components/ui/input';
 import ReactSelect from '@/components/ui/react-select';
 import { Skeleton } from '@/components/ui/skeleton';
+
+import { cn } from '@/lib/utils';
 
 type ICustomRendererProps = {
 	TD?: HTMLTableCellElement;
@@ -25,51 +27,36 @@ const CustomRenderer = (props: ICustomRendererProps) => {
 	} = useFormContext();
 
 	if (props.field.isLoading) {
-		return (
-			<div>
-				<Skeleton className='h-6 w-full' />
-			</div>
-		);
+		return <Skeleton className='h-6 w-full' />;
 	}
 	return (
 		<div className='bg-gradient'>
-			<div className='h-10'>
-				{props.field.type === 'select' && (
-					<ReactSelect
-						placeholder={
-							props.field.placeholder || 'Select an option'
-						}
-						value={props.field.options.find(
+			{props.field.type === 'custom' && (
+				<div className='flex h-full min-h-6 items-center bg-transparent px-2'>
+					{props.field.component(props.row || 0)}
+				</div>
+			)}
+			{props.field.type === 'select' && (
+				<div className='bg-gradient flex h-full min-h-6 justify-between bg-transparent px-3 py-2 text-sm'>
+					{
+						props.field.options.find(
 							(option) => option.value === props.value
-						)}
-						extraControlClassName='!min-h-6 !h-6 !rounded-none !border-none !bg-transparent'
-						isClearable={false}
-					/>
-				)}
+						)?.label
+					}
+					<ChevronDown className='size-5 text-secondary/50' />
+				</div>
+			)}
 
-				{props.field.type === 'input' && (
-					<div className='relative w-full'>
-						<Input
-							type='text'
-							placeholder={
-								props.field.placeholder || 'Write here'
-							}
-							className='absolute bottom-0 left-0 right-0 top-0 h-6 w-auto rounded-none border-none bg-transparent'
-							value={watch(
-								`${props.fieldName}.${props.row}.${props.field.accessorKey}`
-							)}
-							onChange={(e) => {}}
-						/>
-					</div>
-				)}
-
-				{props.field.type === 'custom' && (
-					<div className='flex h-full items-center bg-transparent px-2'>
-						{props.field.component(props.row || 0)}
-					</div>
-				)}
-			</div>
-
+			{(props.field.type === 'text' || props.field.type === 'number') && (
+				<div
+					className={cn(
+						'bg-gradient block h-full min-h-6 w-full px-3 py-2 text-sm font-normal text-foreground'
+					)}>
+					{watch(
+						`${props.fieldName}.${props.row}.${props.field.accessorKey}`
+					)}
+				</div>
+			)}
 			<ErrorMessage
 				errors={errors}
 				name={`${props.fieldName}.${props.row}.${props.field.accessorKey}`}

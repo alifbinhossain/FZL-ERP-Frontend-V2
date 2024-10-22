@@ -30,6 +30,7 @@
 	.bg-gradient {
 		@apply bg-gradient-to-r from-base to-base-150;
 	}
+
 	.sb-red {
 		@apply border border-red-500;
 	}

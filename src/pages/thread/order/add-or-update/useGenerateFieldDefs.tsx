@@ -4,57 +4,71 @@ import FieldActionButton from '@/components/buttons/field-action-button';
 import { FieldDef } from '@/components/core/form/form-dynamic-fields';
 import { IFormSelectOption } from '@/components/core/form/form-select';
 
-import { useOtherMaterial } from '@/lib/common-queries/other';
+import { useOtherThreadCountLength } from '@/lib/common-queries/other';
 
-import { IReceive } from '../../_config/schema';
+import { IThreadOrderInfoEntry } from '../../_config/schema';
 
 interface IGenerateFieldDefsProps {
 	copy: (index: number) => void;
 	remove: (index: number) => void;
-	watch?: UseFormWatch<IReceive>;
+	watch?: UseFormWatch<IThreadOrderInfoEntry>; // TODO: Update Schema Type
 }
 
 const useGenerateFieldDefs = ({
 	copy,
 	remove,
-	watch,
 }: IGenerateFieldDefsProps): FieldDef[] => {
-	const { data: material, isLoading } =
-		useOtherMaterial<(IFormSelectOption & { unit: string })[]>();
+	const { data: countLength, isLoading } =
+		useOtherThreadCountLength<IFormSelectOption[]>();
+
+	const bleaching: IFormSelectOption[] = [
+		{ label: 'Bleach', value: 'bleach' },
+		{ label: 'Non-Bleach', value: 'non-bleach' },
+	];
 
 	return [
 		{
-			header: 'Material',
-			accessorKey: 'material_uuid',
+			header: 'Color',
+			accessorKey: 'color',
+			type: 'text',
+		},
+		{
+			header: 'Style',
+			accessorKey: 'style',
+			type: 'text',
+		},
+		{
+			header: 'Count Length',
+			accessorKey: 'count_length_uuid',
 			type: 'select',
-			placeholder: 'Select Material',
-			options: material || [],
-			className: 'min-w-[200px]',
+			options: countLength || [],
 			isLoading,
+		},
+		{
+			header: 'Bleaching',
+			accessorKey: 'bleaching',
+			type: 'select',
+			options: bleaching,
 		},
 		{
 			header: 'Quantity',
 			accessorKey: 'quantity',
-			type: 'join-input-unit',
-			unit: (index: number) =>
-				material?.find(
-					(item) =>
-						item.value.toString() ===
-						watch?.(`purchase.${index}.material_uuid`)
-				)?.unit || '',
-			className: 'min-w-[100px]',
+			type: 'number',
 		},
 		{
-			header: 'Price',
-			accessorKey: 'price',
+			header: 'Company (USD/DZN)',
+			accessorKey: 'company_price',
 			type: 'number',
-			className: 'min-w-[100px]',
+		},
+		{
+			header: 'Party (USD/DZN)',
+			accessorKey: 'party_price',
+			type: 'number',
 		},
 		{
 			header: 'Remarks',
 			accessorKey: 'remarks',
 			type: 'text',
-			className: 'min-w-[200px]',
 		},
 		{
 			header: 'Actions',

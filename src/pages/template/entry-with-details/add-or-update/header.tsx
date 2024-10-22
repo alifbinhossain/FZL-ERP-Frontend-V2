@@ -17,7 +17,7 @@ const Header = () => {
 	];
 
 	return (
-		<CoreForm.Section title='Information' className='md:grid-cols-3'>
+		<CoreForm.Section title='Information'>
 			<FormField
 				control={form.control}
 				name='company_name'

@@ -173,3 +173,10 @@ export const useOtherSliderItem = <T>() =>
 		queryKey: otherQK.sliderItem(),
 		url: `/other/slider-item-name/value/label`,
 	});
+
+// GET OTHER THREAD COUNT LENGTH
+export const useOtherThreadCountLength = <T>() =>
+	useTQuery<T>({
+		queryKey: otherQK.threadCountLength(),
+		url: `/other/thread/count-length/value/label`,
+	});

@@ -43,6 +43,13 @@ export const useThreadOrderInfoByUUID = <T>(uuid: string) =>
 		enabled: !!uuid,
 	});
 
+export const useThreadOrderInfoDetailsByUUID = <T>(uuid: string) =>
+	useTQuery<T>({
+		queryKey: threadQK.orderInfoDetailsByUUID(uuid),
+		url: `/thread/order-info-details/by/${uuid}`,
+		enabled: !!uuid,
+	});
+
 //Order-info-entry
 export const useThreadOrderInfoEntry = <T>() =>
 	useTQuery<T>({
