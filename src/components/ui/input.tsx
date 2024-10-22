@@ -14,7 +14,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 		ref
 	) => {
 		const inputClass =
-			' flex h-10 w-full rounded-md border border-input bg-gradient-to-r from-base to-base-150 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:from-destructive/5 disabled:to-destructive/5 disabled:border-destructive/30 disabled:text-destructive';
+			'flex h-10 w-full rounded-md border border-input bg-gradient px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:from-destructive/5 disabled:to-destructive/5 disabled:border-destructive/30 disabled:text-destructive';
 
 		return icon ? (
 			<div className={cn(inputClass, 'items-center gap-2', className)}>

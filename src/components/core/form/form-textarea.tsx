@@ -49,6 +49,7 @@ const FormTextarea: React.FC<FormTextareaProps> = ({
 					className={cn(className)}
 					placeholder={placeholder}
 					{...field}
+					value={field.value === null ? '' : field.value}
 				/>
 			</FormControl>
 			<FormMessage />

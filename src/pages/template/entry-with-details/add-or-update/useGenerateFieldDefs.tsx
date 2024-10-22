@@ -77,7 +77,7 @@ const useGenerateFieldDefs = ({
 			header: 'Actions',
 			accessorKey: 'actions',
 			type: 'custom',
-			component: (field: any, index: number) => {
+			component: (index: number) => {
 				return (
 					<FieldActionButton
 						handleCopy={copy}

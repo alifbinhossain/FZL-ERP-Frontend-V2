@@ -22,13 +22,14 @@ const selectStyles: StylesConfig = {
 	},
 };
 
-const classNames: ClassNamesConfig = {
+const classNames = (extraControlClassName?: string): ClassNamesConfig => ({
 	control: ({ isFocused, isDisabled }) =>
 		cn(
-			'min-h-10 rounded-md border border-input bg-gradient-to-r from-base to-base-150 px-3 py-2 text-sm text-foreground',
+			'bg-gradient min-h-10 rounded-md border border-input px-3 py-2 text-sm text-foreground',
 			isFocused && 'outline outline-2 outline-offset-2 outline-secondary',
 			isDisabled &&
-				'cursor-not-allowed border-destructive/50 from-destructive/5 to-destructive/5 text-destructive'
+				'cursor-not-allowed border-destructive/50 from-destructive/5 to-destructive/5 text-destructive',
+			extraControlClassName
 		),
 	placeholder: () => 'text-muted-foreground text-sm',
 	input: () => 'grow',
@@ -45,22 +46,23 @@ const classNames: ClassNamesConfig = {
 		),
 	noOptionsMessage: () =>
 		'text-destructive text-sm p-2 bg-destructive/5 border border-destructive/20 rounded',
-};
+});
 
-const ReactSelect: React.FC<Props> = ({
+const ReactSelect: React.FC<Props & { extraControlClassName?: string }> = ({
 	options,
 	placeholder,
 	isMulti = false,
 	isClearable = true,
 	isSearchable = true,
 	isDisabled = false,
+	extraControlClassName,
 	...props
 }) => {
 	return (
 		<Select
 			unstyled
 			classNamePrefix={'react-select-'}
-			classNames={classNames}
+			classNames={classNames(extraControlClassName)}
 			styles={selectStyles}
 			components={{
 				ClearIndicator: (props) => (

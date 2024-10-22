@@ -19,7 +19,7 @@ const useGenerateFieldDefs = ({
 	remove,
 	watch,
 }: IGenerateFieldDefsProps): FieldDef[] => {
-	const { data: material } =
+	const { data: material, isLoading } =
 		useOtherMaterial<(IFormSelectOption & { unit: string })[]>();
 
 	return [
@@ -30,19 +30,20 @@ const useGenerateFieldDefs = ({
 			placeholder: 'Select Material',
 			options: material || [],
 			className: 'min-w-[200px]',
+			isLoading,
 		},
-		{
-			header: 'Quantity',
-			accessorKey: 'quantity',
-			type: 'join-input-unit',
-			unit: (index: number) =>
-				material?.find(
-					(item) =>
-						item.value.toString() ===
-						watch?.(`purchase.${index}.material_uuid`)
-				)?.unit || '',
-			className: 'min-w-[100px]',
-		},
+		// {
+		// 	header: 'Quantity',
+		// 	accessorKey: 'quantity',
+		// 	type: 'join-input-unit',
+		// 	unit: (index: number) =>
+		// 		material?.find(
+		// 			(item) =>
+		// 				item.value.toString() ===
+		// 				watch?.(`purchase.${index}.material_uuid`)
+		// 		)?.unit || '',
+		// 	className: 'min-w-[100px]',
+		// },
 		{
 			header: 'Price',
 			accessorKey: 'price',
@@ -60,7 +61,7 @@ const useGenerateFieldDefs = ({
 			header: 'Actions',
 			accessorKey: 'actions',
 			type: 'custom',
-			component: (field: any, index: number) => {
+			component: (index: number) => {
 				return (
 					<FieldActionButton
 						handleCopy={copy}

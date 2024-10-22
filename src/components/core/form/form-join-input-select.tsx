@@ -68,7 +68,7 @@ const FormJoinInputSelect: React.FC<FormJoinInputSelectProps> = ({
 				</span>
 				{subLabel && <span className='text-xs'>{subLabel}</span>}
 			</FormLabel>
-			<div className='flex h-10 items-center overflow-hidden rounded-md border border-input bg-gradient-to-r from-base to-base-150 p-0.5'>
+			<div className='bg-gradient flex h-10 items-center overflow-hidden rounded-md border border-input p-0.5'>
 				<FormControl className='h-8 flex-1'>
 					{type === 'password' ? (
 						<PasswordInput
