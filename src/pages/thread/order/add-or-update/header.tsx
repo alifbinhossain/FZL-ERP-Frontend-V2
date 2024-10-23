@@ -33,36 +33,21 @@ const Header = () => {
 				control={form.control}
 				name='is_sample'
 				render={(props) => (
-					<CoreForm.Checkbox
-						isBoxed
-						checked={Boolean(form.watch('is_sample'))}
-						label={'Sample'}
-						{...props}
-					/>
+					<CoreForm.Checkbox isBoxed label={'Sample'} {...props} />
 				)}
 			/>
 			<FormField
 				control={form.control}
 				name='is_bill'
 				render={(props) => (
-					<CoreForm.Checkbox
-						isBoxed
-						checked={Boolean(form.watch('is_bill'))}
-						label={'Bill'}
-						{...props}
-					/>
+					<CoreForm.Checkbox isBoxed label={'Bill'} {...props} />
 				)}
 			/>
 			<FormField
 				control={form.control}
 				name='is_cash'
 				render={(props) => (
-					<CoreForm.Checkbox
-						isBoxed
-						checked={Boolean(form.watch('is_cash'))}
-						label={'Cash'}
-						{...props}
-					/>
+					<CoreForm.Checkbox isBoxed label={'Cash'} {...props} />
 				)}
 			/>
 		</div>

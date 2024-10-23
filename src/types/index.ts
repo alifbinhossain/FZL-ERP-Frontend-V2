@@ -25,13 +25,6 @@ export type IToast = {
 export type IResponse<T> = {
 	toast: IToast;
 	data: T;
-	pagination: {
-		total_record: number;
-		current_page: number;
-		total_page: number;
-		next_page: number | null;
-		prev_page: number | null;
-	};
 };
 
 export type IParams = {

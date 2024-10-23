@@ -34,19 +34,19 @@ export const useThreadMachineByUUID = <T>(uuid: string) =>
 export const useThreadOrderInfo = <T>() =>
 	useTQuery<T>({
 		queryKey: threadQK.orderInfo(),
-		url: '/thread/order-info',
+		url: '/v2/thread/order-info',
 	});
 export const useThreadOrderInfoByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
 		queryKey: threadQK.orderInfoByUUID(uuid),
-		url: `/thread/order-info/${uuid}`,
+		url: `/v2/thread/order-info/${uuid}`,
 		enabled: !!uuid,
 	});
 
 export const useThreadOrderInfoDetailsByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
 		queryKey: threadQK.orderInfoDetailsByUUID(uuid),
-		url: `/thread/order-info-details/by/${uuid}`,
+		url: `/v2/thread/order-info-details/by/${uuid}`,
 		enabled: !!uuid,
 	});
 
@@ -54,12 +54,12 @@ export const useThreadOrderInfoDetailsByUUID = <T>(uuid: string) =>
 export const useThreadOrderInfoEntry = <T>() =>
 	useTQuery<T>({
 		queryKey: threadQK.orderInfoEntry(),
-		url: '/thread/order-entry',
+		url: '/v2/thread/order-entry',
 	});
 export const useThreadOrderInfoEntryByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
 		queryKey: threadQK.orderInfoEntryByUUID(uuid),
-		url: `/thread/order-entry/${uuid}`,
+		url: `/v2/thread/order-entry/${uuid}`,
 		enabled: !!uuid,
 	});
 

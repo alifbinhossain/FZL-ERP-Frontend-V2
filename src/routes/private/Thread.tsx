@@ -5,6 +5,7 @@ const ThreadOrder = lazy(() => import('@/pages/thread/order'));
 const ThreadOrderEntry = lazy(
 	() => import('@/pages/thread/order/add-or-update')
 );
+const ThreadOrderDetails = lazy(() => import('@/pages/thread/order/details'));
 
 const ThreadRoutes: IRoute[] = [
 	{
@@ -31,6 +32,15 @@ const ThreadRoutes: IRoute[] = [
 				element: <ThreadOrderEntry />,
 				page_name: 'thread__order_info_update',
 				actions: ['create', 'read', 'update', 'delete'],
+				hidden: true,
+			},
+
+			{
+				name: 'Details of Order Info',
+				path: '/thread/order-info/:id',
+				element: <ThreadOrderDetails />,
+				page_name: 'thread__order_info_in_details',
+				actions: ['create', 'read', 'update', 'delete', 'show_price'],
 				hidden: true,
 			},
 		],

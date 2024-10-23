@@ -89,7 +89,7 @@ const AddOrUpdate = () => {
 						};
 
 						return postData.mutateAsync({
-							url: '/thread/order-entry',
+							url: '/v2/thread/order-entry',
 							newData: newData,
 							isOnCloseNeeded: false,
 						});
@@ -105,7 +105,7 @@ const AddOrUpdate = () => {
 										: item.swatch_approval_date,
 						};
 						return updateData.mutateAsync({
-							url: `/thread/order-entry${item.uuid}`,
+							url: `/v2/thread/order-entry/${item.uuid}`,
 							updatedData,
 							isOnCloseNeeded: false,
 						});
@@ -140,9 +140,9 @@ const AddOrUpdate = () => {
 		// Create Shade Recipe description
 		const order_info_data = {
 			...values,
-			is_sample: values.is_sample ? 1 : 0,
-			is_bill: values.is_bill ? 1 : 0,
-			is_cash: values.is_cash ? 1 : 0,
+			// is_sample: values.is_sample ? 1 : 0,
+			// is_bill: values.is_bill ? 1 : 0,
+			// is_cash: values.is_cash ? 1 : 0,
 			uuid: new_order_info_uuid,
 			created_at,
 			created_by,
@@ -172,7 +172,7 @@ const AddOrUpdate = () => {
 
 		const order_info_entries_promise = order_info_entries.map((item) =>
 			postData.mutateAsync({
-				url: '/thread/order-entry',
+				url: '/v2/thread/order-entry',
 				newData: item,
 				isOnCloseNeeded: false,
 			})

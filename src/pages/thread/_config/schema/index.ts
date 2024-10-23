@@ -21,7 +21,7 @@ export const THREAD_ORDER_INFO_ENTRY_SCHEMA = z.object({
 	is_sample: BOOLEAN_REQUIRED.default(false),
 	is_bill: BOOLEAN_REQUIRED.default(false),
 	is_cash: BOOLEAN_REQUIRED.default(false),
-	delivery_date: DATE_NULLABLE,
+	delivery_date: STRING_NULLABLE,
 	remarks: STRING_NULLABLE,
 	order_info_entry: z.array(
 		z.object({

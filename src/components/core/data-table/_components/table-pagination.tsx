@@ -65,10 +65,6 @@ export function TablePagination() {
 					currentPage={table.getState().pagination.pageIndex}
 					totalPages={table.getPageCount()}
 				/>
-				{/* <div className='flex w-[100px] items-center justify-center text-sm font-medium'>
-					Page {table.getState().pagination.pageIndex + 1} of{' '}
-					{table.getPageCount()}
-				</div> */}
 				<div className='flex items-center space-x-2'>
 					<Button
 						aria-label='Go to first page'

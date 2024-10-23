@@ -1,8 +1,11 @@
 import React from 'react';
-import { format } from 'date-fns';
 
 import SectionContainer from '@/components/section-container';
 import TableList, { ITableListItems } from '@/components/table-list';
+
+import '@/utils/formatDate';
+
+import { formatDateTable } from '@/utils/formatDate';
 
 import { IReceiveDetails } from '../../_config/columns/columns.type';
 
@@ -18,17 +21,11 @@ const Information: React.FC<{ data: IReceiveDetails }> = ({ data }) => {
 			{ label: 'Created By', value: data.created_by_name },
 			{
 				label: 'Created At',
-				value: format(
-					new Date(data.created_at),
-					'dd/MM/yyyy - hh:mm a'
-				),
+				value: formatDateTable(data.created_at),
 			},
 			{
 				label: 'Updated At',
-				value: format(
-					new Date(data.updated_at),
-					'dd/MM/yyyy - hh:mm a'
-				),
+				value: formatDateTable(data.updated_at),
 			},
 			{ label: 'Remarks', value: data.remarks },
 		];
