@@ -15,7 +15,6 @@ import {
 } from '../../_config/query';
 import { IReceive, RECEIVE_NULL, RECEIVE_SCHEMA } from '../../_config/schema';
 import Header from './header';
-import Test from './test';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 
 const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
@@ -210,8 +209,6 @@ const AddOrUpdate = () => {
 		});
 	};
 
-	// return <Test />;
-
 	return (
 		<CoreForm.AddEditWrapper
 			title={isUpdate ? 'Edit Purchase' : 'Add Purchase'}
@@ -219,6 +216,7 @@ const AddOrUpdate = () => {
 			onSubmit={onSubmit}>
 			<Header />
 			<CoreForm.DynamicFields
+				viewAs={'default'}
 				title='Purchase'
 				form={form}
 				fieldName='purchase'

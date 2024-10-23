@@ -12,6 +12,7 @@ import {
 	NUMBER_REQUIRED,
 	PHONE_NUMBER_NULLABLE,
 	STRING_NULLABLE,
+	STRING_OPTIONAL,
 	STRING_REQUIRED,
 	UUID_FK,
 	UUID_NULLABLE,
@@ -90,6 +91,7 @@ export const ORDER_SCHEMA = z.object({
 
 	order_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			style: STRING_REQUIRED,
 			color: STRING_REQUIRED,
 			size: NUMBER_DOUBLE_REQUIRED,

@@ -1,6 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import usePage from '@/hooks/usePage';
 
+import HoverCardWrapper from '@/components/hover-card-wrapper';
 import DateTime from '@/components/ui/date-time';
 
 import TableCellAction from '../_components/table-cell-action';
@@ -12,7 +13,12 @@ const useDefaultColumns = <TData, TValue>(): ColumnDef<TData, TValue>[] => {
 		{
 			accessorKey: 'remarks',
 			header: 'Remarks',
-			cell: (info) => info.getValue(),
+			cell: (info) => (
+				<HoverCardWrapper
+					title={info.getValue<string>()}
+					content={info.getValue<string>()}
+				/>
+			),
 		},
 		{
 			accessorKey: 'created_by_name',

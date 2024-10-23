@@ -3,9 +3,11 @@ import { z } from 'zod';
 import {
 	BOOLEAN_DEFAULT_VALUE,
 	BOOLEAN_REQUIRED,
+	DATE_NULLABLE,
 	NUMBER_DOUBLE_REQUIRED,
 	NUMBER_REQUIRED,
 	STRING_NULLABLE,
+	STRING_OPTIONAL,
 	STRING_REQUIRED,
 } from '@/utils/validators';
 
@@ -23,6 +25,7 @@ export const THREAD_ORDER_INFO_ENTRY_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 	order_info_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			color: STRING_REQUIRED,
 			style: STRING_REQUIRED,
 			count_length_uuid: STRING_REQUIRED,
@@ -84,6 +87,7 @@ export const THREAD_CONING_SCHEMA = z.object({
 	coning_machines: STRING_REQUIRED,
 	batch_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			// coning_production_quantity: NUMBER_REQUIRED.max(
 			// 	yup.ref('quantity'),
 			// 	'Beyond Max Quantity'

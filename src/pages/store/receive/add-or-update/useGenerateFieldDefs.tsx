@@ -19,7 +19,7 @@ const useGenerateFieldDefs = ({
 	remove,
 	watch,
 }: IGenerateFieldDefsProps): FieldDef[] => {
-	const { data: material } =
+	const { data: material, isLoading } =
 		useOtherMaterial<(IFormSelectOption & { unit: string })[]>();
 
 	return [
@@ -30,6 +30,7 @@ const useGenerateFieldDefs = ({
 			placeholder: 'Select Material',
 			options: material || [],
 			className: 'min-w-[200px]',
+			isLoading,
 		},
 		{
 			header: 'Quantity',
@@ -46,21 +47,20 @@ const useGenerateFieldDefs = ({
 		{
 			header: 'Price',
 			accessorKey: 'price',
-			type: 'input',
-			inputType: 'number',
+			type: 'number',
 			className: 'min-w-[100px]',
 		},
 		{
 			header: 'Remarks',
 			accessorKey: 'remarks',
-			type: 'input',
+			type: 'text',
 			className: 'min-w-[200px]',
 		},
 		{
 			header: 'Actions',
 			accessorKey: 'actions',
 			type: 'custom',
-			component: (field: any, index: number) => {
+			component: (index: number) => {
 				return (
 					<FieldActionButton
 						handleCopy={copy}

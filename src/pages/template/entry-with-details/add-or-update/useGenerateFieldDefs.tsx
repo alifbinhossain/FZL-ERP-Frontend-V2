@@ -47,17 +47,17 @@ const useGenerateFieldDefs = ({
 		{
 			header: 'Name',
 			accessorKey: 'name',
-			type: 'input',
+			type: 'text',
 		},
 		{
 			header: 'Email',
 			accessorKey: 'email',
-			type: 'input',
+			type: 'text',
 		},
 		{
 			header: 'Phone',
 			accessorKey: 'phone',
-			type: 'input',
+			type: 'text',
 		},
 		{
 			header: 'Designation',
@@ -77,7 +77,7 @@ const useGenerateFieldDefs = ({
 			header: 'Actions',
 			accessorKey: 'actions',
 			type: 'custom',
-			component: (field: any, index: number) => {
+			component: (index: number) => {
 				return (
 					<FieldActionButton
 						handleCopy={copy}

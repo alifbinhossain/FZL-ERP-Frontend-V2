@@ -145,7 +145,6 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		// * Data
 		data: data?.data,
 		toast: data?.toast,
-		pagination: data?.pagination || null,
 
 		// * States
 		isLoading: isLoading,

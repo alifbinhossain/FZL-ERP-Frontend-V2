@@ -63,6 +63,7 @@ const FormInput: React.FC<FormInputProps> = ({
 						icon={icon}
 						disabled={disabled}
 						{...field}
+						value={field.value === null ? '' : field.value}
 					/>
 				) : type === 'number' ? (
 					<Input
@@ -70,6 +71,7 @@ const FormInput: React.FC<FormInputProps> = ({
 						placeholder={placeholder}
 						icon={icon}
 						{...field}
+						value={field.value === null ? '' : field.value}
 						onBlur={(e) => {
 							field.onChange(+e.target.value);
 						}}
@@ -82,6 +84,7 @@ const FormInput: React.FC<FormInputProps> = ({
 						icon={icon}
 						disabled={disabled}
 						{...field}
+						value={field.value === null ? '' : field.value}
 					/>
 				)}
 			</FormControl>

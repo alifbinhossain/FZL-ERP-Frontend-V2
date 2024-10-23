@@ -6,22 +6,27 @@ interface IFormSectionProps {
 	title?: string;
 	children: React.ReactNode;
 	className?: string;
+	extraHeader?: React.ReactNode;
 }
 
 const FormSection: React.FC<IFormSectionProps> = ({
 	children,
 	className,
 	title,
+	extraHeader,
 }) => {
 	if (title) {
 		return (
 			<div className='overflow-hidden rounded-md shadow-sm'>
-				<h3 className='bg-primary px-4 py-2 text-lg font-medium text-primary-foreground'>
-					{title}
-				</h3>
+				<div className='flex flex-col justify-between gap-1 bg-primary py-2 pl-4 pr-2 sm:flex-row sm:items-center'>
+					<h3 className='text-lg font-medium text-primary-foreground'>
+						{title}
+					</h3>
+					{extraHeader}
+				</div>
 				<div
 					className={cn(
-						'grid grid-cols-1 gap-2.5 rounded-b-md border bg-base p-4 md:grid-cols-2 md:gap-4',
+						'grid grid-cols-1 gap-2.5 rounded-b-md border bg-base p-4 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3',
 						className
 					)}>
 					{children}
@@ -32,7 +37,7 @@ const FormSection: React.FC<IFormSectionProps> = ({
 	return (
 		<div
 			className={cn(
-				'grid grid-cols-1 gap-2.5 rounded-md border bg-base p-4 shadow-sm md:grid-cols-2 md:gap-4',
+				'grid grid-cols-1 gap-2.5 rounded-md border bg-base p-4 shadow-sm sm:grid-cols-2 sm:gap-4 lg:grid-cols-3',
 				className
 			)}>
 			{children}

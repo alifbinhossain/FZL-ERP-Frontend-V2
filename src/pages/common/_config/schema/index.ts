@@ -6,6 +6,7 @@ import {
 	NUMBER_NULLABLE,
 	NUMBER_REQUIRED,
 	STRING_NULLABLE,
+	STRING_OPTIONAL,
 	STRING_REQUIRED,
 	UUID_FK,
 	UUID_REQUIRED,
@@ -99,6 +100,7 @@ export type ICoilProd = z.infer<typeof COIL_PROD_SCHEMA>;
 export const COMMON_COIL_TO_DYEING_SCHEMA = z.object({
 	coil_to_dyeing_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			order_id: UUID_REQUIRED,
 			trx_quantity: NUMBER_DOUBLE_REQUIRED,
 			remarks: STRING_NULLABLE,
@@ -116,6 +118,7 @@ export type ICommonCoilToDyeing = z.infer<typeof COMMON_COIL_TO_DYEING_SCHEMA>;
 export const DYEING_TRANSFER_SCHEMA = z.object({
 	dyeing_transfer_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			order_description_uuid: STRING_REQUIRED,
 			colors: z.array(STRING_REQUIRED).nullable(),
 			trx_quantity: NUMBER_DOUBLE_REQUIRED,
@@ -185,6 +188,7 @@ export type ITapeStockTrxToDying = z.infer<
 export const DYEING_TRANSFER_FROM_STOCK_SCHEMA = z.object({
 	dyeing_transfer_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			order_description_uuid: STRING_REQUIRED,
 			trx_quantity: NUMBER_DOUBLE_REQUIRED,
 			remarks: STRING_NULLABLE,

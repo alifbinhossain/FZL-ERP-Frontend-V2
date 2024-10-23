@@ -9,6 +9,7 @@ import {
 	NUMBER_OPTIONAL,
 	NUMBER_REQUIRED,
 	STRING_NULLABLE,
+	STRING_OPTIONAL,
 	STRING_REQUIRED,
 } from '@/utils/validators';
 
@@ -16,6 +17,7 @@ import {
 export const DYEING_BATCH_PRODUCTION_SCHEMA = z.object({
 	batch_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			// production_quantity: NUMBER.nullable() // Allows the field to be null
 			// 	.transform((value, originalValue) =>
 			// 		String(originalValue).trim() === '' ? null : value
@@ -48,6 +50,7 @@ export const DYEING_BATCH_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 	batch_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			is_checked: BOOLEAN_REQUIRED.default(false),
 			// quantity: yup.number().when('is_checked', {
 			// 	is: true,
@@ -93,6 +96,7 @@ export const DYEING_THREAD_CONNEING_SCHEMA = z.object({
 
 	batch_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			coning_production_quantity: NUMBER_REQUIRED,
 			coning_production_quantity_in_kg: NUMBER_REQUIRED,
 			transfer_quantity: NUMBER_REQUIRED,
@@ -134,6 +138,7 @@ export const DYEING_THREAD_BATCH_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 	batch_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			batch_remarks: STRING_NULLABLE,
 		})
 	),
@@ -206,6 +211,7 @@ export const DYEING_PLANNING_SNO_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 	planning_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			// sno_quantity: NUMBER_NULLABLE.transform((value, originalValue) =>  // Allows the field to be null
 			// 	String(originalValue).trim() === '' ? null : value
 			// ) // Transforms empty strings to null
@@ -230,6 +236,7 @@ export const DYEING_PLANNING_HEADOFFICE_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 	planning_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			// factory_quantity: NUMBER_NULLABLE // Allows the field to be null
 			// 	.transform((value, originalValue) =>
 			// 		String(originalValue).trim() === '' ? null : value

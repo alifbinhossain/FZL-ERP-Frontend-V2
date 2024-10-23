@@ -93,7 +93,7 @@ export const LC_SCHEMA = z.object({
 	// ),
 	pi: z.array(
 		z.object({
-			uuid: STRING_NULLABLE,
+			uuid: STRING_OPTIONAL,
 		})
 	),
 });
@@ -141,6 +141,7 @@ export const PI_SCHEMA = z.object({
 	pi_cash_entry: z.array(
 		z
 			.object({
+				uuid: STRING_OPTIONAL,
 				is_checked: BOOLEAN_OPTIONAL,
 				sfg_uuid: STRING_NULLABLE,
 				max_quantity: NUMBER_REQUIRED,
@@ -184,6 +185,7 @@ export const PI_SCHEMA = z.object({
 	pi_cash_entry_thread: z.array(
 		z
 			.object({
+				uuid: STRING_OPTIONAL,
 				is_checked: BOOLEAN_OPTIONAL,
 				sfg_uuid: STRING_NULLABLE,
 				max_quantity: NUMBER_REQUIRED,
@@ -244,6 +246,7 @@ export const PI_CASH_SCHEMA = z.object({
 	pi_cash_entry: z.array(
 		z
 			.object({
+				uuid: STRING_OPTIONAL,
 				is_checked: BOOLEAN_OPTIONAL,
 				sfg_uuid: STRING_NULLABLE,
 				max_quantity: NUMBER_REQUIRED,
@@ -287,6 +290,7 @@ export const PI_CASH_SCHEMA = z.object({
 	pi_cash_entry_thread: z.array(
 		z
 			.object({
+				uuid: STRING_OPTIONAL,
 				is_checked: BOOLEAN_OPTIONAL,
 				sfg_uuid: STRING_NULLABLE,
 				max_quantity: NUMBER_REQUIRED,

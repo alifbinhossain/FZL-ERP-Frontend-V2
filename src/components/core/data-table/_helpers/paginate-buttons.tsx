@@ -28,6 +28,7 @@ function PaginateButtons({
 			activeLinkClassName={buttonVariants({
 				variant: 'gradient-accent',
 				size: 'icon',
+				className: '!from-accent !to-accent',
 			})}
 			previousClassName='hidden'
 			nextClassName='hidden'

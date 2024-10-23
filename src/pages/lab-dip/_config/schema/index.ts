@@ -4,6 +4,7 @@ import {
 	BOOLEAN_REQUIRED,
 	NUMBER_DOUBLE_REQUIRED,
 	STRING_NULLABLE,
+	STRING_OPTIONAL,
 	STRING_REQUIRED,
 } from '@/utils/validators';
 
@@ -15,6 +16,7 @@ export const LAB_INFO_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 	recipe: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			status: BOOLEAN_REQUIRED.default(false),
 			approved: BOOLEAN_REQUIRED.default(false),
 			recipe_uuid: STRING_REQUIRED,
@@ -48,6 +50,7 @@ export const LAB_RECIPE_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 	recipe_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			material_uuid: STRING_REQUIRED,
 			quantity: NUMBER_DOUBLE_REQUIRED,
 			remarks: STRING_NULLABLE,
@@ -74,6 +77,7 @@ export const SHADE_RECIPE_SCHEMA = z.object({
 	bleaching: STRING_REQUIRED.default('non-bleach'),
 	shade_recipe_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			material_uuid: STRING_REQUIRED,
 			quantity: NUMBER_DOUBLE_REQUIRED.gt(
 				0,

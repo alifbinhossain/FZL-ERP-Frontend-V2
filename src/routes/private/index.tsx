@@ -7,6 +7,7 @@ import HrRoutes from './Hr';
 import OrderRoutes from './Order';
 import StoreRoutes from './Store';
 import TemplateRoutes from './Template';
+import ThreadRoutes from './Thread';
 
 // import  IssueRoutes  from './Issue';
 // import  CommonRoutes  from './Common';
@@ -16,7 +17,6 @@ import TemplateRoutes from './Template';
 // import  SliderRoutes  from './Slider';
 // import  LibraryRoutes  from './Library';
 // import  DeliveryRoutes  from './Delivery';
-// import  ThreadRoutes  from './Thread';
 // import  LabDipRoutes  from './LabDip';
 // import  DyeingAndIronRoutes  from './DyeingAndIron';
 
@@ -24,7 +24,7 @@ const privateRoutes: IRoute[] = [
 	...DashboardRoutes,
 	...OrderRoutes,
 	// ...LabDipRoutes,
-	// ...ThreadRoutes,
+	...ThreadRoutes,
 	...CommercialRoutes,
 	// ...DeliveryRoutes,
 	...StoreRoutes,

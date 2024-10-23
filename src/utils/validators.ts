@@ -17,6 +17,13 @@ export const STRING_NULLABLE = STRING().nullable();
 export const STRING_REQUIRED = STRING('Required').min(1, 'Required');
 export const STRING_OPTIONAL = STRING().optional();
 
+// DATE
+export const DATE = (message = 'Required') =>
+	z.date({ required_error: message });
+export const DATE_REQUIRED = DATE('Required');
+export const DATE_OPTIONAL = DATE().optional();
+export const DATE_NULLABLE = DATE().nullable();
+
 // UUID
 export const UUID = (message = 'Required') =>
 	STRING(message).min(15, 'Invalid Primary Key UUID Length');

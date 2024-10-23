@@ -7,6 +7,7 @@ import {
 	NUMBER_NULLABLE,
 	NUMBER_REQUIRED,
 	STRING_NULLABLE,
+	STRING_OPTIONAL,
 	STRING_REQUIRED,
 } from '@/utils/validators';
 
@@ -14,6 +15,7 @@ import {
 export const SLIDER_SLIDER_ASSEMBLY_SCHEMA = z.object({
 	slider_slider_assembly_details: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			slider_slider_assembly_uuid: STRING_REQUIRED,
 			order_number: STRING_REQUIRED,
 			party: STRING_REQUIRED,
@@ -133,6 +135,7 @@ export const SLIDER_DIE_CASTING_TRANSFER_AGAINST_STOCK_SCHEMA = z.object({
 	order_description_uuid: STRING_NULLABLE, // TODO: Fix this
 	stocks: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			is_checked: BOOLEAN_REQUIRED,
 			// assigned_quantity: NUMBER.when('is_checked', {
 			// 	is: true,
@@ -329,6 +332,7 @@ export type ISliderDieCastingProductEdit = z.infer<
 export const SLIDER_DIE_CASTING_SCHEMA = z.object({
 	array: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			mc_no: NUMBER_REQUIRED,
 			die_casting_uuid: STRING_REQUIRED,
 			order_info_uuid: STRING_NULLABLE,

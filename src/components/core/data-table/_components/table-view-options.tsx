@@ -30,7 +30,9 @@ export function TableViewOptions<TData>({
 					View
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align='end' className='w-fit'>
+			<DropdownMenuContent
+				align='end'
+				className='max-h-[400px] w-fit overflow-auto'>
 				<DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				{table

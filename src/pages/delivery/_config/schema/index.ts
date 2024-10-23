@@ -8,6 +8,7 @@ import {
 	NUMBER_DOUBLE_REQUIRED,
 	NUMBER_OPTIONAL,
 	STRING_NULLABLE,
+	STRING_OPTIONAL,
 	STRING_REQUIRED,
 } from '@/utils/validators';
 
@@ -21,6 +22,7 @@ export const CHALLAN_SCHEMA = z.object({
 	gate_pass: BOOLEAN_DEFAULT_VALUE(false),
 	challan_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			packing_list_uuid: STRING_REQUIRED,
 			remarks: STRING_NULLABLE,
 		})
@@ -63,6 +65,7 @@ export const PACKING_LIST_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 	packing_list_entry: z.array(
 		z.object({
+			uuid: STRING_OPTIONAL,
 			is_checked: BOOLEAN_REQUIRED,
 			sfg_uuid: STRING_REQUIRED,
 			packing_list_uuid: STRING_NULLABLE,
