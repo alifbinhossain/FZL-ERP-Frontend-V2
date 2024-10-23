@@ -7,7 +7,7 @@ import useTable from '@/hooks/useTable';
 import { buttonVariants } from '@/components/ui/button';
 
 const TableExportCSV = () => {
-	const { table, title } = useTable();
+	const { table, title, isEntry } = useTable();
 
 	const filteredRows = table._getFilteredRowModel?.().rows || [];
 
@@ -45,7 +45,7 @@ const TableExportCSV = () => {
 			role='button'
 			type='button'
 			className={buttonVariants({
-				variant: 'secondary',
+				variant: isEntry ? 'gradient-accent' : 'secondary',
 				size: 'sm',
 				className: 'h-7',
 			})}

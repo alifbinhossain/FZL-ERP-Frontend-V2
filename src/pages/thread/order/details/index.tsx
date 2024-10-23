@@ -13,7 +13,7 @@ const DetailsPage = () => {
 	);
 
 	useEffect(() => {
-		document.title = 'Test Details';
+		document.title = 'Thread Order Info';
 	}, []);
 
 	if (isLoading) return <div>Loading...</div>;

@@ -15,19 +15,19 @@ import { cn } from '@/lib/utils';
 import { TableColumnHeader } from './_components/table-column-header';
 import { TablePagination } from './_components/table-pagination';
 import TableSkeleton from './_components/table-skeleton';
-import TableTitleHeader from './_components/table-title-header';
 import { TableToolbar } from './_components/table-toolbar';
 import { getCommonPinningStyles } from './_helpers/getCommonPinningStyle';
 
 function DataTable() {
-	const { table, isLoading, isOnlyTitle } = useTable();
+	const { table, isLoading, isEntry } = useTable();
+
 	return (
 		<div>
-			{isOnlyTitle === true ? <TableTitleHeader /> : <TableToolbar />}
+			<TableToolbar />
 			<div
 				className={cn(
 					'overflow-hidden border border-secondary/10',
-					isOnlyTitle ? 'rounded-b-md' : 'rounded-md'
+					isEntry ? 'rounded-b-md' : 'rounded-md'
 				)}>
 				<TableComponent>
 					<TableHeader>

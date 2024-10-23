@@ -59,7 +59,6 @@ export type ITableFacetedFilter = {
 
 export type IToolbarOptions =
 	| 'all'
-	| 'none'
 	| 'all-filter'
 	| 'view'
 	| 'date-range'

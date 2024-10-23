@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/button';
 import DebouncedInput from '@/components/ui/debounce-input';
 import { Separator } from '@/components/ui/separator';
 
+import { cn } from '@/lib/utils';
+
 import TableAllFilter from './table-all-filter';
 import TableDateRange from './table-date-range';
 import TableExportCSV from './table-export-csv';
@@ -59,6 +61,7 @@ export function TableToolbar() {
 		handleRefetch,
 		globalFilterValue,
 		facetedFilters,
+		isEntry,
 	} = useTable();
 
 	const isFiltered = table.getState().columnFilters.length > 0;
@@ -170,20 +173,59 @@ export function TableToolbar() {
 		[handleRefetch, createAccess, handleCreate]
 	);
 
-	return (
-		<div className='mb-4 flex w-full flex-col overflow-hidden'>
-			<div className='mb-4 flex w-full flex-col justify-between gap-2 border-b pb-4 lg:flex-row lg:items-end'>
-				<TableTitle title={title} subtitle={subtitle} />
+	if (isEntry) {
+		return (
+			<div className='flex items-center justify-between overflow-hidden rounded-t-md bg-primary px-4 py-3'>
+				<div className='flex items-center justify-between gap-4'>
+					<TableTitle
+						title={title}
+						subtitle={subtitle}
+						titleClassName={
+							'text-2xl font-semibold capitalize leading-tight text-primary-foreground md:text-3xl'
+						}
+					/>
+					{toolbarOptions === 'none' ? null : (
+						<div
+							className={cn('flex items-center justify-between')}>
+							{renderLeftSection()}
+							{renderRightSection()}
+						</div>
+					)}
+				</div>{' '}
 				<DebouncedInput
-					icon={<SearchIcon className='size-5 text-secondary/50' />}
+					icon={<SearchIcon className={cn('size-5 text-white/50')} />}
 					value={globalFilterValue ?? ''}
 					onChange={setGlobalFilter}
-					className='h-10 w-full lg:max-w-[300px]'
+					className={cn(
+						'bg-gradient-accent h-10 w-full border-accent/10 lg:max-w-[300px]'
+					)}
 					placeholder='Search...'
 				/>
 			</div>
-			{toolbarOptions?.includes('none') ? null : (
-				<div className='flex items-center justify-between'>
+		);
+	}
+
+	return (
+		<div className={cn('mb-4 flex w-full flex-col overflow-hidden')}>
+			<div
+				className={cn(
+					'mb-4 flex w-full flex-col justify-between gap-2 border-b pb-4 lg:flex-row lg:items-end'
+				)}>
+				<TableTitle title={title} subtitle={subtitle} />
+				<DebouncedInput
+					icon={
+						<SearchIcon
+							className={cn('size-5 text-secondary/50')}
+						/>
+					}
+					value={globalFilterValue ?? ''}
+					onChange={setGlobalFilter}
+					className={cn('h-10 w-full lg:max-w-[300px]')}
+					placeholder='Search...'
+				/>
+			</div>
+			{toolbarOptions === 'none' ? null : (
+				<div className={cn('flex items-center justify-between')}>
 					{renderLeftSection()}
 					{renderRightSection()}
 				</div>

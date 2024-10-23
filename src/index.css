@@ -31,6 +31,10 @@
 		@apply bg-gradient-to-r from-base to-base-150;
 	}
 
+	.bg-gradient-accent {
+		@apply bg-gradient-to-r from-accent/20 to-accent/30 text-white;
+	}
+
 	.sb-red {
 		@apply border border-red-500;
 	}
