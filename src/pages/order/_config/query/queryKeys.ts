@@ -1,4 +1,4 @@
-import { IParams } from '@/types';
+import { DateRange } from 'react-day-picker';
 
 export const orderQK = {
 	all: () => ['order'],
@@ -48,10 +48,10 @@ export const orderQK = {
 
 	// merchandisers
 	merchandiser: () => [...orderQK.all(), 'merchandisers'],
-	merchandiserQuery: ({ start_date, end_date }: IParams) => [
+	merchandiserQuery: ({ from, to }: DateRange) => [
 		...orderQK.merchandiser(),
-		start_date,
-		end_date,
+		from,
+		to,
 	],
 	merchandiserByUUID: (uuid: string) => [...orderQK.merchandiser(), uuid],
 

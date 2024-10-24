@@ -46,6 +46,9 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
 	disableLabel,
 	calendarProps,
 }) => {
+	console.log({
+		value: field.value,
+	});
 	return (
 		<FormItem className='space-y-1.5'>
 			{!disableLabel && (
@@ -91,6 +94,7 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
 						onSelect={(date) =>
 							field.onChange(formatDate(date as Date))
 						}
+						defaultMonth={new Date(field.value)}
 					/>
 				</PopoverContent>
 			</Popover>

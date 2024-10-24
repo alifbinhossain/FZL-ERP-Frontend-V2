@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState, type FC } from 'react';
+import { differenceInCalendarMonths, differenceInMonths } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
 import { Button } from './button';
 import { Calendar } from './calendar';
-import { DateInput } from './date-input';
+import CalendarPopup from './calender-popup';
 import { Label } from './label';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
 import { ScrollArea } from './scroll-area';
@@ -16,6 +17,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from './select';
+import { Separator } from './separator';
 import { Switch } from './switch';
 
 export interface DateRangePickerProps {
@@ -35,6 +37,10 @@ export interface DateRangePickerProps {
 	locale?: string;
 	/** Option for showing compare feature */
 	showCompare?: boolean;
+
+	/** Option for showing clear button */
+	showClear?: boolean;
+	onClear?: () => void;
 }
 
 const formatDate = (date: Date, locale: string = 'en-us'): string => {
@@ -59,7 +65,7 @@ const getDateAdjustedForTimezone = (dateInput: Date | string): Date => {
 	}
 };
 
-interface DateRange {
+export interface DateRange {
 	from: Date;
 	to: Date | undefined;
 }
@@ -71,10 +77,10 @@ interface Preset {
 
 // Define presets
 const PRESETS: Preset[] = [
-	{ name: 'lastThreeMonths', label: '3 Months' },
-	{ name: 'lastSixMonths', label: '6 Months' },
 	{ name: 'today', label: 'Today' },
 	{ name: 'yesterday', label: 'Yesterday' },
+	{ name: 'lastThreeMonths', label: '3 Months' },
+	{ name: 'lastSixMonths', label: '6 Months' },
 	{ name: 'last7', label: 'Last 7 days' },
 	{ name: 'last14', label: 'Last 14 days' },
 	{ name: 'last30', label: 'Last 30 days' },
@@ -97,6 +103,8 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 	align = 'end',
 	locale = 'en-US',
 	showCompare = false,
+	showClear = false,
+	onClear,
 }): JSX.Element => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -376,6 +384,11 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 		}
 	}, [isOpen]);
 
+	const monthDifference = differenceInCalendarMonths(
+		range.to ?? new Date(),
+		range.from
+	);
+
 	return (
 		<Popover
 			modal={true}
@@ -416,7 +429,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 			<PopoverContent align={align} className='w-auto p-0'>
 				<div className='flex'>
 					<div className='gap flex flex-col'>
-						<div className='flex flex-col items-center justify-center gap-2 border-b px-8 py-4 lg:flex-row lg:items-start'>
+						<div className='flex flex-col items-center justify-center gap-2 border-b px-4 py-2 lg:flex-row lg:items-start'>
 							{showCompare && (
 								<div className='flex items-center space-x-2 py-1 pr-4'>
 									<Switch
@@ -462,83 +475,47 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 								</div>
 							)}
 							<div className='flex flex-col gap-2'>
-								<div className='flex gap-2'>
-									<DateInput
-										value={range.from}
-										onChange={(date) => {
-											const toDate =
-												range.to == null ||
-												date > range.to
-													? date
-													: range.to;
+								<div className='flex items-center gap-2'>
+									<CalendarPopup
+										selected={range?.from}
+										onSelect={(date) => {
 											setRange((prevRange) => ({
 												...prevRange,
-												from: date,
-												to: toDate,
+												from: date!,
 											}));
 										}}
 									/>
-									<div className='py-1'>-</div>
-									<DateInput
-										value={range.to}
-										onChange={(date) => {
-											const fromDate =
-												date < range.from
-													? date
-													: range.from;
+									{'-'}
+									<CalendarPopup
+										selected={range?.to}
+										onSelect={(date) => {
 											setRange((prevRange) => ({
 												...prevRange,
-												from: fromDate,
-												to: date,
+												to: date!,
 											}));
 										}}
 									/>
 								</div>
+
 								{rangeCompare != null && (
-									<div className='flex gap-2'>
-										<DateInput
-											value={rangeCompare?.from}
-											onChange={(date) => {
-												if (rangeCompare) {
-													const compareToDate =
-														rangeCompare.to ==
-															null ||
-														date > rangeCompare.to
-															? date
-															: rangeCompare.to;
-													setRangeCompare(
-														(prevRangeCompare) => ({
-															...prevRangeCompare,
-															from: date,
-															to: compareToDate,
-														})
-													);
-												} else {
-													setRangeCompare({
-														from: date,
-														to: new Date(),
-													});
-												}
+									<div className='flex items-center gap-2'>
+										<CalendarPopup
+											selected={range.from}
+											onSelect={(date) => {
+												setRange((prevRange) => ({
+													...prevRange,
+													from: date!,
+												}));
 											}}
 										/>
-										<div className='py-1'>-</div>
-										<DateInput
-											value={rangeCompare?.to}
-											onChange={(date) => {
-												if (
-													rangeCompare &&
-													rangeCompare.from
-												) {
-													const compareFromDate =
-														date < rangeCompare.from
-															? date
-															: rangeCompare.from;
-													setRangeCompare({
-														...rangeCompare,
-														from: compareFromDate,
-														to: date,
-													});
-												}
+										{'-'}
+										<CalendarPopup
+											selected={range.to}
+											onSelect={(date) => {
+												setRange((prevRange) => ({
+													...prevRange,
+													to: date!,
+												}));
 											}}
 										/>
 									</div>
@@ -546,7 +523,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 							</div>
 						</div>
 
-						<div className='flex flex-col items-center justify-center bg-base-150 py-4 lg:flex-row lg:items-start lg:py-0'>
+						<div className='flex flex-col items-center justify-center bg-base py-4 lg:flex-row lg:items-start lg:py-0'>
 							{isSmallScreen && (
 								<Select
 									defaultValue={selectedPreset}
@@ -556,7 +533,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 									<SelectTrigger className='mx-auto w-[180px]'>
 										<SelectValue placeholder='Select...' />
 									</SelectTrigger>
-									<SelectContent>
+									<SelectContent className='z-[9999999]'>
 										{PRESETS.map((preset) => (
 											<SelectItem
 												key={preset.name}
@@ -606,7 +583,9 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 								defaultMonth={
 									new Date(
 										new Date().setMonth(
-											new Date().getMonth() -
+											new Date(
+												range.to || new Date()
+											).getMonth() -
 												(isSmallScreen ? 0 : 1)
 										)
 									)
@@ -616,8 +595,9 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 					</div>
 				</div>
 
-				<div className='flex justify-end gap-4 border-t px-4 py-4'>
+				<div className='flex items-center justify-end gap-4 border-t px-4 py-3'>
 					<Button
+						size={'sm'}
 						aria-label='Cancel'
 						onClick={() => {
 							setIsOpen(false);
@@ -626,7 +606,24 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 						variant='outline'>
 						Cancel
 					</Button>
+					<Separator
+						orientation={'vertical'}
+						className='h-6 bg-input'
+					/>
+					{showClear && (
+						<Button
+							size={'sm'}
+							aria-label='Cancel'
+							onClick={() => {
+								setIsOpen(false);
+								onClear?.();
+							}}
+							variant='destructive'>
+							Clear
+						</Button>
+					)}
 					<Button
+						size={'sm'}
 						aria-label='Apply'
 						variant={'accent'}
 						onClick={() => {

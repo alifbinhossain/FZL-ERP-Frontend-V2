@@ -1,7 +1,7 @@
-import useDateRange from '@/hooks/useDateRange';
+import { DateRange } from 'react-day-picker';
 import useTQuery from '@/hooks/useTQuery';
 
-import addUrlParams from '@/utils/addUrlParams';
+import addDateParams from '@/utils/addDateParams';
 
 import { orderQK } from './queryKeys';
 
@@ -117,22 +117,10 @@ export const useOrderFactoryByUUID = <T>(uuid: string) =>
 	});
 
 // * Merchandiser * //
-// export const useOrderMerchandiser = <T>() => {
-// 	const { limit, page } = useQueryParams();
-// 	return useTQuery<T>({
-// 		queryKey: orderQK.merchandiserPagination({ limit, page }),
-// 		url: addUrlParams('/public/merchandiser', { limit, page }),
-// 	});
-// };
-export const useOrderMerchandiser = <T>() => {
-	const { start_date, end_date, formatted_start_date, formatted_end_date } =
-		useDateRange();
+export const useOrderMerchandiser = <T>(date: DateRange) => {
 	return useTQuery<T>({
-		queryKey: orderQK.merchandiserQuery({ start_date, end_date }),
-		url: addUrlParams(`/public/merchandiser`, {
-			start_date: formatted_start_date,
-			end_date: formatted_end_date,
-		}),
+		queryKey: orderQK.merchandiserQuery(date),
+		url: addDateParams(`/public/merchandiser`, date),
 	});
 };
 

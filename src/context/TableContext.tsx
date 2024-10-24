@@ -20,6 +20,7 @@ import {
 	VisibilityState,
 } from '@tanstack/react-table';
 import { max, min } from 'date-fns';
+import { DateRange } from 'react-day-picker';
 
 import DataTable from '@/components/core/data-table';
 import { TableRowSelection } from '@/components/core/data-table/_components/table-row-selection';
@@ -49,6 +50,8 @@ declare module '@tanstack/react-table' {
 interface ITableContext<TData> {
 	title: string;
 	subtitle?: string;
+	date?: DateRange;
+	setDate?: React.Dispatch<React.SetStateAction<DateRange>>;
 	isEntry?: boolean;
 	table: Table<TData>;
 	isLoading?: boolean;
@@ -72,6 +75,8 @@ export const TableContext = createContext({} as ITableContext<any>);
 interface ITableProviderProps<TData, TValue> {
 	title: string;
 	subtitle?: string;
+	date?: DateRange;
+	setDate?: React.Dispatch<React.SetStateAction<DateRange>>;
 	isEntry?: boolean;
 	children?: React.ReactNode;
 	columns: ColumnDef<TData, TValue>[];
@@ -94,6 +99,8 @@ interface ITableProviderProps<TData, TValue> {
 function TableProvider<TData, TValue>({
 	title,
 	subtitle,
+	date,
+	setDate,
 	isEntry = false,
 	children,
 	columns,
@@ -196,6 +203,8 @@ function TableProvider<TData, TValue>({
 		() => ({
 			title,
 			subtitle,
+			date,
+			setDate,
 			isEntry,
 			isLoading,
 			table,
@@ -215,6 +224,8 @@ function TableProvider<TData, TValue>({
 		[
 			title,
 			subtitle,
+			date,
+			setDate,
 			isEntry,
 			isLoading,
 			table,

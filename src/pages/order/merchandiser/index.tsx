@@ -2,7 +2,9 @@ import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
 import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
+import { DateRange } from 'react-day-picker';
 
+import getDefaultDateRange from '@/utils/getDefaultDateRange';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { merchandiserColumns } from '../_config/columns';
@@ -16,8 +18,10 @@ const DeleteAllModal = lazy(
 );
 
 const Merchandiser = () => {
+	const [date, setDate] = useState<DateRange>(getDefaultDateRange());
+
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useOrderMerchandiser<IMerchandiserData[]>();
+		useOrderMerchandiser<IMerchandiserData[]>(date);
 
 	const pageInfo = useMemo(
 		() => new PageInfo('Merchandiser', url, 'order__merchandiser'),
@@ -82,6 +86,8 @@ const Merchandiser = () => {
 			pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
+				date={date}
+				setDate={setDate}
 				columns={columns}
 				data={data ?? []}
 				isLoading={isLoading}
