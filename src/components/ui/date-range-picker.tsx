@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type FC } from 'react';
-import { differenceInCalendarMonths, differenceInMonths } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -383,11 +382,6 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 			openedRangeCompareRef.current = rangeCompare;
 		}
 	}, [isOpen]);
-
-	const monthDifference = differenceInCalendarMonths(
-		range.to ?? new Date(),
-		range.from
-	);
 
 	return (
 		<Popover
