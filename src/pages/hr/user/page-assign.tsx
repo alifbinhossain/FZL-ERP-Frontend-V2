@@ -207,7 +207,7 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 			/>
 
 			<Tabs value={selectPageName} className='w-full'>
-				<TabsList className='flex w-full justify-start bg-base-200'>
+				<TabsList className='flex h-full min-h-10 w-full flex-wrap justify-start gap-y-2 bg-base-200'>
 					<TabsTrigger
 						type={'button'}
 						value={'all'}
