@@ -3,25 +3,17 @@ import { Plus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
-import { DynamicFieldsProps } from '..';
+import { DynamicFieldsProps } from '../types';
 
-interface IProps
-	extends Pick<DynamicFieldsProps, 'handleAdd' | 'extraHeader' | 'title'> {
+interface IProps extends Pick<DynamicFieldsProps, 'handleAdd' | 'extraHeader' | 'title'> {
 	children: React.ReactNode;
 }
 
-const DynamicFieldContainer: React.FC<IProps> = ({
-	title,
-	extraHeader,
-	handleAdd,
-	children,
-}) => {
+const DynamicFieldContainer: React.FC<IProps> = ({ title, extraHeader, handleAdd, children }) => {
 	return (
 		<div className='overflow-hidden rounded-md shadow-sm'>
 			<div className='flex items-center justify-between bg-primary py-2 pl-4 pr-2'>
-				<h3 className='text-lg font-medium text-primary-foreground'>
-					{title || 'Dynamic Fields'}
-				</h3>
+				<h3 className='text-lg font-medium text-primary-foreground'>{title || 'Dynamic Fields'}</h3>
 
 				<div className='flex items-center gap-4'>
 					{extraHeader}

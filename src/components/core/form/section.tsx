@@ -2,26 +2,14 @@ import React from 'react';
 
 import { cn } from '@/lib/utils';
 
-interface IFormSectionProps {
-	title?: string;
-	children: React.ReactNode;
-	className?: string;
-	extraHeader?: React.ReactNode;
-}
+import { IFormSectionProps } from './types';
 
-const FormSection: React.FC<IFormSectionProps> = ({
-	children,
-	className,
-	title,
-	extraHeader,
-}) => {
+const FormSection: React.FC<IFormSectionProps> = ({ children, className, title, extraHeader }) => {
 	if (title) {
 		return (
 			<div className='overflow-hidden rounded-md shadow-sm'>
 				<div className='flex flex-col justify-between gap-1 bg-primary py-2 pl-4 pr-2 sm:flex-row sm:items-center'>
-					<h3 className='text-lg font-medium text-primary-foreground'>
-						{title}
-					</h3>
+					<h3 className='text-lg font-medium text-primary-foreground'>{title}</h3>
 					{extraHeader}
 				</div>
 				<div

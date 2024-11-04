@@ -5,11 +5,7 @@ import { ShowToast } from '@/components/toast';
 
 import { BASE_API } from './secret';
 
-export const createApi = ({
-	contentType,
-}: {
-	contentType: AxiosHeaderValue;
-}) => {
+export const createApi = ({ contentType }: { contentType: AxiosHeaderValue }) => {
 	const api = axios.create({
 		baseURL: BASE_API,
 		headers: { 'Content-Type': contentType },

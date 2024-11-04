@@ -25,15 +25,9 @@ const TableList = ({ items, title, className }: ITableListProps) => {
 				<Table>
 					<TableBody>
 						{items.map((item) => (
-							<TableRow
-								key={item.label}
-								className='h-10 cursor-pointer border-b last:border-b-0'>
-								<TableCell className='w-1/2 font-semibold'>
-									{item.label}
-								</TableCell>
-								<TableCell className='w-1/2'>
-									{item.value || '--'}
-								</TableCell>
+							<TableRow key={item.label} className='h-10 cursor-pointer border-b last:border-b-0'>
+								<TableCell className='w-1/2 font-semibold'>{item.label}</TableCell>
+								<TableCell className='w-1/2'>{item.value || '--'}</TableCell>
 							</TableRow>
 						))}
 					</TableBody>

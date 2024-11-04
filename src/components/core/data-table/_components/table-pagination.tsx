@@ -1,19 +1,8 @@
-import {
-	ChevronLeftIcon,
-	ChevronRightIcon,
-	DoubleArrowLeftIcon,
-	DoubleArrowRightIcon,
-} from '@radix-ui/react-icons';
+import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from '@radix-ui/react-icons';
 import useTable from '@/hooks/useTable';
 
 import { Button } from '@/components/ui/button';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 import PaginateButtons from '../_helpers/paginate-buttons';
 
@@ -24,8 +13,8 @@ export function TablePagination() {
 		<div className='flex w-full items-center justify-between overflow-hidden border-t border-secondary/10 px-6 py-3'>
 			{enableRowSelection === true ? (
 				<div className='flex-1 text-sm text-muted-foreground'>
-					{table.getFilteredSelectedRowModel().rows.length} of{' '}
-					{table.getFilteredRowModel().rows.length} row(s) selected.
+					{table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{' '}
+					row(s) selected.
 				</div>
 			) : null}
 			<div className='flex flex-1 items-center justify-between space-x-6 lg:space-x-8'>
@@ -36,20 +25,12 @@ export function TablePagination() {
 						onValueChange={(value) => {
 							table.setPageSize(Number(value));
 						}}>
-						<SelectTrigger
-							aria-label='Rows per page'
-							className='h-8 w-[70px]'>
-							<SelectValue
-								placeholder={
-									table.getState().pagination.pageSize
-								}
-							/>
+						<SelectTrigger aria-label='Rows per page' className='h-8 w-[70px]'>
+							<SelectValue placeholder={table.getState().pagination.pageSize} />
 						</SelectTrigger>
 						<SelectContent side='top'>
 							{[10, 20, 30, 40, 50].map((pageSize) => (
-								<SelectItem
-									key={pageSize}
-									value={`${pageSize}`}>
+								<SelectItem key={pageSize} value={`${pageSize}`}>
 									{pageSize}
 								</SelectItem>
 							))}
@@ -97,9 +78,7 @@ export function TablePagination() {
 						aria-label='Go to last page'
 						variant='outline'
 						className='hidden h-8 w-8 p-0 lg:flex'
-						onClick={() =>
-							table.setPageIndex(table.getPageCount() - 1)
-						}
+						onClick={() => table.setPageIndex(table.getPageCount() - 1)}
 						disabled={!table.getCanNextPage()}>
 						<span className='sr-only'>Go to last page</span>
 						<DoubleArrowRightIcon className='h-4 w-4' />

@@ -25,11 +25,7 @@ const SidebarProvider: React.FC<ISidebarProviderProps> = ({ children }) => {
 		};
 	}, [path, isCloseAll]);
 
-	return (
-		<SidebarContext.Provider value={value}>
-			{children}
-		</SidebarContext.Provider>
-	);
+	return <SidebarContext.Provider value={value}>{children}</SidebarContext.Provider>;
 };
 
 export default SidebarProvider;

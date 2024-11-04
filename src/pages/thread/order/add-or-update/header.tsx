@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
 import CoreForm from '@/components/core/form';
-import { IFormSelectOption } from '@/components/core/form/form-select';
+import { IFormSelectOption } from '@/components/core/form/select';
 import { FormField } from '@/components/ui/form';
 
 import {
@@ -20,35 +20,25 @@ const Header = () => {
 	const { data: marketing } = useOtherMarketing<IFormSelectOption[]>();
 	const { data: buyer } = useOtherBuyer<IFormSelectOption[]>();
 	const { data: party } = useOtherParty<IFormSelectOption[]>();
-	const { data: merchandiser } = useOtherMerchandiserByPartyUUID<
-		IFormSelectOption[]
-	>(form.watch('party_uuid'));
-	const { data: factory } = useOtherFactoryByPartyUUID<IFormSelectOption[]>(
-		form.watch('party_uuid')
-	);
+	const { data: merchandiser } = useOtherMerchandiserByPartyUUID<IFormSelectOption[]>(form.watch('party_uuid'));
+	const { data: factory } = useOtherFactoryByPartyUUID<IFormSelectOption[]>(form.watch('party_uuid'));
 
 	const extraHeader = (
 		<div className='flex items-center gap-2'>
 			<FormField
 				control={form.control}
 				name='is_sample'
-				render={(props) => (
-					<CoreForm.Checkbox isBoxed label={'Sample'} {...props} />
-				)}
+				render={(props) => <CoreForm.Checkbox isBoxed label={'Sample'} {...props} />}
 			/>
 			<FormField
 				control={form.control}
 				name='is_bill'
-				render={(props) => (
-					<CoreForm.Checkbox isBoxed label={'Bill'} {...props} />
-				)}
+				render={(props) => <CoreForm.Checkbox isBoxed label={'Bill'} {...props} />}
 			/>
 			<FormField
 				control={form.control}
 				name='is_cash'
-				render={(props) => (
-					<CoreForm.Checkbox isBoxed label={'Cash'} {...props} />
-				)}
+				render={(props) => <CoreForm.Checkbox isBoxed label={'Cash'} {...props} />}
 			/>
 		</div>
 	);
@@ -121,11 +111,7 @@ const Header = () => {
 				render={(props) => <CoreForm.DatePicker {...props} />}
 			/>
 			<div className='sm:col-span-2 lg:col-span-3'>
-				<FormField
-					control={form.control}
-					name='remarks'
-					render={(props) => <CoreForm.Textarea {...props} />}
-				/>
+				<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 			</div>
 		</CoreForm.Section>
 	);

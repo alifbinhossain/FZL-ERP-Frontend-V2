@@ -2,7 +2,7 @@ import { UseFormWatch } from 'react-hook-form';
 
 import FieldActionButton from '@/components/buttons/field-action-button';
 import { FieldDef } from '@/components/core/form/form-dynamic-fields';
-import { IFormSelectOption } from '@/components/core/form/form-select';
+import { IFormSelectOption } from '@/components/core/form/select';
 
 import { ITest3 } from '../../_config/schema';
 
@@ -12,11 +12,7 @@ interface IGenerateFieldDefsProps {
 	watch?: UseFormWatch<ITest3>; // TODO: Update Schema Type
 }
 
-const useGenerateFieldDefs = ({
-	copy,
-	remove,
-	watch,
-}: IGenerateFieldDefsProps): FieldDef[] => {
+const useGenerateFieldDefs = ({ copy, remove, watch }: IGenerateFieldDefsProps): FieldDef[] => {
 	const designationOptions: IFormSelectOption[] = [
 		{
 			label: 'Software Engineer',
@@ -78,13 +74,7 @@ const useGenerateFieldDefs = ({
 			accessorKey: 'actions',
 			type: 'custom',
 			component: (index: number) => {
-				return (
-					<FieldActionButton
-						handleCopy={copy}
-						handleRemove={remove}
-						index={index}
-					/>
-				);
+				return <FieldActionButton handleCopy={copy} handleRemove={remove} index={index} />;
 			},
 		},
 	];

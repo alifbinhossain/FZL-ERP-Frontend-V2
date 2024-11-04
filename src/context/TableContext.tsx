@@ -20,6 +20,7 @@ import {
 	VisibilityState,
 } from '@tanstack/react-table';
 import { max, min } from 'date-fns';
+import { DateRange } from 'react-day-picker';
 
 import DataTable from '@/components/core/data-table';
 import { TableRowSelection } from '@/components/core/data-table/_components/table-row-selection';
@@ -55,9 +56,7 @@ interface ITableContext<TData> {
 	handleCreate?: () => void;
 	handleUpdate?: (row: Row<TData>) => void;
 	handleDelete?: (row: Row<TData>) => void;
-	handleRefetch?: (
-		options?: RefetchOptions
-	) => Promise<QueryObserverResult<IResponse<any>, Error>>;
+	handleRefetch?: (options?: RefetchOptions) => Promise<QueryObserverResult<IResponse<any>, Error>>;
 	handleDeleteAll?: (rows: Row<TData>[]) => void;
 	initialDateRange: [Date | string, Date | string];
 	globalFilterValue?: string;
@@ -65,6 +64,9 @@ interface ITableContext<TData> {
 	toolbarOptions?: 'none' | IToolbarOptions[];
 	enableRowSelection?: boolean;
 	enableDefaultColumns?: boolean;
+	start_date?: Date | string;
+	end_date?: Date | string;
+	onUpdate?: ({ range }: { range: DateRange }) => void;
 }
 
 export const TableContext = createContext({} as ITableContext<any>);
@@ -82,13 +84,14 @@ interface ITableProviderProps<TData, TValue> {
 	handleCreate?: () => void;
 	handleUpdate?: (row: Row<TData>) => void;
 	handleDelete?: (row: Row<TData>) => void;
-	handleRefetch?: (
-		options?: RefetchOptions
-	) => Promise<QueryObserverResult<IResponse<any>, Error>>;
+	handleRefetch?: (options?: RefetchOptions) => Promise<QueryObserverResult<IResponse<any>, Error>>;
 	handleDeleteAll?: (rows: Row<TData>[]) => void;
 	facetedFilters?: ITableFacetedFilter[];
 	toolbarOptions?: 'none' | IToolbarOptions[];
 	defaultVisibleColumns?: VisibilityState;
+	start_date?: Date | string;
+	end_date?: Date | string;
+	onUpdate?: ({ range }: { range: DateRange }) => void;
 }
 
 function TableProvider<TData, TValue>({
@@ -109,6 +112,9 @@ function TableProvider<TData, TValue>({
 	facetedFilters,
 	toolbarOptions = ['all'],
 	defaultVisibleColumns = {},
+	start_date,
+	end_date,
+	onUpdate,
 }: ITableProviderProps<TData, TValue>) {
 	const [isMounted, setIsMounted] = useState(false);
 
@@ -116,18 +122,12 @@ function TableProvider<TData, TValue>({
 	const tableData = useMemo(() => data, [data]);
 	const tableColumns = useMemo(() => columns, [columns]);
 	const defaultColumns = useDefaultColumns<TData, TValue>();
-	const renderColumns = enableDefaultColumns
-		? tableColumns.concat(defaultColumns)
-		: tableColumns;
+	const renderColumns = enableDefaultColumns ? tableColumns.concat(defaultColumns) : tableColumns;
 
-	const visibleColumns = renderColumns.filter(
-		(column) => !column.meta?.hidden
-	);
+	const visibleColumns = renderColumns.filter((column) => !column.meta?.hidden);
 
 	const [rowSelection, setRowSelection] = useState({});
-	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
-		defaultVisibleColumns
-	);
+	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(defaultVisibleColumns);
 
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [sorting, setSorting] = useState<SortingState>([
@@ -146,9 +146,7 @@ function TableProvider<TData, TValue>({
 
 	const table = useReactTable({
 		data: tableData,
-		columns: enableRowSelection
-			? [TableRowSelection<TData, TValue>(), ...visibleColumns]
-			: visibleColumns,
+		columns: enableRowSelection ? [TableRowSelection<TData, TValue>(), ...visibleColumns] : visibleColumns,
 		initialState: {
 			columnPinning: { right: ['actions'] },
 		},
@@ -162,8 +160,7 @@ function TableProvider<TData, TValue>({
 		enableRowSelection: true,
 
 		filterFns: {
-			dateRange: (row, columnId, value) =>
-				dateRange(row, columnId, value),
+			dateRange: (row, columnId, value) => dateRange(row, columnId, value),
 			fuzzy: fuzzyFilter,
 		},
 
@@ -207,10 +204,12 @@ function TableProvider<TData, TValue>({
 			initialDateRange: [minDate, maxDate],
 			globalFilterValue: globalFilter,
 			facetedFilters,
-			toolbarOptions:
-				toolbarOptions.length > 0 ? toolbarOptions : ['all'],
+			toolbarOptions: toolbarOptions.length > 0 ? toolbarOptions : ['all'],
 			enableRowSelection,
 			enableDefaultColumns,
+			start_date,
+			end_date,
+			onUpdate,
 		}),
 		[
 			title,
@@ -230,6 +229,9 @@ function TableProvider<TData, TValue>({
 			toolbarOptions,
 			enableRowSelection,
 			enableDefaultColumns,
+			start_date,
+			end_date,
+			onUpdate,
 		]
 	);
 

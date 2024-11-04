@@ -26,20 +26,12 @@ const SectionContainer = ({
 					</h3>
 
 					{buttons && buttons.length > 0 && (
-						<div className='flex items-center gap-2'>
-							{buttons.map((e) => e)}
-						</div>
+						<div className='flex items-center gap-2'>{buttons.map((e) => e)}</div>
 					)}
 				</div>
 				<div className='w-32'>{selector}</div>
 			</div>
-			<div
-				className={cn(
-					'overflow-hidden rounded-md rounded-t-none border',
-					contentClassName
-				)}>
-				{children}
-			</div>
+			<div className={cn('overflow-hidden rounded-md rounded-t-none border', contentClassName)}>{children}</div>
 		</div>
 	);
 };

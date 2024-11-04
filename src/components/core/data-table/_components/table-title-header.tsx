@@ -10,10 +10,7 @@ const TableTitleHeader = () => {
 	const { title, globalFilterValue, table } = useTable();
 
 	// Memoize the callback for setting global filter
-	const setGlobalFilter = useCallback(
-		(value: string | number) => table.setGlobalFilter(value),
-		[table]
-	);
+	const setGlobalFilter = useCallback((value: string | number) => table.setGlobalFilter(value), [table]);
 
 	return (
 		<div className='flex items-center justify-between gap-2 rounded-t-md bg-primary px-4 py-3'>

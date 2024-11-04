@@ -31,19 +31,14 @@ interface ToolbarComponentProps {
  * @param option - The toolbar option to check
  * @param render - Function to render the toolbar item
  */
-const ToolbarComponent: React.FC<ToolbarComponentProps> = React.memo(
-	({ option, render }) => {
-		const { toolbarOptions } = useTable();
+const ToolbarComponent: React.FC<ToolbarComponentProps> = React.memo(({ option, render }) => {
+	const { toolbarOptions } = useTable();
 
-		if (
-			toolbarOptions?.includes(option) ||
-			toolbarOptions?.includes('all')
-		) {
-			return render();
-		}
-		return null;
+	if (toolbarOptions?.includes(option) || toolbarOptions?.includes('all')) {
+		return render();
 	}
-);
+	return null;
+});
 
 ToolbarComponent.displayName = 'ToolbarComponent';
 
@@ -62,21 +57,18 @@ export function TableToolbar() {
 		globalFilterValue,
 		facetedFilters,
 		isEntry,
+		start_date,
+		end_date,
+		onUpdate,
 	} = useTable();
 
 	const isFiltered = table.getState().columnFilters.length > 0;
 
 	// Memoize the callback for resetting column filters
-	const resetColumnFilters = useCallback(
-		() => table.resetColumnFilters(),
-		[table]
-	);
+	const resetColumnFilters = useCallback(() => table.resetColumnFilters(), [table]);
 
 	// Memoize the callback for setting global filter
-	const setGlobalFilter = useCallback(
-		(value: string | number) => table.setGlobalFilter(value),
-		[table]
-	);
+	const setGlobalFilter = useCallback((value: string | number) => table.setGlobalFilter(value), [table]);
 
 	/**
 	 * Renders the left section of the toolbar
@@ -87,19 +79,13 @@ export function TableToolbar() {
 				<ToolbarComponent
 					option='all-filter'
 					render={() =>
-						table
-							.getAllColumns()
-							.filter((column) => column.getCanFilter()).length >
-							0 && <TableAllFilter />
+						table.getAllColumns().filter((column) => column.getCanFilter()).length > 0 && <TableAllFilter />
 					}
 				/>
-				<ToolbarComponent
-					option='view'
-					render={() => <TableViewOptions table={table} />}
-				/>
+				<ToolbarComponent option='view' render={() => <TableViewOptions table={table} />} />
 				<ToolbarComponent
 					option='date-range'
-					render={() => <TableDateRange />}
+					render={() => <TableDateRange start_date={start_date} end_date={end_date} onUpdate={onUpdate} />}
 				/>
 				<ToolbarComponent
 					option='faceted-filter'
@@ -129,13 +115,10 @@ export function TableToolbar() {
 				)}
 				<Separator orientation='vertical' className='h-6' />
 
-				<ToolbarComponent
-					option='export-csv'
-					render={() => <TableExportCSV />}
-				/>
+				<ToolbarComponent option='export-csv' render={() => <TableExportCSV />} />
 			</div>
 		),
-		[table, facetedFilters, isFiltered, resetColumnFilters]
+		[table, facetedFilters, isFiltered, resetColumnFilters, start_date, end_date, onUpdate]
 	);
 
 	/**
@@ -147,21 +130,13 @@ export function TableToolbar() {
 				<TableRowDelete />
 				<ToolbarComponent
 					option='refresh'
-					render={() =>
-						handleRefetch && (
-							<TableRefresh handleRefetch={handleRefetch} />
-						)
-					}
+					render={() => handleRefetch && <TableRefresh handleRefetch={handleRefetch} />}
 				/>
 				<ToolbarComponent
 					option='new-entry'
 					render={() =>
 						createAccess && (
-							<Button
-								aria-label='Create new entry'
-								onClick={handleCreate}
-								variant='accent'
-								size='sm'>
+							<Button aria-label='Create new entry' onClick={handleCreate} variant='accent' size='sm'>
 								<CirclePlus className='size-4' />
 								New
 							</Button>
@@ -185,8 +160,7 @@ export function TableToolbar() {
 						}
 					/>
 					{toolbarOptions === 'none' ? null : (
-						<div
-							className={cn('flex items-center justify-between')}>
+						<div className={cn('flex items-center justify-between')}>
 							{renderLeftSection()}
 							{renderRightSection()}
 						</div>
@@ -196,9 +170,7 @@ export function TableToolbar() {
 					icon={<SearchIcon className={cn('size-5 text-white/50')} />}
 					value={globalFilterValue ?? ''}
 					onChange={setGlobalFilter}
-					className={cn(
-						'bg-gradient-accent h-10 w-full border-accent/10 lg:max-w-[300px]'
-					)}
+					className={cn('bg-gradient-accent h-10 w-full border-accent/10 lg:max-w-[300px]')}
 					placeholder='Search...'
 				/>
 			</div>
@@ -213,11 +185,7 @@ export function TableToolbar() {
 				)}>
 				<TableTitle title={title} subtitle={subtitle} />
 				<DebouncedInput
-					icon={
-						<SearchIcon
-							className={cn('size-5 text-secondary/50')}
-						/>
-					}
+					icon={<SearchIcon className={cn('size-5 text-secondary/50')} />}
 					value={globalFilterValue ?? ''}
 					onChange={setGlobalFilter}
 					className={cn('h-10 w-full lg:max-w-[300px]')}

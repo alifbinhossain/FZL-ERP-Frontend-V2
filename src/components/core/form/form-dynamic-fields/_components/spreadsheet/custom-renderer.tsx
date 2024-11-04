@@ -3,7 +3,7 @@ import Handsontable from 'handsontable';
 import { ChevronDown } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 
-import { FieldDef } from '@/components/core/form/form-dynamic-fields';
+import { FieldDef } from '@/components/core/form/form-dynamic-fields/types';
 import ReactSelect from '@/components/ui/react-select';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -38,11 +38,7 @@ const CustomRenderer = (props: ICustomRendererProps) => {
 			)}
 			{props.field.type === 'select' && (
 				<div className='bg-gradient flex h-full min-h-6 justify-between bg-transparent px-3 py-2 text-sm'>
-					{
-						props.field.options.find(
-							(option) => option.value === props.value
-						)?.label
-					}
+					{props.field.options.find((option) => option.value === props.value)?.label}
 					<ChevronDown className='size-5 text-secondary/50' />
 				</div>
 			)}
@@ -52,19 +48,13 @@ const CustomRenderer = (props: ICustomRendererProps) => {
 					className={cn(
 						'bg-gradient block h-full min-h-6 w-full px-3 py-2 text-sm font-normal text-foreground'
 					)}>
-					{watch(
-						`${props.fieldName}.${props.row}.${props.field.accessorKey}`
-					)}
+					{watch(`${props.fieldName}.${props.row}.${props.field.accessorKey}`)}
 				</div>
 			)}
 			<ErrorMessage
 				errors={errors}
 				name={`${props.fieldName}.${props.row}.${props.field.accessorKey}`}
-				render={({ message }) => (
-					<p className='pb-2 pl-3 text-sm font-medium text-destructive'>
-						{message}
-					</p>
-				)}
+				render={({ message }) => <p className='pb-2 pl-3 text-sm font-medium text-destructive'>{message}</p>}
 			/>
 		</div>
 	);

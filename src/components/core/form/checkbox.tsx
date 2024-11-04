@@ -1,33 +1,10 @@
-import { CheckboxProps } from '@radix-ui/react-checkbox';
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
-
 import { buttonVariants } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import {
-	FormControl,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from '@/components/ui/form';
+import { FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
 import { cn } from '@/lib/utils';
 
-interface FormCheckboxProps extends CheckboxProps {
-	field: ControllerRenderProps<any, any>;
-	fieldState: ControllerFieldState;
-	formState: UseFormStateReturn<any>;
-	label?: string;
-	placeholder?: string;
-	optional?: boolean;
-	icon?: React.ReactNode;
-	disableLabel?: boolean;
-	labelClassName?: string;
-	isBoxed?: boolean;
-}
+import { FormCheckboxProps } from './types';
 
 const FormCheckbox: React.FC<FormCheckboxProps> = ({
 	field,
@@ -49,16 +26,14 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
 					buttonVariants({
 						variant: 'gradient-accent',
 						size: 'sm',
-						className:
-							'gap-1.5 rounded transition-none active:scale-100',
+						className: 'gap-1.5 rounded transition-none active:scale-100',
 					})
 			)}>
 			<FormControl className=''>
 				<Checkbox
 					className={cn(
 						'size-[18px]',
-						isBoxed &&
-							'rounded-full border-2 border-accent-foreground/50',
+						isBoxed && 'rounded-full border-2 border-accent-foreground/50',
 						className
 					)}
 					disabled={disabled}
@@ -75,11 +50,7 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
 						labelClassName
 					)}>
 					{label || field.name.replace('_', ' ')}{' '}
-					{optional ? (
-						<span className='text-xs'>(Optional)</span>
-					) : (
-						''
-					)}
+					{optional ? <span className='text-xs'>(Optional)</span> : ''}
 				</FormLabel>
 			)}
 

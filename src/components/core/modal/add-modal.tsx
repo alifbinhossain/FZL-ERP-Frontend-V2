@@ -39,17 +39,9 @@ const AddModal: React.FC<IAddModalProps> = ({
 }) => {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogContent
-				className={cn(
-					'w-full bg-background',
-					isSmall && 'sm:max-w-5xl',
-					className
-				)}>
+			<DialogContent className={cn('w-full bg-background', isSmall && 'sm:max-w-5xl', className)}>
 				<DialogHeader>
-					<DialogTitle
-						aria-label='Modal Title'
-						aria-description='Modal Title'
-						aria-describedby='Modal Title'>
+					<DialogTitle aria-label='Modal Title' aria-description='Modal Title' aria-describedby='Modal Title'>
 						{title}
 					</DialogTitle>
 					<DialogDescription
@@ -62,9 +54,7 @@ const AddModal: React.FC<IAddModalProps> = ({
 				</DialogHeader>
 
 				<Form {...form}>
-					<form
-						onSubmit={form.handleSubmit(onSubmit)}
-						className='relative'>
+					<form onSubmit={form.handleSubmit(onSubmit)} className='relative'>
 						<div className='space-y-3'>{children}</div>
 						<DialogFooter className='mt-6'>
 							<CoreForm.Submit className='w-full' title='Save' />

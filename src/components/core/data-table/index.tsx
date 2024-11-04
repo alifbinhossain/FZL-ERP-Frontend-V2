@@ -1,14 +1,7 @@
 import { flexRender } from '@tanstack/react-table';
 import useTable from '@/hooks/useTable';
 
-import {
-	TableBody,
-	TableCell,
-	Table as TableComponent,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from '@/components/ui/table';
+import { TableBody, TableCell, Table as TableComponent, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import { cn } from '@/lib/utils';
 
@@ -24,18 +17,13 @@ function DataTable() {
 	return (
 		<div>
 			<TableToolbar />
-			<div
-				className={cn(
-					'overflow-hidden border border-secondary/10',
-					isEntry ? 'rounded-b-md' : 'rounded-md'
-				)}>
+			<div className={cn('overflow-hidden border border-secondary/10', isEntry ? 'rounded-b-md' : 'rounded-md')}>
 				<TableComponent>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
-									const content =
-										header.column.columnDef.header;
+									const content = header.column.columnDef.header;
 									return (
 										<TableHead
 											key={header.id}
@@ -49,13 +37,8 @@ function DataTable() {
 											{header.isPlaceholder
 												? null
 												: flexRender(
-														typeof content ===
-															'string' ? (
-															<TableColumnHeader
-																column={
-																	header.column
-																}
-															/>
+														typeof content === 'string' ? (
+															<TableColumnHeader column={header.column} />
 														) : (
 															content
 														),
@@ -69,16 +52,10 @@ function DataTable() {
 					</TableHeader>
 					<TableBody className='divide-y-[1px] divide-secondary/10'>
 						{isLoading ? (
-							<TableSkeleton
-								columnsLength={table.getAllColumns().length}
-							/>
+							<TableSkeleton columnsLength={table.getAllColumns().length} />
 						) : table.getRowModel().rows?.length ? (
 							table.getRowModel().rows.map((row) => (
-								<TableRow
-									key={row.id}
-									data-state={
-										row.getIsSelected() && 'selected'
-									}>
+								<TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
 									{row.getVisibleCells().map((cell) => (
 										<TableCell
 											key={cell.id}
@@ -87,19 +64,14 @@ function DataTable() {
 													column: cell.column,
 												}),
 											}}>
-											{flexRender(
-												cell.column.columnDef.cell,
-												cell.getContext()
-											)}
+											{flexRender(cell.column.columnDef.cell, cell.getContext())}
 										</TableCell>
 									))}
 								</TableRow>
 							))
 						) : (
 							<TableRow>
-								<TableCell
-									colSpan={table.getAllColumns().length}
-									className='h-24 text-center'>
+								<TableCell colSpan={table.getAllColumns().length} className='h-24 text-center'>
 									No results.
 								</TableCell>
 							</TableRow>

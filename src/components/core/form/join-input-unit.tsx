@@ -1,33 +1,11 @@
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
-
-import { Button, buttonVariants } from '@/components/ui/button';
-import {
-	FormControl,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from '@/components/ui/form';
-import { Input, InputProps } from '@/components/ui/input';
+import { buttonVariants } from '@/components/ui/button';
+import { FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 
 import { cn } from '@/lib/utils';
 
-interface FormJoinInputUnitProps extends InputProps {
-	field: ControllerRenderProps<any, any>;
-	fieldState: ControllerFieldState;
-	formState: UseFormStateReturn<any>;
-	label?: string;
-	subLabel?: string;
-	placeholder?: string;
-	optional?: boolean;
-	icon?: React.ReactNode;
-	unit: string;
-	disableLabel?: boolean;
-}
+import { FormJoinInputUnitProps } from './types';
 
 const FormJoinInputUnit: React.FC<FormJoinInputUnitProps> = ({
 	field,
@@ -47,11 +25,7 @@ const FormJoinInputUnit: React.FC<FormJoinInputUnitProps> = ({
 				<FormLabel className='flex items-center justify-between capitalize'>
 					<span>
 						{label || field.name.replace('_', ' ')}{' '}
-						{optional ? (
-							<span className='text-xs'>(Optional)</span>
-						) : (
-							''
-						)}
+						{optional ? <span className='text-xs'>(Optional)</span> : ''}
 					</span>
 					{subLabel && <span className='text-xs'>{subLabel}</span>}
 				</FormLabel>
@@ -59,12 +33,7 @@ const FormJoinInputUnit: React.FC<FormJoinInputUnitProps> = ({
 			<div className='bg-gradient flex h-10 items-center overflow-hidden rounded-md border border-input p-0.5'>
 				<FormControl className='h-8 flex-1'>
 					{type === 'password' ? (
-						<PasswordInput
-							className={cn(className)}
-							placeholder={placeholder}
-							icon={icon}
-							{...field}
-						/>
+						<PasswordInput className={cn(className)} placeholder={placeholder} icon={icon} {...field} />
 					) : type === 'number' ? (
 						<Input
 							className={cn(className)}
@@ -76,13 +45,7 @@ const FormJoinInputUnit: React.FC<FormJoinInputUnitProps> = ({
 							}}
 						/>
 					) : (
-						<Input
-							className={cn(className)}
-							placeholder={placeholder}
-							type={type}
-							icon={icon}
-							{...field}
-						/>
+						<Input className={cn(className)} placeholder={placeholder} type={type} icon={icon} {...field} />
 					)}
 				</FormControl>
 

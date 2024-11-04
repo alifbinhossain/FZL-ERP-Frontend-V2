@@ -20,11 +20,7 @@ const SidebarCollapse = () => {
 				setIsCollapsed((prev) => !prev);
 			}}>
 			<TooltipWrapper message='Toggle Sidebar (Ctrl+Q)'>
-				{isCollapsed ? (
-					<PanelLeftOpenIcon className='size-6' />
-				) : (
-					<PanelRightOpenIcon className='size-6' />
-				)}
+				{isCollapsed ? <PanelLeftOpenIcon className='size-6' /> : <PanelRightOpenIcon className='size-6' />}
 			</TooltipWrapper>
 		</motion.button>
 	);

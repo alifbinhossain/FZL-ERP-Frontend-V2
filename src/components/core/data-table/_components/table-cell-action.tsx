@@ -9,9 +9,7 @@ interface ITableCellActionProps<TData, TValue> {
 	info: CellContext<TData, TValue>;
 }
 
-function TableCellAction<TData, TValue>({
-	info,
-}: ITableCellActionProps<TData, TValue>) {
+function TableCellAction<TData, TValue>({ info }: ITableCellActionProps<TData, TValue>) {
 	const row = info.row;
 	const { updateAccess, deleteAccess } = usePage();
 	const { handleUpdate, handleDelete } = useTable();

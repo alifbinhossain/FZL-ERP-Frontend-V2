@@ -17,11 +17,7 @@ interface IPageProviderProps {
 	children: React.ReactNode;
 }
 
-const PageProvider: React.FC<IPageProviderProps> = ({
-	children,
-	pageName,
-	pageTitle,
-}) => {
+const PageProvider: React.FC<IPageProviderProps> = ({ children, pageName, pageTitle }) => {
 	const pageAccess = useAccess(pageName) as string[];
 	const readAccess = pageAccess.includes('read');
 	const createAccess = pageAccess.includes('create');
@@ -42,9 +38,7 @@ const PageProvider: React.FC<IPageProviderProps> = ({
 		}),
 		[pageName, readAccess, createAccess, updateAccess, deleteAccess]
 	);
-	return (
-		<PageContext.Provider value={value}>{children}</PageContext.Provider>
-	);
+	return <PageContext.Provider value={value}>{children}</PageContext.Provider>;
 };
 
 export default PageProvider;

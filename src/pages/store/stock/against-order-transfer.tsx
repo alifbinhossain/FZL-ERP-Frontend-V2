@@ -6,7 +6,7 @@ import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
-import { IFormSelectOption } from '@/components/core/form/form-select';
+import { IFormSelectOption } from '@/components/core/form/select';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
@@ -25,9 +25,7 @@ interface IAgainstOrderTransferProps {
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	updatedData?: IStockActionTrxAgainstOrder | null;
-	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<IStockActionTrxAgainstOrder | null>
-	>;
+	setUpdatedData?: React.Dispatch<React.SetStateAction<IStockActionTrxAgainstOrder | null>>;
 	postData: UseMutationResult<
 		IResponse<any>,
 		AxiosError<IResponse<any>, any>,
@@ -96,12 +94,7 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 				control={form.control}
 				name='order_description_uuid'
 				render={(props) => (
-					<CoreForm.ReactSelect
-						label='Order'
-						placeholder='Select an Order'
-						options={order!}
-						{...props}
-					/>
+					<CoreForm.ReactSelect label='Order' placeholder='Select an Order' options={order!} {...props} />
 				)}
 			/>
 
@@ -131,11 +124,7 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 				)}
 			/>
 
-			<FormField
-				control={form.control}
-				name='remarks'
-				render={(props) => <CoreForm.Textarea {...props} />}
-			/>
+			<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 		</AddModal>
 	);
 };

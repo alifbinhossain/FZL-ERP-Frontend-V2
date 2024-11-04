@@ -1,33 +1,7 @@
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
-
-import {
-	FormControl,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from '@/components/ui/form';
+import { FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { MultiSelect } from '@/components/ui/multi-select';
 
-export interface IFormSelectOption {
-	label: string;
-	value: string | number;
-}
-
-interface FormMultiSelectProps {
-	field: ControllerRenderProps<any, any>;
-	fieldState: ControllerFieldState;
-	formState: UseFormStateReturn<any>;
-	label?: string;
-	placeholder?: string;
-	optional?: boolean;
-	options: IFormSelectOption[];
-	isDisabled?: boolean;
-	disableLabel?: boolean;
-}
+import { FormMultiSelectProps } from './types';
 
 const FormMultiSelect: React.FC<FormMultiSelectProps> = ({
 	field,
@@ -43,11 +17,7 @@ const FormMultiSelect: React.FC<FormMultiSelectProps> = ({
 			{!disableLabel && (
 				<FormLabel className='flex items-center justify-between capitalize'>
 					{label || field.name.split('_').join(' ')}{' '}
-					{optional ? (
-						<span className='text-xs'>(Optional)</span>
-					) : (
-						''
-					)}
+					{optional ? <span className='text-xs'>(Optional)</span> : ''}
 				</FormLabel>
 			)}
 			<FormControl>

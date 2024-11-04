@@ -9,11 +9,7 @@ interface IPaginatedProps {
 	currentPage: number;
 }
 
-function PaginateButtons({
-	totalPages,
-	onChange,
-	currentPage,
-}: IPaginatedProps) {
+function PaginateButtons({ totalPages, onChange, currentPage }: IPaginatedProps) {
 	const handlePageClick = (event: any) => {
 		onChange(event.selected);
 	};

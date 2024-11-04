@@ -8,11 +8,7 @@ interface FieldActionButtonProps {
 	index: number;
 }
 
-const FieldActionButton = ({
-	handleCopy,
-	handleRemove,
-	index,
-}: FieldActionButtonProps) => {
+const FieldActionButton = ({ handleCopy, handleRemove, index }: FieldActionButtonProps) => {
 	return (
 		<div className='flex items-center'>
 			{handleCopy && (

@@ -10,15 +10,8 @@ const otherQK = {
 		'order-description-by-order-number',
 		orderNumber,
 	],
-	orderPropertiesByTypeName: (typeName: string) => [
-		...otherQK.all(),
-		'properties-by-type-name',
-		typeName,
-	],
-	orderNumberByMarketingAndPartyUUID: (
-		marketingUUID: string,
-		partyUUID: string
-	) => [
+	orderPropertiesByTypeName: (typeName: string) => [...otherQK.all(), 'properties-by-type-name', typeName],
+	orderNumberByMarketingAndPartyUUID: (marketingUUID: string, partyUUID: string) => [
 		...otherQK.all(),
 		'number-by-marketing-and-party',
 		marketingUUID,
@@ -68,18 +61,10 @@ const otherQK = {
 	marketingUser: () => [...otherQK.all(), 'marketing-user'],
 
 	//Merchandiser
-	merchandiserByPartyUUID: (uuid: string) => [
-		...otherQK.all(),
-		'merchandiser-by-party',
-		uuid,
-	],
+	merchandiserByPartyUUID: (uuid: string) => [...otherQK.all(), 'merchandiser-by-party', uuid],
 
 	//Factory
-	factoryByPartyUUID: (uuid: string) => [
-		...otherQK.all(),
-		'factory-by-party',
-		uuid,
-	],
+	factoryByPartyUUID: (uuid: string) => [...otherQK.all(), 'factory-by-party', uuid],
 };
 
 export default otherQK;

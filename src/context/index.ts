@@ -4,10 +4,4 @@ import PageProvider from './PageContext';
 import SidebarProvider from './SidebarContext';
 import TableProvider from './TableContext';
 
-export {
-	AuthProvider,
-	SidebarProvider,
-	LayoutProvider,
-	PageProvider,
-	TableProvider,
-};
+export { AuthProvider, SidebarProvider, LayoutProvider, PageProvider, TableProvider };

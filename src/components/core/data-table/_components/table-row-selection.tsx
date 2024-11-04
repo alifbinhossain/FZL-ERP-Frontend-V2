@@ -7,13 +7,8 @@ export function TableRowSelection<TData, TValue>(): ColumnDef<TData, TValue> {
 		id: 'row-selection',
 		header: ({ table }) => (
 			<Checkbox
-				checked={
-					table.getIsAllPageRowsSelected() ||
-					(table.getIsSomePageRowsSelected() && 'indeterminate')
-				}
-				onCheckedChange={(value) =>
-					table.toggleAllPageRowsSelected(!!value)
-				}
+				checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+				onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
 				aria-label='Select all'
 				className='translate-y-[2px]'
 			/>

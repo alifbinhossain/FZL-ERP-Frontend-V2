@@ -19,19 +19,14 @@ const User = ({ avatar = false }) => {
 			{avatar && (
 				<div className={cn('avatar', isOnline ? 'online' : 'offline')}>
 					<div className='size-10 rounded-full'>
-						<img
-							className='object-cover'
-							src='https://avatar.iran.liara.run/public/job/operator/male'
-						/>
+						<img className='object-cover' src='https://avatar.iran.liara.run/public/job/operator/male' />
 					</div>
 				</div>
 			)}
 
 			<div className='flex flex-col items-start'>
 				<span className='truncate capitalize'>{user?.name}</span>
-				<span className='text-[.6rem] capitalize text-primary-foreground/70'>
-					{user?.department}
-				</span>
+				<span className='text-[.6rem] capitalize text-primary-foreground/70'>{user?.department}</span>
 			</div>
 		</div>
 	);

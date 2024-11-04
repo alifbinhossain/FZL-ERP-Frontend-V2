@@ -1,23 +1,12 @@
 import React, { useEffect } from 'react';
 import { DevTool } from '@hookform/devtools';
-import { UseFormReturn } from 'react-hook-form';
 
 import CoreForm from '@/components/core/form';
 import { Form } from '@/components/ui/form';
 
-interface IFormAddEditWrapperProps {
-	children: React.ReactNode;
-	form: UseFormReturn<any, any, undefined>;
-	onSubmit(values: any): void;
-	title?: string;
-}
+import { IFormAddEditWrapperProps } from './types';
 
-const FormAddEditWrapper: React.FC<IFormAddEditWrapperProps> = ({
-	children,
-	form,
-	onSubmit,
-	title,
-}) => {
+const FormAddEditWrapper: React.FC<IFormAddEditWrapperProps> = ({ children, form, onSubmit, title }) => {
 	useEffect(() => {
 		if (title) {
 			document.title = title;

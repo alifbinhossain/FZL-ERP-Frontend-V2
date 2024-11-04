@@ -85,25 +85,16 @@ const GlobalBreadcrumbs = () => {
 								animate='animate'
 								className='flex flex-wrap items-center gap-1.5 sm:gap-2.5'
 								key={index + 'item'}>
-								<BreadcrumbItem key={index + 'item-label'}>
-									{item.label}
-								</BreadcrumbItem>
+								<BreadcrumbItem key={index + 'item-label'}>{item.label}</BreadcrumbItem>
 								<BreadcrumbSeparator />
 							</motion.span>
 						)
 					)}
 
 				{items?.length > 0 && (
-					<motion.span
-						variants={variants}
-						initial='initial'
-						animate='animate'>
-						<BreadcrumbItem
-							key={items.length - 1}
-							className='font-medium text-primary'>
-							<BreadcrumbPage>
-								{items[items.length - 1].label}
-							</BreadcrumbPage>
+					<motion.span variants={variants} initial='initial' animate='animate'>
+						<BreadcrumbItem key={items.length - 1} className='font-medium text-primary'>
+							<BreadcrumbPage>{items[items.length - 1].label}</BreadcrumbPage>
 						</BreadcrumbItem>
 					</motion.span>
 				)}

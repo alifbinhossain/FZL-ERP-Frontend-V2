@@ -133,15 +133,9 @@ export const useOtherOrderDescriptionByOrderNumber = <T>(orderNumber: string) =>
 	});
 
 // GET OTHER ORDER NUMBER BY MARKETING AND PARTY UUID
-export const useOtherOrderNumberByMarketingAndPartyUUID = <T>(
-	marketingUUID: string,
-	partyUUID: string
-) =>
+export const useOtherOrderNumberByMarketingAndPartyUUID = <T>(marketingUUID: string, partyUUID: string) =>
 	useTQuery<T>({
-		queryKey: otherQK.orderNumberByMarketingAndPartyUUID(
-			marketingUUID,
-			partyUUID
-		),
+		queryKey: otherQK.orderNumberByMarketingAndPartyUUID(marketingUUID, partyUUID),
 		url: `/other/order-number-for-pi/value/label/${marketingUUID}/${partyUUID}`,
 		enabled: !!marketingUUID && !!partyUUID,
 	});

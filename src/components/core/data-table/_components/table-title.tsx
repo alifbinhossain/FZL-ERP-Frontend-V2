@@ -7,12 +7,7 @@ interface TableTitleProps {
 	subtitleClassName?: string;
 }
 
-const TableTitle: React.FC<TableTitleProps> = ({
-	title,
-	subtitle,
-	titleClassName,
-	subtitleClassName,
-}) => {
+const TableTitle: React.FC<TableTitleProps> = ({ title, subtitle, titleClassName, subtitleClassName }) => {
 	return (
 		<div className='flex items-start justify-between gap-2 md:justify-start'>
 			<div className='flex flex-col'>
@@ -24,13 +19,7 @@ const TableTitle: React.FC<TableTitleProps> = ({
 					{title}
 				</h1>
 				{subtitle && (
-					<p
-						className={cn(
-							'mt-0.5 text-sm capitalize text-secondary',
-							subtitleClassName
-						)}>
-						{subtitle}
-					</p>
+					<p className={cn('mt-0.5 text-sm capitalize text-secondary', subtitleClassName)}>{subtitle}</p>
 				)}
 			</div>
 		</div>

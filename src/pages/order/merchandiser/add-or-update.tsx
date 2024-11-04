@@ -7,7 +7,7 @@ import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
-import { IFormSelectOption } from '@/components/core/form/form-select';
+import { IFormSelectOption } from '@/components/core/form/select';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
@@ -16,20 +16,14 @@ import nanoid from '@/lib/nanoid';
 
 import { IMerchandiserData } from '../_config/columns/columns.type';
 import { useOrderMerchandiserByUUID } from '../_config/query';
-import {
-	IMerchandiser,
-	MERCHANDISER_NULL,
-	MERCHANDISER_SCHEMA,
-} from '../_config/schema';
+import { IMerchandiser, MERCHANDISER_NULL, MERCHANDISER_SCHEMA } from '../_config/schema';
 
 interface IAddOrUpdateProps {
 	url: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	updatedData?: IMerchandiserData | null;
-	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<IMerchandiserData | null>
-	>;
+	setUpdatedData?: React.Dispatch<React.SetStateAction<IMerchandiserData | null>>;
 	postData: UseMutationResult<
 		IResponse<any>,
 		AxiosError<IResponse<any>, any>,
@@ -122,40 +116,14 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			<FormField
 				control={form.control}
 				name='party_uuid'
-				render={(props) => (
-					<CoreForm.ReactSelect
-						label='Party'
-						options={party || []}
-						{...props}
-					/>
-				)}
+				render={(props) => <CoreForm.ReactSelect label='Party' options={party || []} {...props} />}
 			/>
 
-			<FormField
-				control={form.control}
-				name='name'
-				render={(props) => <CoreForm.Input {...props} />}
-			/>
-			<FormField
-				control={form.control}
-				name='email'
-				render={(props) => <CoreForm.Input {...props} />}
-			/>
-			<FormField
-				control={form.control}
-				name='phone'
-				render={(props) => <CoreForm.Input {...props} />}
-			/>
-			<FormField
-				control={form.control}
-				name='address'
-				render={(props) => <CoreForm.Textarea {...props} />}
-			/>
-			<FormField
-				control={form.control}
-				name='remarks'
-				render={(props) => <CoreForm.Textarea {...props} />}
-			/>
+			<FormField control={form.control} name='name' render={(props) => <CoreForm.Input {...props} />} />
+			<FormField control={form.control} name='email' render={(props) => <CoreForm.Input {...props} />} />
+			<FormField control={form.control} name='phone' render={(props) => <CoreForm.Input {...props} />} />
+			<FormField control={form.control} name='address' render={(props) => <CoreForm.Textarea {...props} />} />
+			<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 		</AddModal>
 	);
 };

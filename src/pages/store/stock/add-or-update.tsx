@@ -7,14 +7,11 @@ import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
-import { IFormSelectOption } from '@/components/core/form/form-select';
+import { IFormSelectOption } from '@/components/core/form/select';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
-import {
-	useOtherMaterialSection,
-	useOtherMaterialType,
-} from '@/lib/common-queries/other';
+import { useOtherMaterialSection, useOtherMaterialType } from '@/lib/common-queries/other';
 import nanoid from '@/lib/nanoid';
 
 import { IStockTableData } from '../_config/columns/columns.type';
@@ -26,9 +23,7 @@ interface IAddOrUpdateProps {
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	updatedData?: IStockTableData | null;
-	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<IStockTableData | null>
-	>;
+	setUpdatedData?: React.Dispatch<React.SetStateAction<IStockTableData | null>>;
 	postData: UseMutationResult<
 		IResponse<any>,
 		AxiosError<IResponse<any>, any>,
@@ -157,16 +152,8 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			</CoreForm.Section>
 
 			<CoreForm.Section>
-				<FormField
-					control={form.control}
-					name='name'
-					render={(props) => <CoreForm.Input {...props} />}
-				/>
-				<FormField
-					control={form.control}
-					name='short_name'
-					render={(props) => <CoreForm.Input {...props} />}
-				/>
+				<FormField control={form.control} name='name' render={(props) => <CoreForm.Input {...props} />} />
+				<FormField control={form.control} name='short_name' render={(props) => <CoreForm.Input {...props} />} />
 				<FormField
 					control={form.control}
 					name='threshold'
@@ -184,11 +171,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			</CoreForm.Section>
 
 			<CoreForm.Section className='lg:grid-cols-2'>
-				<FormField
-					control={form.control}
-					name='remarks'
-					render={(props) => <CoreForm.Textarea {...props} />}
-				/>
+				<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 				<FormField
 					control={form.control}
 					name='description'

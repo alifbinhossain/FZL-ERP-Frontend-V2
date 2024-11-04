@@ -14,17 +14,16 @@ interface IUseTQuery {
 const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 	const queryClient = useQueryClient();
 
-	const { data, isError, isLoading, isPending, refetch, isFetching, status } =
-		useQuery<IResponse<T>>({
-			queryKey,
-			queryFn: () => api.get(url).then((res) => res.data),
-			refetchInterval: false,
-			refetchOnMount: false,
-			refetchOnWindowFocus: true,
-			refetchOnReconnect: false,
-			refetchIntervalInBackground: false,
-			enabled,
-		});
+	const { data, isError, isLoading, isPending, refetch, isFetching, status } = useQuery<IResponse<T>>({
+		queryKey,
+		queryFn: () => api.get(url).then((res) => res.data),
+		refetchInterval: false,
+		refetchOnMount: false,
+		refetchOnWindowFocus: true,
+		refetchOnReconnect: false,
+		refetchIntervalInBackground: false,
+		enabled,
+	});
 
 	const postData = useMutation({
 		mutationFn: async ({
@@ -92,11 +91,7 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 			// ShowToast(data?.toast);
 			toast.warning(data?.toast?.message);
 		},
-		onError: (
-			error: AxiosError<IResponse<any>>,
-			variables,
-			context: any
-		) => {
+		onError: (error: AxiosError<IResponse<any>>, variables, context: any) => {
 			queryClient.setQueryData(queryKey, context.previousData);
 			console.log(error);
 			// ShowToast(error?.response!.data?.toast);
@@ -112,13 +107,7 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 	});
 
 	const deleteData = useMutation({
-		mutationFn: async ({
-			url,
-		}: {
-			url: string;
-			isOnCloseNeeded?: boolean;
-			onClose?: () => void;
-		}) => {
+		mutationFn: async ({ url }: { url: string; isOnCloseNeeded?: boolean; onClose?: () => void }) => {
 			const response = await api.delete<IResponse<any>>(url);
 			return response.data;
 		},

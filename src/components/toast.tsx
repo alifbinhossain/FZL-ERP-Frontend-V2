@@ -1,10 +1,5 @@
 import { IToast } from '@/types';
-import {
-	Slide,
-	toast,
-	ToastContainer,
-	ToastContainerProps,
-} from 'react-toastify';
+import { Slide, toast, ToastContainer, ToastContainerProps } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -14,8 +9,7 @@ const ToastBody = ({ text }: { text: string }) => (
 	</div>
 );
 
-const SuccessToast = (text: string) =>
-	toast.success(<ToastBody {...{ text }} />);
+const SuccessToast = (text: string) => toast.success(<ToastBody {...{ text }} />);
 const WarningToast = (text: string) => toast.warn(<ToastBody {...{ text }} />);
 const ErrorToast = (text: string) => toast.error(<ToastBody {...{ text }} />);
 
@@ -57,20 +51,7 @@ const DefaultConfig: ToastContainerProps = {
 };
 
 const Toast = () => {
-	return (
-		<ToastContainer
-			style={{ width: 'auto' }}
-			transition={Slide}
-			{...DefaultConfig}
-		/>
-	);
+	return <ToastContainer style={{ width: 'auto' }} transition={Slide} {...DefaultConfig} />;
 };
 
-export {
-	ErrorToast,
-	ShowLocalToast,
-	ShowToast,
-	SuccessToast,
-	Toast,
-	WarningToast,
-};
+export { ErrorToast, ShowLocalToast, ShowToast, SuccessToast, Toast, WarningToast };

@@ -2,7 +2,7 @@ import { UseFormWatch } from 'react-hook-form';
 
 import FieldActionButton from '@/components/buttons/field-action-button';
 import { FieldDef } from '@/components/core/form/form-dynamic-fields';
-import { IFormSelectOption } from '@/components/core/form/form-select';
+import { IFormSelectOption } from '@/components/core/form/select';
 
 import { useOtherThreadCountLength } from '@/lib/common-queries/other';
 
@@ -14,12 +14,8 @@ interface IGenerateFieldDefsProps {
 	watch?: UseFormWatch<IThreadOrderInfoEntry>; // TODO: Update Schema Type
 }
 
-const useGenerateFieldDefs = ({
-	copy,
-	remove,
-}: IGenerateFieldDefsProps): FieldDef[] => {
-	const { data: countLength, isLoading } =
-		useOtherThreadCountLength<IFormSelectOption[]>();
+const useGenerateFieldDefs = ({ copy, remove }: IGenerateFieldDefsProps): FieldDef[] => {
+	const { data: countLength, isLoading } = useOtherThreadCountLength<IFormSelectOption[]>();
 
 	const bleaching: IFormSelectOption[] = [
 		{ label: 'Bleach', value: 'bleach' },
@@ -75,13 +71,7 @@ const useGenerateFieldDefs = ({
 			accessorKey: 'actions',
 			type: 'custom',
 			component: (index: number) => {
-				return (
-					<FieldActionButton
-						handleCopy={copy}
-						handleRemove={remove}
-						index={index}
-					/>
-				);
+				return <FieldActionButton handleCopy={copy} handleRemove={remove} index={index} />;
 			},
 		},
 	];

@@ -7,14 +7,11 @@ import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
-import { IFormSelectOption } from '@/components/core/form/form-select';
+import { IFormSelectOption } from '@/components/core/form/select';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
-import {
-	useOtherDepartment,
-	useOtherDesignation,
-} from '@/lib/common-queries/other';
+import { useOtherDepartment, useOtherDesignation } from '@/lib/common-queries/other';
 import nanoid from '@/lib/nanoid';
 
 import { IUserTableData } from '../_config/columns/columns.type';
@@ -26,9 +23,7 @@ interface IAddOrUpdateProps {
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	updatedData?: IUserTableData | null;
-	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<IUserTableData | null>
-	>;
+	setUpdatedData?: React.Dispatch<React.SetStateAction<IUserTableData | null>>;
 	postData: UseMutationResult<
 		IResponse<any>,
 		AxiosError<IResponse<any>, any>,
@@ -67,8 +62,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	const { user } = useAuth();
 	const { data } = useHrUsersByUUID(updatedData?.uuid as string);
 	const { data: departmentData } = useOtherDepartment<IFormSelectOption[]>();
-	const { data: designationData } =
-		useOtherDesignation<IFormSelectOption[]>();
+	const { data: designationData } = useOtherDesignation<IFormSelectOption[]>();
 
 	const form = useRHF(USER_SCHEMA(isUpdate) as any, USER_NULL);
 
@@ -147,59 +141,27 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 						/>
 					)}
 				/>
-				<FormField
-					control={form.control}
-					name='name'
-					render={(props) => <CoreForm.Input {...props} />}
-				/>
-				<FormField
-					control={form.control}
-					name='email'
-					render={(props) => <CoreForm.Input {...props} />}
-				/>
-				<FormField
-					control={form.control}
-					name='ext'
-					render={(props) => <CoreForm.Input {...props} />}
-				/>
-				<FormField
-					control={form.control}
-					name='phone'
-					render={(props) => <CoreForm.Input {...props} />}
-				/>
+				<FormField control={form.control} name='name' render={(props) => <CoreForm.Input {...props} />} />
+				<FormField control={form.control} name='email' render={(props) => <CoreForm.Input {...props} />} />
+				<FormField control={form.control} name='ext' render={(props) => <CoreForm.Input {...props} />} />
+				<FormField control={form.control} name='phone' render={(props) => <CoreForm.Input {...props} />} />
 			</div>
 			{!isUpdate && (
 				<div className='grid grid-cols-2 gap-4'>
 					<FormField
 						control={form.control}
 						name='pass'
-						render={(props) => (
-							<CoreForm.Input
-								label='Password'
-								type={'password'}
-								{...props}
-							/>
-						)}
+						render={(props) => <CoreForm.Input label='Password' type={'password'} {...props} />}
 					/>
 					<FormField
 						control={form.control}
 						name='repeatPass'
-						render={(props) => (
-							<CoreForm.Input
-								label='Repeat Password'
-								type={'password'}
-								{...props}
-							/>
-						)}
+						render={(props) => <CoreForm.Input label='Repeat Password' type={'password'} {...props} />}
 					/>
 				</div>
 			)}
 
-			<FormField
-				control={form.control}
-				name='remarks'
-				render={(props) => <CoreForm.Textarea {...props} />}
-			/>
+			<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 		</AddModal>
 	);
 };

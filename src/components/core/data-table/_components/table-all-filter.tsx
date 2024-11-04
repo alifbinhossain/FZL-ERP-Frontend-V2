@@ -28,11 +28,7 @@ const TableAllFilter = () => {
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
-				<Button
-					aria-label='Filters All Columns'
-					variant='gradient'
-					size='sm'
-					className='hidden lg:flex'>
+				<Button aria-label='Filters All Columns' variant='gradient' size='sm' className='hidden lg:flex'>
 					<MixerHorizontalIcon className='size-4' />
 					Filters
 				</Button>
@@ -43,9 +39,8 @@ const TableAllFilter = () => {
 						<MixerHorizontalIcon className='size-4' /> All Filters
 					</SheetTitle>
 					<SheetDescription className='sr-only'>
-						This action cannot be undone. This will permanently
-						delete your account and remove your data from our
-						servers.
+						This action cannot be undone. This will permanently delete your account and remove your data
+						from our servers.
 					</SheetDescription>
 				</SheetHeader>
 
@@ -53,21 +48,14 @@ const TableAllFilter = () => {
 					<div className='flex flex-col gap-4'>
 						{filteredColumns.length > 0 &&
 							filteredColumns.map((column) => (
-								<TableColumnFilter
-									key={column.id}
-									showLabel
-									column={column}
-								/>
+								<TableColumnFilter key={column.id} showLabel column={column} />
 							))}
 					</div>
 				</ScrollArea>
 
 				<SheetFooter className='justify-start'>
 					{isFiltered && (
-						<Button
-							variant='outline-destructive'
-							size='sm'
-							onClick={() => table.resetColumnFilters()}>
+						<Button variant='outline-destructive' size='sm' onClick={() => table.resetColumnFilters()}>
 							Reset
 							<X className='size-4' />
 						</Button>

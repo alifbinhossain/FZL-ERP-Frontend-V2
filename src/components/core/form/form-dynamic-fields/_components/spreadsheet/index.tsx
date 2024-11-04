@@ -1,7 +1,7 @@
 import { HotColumn, HotTable } from '@handsontable/react';
 import { registerAllModules } from 'handsontable/registry';
 
-import { DynamicFieldsProps } from '@/components/core/form/form-dynamic-fields';
+import { DynamicFieldsProps } from '@/components/core/form/form-dynamic-fields/types';
 
 import CustomEditor from './custom-editor';
 import CustomRenderer from './custom-renderer';
@@ -11,9 +11,7 @@ registerAllModules();
 const SpreadsheetDynamicFields: React.FC<
 	Omit<DynamicFieldsProps, 'title' | 'viewAs' | 'extraButtons' | 'handleAdd'>
 > = ({ fieldDefs, fieldName, form }) => {
-	const columnHeaders = fieldDefs
-		.filter((field) => !field.hidden)
-		.map((field) => field.header);
+	const columnHeaders = fieldDefs.filter((field) => !field.hidden).map((field) => field.header);
 
 	const data = form.watch(fieldName)?.map((field: Record<string, string>) => {
 		const fields = fieldDefs
@@ -50,18 +48,12 @@ const SpreadsheetDynamicFields: React.FC<
 				headerClassName='h-8 flex items-center whitespace-nowrap !px-3 text-left align-middle text-sm font-medium tracking-wide text-primary first:pl-6 dark:text-neutral-400 [&:has([role=checkbox])]:pr-0 bg-base-200'
 				afterChange={(changes) => {
 					changes?.forEach(([row, prop, oldValue, newValue]) => {
-						const field = fieldDefs.find(
-							(field) => field.accessorKey === prop
-						);
-						form.setValue(
-							`${fieldName}.${row}.${prop}`,
-							field?.type === 'number' ? +newValue : newValue,
-							{
-								shouldDirty: true,
-								shouldTouch: true,
-								shouldValidate: true,
-							}
-						);
+						const field = fieldDefs.find((field) => field.accessorKey === prop);
+						form.setValue(`${fieldName}.${row}.${prop}`, field?.type === 'number' ? +newValue : newValue, {
+							shouldDirty: true,
+							shouldTouch: true,
+							shouldValidate: true,
+						});
 					});
 				}}
 				licenseKey='non-commercial-and-evaluation' // for non-commercial use only
@@ -85,12 +77,7 @@ const SpreadsheetDynamicFields: React.FC<
 						// }
 
 						if (field.type === 'readOnly') {
-							return (
-								<HotColumn
-									key={field.accessorKey}
-									data={field.accessorKey}
-								/>
-							);
+							return <HotColumn key={field.accessorKey} data={field.accessorKey} />;
 						}
 
 						return (
@@ -99,11 +86,7 @@ const SpreadsheetDynamicFields: React.FC<
 								data={field.accessorKey}
 								readOnly={field.type === 'custom'}>
 								<CustomEditor hot-editor field={field} />
-								<CustomRenderer
-									hot-renderer
-									field={field}
-									fieldName={fieldName}
-								/>
+								<CustomRenderer hot-renderer field={field} fieldName={fieldName} />
 							</HotColumn>
 						);
 					})}

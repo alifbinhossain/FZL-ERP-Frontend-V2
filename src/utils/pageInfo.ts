@@ -37,11 +37,7 @@ export default class PageInfo {
 		return (
 			this.tabName
 				?.split('__')
-				.map(
-					(word) =>
-						word.charAt(0).toUpperCase() +
-						word.slice(1).replace(/_/g, ' ')
-				)
+				.map((word) => word.charAt(0).toUpperCase() + word.slice(1).replace(/_/g, ' '))
 				.join(': ') || ''
 		);
 	}

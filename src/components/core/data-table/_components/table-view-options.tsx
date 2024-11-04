@@ -15,42 +15,28 @@ interface TableViewOptionsProps<TData> {
 	table: Table<TData>;
 }
 
-export function TableViewOptions<TData>({
-	table,
-}: TableViewOptionsProps<TData>) {
+export function TableViewOptions<TData>({ table }: TableViewOptionsProps<TData>) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button
-					aria-label='View Options'
-					variant='gradient'
-					size='sm'
-					className='hidden lg:flex'>
+				<Button aria-label='View Options' variant='gradient' size='sm' className='hidden lg:flex'>
 					<Columns2 className='size-4' />
 					View
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent
-				align='end'
-				className='max-h-[400px] w-fit overflow-auto'>
+			<DropdownMenuContent align='end' className='max-h-[400px] w-fit overflow-auto'>
 				<DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				{table
 					.getAllColumns()
-					.filter(
-						(column) =>
-							typeof column.accessorFn !== 'undefined' &&
-							column.getCanHide()
-					)
+					.filter((column) => typeof column.accessorFn !== 'undefined' && column.getCanHide())
 					.map((column) => {
 						return (
 							<DropdownMenuCheckboxItem
 								key={column.id}
 								className='capitalize'
 								checked={column.getIsVisible()}
-								onCheckedChange={(value) =>
-									column.toggleVisibility(!!value)
-								}>
+								onCheckedChange={(value) => column.toggleVisibility(!!value)}>
 								{column.id.split('_').join(' ')}
 							</DropdownMenuCheckboxItem>
 						);

@@ -8,10 +8,7 @@ interface INumberFilterProps<TData, TValue> {
 	showLabel?: boolean;
 }
 
-function NumberFilter<TData, TValue>({
-	column,
-	showLabel,
-}: INumberFilterProps<TData, TValue>) {
+function NumberFilter<TData, TValue>({ column, showLabel }: INumberFilterProps<TData, TValue>) {
 	const columnFilterValue = column.getFilterValue();
 
 	const sortedUniqueValues: number[] = useMemo(
@@ -33,24 +30,14 @@ function NumberFilter<TData, TValue>({
 				<DebouncedInput
 					type='number'
 					value={(columnFilterValue as [number, number])?.[0] ?? ''}
-					onChange={(value) =>
-						column.setFilterValue((old: [number, number]) => [
-							value,
-							old?.[1],
-						])
-					}
+					onChange={(value) => column.setFilterValue((old: [number, number]) => [value, old?.[1]])}
 					placeholder={`Min (${Math.min(...sortedUniqueValues)})`}
 					className='flex-1 rounded border'
 				/>
 				<DebouncedInput
 					type='number'
 					value={(columnFilterValue as [number, number])?.[1] ?? ''}
-					onChange={(value) =>
-						column.setFilterValue((old: [number, number]) => [
-							old?.[0],
-							value,
-						])
-					}
+					onChange={(value) => column.setFilterValue((old: [number, number]) => [old?.[0], value])}
 					placeholder={`Max (${Math.max(...sortedUniqueValues)})`}
 					className='flex-1 rounded border'
 				/>

@@ -1,40 +1,7 @@
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
+import { FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-import {
-	FormControl,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from '@/components/ui/form';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
-
-export interface IFormSelectOption {
-	label: string;
-	value: string | number;
-}
-
-interface FormSelectProps {
-	field: ControllerRenderProps<any, any>;
-	fieldState: ControllerFieldState;
-	formState: UseFormStateReturn<any>;
-	label?: string;
-	placeholder?: string;
-	optional?: boolean;
-	options: IFormSelectOption[];
-	isDisabled?: boolean;
-	disableLabel?: boolean;
-	valueType?: 'string' | 'number';
-}
+import { FormSelectProps } from './types';
 
 const FormSelect: React.FC<FormSelectProps> = ({
 	field,
@@ -51,11 +18,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
 			{!disableLabel && (
 				<FormLabel className='flex items-center justify-between capitalize'>
 					{label || field.name.split('_').join(' ')}{' '}
-					{optional ? (
-						<span className='text-xs'>(Optional)</span>
-					) : (
-						''
-					)}
+					{optional ? <span className='text-xs'>(Optional)</span> : ''}
 				</FormLabel>
 			)}
 			<FormControl>
@@ -78,9 +41,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
 					</FormControl>
 					<SelectContent>
 						{options.map((option) => (
-							<SelectItem
-								key={option.value}
-								value={option?.value?.toString()}>
+							<SelectItem key={option.value} value={option?.value?.toString()}>
 								{option.label}
 							</SelectItem>
 						))}

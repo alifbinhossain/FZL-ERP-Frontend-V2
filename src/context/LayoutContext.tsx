@@ -47,11 +47,7 @@ const LayoutProvider: React.FC<ILayoutProps> = ({ children }) => {
 		return <Navigate to={`/login?redirect=${pathName}`} replace={true} />;
 	}
 
-	return (
-		<LayoutContext.Provider value={value}>
-			{children}
-		</LayoutContext.Provider>
-	);
+	return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;
 };
 
 export default LayoutProvider;

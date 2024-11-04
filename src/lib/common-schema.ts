@@ -14,14 +14,11 @@ export const RM_MATERIAL_ORDER_AGAINST_EDIT_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const RM_MATERIAL_ORDER_AGAINST_EDIT_NULL: Partial<IRMMaterialOrderAgainstEdit> =
-	{
-		remarks: '',
-	};
+export const RM_MATERIAL_ORDER_AGAINST_EDIT_NULL: Partial<IRMMaterialOrderAgainstEdit> = {
+	remarks: '',
+};
 
-export type IRMMaterialOrderAgainstEdit = z.infer<
-	typeof RM_MATERIAL_ORDER_AGAINST_EDIT_SCHEMA
->;
+export type IRMMaterialOrderAgainstEdit = z.infer<typeof RM_MATERIAL_ORDER_AGAINST_EDIT_SCHEMA>;
 
 // RM Material Used Edit Schema
 export const RM_MATERIAL_USED_EDIT_SCHEMA = z.object({
@@ -95,14 +92,11 @@ export const SFG_PRODUCTION_SCHEMA_IN_KG = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const SFG_PRODUCTION_SCHEMA_IN_KG_NULL: Partial<ISFGProductionSchemaInKg> =
-	{
-		remarks: null,
-	};
+export const SFG_PRODUCTION_SCHEMA_IN_KG_NULL: Partial<ISFGProductionSchemaInKg> = {
+	remarks: null,
+};
 
-export type ISFGProductionSchemaInKg = z.infer<
-	typeof SFG_PRODUCTION_SCHEMA_IN_KG
->;
+export type ISFGProductionSchemaInKg = z.infer<typeof SFG_PRODUCTION_SCHEMA_IN_KG>;
 
 // SFG Production in PCS Schema
 export const SFG_PRODUCTION_SCHEMA_IN_PCS = z.object({
@@ -116,18 +110,12 @@ export const SFG_PRODUCTION_SCHEMA_IN_PCS = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const SFG_PRODUCTION_SCHEMA_IN_PCS_NULL: Partial<ISFGProductionSchemaInPcs> =
-	{};
+export const SFG_PRODUCTION_SCHEMA_IN_PCS_NULL: Partial<ISFGProductionSchemaInPcs> = {};
 
-export type ISFGProductionSchemaInPcs = z.infer<
-	typeof SFG_PRODUCTION_SCHEMA_IN_PCS
->;
+export type ISFGProductionSchemaInPcs = z.infer<typeof SFG_PRODUCTION_SCHEMA_IN_PCS>;
 
 // SFG Production Schema
-export const SFG_PRODUCTION_SCHEMA = z
-	.object({})
-	.and(SFG_PRODUCTION_SCHEMA_IN_KG)
-	.and(SFG_PRODUCTION_SCHEMA_IN_PCS);
+export const SFG_PRODUCTION_SCHEMA = z.object({}).and(SFG_PRODUCTION_SCHEMA_IN_KG).and(SFG_PRODUCTION_SCHEMA_IN_PCS);
 
 export const SFG_PRODUCTION_NULL: Partial<ISFGProduction> = {
 	remarks: null,
@@ -153,14 +141,11 @@ export const SFG_TRANSACTION_SCHEMA_IN_KG = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const SFG_TRANSACTION_SCHEMA_IN_KG_NULL: Partial<ISFGTransactionSchemaInKg> =
-	{
-		remarks: null,
-	};
+export const SFG_TRANSACTION_SCHEMA_IN_KG_NULL: Partial<ISFGTransactionSchemaInKg> = {
+	remarks: null,
+};
 
-export type ISFGTransactionSchemaInKg = z.infer<
-	typeof SFG_TRANSACTION_SCHEMA_IN_KG
->;
+export type ISFGTransactionSchemaInKg = z.infer<typeof SFG_TRANSACTION_SCHEMA_IN_KG>;
 
 // SFG Transaction Schema in PCS
 export const SFG_TRANSACTION_SCHEMA_IN_PCS = z.object({
@@ -168,20 +153,14 @@ export const SFG_TRANSACTION_SCHEMA_IN_PCS = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const SFG_TRANSACTION_SCHEMA_IN_PCS_NULL: Partial<ISFGTransactionSchemaInPcs> =
-	{
-		remarks: null,
-	};
+export const SFG_TRANSACTION_SCHEMA_IN_PCS_NULL: Partial<ISFGTransactionSchemaInPcs> = {
+	remarks: null,
+};
 
-export type ISFGTransactionSchemaInPcs = z.infer<
-	typeof SFG_TRANSACTION_SCHEMA_IN_PCS
->;
+export type ISFGTransactionSchemaInPcs = z.infer<typeof SFG_TRANSACTION_SCHEMA_IN_PCS>;
 
 // SFG Transaction Schema
-export const SFG_TRANSACTION_SCHEMA = z
-	.object({})
-	.and(SFG_TRANSACTION_SCHEMA_IN_KG)
-	.and(SFG_TRANSACTION_SCHEMA_IN_PCS);
+export const SFG_TRANSACTION_SCHEMA = z.object({}).and(SFG_TRANSACTION_SCHEMA_IN_KG).and(SFG_TRANSACTION_SCHEMA_IN_PCS);
 
 export const SFG_TRANSACTION_SCHEMA_NULL: Partial<ISFGTransactionSchema> = {
 	remarks: null,

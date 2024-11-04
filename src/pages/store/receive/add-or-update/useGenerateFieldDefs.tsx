@@ -2,7 +2,7 @@ import { UseFormWatch } from 'react-hook-form';
 
 import FieldActionButton from '@/components/buttons/field-action-button';
 import { FieldDef } from '@/components/core/form/form-dynamic-fields';
-import { IFormSelectOption } from '@/components/core/form/form-select';
+import { IFormSelectOption } from '@/components/core/form/select';
 
 import { useOtherMaterial } from '@/lib/common-queries/other';
 
@@ -14,13 +14,8 @@ interface IGenerateFieldDefsProps {
 	watch?: UseFormWatch<IReceive>;
 }
 
-const useGenerateFieldDefs = ({
-	copy,
-	remove,
-	watch,
-}: IGenerateFieldDefsProps): FieldDef[] => {
-	const { data: material, isLoading } =
-		useOtherMaterial<(IFormSelectOption & { unit: string })[]>();
+const useGenerateFieldDefs = ({ copy, remove, watch }: IGenerateFieldDefsProps): FieldDef[] => {
+	const { data: material, isLoading } = useOtherMaterial<(IFormSelectOption & { unit: string })[]>();
 
 	return [
 		{
@@ -37,11 +32,8 @@ const useGenerateFieldDefs = ({
 			accessorKey: 'quantity',
 			type: 'join-input-unit',
 			unit: (index: number) =>
-				material?.find(
-					(item) =>
-						item.value.toString() ===
-						watch?.(`purchase.${index}.material_uuid`)
-				)?.unit || '',
+				material?.find((item) => item.value.toString() === watch?.(`purchase.${index}.material_uuid`))?.unit ||
+				'',
 			className: 'min-w-[100px]',
 		},
 		{
@@ -61,13 +53,7 @@ const useGenerateFieldDefs = ({
 			accessorKey: 'actions',
 			type: 'custom',
 			component: (index: number) => {
-				return (
-					<FieldActionButton
-						handleCopy={copy}
-						handleRemove={remove}
-						index={index}
-					/>
-				);
+				return <FieldActionButton handleCopy={copy} handleRemove={remove} index={index} />;
 			},
 		},
 	];

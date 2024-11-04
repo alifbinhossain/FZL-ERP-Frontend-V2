@@ -13,28 +13,18 @@ const TableExportCSV = () => {
 
 	const filteredCsvColumn = table
 		.getAllLeafColumns()
-		.filter(
-			({ getIsVisible, id }) =>
-				id !== 'row-selection' && id !== 'actions' && getIsVisible()
-		);
+		.filter(({ getIsVisible, id }) => id !== 'row-selection' && id !== 'actions' && getIsVisible());
 
 	const { csvHeaders, csvHeadersId } = filteredCsvColumn.reduce(
 		(acc, column: any) => {
-			acc.csvHeaders.push(
-				getFlatHeader(column.columnDef.header) as never
-			);
+			acc.csvHeaders.push(getFlatHeader(column.columnDef.header) as never);
 			acc.csvHeadersId.push(column.id as never);
 			return acc;
 		},
 		{ csvHeaders: [], csvHeadersId: [] }
 	);
 
-	const csvData = [
-		csvHeaders,
-		...filteredRows.map((row) =>
-			csvHeadersId.map((column) => row.original[column])
-		),
-	];
+	const csvData = [csvHeaders, ...filteredRows.map((row) => csvHeadersId.map((column) => row.original[column]))];
 
 	const dateTime = format(new Date(), 'dd-MM-yyyy');
 	const filename = `${title.toLowerCase()} - ${dateTime}.csv`;

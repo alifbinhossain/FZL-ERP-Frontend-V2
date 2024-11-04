@@ -124,11 +124,21 @@ export const useOrderFactoryByUUID = <T>(uuid: string) =>
 // 		url: addUrlParams('/public/merchandiser', { limit, page }),
 // 	});
 // };
-export const useOrderMerchandiser = <T>() => {
-	const { start_date, end_date, formatted_start_date, formatted_end_date } =
-		useDateRange();
+
+type IUseOrderMerchandiserProps = {
+	formatted_start_date: string;
+	formatted_end_date: string;
+};
+
+export const useOrderMerchandiser = <T>({
+	formatted_start_date,
+	formatted_end_date,
+}: IUseOrderMerchandiserProps) => {
 	return useTQuery<T>({
-		queryKey: orderQK.merchandiserQuery({ start_date, end_date }),
+		queryKey: orderQK.merchandiserQuery({
+			start_date: formatted_start_date,
+			end_date: formatted_end_date,
+		}),
 		url: addUrlParams(`/public/merchandiser`, {
 			start_date: formatted_start_date,
 			end_date: formatted_end_date,

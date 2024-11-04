@@ -1,19 +1,16 @@
 {
 	"recommendations": [
-		"codeium.codeium",
-		"streetsidesoftware.code-spell-checker",
+		"aaron-bond.better-comments",
 		"vivaxy.vscode-conventional-commits",
-		"dbaeumer.vscode-eslint",
+		"codeium.codeium",
 		"github.vscode-pull-request-github",
-		"pkief.material-icon-theme",
+		"ms-vsliveshare.vsliveshare",
 		"esbenp.prettier-vscode",
-		"jawandarajbir.react-vscode-extension-pack",
-		"xabikos.reactsnippets",
+		"moalamri.inline-fold",
+		"streetsidesoftware.code-spell-checker",
+		"dbaeumer.vscode-eslint",
 		"bradlc.vscode-tailwindcss",
 		"infeng.vscode-react-typescript",
-		"moalamri.inline-fold",
-		"wayou.vscode-todo-highlight",
-		"naumovs.color-highlight",
-		"aaron-bond.better-comments"
+		"naumovs.color-highlight"
 	]
 }

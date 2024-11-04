@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
 import CoreForm from '@/components/core/form';
-import { IFormSelectOption } from '@/components/core/form/form-select';
+import { IFormSelectOption } from '@/components/core/form/select';
 import { FormField } from '@/components/ui/form';
 
 import { useOtherVendor } from '@/lib/common-queries/other';
@@ -46,21 +46,11 @@ const Header = () => {
 			<FormField
 				control={form.control}
 				name='lc_number'
-				render={(props) => (
-					<CoreForm.Input label='LC Number' {...props} />
-				)}
+				render={(props) => <CoreForm.Input label='LC Number' {...props} />}
 			/>
-			<FormField
-				control={form.control}
-				name='challan_number'
-				render={(props) => <CoreForm.Input {...props} />}
-			/>
+			<FormField control={form.control} name='challan_number' render={(props) => <CoreForm.Input {...props} />} />
 			<div className='col-span-1 sm:col-span-2 lg:col-span-4'>
-				<FormField
-					control={form.control}
-					name='remarks'
-					render={(props) => <CoreForm.Textarea {...props} />}
-				/>
+				<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 			</div>
 		</CoreForm.Section>
 	);

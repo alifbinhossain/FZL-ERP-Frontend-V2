@@ -8,10 +8,7 @@ interface StatusButtonProps {
 	buttonProps?: ButtonProps;
 }
 
-const StatusButton: React.FC<StatusButtonProps> = ({
-	value = 0,
-	buttonProps,
-}) => {
+const StatusButton: React.FC<StatusButtonProps> = ({ value = 0, buttonProps }) => {
 	const valueIsBoolean = typeof value === 'boolean';
 
 	if (valueIsBoolean) {
@@ -21,11 +18,7 @@ const StatusButton: React.FC<StatusButtonProps> = ({
 				size={'icon'}
 				variant={value ? 'destructive' : 'accent'}
 				{...buttonProps}>
-				{value ? (
-					<X className='size-4' />
-				) : (
-					<Check className='size-4' />
-				)}
+				{value ? <X className='size-4' /> : <Check className='size-4' />}
 			</Button>
 		);
 	}
@@ -36,11 +29,7 @@ const StatusButton: React.FC<StatusButtonProps> = ({
 			size={'icon'}
 			variant={value === 0 ? 'destructive' : 'accent'}
 			{...buttonProps}>
-			{value === 0 ? (
-				<X className='size-4' />
-			) : (
-				<Check className='size-4' />
-			)}
+			{value === 0 ? <X className='size-4' /> : <Check className='size-4' />}
 		</Button>
 	);
 };

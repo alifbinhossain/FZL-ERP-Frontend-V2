@@ -8,16 +8,10 @@ interface IStringFilterProps<TData, TValue> {
 	showLabel?: boolean;
 }
 
-function StringFilter<TData, TValue>({
-	column,
-	showLabel,
-}: IStringFilterProps<TData, TValue>) {
+function StringFilter<TData, TValue>({ column, showLabel }: IStringFilterProps<TData, TValue>) {
 	const columnFilterValue = column.getFilterValue();
 
-	const sortedUniqueValues = useMemo(
-		() => Array.from(column.getFacetedUniqueValues().keys()).sort(),
-		[column]
-	);
+	const sortedUniqueValues = useMemo(() => Array.from(column.getFacetedUniqueValues().keys()).sort(), [column]);
 
 	return (
 		<div className='flex flex-col gap-1'>
@@ -30,14 +24,7 @@ function StringFilter<TData, TValue>({
 			)}
 			<datalist id={column.id + 'list'}>
 				{sortedUniqueValues.slice(0, 10).map((value, index) => (
-					<option
-						key={
-							value !== null && value !== undefined
-								? value
-								: `option-${index}`
-						}
-						value={value}
-					/>
+					<option key={value !== null && value !== undefined ? value : `option-${index}`} value={value} />
 				))}
 			</datalist>
 			<DebouncedInput

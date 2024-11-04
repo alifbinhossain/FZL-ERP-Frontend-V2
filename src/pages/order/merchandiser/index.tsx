@@ -2,6 +2,7 @@ import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
 import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
+import useDateRange from '@/hooks/useDateRange';
 
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
@@ -16,8 +17,23 @@ const DeleteAllModal = lazy(
 );
 
 const Merchandiser = () => {
+	const {
+		start_date,
+		end_date,
+		formatted_start_date,
+		formatted_end_date,
+		onUpdate,
+	} = useDateRange();
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useOrderMerchandiser<IMerchandiserData[]>();
+		useOrderMerchandiser<IMerchandiserData[]>({
+			formatted_start_date,
+			formatted_end_date,
+		});
+
+	console.log({
+		formatted_start_date,
+		formatted_end_date,
+	});
 
 	const pageInfo = useMemo(
 		() => new PageInfo('Merchandiser', url, 'order__merchandiser'),
@@ -89,7 +105,10 @@ const Merchandiser = () => {
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
-				handleDeleteAll={handleDeleteAll}>
+				handleDeleteAll={handleDeleteAll}
+				start_date={start_date}
+				end_date={end_date}
+				onUpdate={onUpdate}>
 				{renderSuspenseModals([
 					<AddOrUpdate
 						{...{

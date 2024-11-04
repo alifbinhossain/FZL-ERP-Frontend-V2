@@ -63,10 +63,7 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	// Check if the current route matches the folder's path
-	const routeMatch = useMemo(
-		() => confirmRouteMatch(props, pathname),
-		[props, pathname]
-	);
+	const routeMatch = useMemo(() => confirmRouteMatch(props, pathname), [props, pathname]);
 
 	// Update folder state based on route match and close-all state
 	useEffect(() => {
@@ -99,18 +96,10 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 	};
 
 	return (
-		<motion.li
-			variants={variants}
-			initial='initial'
-			animate='animate'
-			className={''}>
+		<motion.li variants={variants} initial='initial' animate='animate' className={''}>
 			{/* Render the folder link if it has a path */}
 			{path && (
-				<Link
-					key={name}
-					onClick={handleClick}
-					className={folderClassName}
-					to={path}>
+				<Link key={name} onClick={handleClick} className={folderClassName} to={path}>
 					<span className='truncate'>{name}</span>
 					<ChevronRight
 						className={cn(
@@ -123,11 +112,7 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 
 			{/* Render a button if the folder doesn't have a path */}
 			{!path && (
-				<motion.button
-					whileTap={{ scale: 0.95 }}
-					key={name}
-					onClick={handleClick}
-					className={folderClassName}>
+				<motion.button whileTap={{ scale: 0.95 }} key={name} onClick={handleClick} className={folderClassName}>
 					<span className='truncate'>{name}</span>
 					<ChevronRight
 						className={cn(
@@ -139,10 +124,7 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 			)}
 
 			{/* Render children if the folder is open */}
-			<motion.div
-				variants={childVariants}
-				animate={isOpen ? 'open' : 'closed'}
-				className='pl-3'>
+			<motion.div variants={childVariants} animate={isOpen ? 'open' : 'closed'} className='pl-3'>
 				<ul className='space-y-1 border-l border-accent/10 pt-1'>
 					{children?.map((child: any, index: number) => {
 						if (child?.children) {

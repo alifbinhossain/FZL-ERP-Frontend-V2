@@ -6,7 +6,7 @@ import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
-import { IFormSelectOption } from '@/components/core/form/form-select';
+import { IFormSelectOption } from '@/components/core/form/select';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
@@ -16,11 +16,7 @@ import nanoid from '@/lib/nanoid';
 import { IActionTrxAgainstOrder } from '../_config/columns/columns.type'; // TODO: Import Columns Type
 
 // TODO: Import Schema
-import {
-	ITestTrxAgainstOrder,
-	TEST_TRX_AGAINST_ORDER_NULL,
-	TEST_TRX_AGAINST_ORDER_SCHEMA,
-} from '../_config/schema';
+import { ITestTrxAgainstOrder, TEST_TRX_AGAINST_ORDER_NULL, TEST_TRX_AGAINST_ORDER_SCHEMA } from '../_config/schema';
 
 interface IAgainstOrderTransferProps {
 	url: string;
@@ -105,12 +101,7 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 				control={form.control}
 				name='order_description_uuid'
 				render={(props) => (
-					<CoreForm.ReactSelect
-						label='Order'
-						placeholder='Select an Order'
-						options={order!}
-						{...props}
-					/>
+					<CoreForm.ReactSelect label='Order' placeholder='Select an Order' options={order!} {...props} />
 				)}
 			/>
 
@@ -140,11 +131,7 @@ const AgainstOrderTransfer: React.FC<IAgainstOrderTransferProps> = ({
 				)}
 			/>
 
-			<FormField
-				control={form.control}
-				name='remarks'
-				render={(props) => <CoreForm.Textarea {...props} />}
-			/>
+			<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 		</AddModal>
 	);
 };

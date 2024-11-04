@@ -1,8 +1,7 @@
 import { z } from 'zod';
 import { zu } from 'zod_utilz';
 
-export const handelNumberDefaultValue = (value: number) =>
-	value === null ? undefined : value;
+export const handelNumberDefaultValue = (value: number) => (value === null ? undefined : value);
 
 // STRING
 export const STRING = (message = 'Required', typeError = 'Invalid String') =>
@@ -18,15 +17,13 @@ export const STRING_REQUIRED = STRING('Required').min(1, 'Required');
 export const STRING_OPTIONAL = STRING().optional();
 
 // DATE
-export const DATE = (message = 'Required') =>
-	z.date({ required_error: message });
+export const DATE = (message = 'Required') => z.date({ required_error: message });
 export const DATE_REQUIRED = DATE('Required');
 export const DATE_OPTIONAL = DATE().optional();
 export const DATE_NULLABLE = DATE().nullable();
 
 // UUID
-export const UUID = (message = 'Required') =>
-	STRING(message).min(15, 'Invalid Primary Key UUID Length');
+export const UUID = (message = 'Required') => STRING(message).min(15, 'Invalid Primary Key UUID Length');
 export const UUID_REQUIRED = UUID('Required');
 export const UUID_FK = UUID().nullable();
 export const UUID_PK = UUID_REQUIRED;
@@ -38,14 +35,12 @@ export const URL_REQUIRED = URL('Required');
 export const URL_OPTIONAL = URL().optional();
 
 // NAME
-export const NAME = (message = 'Required') =>
-	STRING(message).regex(/^[a-zA-Z0-9 ._#-/"'()]*$/, 'Invalid Name');
+export const NAME = (message = 'Required') => STRING(message).regex(/^[a-zA-Z0-9 ._#-/"'()]*$/, 'Invalid Name');
 export const NAME_REQUIRED = NAME('Required').min(1, 'Required');
 export const NAME_OPTIONAL = NAME().optional();
 
 // EMAIL
-export const EMAIL = (message = 'Required') =>
-	STRING(message).email('Invalid Email');
+export const EMAIL = (message = 'Required') => STRING(message).email('Invalid Email');
 export const EMAIL_REQUIRED = EMAIL('Required');
 export const EMAIL_OPTIONAL = EMAIL().optional();
 export const EMAIL_NULLABLE = EMAIL().nullable();
@@ -61,8 +56,7 @@ export const BOOLEAN = (message = 'Required') =>
 		required_error: message,
 	});
 export const BOOLEAN_REQUIRED = BOOLEAN('Required');
-export const BOOLEAN_DEFAULT_VALUE = (value: boolean) =>
-	BOOLEAN().default(value);
+export const BOOLEAN_DEFAULT_VALUE = (value: boolean) => BOOLEAN().default(value);
 
 export const BOOLEAN_OPTIONAL = BOOLEAN().optional();
 
@@ -108,10 +102,10 @@ export const PHONE_NUMBER_OPTIONAL = PHONE_NUMBER.optional();
 export const PHONE_NUMBER_NULLABLE = PHONE_NUMBER.nullable();
 
 // PASSWORD
-export const PASSWORD = STRING_REQUIRED.min(
-	4,
-	'Password length should be at least 4 characters'
-).max(12, 'Password cannot exceed more than 12 characters');
+export const PASSWORD = STRING_REQUIRED.min(4, 'Password length should be at least 4 characters').max(
+	12,
+	'Password cannot exceed more than 12 characters'
+);
 
 // ORDER NUMBER
 export const ORDER_NUMBER = STRING('Required', 'Invalid Order Number').regex(

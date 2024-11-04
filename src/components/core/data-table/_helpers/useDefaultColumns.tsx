@@ -13,12 +13,7 @@ const useDefaultColumns = <TData, TValue>(): ColumnDef<TData, TValue>[] => {
 		{
 			accessorKey: 'remarks',
 			header: 'Remarks',
-			cell: (info) => (
-				<HoverCardWrapper
-					title={info.getValue<string>()}
-					content={info.getValue<string>()}
-				/>
-			),
+			cell: (info) => <HoverCardWrapper title={info.getValue<string>()} content={info.getValue<string>()} />,
 		},
 		{
 			accessorKey: 'created_by_name',

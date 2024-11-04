@@ -9,10 +9,7 @@ function filterRoutes(routes: IRoute[]) {
 
 	// Helper function to check if a route has read access
 	function hasReadAccess(route: IRoute) {
-		return (
-			userAccess[route.page_name!] &&
-			userAccess[route.page_name!].includes('read')
-		);
+		return userAccess[route.page_name!] && userAccess[route.page_name!].includes('read');
 	}
 
 	// Recursive function to filter routes and their children

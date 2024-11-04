@@ -1,37 +1,9 @@
 import { isArray } from 'lodash';
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
 
-import {
-	FormControl,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from '@/components/ui/form';
+import { FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import ReactSelect from '@/components/ui/react-select';
 
-export interface IFormSelectOption {
-	label: string;
-	value: string | number;
-}
-
-interface FormReactSelectProps {
-	field: ControllerRenderProps<any, any>;
-	fieldState: ControllerFieldState;
-	formState: UseFormStateReturn<any>;
-	label?: string;
-	placeholder?: string;
-	optional?: boolean;
-	options: IFormSelectOption[];
-	isDisabled?: boolean;
-	disableLabel?: boolean;
-	isMulti?: boolean;
-	menuPortalTarget?: any;
-	valueType?: 'string' | 'number';
-}
+import { FormReactSelectProps, IFormSelectOption } from './types';
 
 const FormReactSelect: React.FC<FormReactSelectProps> = ({
 	field,
@@ -50,11 +22,7 @@ const FormReactSelect: React.FC<FormReactSelectProps> = ({
 			{!disableLabel && (
 				<FormLabel className='flex items-center justify-between capitalize'>
 					{label || field.name.split('_').join(' ')}{' '}
-					{optional ? (
-						<span className='text-xs'>(Optional)</span>
-					) : (
-						''
-					)}
+					{optional ? <span className='text-xs'>(Optional)</span> : ''}
 				</FormLabel>
 			)}
 			<FormControl>
@@ -72,16 +40,10 @@ const FormReactSelect: React.FC<FormReactSelectProps> = ({
 										console.log({
 											item,
 										});
-										return options.find(
-											(option: IFormSelectOption) =>
-												option.value === item
-										);
+										return options.find((option: IFormSelectOption) => option.value === item);
 									})
 								: []
-							: options.filter(
-									(item: IFormSelectOption) =>
-										item.value === field.value
-								)
+							: options.filter((item: IFormSelectOption) => item.value === field.value)
 					}
 					onChange={(option: any) => {
 						if (option === null) {
@@ -93,9 +55,7 @@ const FormReactSelect: React.FC<FormReactSelectProps> = ({
 							return;
 						}
 						if (isMulti) {
-							field.onChange(
-								option.map((item: any) => item.value)
-							);
+							field.onChange(option.map((item: any) => item.value));
 
 							return;
 						}

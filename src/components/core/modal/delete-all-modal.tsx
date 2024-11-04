@@ -52,13 +52,7 @@ interface IDeleteAllModalProps {
 	onClose?: () => void;
 }
 
-const DeleteAllModal: React.FC<IDeleteAllModalProps> = ({
-	deleteItems,
-	setDeleteItems,
-	url,
-	deleteData,
-	onClose,
-}) => {
+const DeleteAllModal: React.FC<IDeleteAllModalProps> = ({ deleteItems, setDeleteItems, url, deleteData, onClose }) => {
 	const { table } = useTable();
 	const [isLoading, setIsLoading] = useState(false);
 	const handleConfirm = async () => {
@@ -90,12 +84,8 @@ const DeleteAllModal: React.FC<IDeleteAllModalProps> = ({
 		<AlertDialog open={!!deleteItems?.length}>
 			<AlertDialogContent>
 				<AlertDialogHeader>
-					<AlertDialogTitle>
-						Are you sure you want to delete the following items?
-					</AlertDialogTitle>
-					<AlertDialogDescription className='sr-only'>
-						This action cannot be undone.
-					</AlertDialogDescription>
+					<AlertDialogTitle>Are you sure you want to delete the following items?</AlertDialogTitle>
+					<AlertDialogDescription className='sr-only'>This action cannot be undone.</AlertDialogDescription>
 
 					<ul className='space-y-3 pt-2'>
 						{deleteItems !== null &&
@@ -107,15 +97,13 @@ const DeleteAllModal: React.FC<IDeleteAllModalProps> = ({
 										id={'item' + item.id}
 										checked={item.checked}
 										onCheckedChange={() => {
-											const newItems = deleteItems?.map(
-												(e) =>
-													e.id === item.id
-														? {
-																...e,
-																checked:
-																	!e.checked,
-															}
-														: e
+											const newItems = deleteItems?.map((e) =>
+												e.id === item.id
+													? {
+															...e,
+															checked: !e.checked,
+														}
+													: e
 											);
 											setDeleteItems(newItems);
 										}}
@@ -123,10 +111,7 @@ const DeleteAllModal: React.FC<IDeleteAllModalProps> = ({
 									/>
 									<Label
 										htmlFor={'item' + item.id}
-										className={cn(
-											'text-sm',
-											!item.checked && 'line-through'
-										)}>
+										className={cn('text-sm', !item.checked && 'line-through')}>
 										{item.name}
 									</Label>
 								</li>
@@ -134,18 +119,11 @@ const DeleteAllModal: React.FC<IDeleteAllModalProps> = ({
 					</ul>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
-					<AlertDialogCancel onClick={() => setDeleteItems(null)}>
-						Cancel
-					</AlertDialogCancel>
+					<AlertDialogCancel onClick={() => setDeleteItems(null)}>Cancel</AlertDialogCancel>
 					<AlertDialogAction
-						disabled={
-							isLoading ||
-							!deleteItems?.filter((item) => item.checked).length
-						}
+						disabled={isLoading || !deleteItems?.filter((item) => item.checked).length}
 						onClick={handleConfirm}>
-						{isLoading && (
-							<ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
-						)}
+						{isLoading && <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />}
 						{isLoading ? 'Please wait...' : 'Confirm'}
 					</AlertDialogAction>
 				</AlertDialogFooter>

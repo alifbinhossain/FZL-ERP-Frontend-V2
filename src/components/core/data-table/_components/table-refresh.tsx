@@ -10,9 +10,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 interface TableRefreshProps {
-	handleRefetch: (
-		options?: RefetchOptions
-	) => Promise<QueryObserverResult<IResponse<unknown>, Error>>;
+	handleRefetch: (options?: RefetchOptions) => Promise<QueryObserverResult<IResponse<unknown>, Error>>;
 }
 const TableRefresh: React.FC<TableRefreshProps> = ({ handleRefetch }) => {
 	const [isFetching, setIsFetching] = useState(false);
@@ -41,9 +39,7 @@ const TableRefresh: React.FC<TableRefreshProps> = ({ handleRefetch }) => {
 				variant={'gradient'}
 				size={'sm'}
 				onClick={handleClick}>
-				<RefreshCw
-					className={cn('size-4', isFetching && 'animate-spin')}
-				/>
+				<RefreshCw className={cn('size-4', isFetching && 'animate-spin')} />
 				Refresh
 			</Button>
 		</TooltipWrapper>

@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-function useStorage(
-	key: string,
-	defaultValue: unknown,
-	storageObject: Storage
-) {
+function useStorage(key: string, defaultValue: unknown, storageObject: Storage) {
 	const [value, setValue] = useState(() => {
 		const jsonValue = storageObject.getItem(key);
 		if (jsonValue != null) return JSON.parse(jsonValue);

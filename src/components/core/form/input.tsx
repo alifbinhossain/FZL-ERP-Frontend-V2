@@ -1,31 +1,10 @@
-import {
-	ControllerFieldState,
-	ControllerRenderProps,
-	UseFormStateReturn,
-} from 'react-hook-form';
-
-import {
-	FormControl,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from '@/components/ui/form';
-import { Input, InputProps } from '@/components/ui/input';
+import { FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 
 import { cn } from '@/lib/utils';
 
-interface FormInputProps extends InputProps {
-	field: ControllerRenderProps<any, any>;
-	fieldState: ControllerFieldState;
-	formState: UseFormStateReturn<any>;
-	label?: string;
-	subLabel?: string;
-	placeholder?: string;
-	optional?: boolean;
-	icon?: React.ReactNode;
-	disableLabel?: boolean;
-}
+import { FormInputProps } from './types';
 
 const FormInput: React.FC<FormInputProps> = ({
 	field,
@@ -45,11 +24,7 @@ const FormInput: React.FC<FormInputProps> = ({
 				<FormLabel className='flex items-center justify-between capitalize'>
 					<span>
 						{label || field.name.replace('_', ' ')}{' '}
-						{optional ? (
-							<span className='text-xs'>(Optional)</span>
-						) : (
-							''
-						)}
+						{optional ? <span className='text-xs'>(Optional)</span> : ''}
 					</span>
 					{subLabel && <span className='text-xs'>{subLabel}</span>}
 				</FormLabel>

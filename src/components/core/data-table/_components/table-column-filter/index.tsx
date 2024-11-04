@@ -12,10 +12,7 @@ interface TableColumnFilterProps<T> {
 }
 
 // Define the component as a generic function to improve type inference
-function TableColumnFilter<T>({
-	column,
-	showLabel = false,
-}: TableColumnFilterProps<T>) {
+function TableColumnFilter<T>({ column, showLabel = false }: TableColumnFilterProps<T>) {
 	const filterVariant = column.columnDef.meta?.filterVariant;
 
 	// Render the appropriate filter component based on the filter variant

@@ -1,23 +1,14 @@
 import { useMemo } from 'react';
 import { Column } from '@tanstack/react-table';
 
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface ISelectFilterProps<TData, TValue> {
 	column: Column<TData, TValue>;
 	showLabel?: boolean;
 }
 
-function SelectFilter<TData, TValue>({
-	column,
-	showLabel,
-}: ISelectFilterProps<TData, TValue>) {
+function SelectFilter<TData, TValue>({ column, showLabel }: ISelectFilterProps<TData, TValue>) {
 	// Memoize the select options to prevent unnecessary re-renders
 	const selectOptions = useMemo(
 		() => [
@@ -44,9 +35,7 @@ function SelectFilter<TData, TValue>({
 				</SelectTrigger>
 				<SelectContent>
 					{selectOptions.map((option) => (
-						<SelectItem
-							key={option.value}
-							value={String(option.value)}>
+						<SelectItem key={option.value} value={String(option.value)}>
 							{option.label}
 						</SelectItem>
 					))}

@@ -9,17 +9,11 @@ interface IDateFilterProps<TData, TValue> {
 	showLabel?: boolean;
 }
 
-function DateFilter<TData, TValue>({
-	column,
-	showLabel,
-}: IDateFilterProps<TData, TValue>) {
+function DateFilter<TData, TValue>({ column, showLabel }: IDateFilterProps<TData, TValue>) {
 	const columnFilterValue = column.getFilterValue() as [Date, Date];
 
 	const allDates: Date[] = useMemo(
-		() =>
-			Array.from(column.getFacetedUniqueValues().keys()).map(
-				(e) => new Date(e)
-			),
+		() => Array.from(column.getFacetedUniqueValues().keys()).map((e) => new Date(e)),
 		[column]
 	);
 

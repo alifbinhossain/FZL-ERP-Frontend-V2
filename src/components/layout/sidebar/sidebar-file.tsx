@@ -43,10 +43,7 @@ const SidebarFile: React.FC<IRoute> = ({ path, name }) => {
 				<span className='block w-full truncate'>{name}</span>
 
 				{matchUrl(path!, pathname) ? (
-					<motion.div
-						className='absolute inset-0 h-full w-[3px] bg-accent'
-						layoutId='active-sidebar-item'
-					/>
+					<motion.div className='absolute inset-0 h-full w-[3px] bg-accent' layoutId='active-sidebar-item' />
 				) : null}
 			</NavLink>
 		</motion.li>

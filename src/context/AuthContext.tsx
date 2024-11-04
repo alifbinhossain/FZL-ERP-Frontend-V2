@@ -1,10 +1,4 @@
-import {
-	createContext,
-	useCallback,
-	useEffect,
-	useMemo,
-	useState,
-} from 'react';
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import { IAuthResponse, IUser } from '@/types';
 import { toast } from 'sonner';
 import useCookie from '@/hooks/useCookie';
@@ -42,25 +36,13 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [loading, setLoading] = useState(true);
 
 	// Access to cookie values and functions
-	const {
-		value: authCookie,
-		updateCookie: updateAuthCookie,
-		deleteCookie: deleteAuthCookie,
-	} = useCookie('auth');
-	const {
-		value: userCookie,
-		updateCookie: updateUserCookie,
-		deleteCookie: deleteUserCookie,
-	} = useCookie('user');
-	const [userCanAccess, updateUserCanAccess, removeUserCanAccess] =
-		useLocalStorage('can_access', '');
+	const { value: authCookie, updateCookie: updateAuthCookie, deleteCookie: deleteAuthCookie } = useCookie('auth');
+	const { value: userCookie, updateCookie: updateUserCookie, deleteCookie: deleteUserCookie } = useCookie('user');
+	const [userCanAccess, updateUserCanAccess, removeUserCanAccess] = useLocalStorage('can_access', '');
 
 	useEffect(() => {
 		if (!user) {
-			setRedirectUrl(
-				new URLSearchParams(window.location.search).get('redirect') ||
-					'/'
-			);
+			setRedirectUrl(new URLSearchParams(window.location.search).get('redirect') || '/');
 		} else {
 			setRedirectUrl('/');
 		}
@@ -83,10 +65,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const login = useCallback(
 		async (data: ILoginData) => {
 			try {
-				const response = await api.post<IAuthResponse>(
-					'/hr/user/login',
-					data
-				);
+				const response = await api.post<IAuthResponse>('/hr/user/login', data);
 				const { token, user, can_access } = response.data;
 
 				updateAuthCookie(`Bearer ${token || ''}`);
@@ -136,9 +115,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		[user, canAccess, loading, login, logout]
 	);
 
-	return (
-		<AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-	);
+	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

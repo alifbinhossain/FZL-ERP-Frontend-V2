@@ -22,20 +22,12 @@ const LoginForm = () => {
 				<FormField
 					control={form.control}
 					name='email'
-					render={(props) => (
-						<CoreForm.Input type='email' {...props} />
-					)}
+					render={(props) => <CoreForm.Input type='email' {...props} />}
 				/>
 				<FormField
 					control={form.control}
 					name='pass'
-					render={(props) => (
-						<CoreForm.Input
-							type='password'
-							label='Password'
-							{...props}
-						/>
-					)}
+					render={(props) => <CoreForm.Input type='password' label='Password' {...props} />}
 				/>
 
 				<CoreForm.Submit title='Login' />

@@ -1,9 +1,4 @@
-import {
-	ArrowDownIcon,
-	ArrowUpIcon,
-	CaretSortIcon,
-	EyeNoneIcon,
-} from '@radix-ui/react-icons';
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, EyeNoneIcon } from '@radix-ui/react-icons';
 import { Column } from '@tanstack/react-table';
 import { ListFilter, Pin, PinOff } from 'lucide-react';
 
@@ -15,25 +10,17 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from '@/components/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 import { cn } from '@/lib/utils';
 
 import TableColumnFilter from './table-column-filter';
 
-interface TableColumnHeaderProps<TData, TValue>
-	extends React.HTMLAttributes<HTMLDivElement> {
+interface TableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
 	column: Column<TData, TValue>;
 }
 
-export function TableColumnHeader<TData, TValue>({
-	column,
-	className,
-}: TableColumnHeaderProps<TData, TValue>) {
+export function TableColumnHeader<TData, TValue>({ column, className }: TableColumnHeaderProps<TData, TValue>) {
 	const title = column.columnDef.header as string;
 
 	if (!column.getCanSort()) {
@@ -60,13 +47,11 @@ export function TableColumnHeader<TData, TValue>({
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align='start'>
-					<DropdownMenuItem
-						onClick={() => column.toggleSorting(false)}>
+					<DropdownMenuItem onClick={() => column.toggleSorting(false)}>
 						<ArrowUpIcon className='mr-2 size-3.5 text-muted-foreground/70' />
 						Asc
 					</DropdownMenuItem>
-					<DropdownMenuItem
-						onClick={() => column.toggleSorting(true)}>
+					<DropdownMenuItem onClick={() => column.toggleSorting(true)}>
 						<ArrowDownIcon className='mr-2 size-3.5 text-muted-foreground/70' />
 						Desc
 					</DropdownMenuItem>
@@ -85,23 +70,14 @@ export function TableColumnHeader<TData, TValue>({
 							{column.getIsPinned() === 'left' ? (
 								<PinOff className='mr-2 size-3.5 text-muted-foreground/70' />
 							) : (
-								<Pin
-									className={
-										'mr-2 size-3.5 text-muted-foreground/70'
-									}
-								/>
+								<Pin className={'mr-2 size-3.5 text-muted-foreground/70'} />
 							)}
-							<span>
-								{column.getIsPinned() === 'left'
-									? 'Unpin'
-									: 'Pin to left'}
-							</span>
+							<span>{column.getIsPinned() === 'left' ? 'Unpin' : 'Pin to left'}</span>
 						</DropdownMenuItem>
 					)}
 
 					{column.getCanHide() && (
-						<DropdownMenuItem
-							onClick={() => column.toggleVisibility(false)}>
+						<DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
 							<EyeNoneIcon className='mr-2 size-3.5 text-muted-foreground/70' />
 							Hide
 						</DropdownMenuItem>
@@ -112,10 +88,7 @@ export function TableColumnHeader<TData, TValue>({
 			{column.getCanFilter() ? (
 				<Popover>
 					<PopoverTrigger asChild>
-						<Button
-							aria-label='Column Filter'
-							variant='ghost'
-							size={'icon'}>
+						<Button aria-label='Column Filter' variant='ghost' size={'icon'}>
 							<ListFilter className='size-4' />
 						</Button>
 					</PopoverTrigger>

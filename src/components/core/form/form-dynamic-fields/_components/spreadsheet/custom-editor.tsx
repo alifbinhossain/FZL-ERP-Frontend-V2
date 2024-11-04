@@ -4,7 +4,7 @@ import { createRef, RefObject } from 'react';
 import { BaseEditorComponent } from '@handsontable/react';
 import Handsontable from 'handsontable';
 
-import { FieldDef } from '@/components/core/form/form-dynamic-fields';
+import { FieldDef } from '@/components/core/form/form-dynamic-fields/types';
 import { Input } from '@/components/ui/input';
 import ReactSelect from '@/components/ui/react-select';
 
@@ -73,12 +73,8 @@ class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 		// any cell, we're updating the styles for the editor element,
 		// so it shows up in the correct position.
 		if (!this.mainElementRef.current) return;
-		this.mainElementRef.current.style.left = `${
-			tdPosition.left + window.pageXOffset
-		}px`;
-		this.mainElementRef.current.style.top = `${
-			tdPosition.top + window.pageYOffset
-		}px`;
+		this.mainElementRef.current.style.left = `${tdPosition.left + window.pageXOffset}px`;
+		this.mainElementRef.current.style.top = `${tdPosition.top + window.pageYOffset}px`;
 
 		this.mainElementRef.current.style.width = `${tdPosition.width}px`;
 		this.mainElementRef.current.style.height = `${tdPosition.height}px`;
@@ -107,12 +103,8 @@ class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 						openMenuOnFocus
 						autoFocus
 						ref={this.selectElementRef}
-						placeholder={
-							this.props.field.placeholder || 'Select an option'
-						}
-						value={this.props.field.options.find(
-							(option) => option.value === this.state.value
-						)}
+						placeholder={this.props.field.placeholder || 'Select an option'}
+						value={this.props.field.options.find((option) => option.value === this.state.value)}
 						options={this.props.field.options}
 						onChange={(value: any) => {
 							this.setValue(value?.value, () => {
@@ -124,10 +116,7 @@ class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 			);
 		}
 
-		if (
-			this.props.field.type === 'text' ||
-			this.props.field.type === 'number'
-		) {
+		if (this.props.field.type === 'text' || this.props.field.type === 'number') {
 			const inputType = this.props.field.type;
 			return (
 				<div
