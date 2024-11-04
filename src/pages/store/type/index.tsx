@@ -10,19 +10,13 @@ import { ITypeTableData } from '../_config/columns/columns.type';
 import { useMaterialType } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 const Type = () => {
-	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useMaterialType<ITypeTableData[]>();
+	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useMaterialType<ITypeTableData[]>();
 
-	const pageInfo = useMemo(
-		() => new PageInfo('Type', url, 'store__type'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Type', url, 'store__type'), [url]);
 
 	// Add/Update Modal state
 	const [isOpenAddModal, setIsOpenAddModal] = useState(false);
@@ -53,9 +47,7 @@ const Type = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<ITypeTableData>[]) => {
@@ -74,9 +66,7 @@ const Type = () => {
 	const columns = typeColumns();
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

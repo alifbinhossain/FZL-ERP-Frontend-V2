@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 
-import HoverCardWrapper from '@/components/hover-card-wrapper';
+import HoverCardWrapper from '@/components/others/hover-card-wrapper';
 
 import { IBankTableData } from './columns.type';
 
@@ -29,12 +29,7 @@ export const bankColumns = (): ColumnDef<IBankTableData>[] => [
 	{
 		accessorKey: 'policy',
 		header: 'Policy',
-		cell: (info) => (
-			<HoverCardWrapper
-				title={info.getValue<string>()}
-				content={info.getValue<string>()}
-			/>
-		),
+		cell: (info) => <HoverCardWrapper title={info.getValue<string>()} content={info.getValue<string>()} />,
 		size: 400,
 	},
 ];

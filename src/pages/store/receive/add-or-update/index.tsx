@@ -9,15 +9,12 @@ import CoreForm from '@/components/core/form';
 
 import nanoid from '@/lib/nanoid';
 
-import {
-	usePurchaseDescription,
-	usePurchaseDetailsByUUID,
-} from '../../_config/query';
+import { usePurchaseDescription, usePurchaseDetailsByUUID } from '../../_config/query';
 import { IReceive, RECEIVE_NULL, RECEIVE_SCHEMA } from '../../_config/schema';
 import Header from './header';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
 
 const AddOrUpdate = () => {
 	const { user } = useAuth();
@@ -25,15 +22,9 @@ const AddOrUpdate = () => {
 	const { id } = useParams();
 	const isUpdate = !!id;
 
-	const {
-		url: purchaseDescriptionUrl,
-		updateData,
-		postData,
-		deleteData,
-	} = usePurchaseDescription();
+	const { url: purchaseDescriptionUrl, updateData, postData, deleteData } = usePurchaseDescription();
 
-	const { data, invalidateQuery: invalidatePurchaseDetails } =
-		usePurchaseDetailsByUUID(id as string);
+	const { data, invalidateQuery: invalidatePurchaseDetails } = usePurchaseDetailsByUUID(id as string);
 
 	const form = useRHF(RECEIVE_SCHEMA, RECEIVE_NULL);
 
@@ -94,10 +85,7 @@ const AddOrUpdate = () => {
 			});
 
 			try {
-				await Promise.all([
-					purchase_description_promise,
-					...purchase_entries_promise,
-				])
+				await Promise.all([purchase_description_promise, ...purchase_entries_promise])
 					.then(() => form.reset(RECEIVE_NULL))
 					.then(() => {
 						invalidatePurchaseDetails();
@@ -129,9 +117,7 @@ const AddOrUpdate = () => {
 
 		// delete purchase field from data to be sent
 		if ('purchase' in purchase_description_data) {
-			delete (purchase_description_data as { purchase?: any })[
-				'purchase'
-			];
+			delete (purchase_description_data as { purchase?: any })['purchase'];
 		}
 
 		const purchase_description_promise = await postData.mutateAsync({
@@ -158,10 +144,7 @@ const AddOrUpdate = () => {
 		);
 
 		try {
-			await Promise.all([
-				purchase_description_promise,
-				...purchase_entries_promise,
-			])
+			await Promise.all([purchase_description_promise, ...purchase_entries_promise])
 				.then(() => form.reset(RECEIVE_NULL))
 				.then(() => {
 					// invalidateMaterialInfo();
@@ -210,10 +193,7 @@ const AddOrUpdate = () => {
 	};
 
 	return (
-		<CoreForm.AddEditWrapper
-			title={isUpdate ? 'Edit Purchase' : 'Add Purchase'}
-			form={form}
-			onSubmit={onSubmit}>
+		<CoreForm.AddEditWrapper title={isUpdate ? 'Edit Purchase' : 'Add Purchase'} form={form} onSubmit={onSubmit}>
 			<Header />
 			<CoreForm.DynamicFields
 				viewAs={'default'}
@@ -239,11 +219,7 @@ const AddOrUpdate = () => {
 						onClose: () => {
 							form.setValue(
 								'purchase',
-								form
-									.getValues('purchase')
-									.filter(
-										(item) => item.uuid !== deleteItem?.id
-									)
+								form.getValues('purchase').filter((item) => item.uuid !== deleteItem?.id)
 							);
 						},
 					}}

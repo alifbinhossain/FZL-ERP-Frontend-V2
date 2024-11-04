@@ -10,10 +10,7 @@ import { Switch } from '@/components/ui/switch';
 
 import nanoid from '@/lib/nanoid';
 
-import {
-	useThreadOrderInfo,
-	useThreadOrderInfoDetailsByUUID,
-} from '../../_config/query';
+import { useThreadOrderInfo, useThreadOrderInfoDetailsByUUID } from '../../_config/query';
 import {
 	IThreadOrderInfoEntry,
 	THREAD_ORDER_INFO_ENTRY_NULL,
@@ -22,7 +19,7 @@ import {
 import Header from './header';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
 
 const AddOrUpdate = () => {
 	const { user } = useAuth();
@@ -30,20 +27,11 @@ const AddOrUpdate = () => {
 	const { id } = useParams();
 	const isUpdate = !!id;
 
-	const {
-		url: threadOrderInfoUrl,
-		updateData,
-		postData,
-		deleteData,
-	} = useThreadOrderInfo();
+	const { url: threadOrderInfoUrl, updateData, postData, deleteData } = useThreadOrderInfo();
 
-	const { data, invalidateQuery: invalidateOrderInfoDetails } =
-		useThreadOrderInfoDetailsByUUID(id as string);
+	const { data, invalidateQuery: invalidateOrderInfoDetails } = useThreadOrderInfoDetailsByUUID(id as string);
 
-	const form = useRHF(
-		THREAD_ORDER_INFO_ENTRY_SCHEMA,
-		THREAD_ORDER_INFO_ENTRY_NULL
-	);
+	const form = useRHF(THREAD_ORDER_INFO_ENTRY_SCHEMA, THREAD_ORDER_INFO_ENTRY_NULL);
 
 	const { fields, append, remove } = useFieldArray({
 		control: form.control,
@@ -73,51 +61,43 @@ const AddOrUpdate = () => {
 				isOnCloseNeeded: false,
 			});
 
-			const order_info_entries_promise = values.order_info_entry.map(
-				(item: any) => {
-					if (item.uuid === undefined) {
-						const newData = {
-							...item,
-							swatch_approval_date:
-								item.recipe_uuid === null
-									? null
-									: getDateTime(),
-							order_info_uuid: id,
-							created_at: getDateTime(),
-							created_by: user?.uuid,
-							uuid: nanoid(),
-						};
+			const order_info_entries_promise = values.order_info_entry.map((item: any) => {
+				if (item.uuid === undefined) {
+					const newData = {
+						...item,
+						swatch_approval_date: item.recipe_uuid === null ? null : getDateTime(),
+						order_info_uuid: id,
+						created_at: getDateTime(),
+						created_by: user?.uuid,
+						uuid: nanoid(),
+					};
 
-						return postData.mutateAsync({
-							url: '/v2/thread/order-entry',
-							newData: newData,
-							isOnCloseNeeded: false,
-						});
-					} else {
-						const updatedData = {
-							...item,
-							updated_at: getDateTime(),
-							swatch_approval_date:
-								item.recipe_uuid === null
-									? null
-									: item.swatch_approval_date === null
-										? getDateTime()
-										: item.swatch_approval_date,
-						};
-						return updateData.mutateAsync({
-							url: `/v2/thread/order-entry/${item.uuid}`,
-							updatedData,
-							isOnCloseNeeded: false,
-						});
-					}
+					return postData.mutateAsync({
+						url: '/v2/thread/order-entry',
+						newData: newData,
+						isOnCloseNeeded: false,
+					});
+				} else {
+					const updatedData = {
+						...item,
+						updated_at: getDateTime(),
+						swatch_approval_date:
+							item.recipe_uuid === null
+								? null
+								: item.swatch_approval_date === null
+									? getDateTime()
+									: item.swatch_approval_date,
+					};
+					return updateData.mutateAsync({
+						url: `/v2/thread/order-entry/${item.uuid}`,
+						updatedData,
+						isOnCloseNeeded: false,
+					});
 				}
-			);
+			});
 
 			try {
-				await Promise.all([
-					order_info_promise,
-					...order_info_entries_promise,
-				])
+				await Promise.all([order_info_promise, ...order_info_entries_promise])
 					.then(() => form.reset(THREAD_ORDER_INFO_ENTRY_NULL))
 					.then(() => {
 						invalidateOrderInfoDetails();
@@ -150,9 +130,7 @@ const AddOrUpdate = () => {
 
 		// delete order_info_entry from data to be sent
 		if ('order_info_entry' in order_info_data) {
-			delete (order_info_data as { order_info_entry?: any })[
-				'order_info_entry'
-			];
+			delete (order_info_data as { order_info_entry?: any })['order_info_entry'];
 		}
 
 		const order_info_promise = await postData.mutateAsync({
@@ -179,10 +157,7 @@ const AddOrUpdate = () => {
 		);
 
 		try {
-			await Promise.all([
-				order_info_promise,
-				...order_info_entries_promise,
-			])
+			await Promise.all([order_info_promise, ...order_info_entries_promise])
 				.then(() => form.reset(THREAD_ORDER_INFO_ENTRY_NULL))
 				.then(() => {
 					invalidateOrderInfoDetails();
@@ -243,14 +218,10 @@ const AddOrUpdate = () => {
 	useEffect(() => {
 		if (bleachAll !== null) {
 			fields.forEach((item, index) => {
-				form.setValue(
-					`order_info_entry.${index}.bleaching`,
-					bleachAll ? 'bleach' : 'non-bleach',
-					{
-						shouldDirty: true,
-						shouldValidate: true,
-					}
-				);
+				form.setValue(`order_info_entry.${index}.bleaching`, bleachAll ? 'bleach' : 'non-bleach', {
+					shouldDirty: true,
+					shouldValidate: true,
+				});
 			});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -259,16 +230,9 @@ const AddOrUpdate = () => {
 	useEffect(() => {
 		const subscription = form.watch((value) => {
 			const { order_info_entry } = value;
-			if (
-				order_info_entry !== undefined &&
-				order_info_entry?.length > 0
-			) {
-				const allBleach = order_info_entry.every(
-					(item) => item?.bleaching === 'bleach'
-				);
-				const allNonBleach = order_info_entry.every(
-					(item) => item?.bleaching === 'non-bleach'
-				);
+			if (order_info_entry !== undefined && order_info_entry?.length > 0) {
+				const allBleach = order_info_entry.every((item) => item?.bleaching === 'bleach');
+				const allNonBleach = order_info_entry.every((item) => item?.bleaching === 'non-bleach');
 
 				if (allBleach) {
 					setBleachAll(true);
@@ -328,11 +292,7 @@ const AddOrUpdate = () => {
 								'order_info_entry',
 								form
 									.getValues('order_info_entry')
-									.filter(
-										(item) =>
-											item.count_length_uuid !==
-											deleteItem?.id
-									)
+									.filter((item) => item.count_length_uuid !== deleteItem?.id)
 							);
 						},
 					}}

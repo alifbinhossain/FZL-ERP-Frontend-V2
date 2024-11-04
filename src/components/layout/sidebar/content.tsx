@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils';
 
-import SidebarHeader from './sidebar-header';
-import SidebarLogout from './sidebar-logout';
-import SidebarMenu from './sidebar-menu';
+import SidebarHeader from './header';
+import SidebarLogout from './logout';
+import SidebarMenu from './menu';
 
 const SidebarContent = () => {
 	return (

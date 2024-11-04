@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import StatusButton from '@/components/buttons/status-button';
-import SectionContainer from '@/components/section-container';
-import TableList, { ITableListItems } from '@/components/table-list';
+import StatusButton from '@/components/buttons/status';
+import SectionContainer from '@/components/others/section-container';
+import TableList, { ITableListItems } from '@/components/others/table-list';
 
 import { formatDateTable } from '@/utils/formatDate';
 
@@ -14,10 +14,7 @@ const Information: React.FC<{ data: IOrderDetails }> = ({ data }) => {
 
 	useEffect(() => {
 		data?.order_info_entry.map((item, i) => {
-			if (
-				Number(item?.company_price) <= 0 &&
-				Number(item?.party_price) <= 0
-			) {
+			if (Number(item?.company_price) <= 0 && Number(item?.party_price) <= 0) {
 				setCheck(false);
 			}
 			if (!item?.swatch_approval_date) {
@@ -134,11 +131,7 @@ const Information: React.FC<{ data: IOrderDetails }> = ({ data }) => {
 			title={'Information'}
 			contentClassName='grid grid-cols-1 lg:grid-cols-2'
 			buttons={renderButtons()}>
-			<TableList
-				title='Order Details'
-				items={orderDetails()}
-				className='border-b lg:border-b-0 lg:border-r'
-			/>
+			<TableList title='Order Details' items={orderDetails()} className='border-b lg:border-b-0 lg:border-r' />
 			<TableList title='Buyer Details' items={buyerDetails()} />
 		</SectionContainer>
 	);

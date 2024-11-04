@@ -4,7 +4,7 @@ import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
 
-import TooltipWrapper from '@/components/tooltip-wrapper';
+import TooltipWrapper from '@/components/others/tooltip-wrapper';
 import { Button } from '@/components/ui/button';
 
 import { cn } from '@/lib/utils';

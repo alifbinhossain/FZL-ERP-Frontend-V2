@@ -10,20 +10,14 @@ import { receiveColumns } from '../_config/columns';
 import { IReceiveTableData } from '../_config/columns/columns.type';
 import { usePurchaseDescription } from '../_config/query';
 
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 const Receive = () => {
 	const navigate = useNavigate();
-	const { data, isLoading, url, deleteData, refetch } =
-		usePurchaseDescription<IReceiveTableData[]>();
+	const { data, isLoading, url, deleteData, refetch } = usePurchaseDescription<IReceiveTableData[]>();
 
-	const pageInfo = useMemo(
-		() => new PageInfo('Receive', url, 'store__receive'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Receive', url, 'store__receive'), [url]);
 
 	// Add/Update Modal state
 	const handleCreate = () => navigate('/store/receive/add');
@@ -48,9 +42,7 @@ const Receive = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IReceiveTableData>[]) => {
@@ -69,9 +61,7 @@ const Receive = () => {
 	const columns = receiveColumns();
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

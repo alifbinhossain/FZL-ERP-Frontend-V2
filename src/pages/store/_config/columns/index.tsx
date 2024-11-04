@@ -1,7 +1,7 @@
 import { ColumnDef, Row } from '@tanstack/react-table';
 
 import Transfer from '@/components/buttons/transfer';
-import { LinkOnly } from '@/components/link';
+import { LinkOnly } from '@/components/others/link';
 
 import {
 	IReceiveDetailsEntry,
@@ -105,8 +105,7 @@ export function stockColumns({
 			enableColumnFilter: false,
 			cell: (info) => {
 				const cls =
-					Number(info.row.original.threshold) >
-					Number(info.getValue())
+					Number(info.row.original.threshold) > Number(info.getValue())
 						? 'text-error bg-error/10 px-2 py-1 rounded-md'
 						: '';
 				return <span className={cls}>{Number(info.getValue())}</span>;
@@ -122,9 +121,7 @@ export function stockColumns({
 		{
 			id: 'action_trx',
 			header: 'Material Trx',
-			cell: (info) => (
-				<Transfer onClick={() => handleAgainstTrx(info.row)} />
-			),
+			cell: (info) => <Transfer onClick={() => handleAgainstTrx(info.row)} />,
 			size: 40,
 			meta: {
 				hidden: !actionTrxAccess,
@@ -135,9 +132,7 @@ export function stockColumns({
 		{
 			id: 'action_trx_against_order',
 			header: 'Trx Against Order',
-			cell: (info) => (
-				<Transfer onClick={() => handleAgainstOrder(info.row)} />
-			),
+			cell: (info) => <Transfer onClick={() => handleAgainstOrder(info.row)} />,
 			size: 40,
 			meta: {
 				hidden: !actionTrxAgainstOrderAccess,
@@ -174,12 +169,7 @@ export const receiveColumns = (): ColumnDef<IReceiveTableData>[] => [
 		cell: (info) => {
 			const { uuid } = info.row.original;
 
-			return (
-				<LinkOnly
-					uri={`/store/receive/${uuid}`}
-					title={info.getValue<string>()}
-				/>
-			);
+			return <LinkOnly uri={`/store/receive/${uuid}`} title={info.getValue<string>()} />;
 		},
 	},
 	{

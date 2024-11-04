@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DataTableEntry from '@/components/core/data-table/data-table-entry';
+import DataTableEntry from '@/components/core/data-table/entry';
 
 import { testEntryColumns } from '../../_config/columns'; // TODO: update columns to match the data type
 import { ITestDetails } from '../../_config/columns/columns.type'; // TODO: update data type
@@ -8,13 +8,7 @@ import { ITestDetails } from '../../_config/columns/columns.type'; // TODO: upda
 const EntryTable: React.FC<{ data: ITestDetails }> = ({ data }) => {
 	const columns = testEntryColumns(); // TODO: update columns to match the data type
 
-	return (
-		<DataTableEntry
-			title='Entries'
-			columns={columns}
-			data={data.entries || []}
-		/>
-	);
+	return <DataTableEntry title='Entries' columns={columns} data={data.entries || []} />;
 };
 
 export default EntryTable;

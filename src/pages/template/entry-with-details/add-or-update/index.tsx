@@ -14,7 +14,7 @@ import { ITest3, TEST_NULL_3, TEST_SCHEMA_3 } from '../../_config/schema';
 import Header from './header';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
 
 const AddOrUpdate = () => {
 	const { user } = useAuth();
@@ -24,9 +24,7 @@ const AddOrUpdate = () => {
 
 	const { url: testUrl, updateData, postData, deleteData } = useTest(); // TODO: Update Query
 
-	const { data, invalidateQuery: invalidateTestDetails } = useTestByUUID(
-		id as string
-	); // TODO: Update Query
+	const { data, invalidateQuery: invalidateTestDetails } = useTestByUUID(id as string); // TODO: Update Query
 
 	const form = useRHF(TEST_SCHEMA_3, TEST_NULL_3); // TODO: Update schema
 
@@ -239,9 +237,7 @@ const AddOrUpdate = () => {
 								'employees', // TODO: Update field name
 								form
 									.getValues('employees') // TODO: Update field name
-									.filter(
-										(item) => item.uuid !== deleteItem?.id
-									)
+									.filter((item) => item.uuid !== deleteItem?.id)
 							);
 						},
 					}}

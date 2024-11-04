@@ -1,5 +1,5 @@
-import AddModal from './add-modal';
-import DeleteAllModal from './delete-all-modal';
-import DeleteModal from './delete-modal';
+import AddModal from './add';
+import DeleteModal from './delete';
+import DeleteAllModal from './delete/all';
 
 export { AddModal, DeleteModal, DeleteAllModal };

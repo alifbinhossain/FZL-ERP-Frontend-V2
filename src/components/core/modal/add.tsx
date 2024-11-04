@@ -1,5 +1,4 @@
 import { DevTool } from '@hookform/devtools';
-import { UseFormReturn } from 'react-hook-form';
 
 import CoreForm from '@/components/core/form';
 import {
@@ -14,17 +13,7 @@ import { Form } from '@/components/ui/form';
 
 import { cn } from '@/lib/utils';
 
-interface IAddModalProps {
-	form: UseFormReturn<any, any, undefined>;
-	onSubmit(values: any): void;
-	open: boolean;
-	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	title?: string;
-	subtitle?: string;
-	children?: React.ReactNode;
-	className?: string;
-	isSmall?: boolean;
-}
+import { IAddModalProps } from './types';
 
 const AddModal: React.FC<IAddModalProps> = ({
 	form,

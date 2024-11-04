@@ -9,44 +9,31 @@ import renderSuspenseModals from '@/utils/renderSuspenseModals';
 import { test2Columns } from '../_config/columns'; // TODO: Import columns
 
 // TODO: Import columns type
-import {
-	IActionTrx,
-	IActionTrxAgainstOrder,
-	IPaymentTableData,
-} from '../_config/columns/columns.type';
+import { IActionTrx, IActionTrxAgainstOrder, IPaymentTableData } from '../_config/columns/columns.type';
 import { type1FacetedFilters } from '../_config/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
 import { useTest } from '../_config/query'; // TODO: Import query
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 const AgainstTrx = lazy(() => import('./against-trx'));
 const AgainstOrderTransfer = lazy(() => import('./against-order-transfer'));
 
 //TODO: Remove it when working with real data
-const fakePayments: IPaymentTableData[] = Array.from(
-	{ length: 10 },
-	(_, i) => ({
-		amount: 100 + i,
-		email: `a${i}@a.com`,
-		id: `${i + 1}`,
-		status: 'success',
-		created_at: getRandomPreviousDate(30),
-	})
-);
+const fakePayments: IPaymentTableData[] = Array.from({ length: 10 }, (_, i) => ({
+	amount: 100 + i,
+	email: `a${i}@a.com`,
+	id: `${i + 1}`,
+	status: 'success',
+	created_at: getRandomPreviousDate(30),
+}));
 
 // TODO: Update Component Name
 const MultiModal = () => {
-	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useTest<IPaymentTableData[]>(); // TODO: Update query
+	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useTest<IPaymentTableData[]>(); // TODO: Update query
 
 	// TODO: Update Page Info (Title, Url and Tab Name)
-	const pageInfo = useMemo(
-		() => new PageInfo('Multi Modal', url, 'template__multi_modal'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Multi Modal', url, 'template__multi_modal'), [url]);
 
 	const pageAccess = useAccess(pageInfo.getTab() as string) as string[];
 	const actionTrxAccess = pageAccess.includes('click_action'); // TODO: Update Action Trx Access
@@ -61,9 +48,7 @@ const MultiModal = () => {
 		setIsOpenAddModal(true);
 	};
 
-	const [updatedData, setUpdatedData] = useState<IPaymentTableData | null>( // TODO: Update updatedData type
-		null
-	);
+	const [updatedData, setUpdatedData] = useState<IPaymentTableData | null>(null); // TODO: Update updatedData type
 	const handleUpdate = (row: Row<IPaymentTableData>) => {
 		setUpdatedData(row.original);
 		setIsOpenAddModal(true);
@@ -85,9 +70,7 @@ const MultiModal = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IPaymentTableData>[]) => {
@@ -105,8 +88,7 @@ const MultiModal = () => {
 
 	// Action Trx Modal state
 	const [isOpenActionTrxModal, setIsOpenActionTrxModal] = useState(false);
-	const [updateActionTrxData, setUpdateActionTrxData] =
-		useState<IActionTrx | null>(null);
+	const [updateActionTrxData, setUpdateActionTrxData] = useState<IActionTrx | null>(null);
 
 	const handleAgainstTrx = (row: Row<IPaymentTableData>) => {
 		// TODO: Update Action Trx Data type
@@ -119,10 +101,10 @@ const MultiModal = () => {
 	};
 
 	// Action Against Order Modal state
-	const [isOpenActionAgainstOrderModal, setIsOpenActionAgainstOrderModal] =
-		useState(false);
-	const [updateActionAgainstOrderData, setUpdateActionAgainstOrderData] =
-		useState<IActionTrxAgainstOrder | null>(null);
+	const [isOpenActionAgainstOrderModal, setIsOpenActionAgainstOrderModal] = useState(false);
+	const [updateActionAgainstOrderData, setUpdateActionAgainstOrderData] = useState<IActionTrxAgainstOrder | null>(
+		null
+	);
 
 	const handleAgainstOrder = (row: Row<IPaymentTableData>) => {
 		// TODO: Update Action Against Order Data type
@@ -143,9 +125,7 @@ const MultiModal = () => {
 	}); // TODO: Update columns
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

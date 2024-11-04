@@ -1,6 +1,6 @@
 import { sidebarRoutes } from '@/routes';
 
-import SidebarItem from './sidebar-item';
+import SidebarItem from './item';
 
 const SidebarMenu = () => {
 	return (

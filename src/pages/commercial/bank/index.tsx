@@ -10,19 +10,13 @@ import { IBankTableData } from '../_config/columns/columns.type';
 import { useCommercialBank } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 const CommercialBank = () => {
-	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useCommercialBank<IBankTableData[]>();
+	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useCommercialBank<IBankTableData[]>();
 
-	const pageInfo = useMemo(
-		() => new PageInfo('Commercial/Bank', url, 'commercial__bank'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Commercial/Bank', url, 'commercial__bank'), [url]);
 
 	// Add/Update Modal state
 	const [isOpenAddModal, setIsOpenAddModal] = useState(false);
@@ -54,9 +48,7 @@ const CommercialBank = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IBankTableData>[]) => {
@@ -75,9 +67,7 @@ const CommercialBank = () => {
 	const columns = bankColumns();
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

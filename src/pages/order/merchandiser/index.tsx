@@ -11,34 +11,24 @@ import { IMerchandiserData } from '../_config/columns/columns.type';
 import { useOrderMerchandiser } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 const Merchandiser = () => {
-	const {
-		start_date,
-		end_date,
+	const { start_date, end_date, formatted_start_date, formatted_end_date, onUpdate } = useDateRange();
+	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useOrderMerchandiser<
+		IMerchandiserData[]
+	>({
 		formatted_start_date,
 		formatted_end_date,
-		onUpdate,
-	} = useDateRange();
-	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useOrderMerchandiser<IMerchandiserData[]>({
-			formatted_start_date,
-			formatted_end_date,
-		});
+	});
 
 	console.log({
 		formatted_start_date,
 		formatted_end_date,
 	});
 
-	const pageInfo = useMemo(
-		() => new PageInfo('Merchandiser', url, 'order__merchandiser'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Merchandiser', url, 'order__merchandiser'), [url]);
 
 	// Add/Update Modal state
 	const [isOpenAddModal, setIsOpenAddModal] = useState(false);
@@ -47,9 +37,7 @@ const Merchandiser = () => {
 		setIsOpenAddModal(true);
 	};
 
-	const [updatedData, setUpdatedData] = useState<IMerchandiserData | null>(
-		null
-	);
+	const [updatedData, setUpdatedData] = useState<IMerchandiserData | null>(null);
 
 	const handleUpdate = (row: Row<IMerchandiserData>) => {
 		setUpdatedData(row.original);
@@ -72,9 +60,7 @@ const Merchandiser = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IMerchandiserData>[]) => {
@@ -93,9 +79,7 @@ const Merchandiser = () => {
 	const columns = merchandiserColumns();
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

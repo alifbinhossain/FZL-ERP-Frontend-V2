@@ -10,19 +10,13 @@ import { IVendorTableData } from '../_config/columns/columns.type';
 import { usePurchaseVendor } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 const Vendor = () => {
-	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		usePurchaseVendor<IVendorTableData[]>();
+	const { data, isLoading, url, deleteData, postData, updateData, refetch } = usePurchaseVendor<IVendorTableData[]>();
 
-	const pageInfo = useMemo(
-		() => new PageInfo('Vendor', url, 'store__vendor'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Vendor', url, 'store__vendor'), [url]);
 
 	// Add/Update Modal state
 	const [isOpenAddModal, setIsOpenAddModal] = useState(false);
@@ -31,9 +25,7 @@ const Vendor = () => {
 		setIsOpenAddModal(true);
 	};
 
-	const [updatedData, setUpdatedData] = useState<IVendorTableData | null>(
-		null
-	);
+	const [updatedData, setUpdatedData] = useState<IVendorTableData | null>(null);
 	const handleUpdate = (row: Row<IVendorTableData>) => {
 		setUpdatedData(row.original);
 		setIsOpenAddModal(true);
@@ -55,9 +47,7 @@ const Vendor = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IVendorTableData>[]) => {
@@ -76,9 +66,7 @@ const Vendor = () => {
 	const columns = vendorColumns();
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

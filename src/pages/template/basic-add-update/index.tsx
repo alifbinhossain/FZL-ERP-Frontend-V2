@@ -12,34 +12,24 @@ import { type1FacetedFilters } from '../_config/columns/facetedFilters'; // TODO
 import { useTest } from '../_config/query'; // TODO: Import query
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 //TODO: Remove it when working with real data
-const fakePayments: IPaymentTableData[] = Array.from(
-	{ length: 10 },
-	(_, i) => ({
-		amount: 100 + i,
-		email: `a${i}@a.com`,
-		id: `${i + 1}`,
-		status: 'success',
-		created_at: getRandomPreviousDate(30),
-	})
-);
+const fakePayments: IPaymentTableData[] = Array.from({ length: 10 }, (_, i) => ({
+	amount: 100 + i,
+	email: `a${i}@a.com`,
+	id: `${i + 1}`,
+	status: 'success',
+	created_at: getRandomPreviousDate(30),
+}));
 
 // TODO: Update Component Name
 const BasicAddUpdate = () => {
-	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useTest<IPaymentTableData[]>(); // TODO: Update query
+	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useTest<IPaymentTableData[]>(); // TODO: Update query
 
 	// TODO: Update Page Info (Title, Url and Tab Name)
-	const pageInfo = useMemo(
-		() =>
-			new PageInfo('Basic Add Update', url, 'template__basic_add_update'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Basic Add Update', url, 'template__basic_add_update'), [url]);
 
 	// Add/Update Modal state
 	const [isOpenAddModal, setIsOpenAddModal] = useState(false);
@@ -48,9 +38,7 @@ const BasicAddUpdate = () => {
 		setIsOpenAddModal(true);
 	};
 
-	const [updatedData, setUpdatedData] = useState<IPaymentTableData | null>( // TODO: Update updatedData type
-		null
-	);
+	const [updatedData, setUpdatedData] = useState<IPaymentTableData | null>(null); // TODO: Update updatedData type
 
 	const handleUpdate = (row: Row<IPaymentTableData>) => {
 		setUpdatedData(row.original);
@@ -73,9 +61,7 @@ const BasicAddUpdate = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IPaymentTableData>[]) => {
@@ -95,9 +81,7 @@ const BasicAddUpdate = () => {
 	const columns = test1Columns(); // TODO: Update columns
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

@@ -7,28 +7,18 @@ import useAccess from '@/hooks/useAccess';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { userColumns } from '../_config/columns';
-import {
-	IPageAssign,
-	IResetPassword,
-	IUserTableData,
-} from '../_config/columns/columns.type';
+import { IPageAssign, IResetPassword, IUserTableData } from '../_config/columns/columns.type';
 import { useHrUsers } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
 const ResetPassword = lazy(() => import('./reset-password'));
 const PageAssign = lazy(() => import('./page-assign'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 const User = () => {
-	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useHrUsers<IUserTableData[]>();
+	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useHrUsers<IUserTableData[]>();
 
-	const pageInfo = useMemo(
-		() => new PageInfo('Admin/User', url, 'admin__user'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Admin/User', url, 'admin__user'), [url]);
 
 	const pageAccess = useAccess(pageInfo.getTab() as string) as string[];
 	const statusAccess = pageAccess.includes('click_status');
@@ -64,9 +54,7 @@ const User = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IUserTableData>[]) => {
@@ -82,10 +70,8 @@ const User = () => {
 	};
 
 	// Action Trx Modal state
-	const [isOpenResetPasswordModal, setIsOpenResetPasswordModal] =
-		useState(false);
-	const [updateResetPasswordData, setUpdateResetPasswordData] =
-		useState<IResetPassword | null>(null);
+	const [isOpenResetPasswordModal, setIsOpenResetPasswordModal] = useState(false);
+	const [updateResetPasswordData, setUpdateResetPasswordData] = useState<IResetPassword | null>(null);
 
 	// Reset Password Handler
 	const handleResetPassword = (row: Row<IUserTableData>) => {
@@ -98,8 +84,7 @@ const User = () => {
 
 	// Action Against Order Modal state
 	const [isOpenPageAssignModal, setIsOpenPageAssignModal] = useState(false);
-	const [updatePageAssignData, setUpdatePageAssignData] =
-		useState<IPageAssign | null>(null);
+	const [updatePageAssignData, setUpdatePageAssignData] = useState<IPageAssign | null>(null);
 
 	// Page Assign Handler
 	const handlePageAssign = (row: Row<IUserTableData>) => {
@@ -132,9 +117,7 @@ const User = () => {
 	});
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

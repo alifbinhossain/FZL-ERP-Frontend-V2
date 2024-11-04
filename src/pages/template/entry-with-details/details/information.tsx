@@ -1,7 +1,7 @@
 import React from 'react';
 
-import SectionContainer from '@/components/section-container';
-import TableList, { ITableListItems } from '@/components/table-list';
+import SectionContainer from '@/components/others/section-container';
+import TableList, { ITableListItems } from '@/components/others/table-list';
 
 import { formatDateTable } from '@/utils/formatDate';
 

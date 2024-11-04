@@ -10,20 +10,14 @@ import { orderColumns } from '../_config/columns';
 import { IOrderTableData } from '../_config/columns/columns.type';
 import { useThreadOrderInfo } from '../_config/query';
 
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 const ThreadOrder = () => {
 	const navigate = useNavigate();
-	const { data, isLoading, url, deleteData, refetch } =
-		useThreadOrderInfo<IOrderTableData[]>();
+	const { data, isLoading, url, deleteData, refetch } = useThreadOrderInfo<IOrderTableData[]>();
 
-	const pageInfo = useMemo(
-		() => new PageInfo('Thread/Order', url, 'thread__order_info_details'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Thread/Order', url, 'thread__order_info_details'), [url]);
 
 	const handleCreate = () => navigate('/thread/order-info/add');
 
@@ -47,9 +41,7 @@ const ThreadOrder = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IOrderTableData>[]) => {
@@ -68,9 +60,7 @@ const ThreadOrder = () => {
 	const columns = orderColumns();
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

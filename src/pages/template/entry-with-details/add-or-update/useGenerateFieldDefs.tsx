@@ -1,6 +1,6 @@
 import { UseFormWatch } from 'react-hook-form';
 
-import FieldActionButton from '@/components/buttons/field-action-button';
+import FieldActionButton from '@/components/buttons/field-action';
 import { FieldDef } from '@/components/core/form/form-dynamic-fields/types';
 import { IFormSelectOption } from '@/components/core/form/types';
 

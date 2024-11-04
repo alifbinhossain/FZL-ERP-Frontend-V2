@@ -8,7 +8,7 @@ import useSidebar from '@/hooks/useSidebar';
 
 import { cn } from '@/lib/utils';
 
-import SidebarFile from './sidebar-file';
+import SidebarFile from './file';
 
 // Animation definitions for the sidebar folder
 const variants = {

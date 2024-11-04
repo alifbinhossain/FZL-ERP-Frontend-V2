@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import usePage from '@/hooks/usePage';
 
-import HoverCardWrapper from '@/components/hover-card-wrapper';
+import HoverCardWrapper from '@/components/others/hover-card-wrapper';
 import DateTime from '@/components/ui/date-time';
 
 import TableCellAction from '../_components/cell-action';

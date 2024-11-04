@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { IResponse } from '@/types';
 import { ReloadIcon } from '@radix-ui/react-icons';
-import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useTable from '@/hooks/useTable';
 
@@ -20,37 +19,7 @@ import { Label } from '@/components/ui/label';
 
 import { cn } from '@/lib/utils';
 
-interface IDeleteAllModalProps {
-	deleteItems:
-		| {
-				id: string;
-				name: string;
-				checked: boolean;
-		  }[]
-		| null;
-	setDeleteItems: React.Dispatch<
-		React.SetStateAction<
-			| {
-					id: string;
-					name: string;
-					checked: boolean;
-			  }[]
-			| null
-		>
-	>;
-	url: string;
-	deleteData: UseMutationResult<
-		IResponse<any>,
-		AxiosError<IResponse<any>, any>,
-		{
-			url: string;
-			isOnCloseNeeded?: boolean;
-			onClose?: (() => void) | undefined;
-		},
-		void
-	>;
-	onClose?: () => void;
-}
+import { IDeleteAllModalProps } from '../types';
 
 const DeleteAllModal: React.FC<IDeleteAllModalProps> = ({ deleteItems, setDeleteItems, url, deleteData, onClose }) => {
 	const { table } = useTable();

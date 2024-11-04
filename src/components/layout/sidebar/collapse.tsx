@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { PanelLeftOpenIcon, PanelRightOpenIcon } from 'lucide-react';
 import useLayout from '@/hooks/useLayout';
 
-import TooltipWrapper from '@/components/tooltip-wrapper';
+import TooltipWrapper from '@/components/others/tooltip-wrapper';
 import { buttonVariants } from '@/components/ui/button';
 
 const SidebarCollapse = () => {

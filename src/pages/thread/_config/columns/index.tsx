@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 
-import StatusButton from '@/components/buttons/status-button';
-import { LinkOnly } from '@/components/link';
+import StatusButton from '@/components/buttons/status';
+import { LinkOnly } from '@/components/others/link';
 import DateTime from '@/components/ui/date-time';
 
 import { IOrderDetailsEntry, IOrderTableData } from './columns.type';
@@ -28,12 +28,7 @@ export const orderColumns = (): ColumnDef<IOrderTableData>[] => [
 		header: 'ID',
 		cell: (info) => {
 			const { uuid } = info.row.original;
-			return (
-				<LinkOnly
-					uri={`/thread/order-info/${uuid}`}
-					title={info.getValue<string>()}
-				/>
-			);
+			return <LinkOnly uri={`/thread/order-info/${uuid}`} title={info.getValue<string>()} />;
 		},
 	},
 	{
@@ -65,8 +60,7 @@ export const orderColumns = (): ColumnDef<IOrderTableData>[] => [
 		header: 'Swatch Approved',
 
 		cell: (info) => {
-			const { order_entry_count, swatch_approval_count } =
-				info.row.original;
+			const { order_entry_count, swatch_approval_count } = info.row.original;
 			return `${swatch_approval_count} / ${order_entry_count}`;
 		},
 	},
@@ -110,17 +104,10 @@ export const orderEntryColumns = ({
 		),
 
 		cell: (info) => {
-			const { company_price, party_price, swatch_approval_date } =
-				info.row.original;
+			const { company_price, party_price, swatch_approval_date } = info.row.original;
 			return (
 				<div className='flex items-center justify-start gap-2'>
-					<StatusButton
-						value={
-							Number(company_price) > 0 && Number(party_price) > 0
-								? 1
-								: 0
-						}
-					/>
+					<StatusButton value={Number(company_price) > 0 && Number(party_price) > 0 ? 1 : 0} />
 					<StatusButton value={swatch_approval_date ? 1 : 0} />
 				</div>
 			);
@@ -144,9 +131,7 @@ export const orderEntryColumns = ({
 	{
 		accessorKey: 'bleaching',
 		header: 'Bleaching',
-		cell: (info) => (
-			<span className='capitalize'>{info.getValue<string>()}</span>
-		),
+		cell: (info) => <span className='capitalize'>{info.getValue<string>()}</span>,
 	},
 	{
 		accessorKey: 'quantity',

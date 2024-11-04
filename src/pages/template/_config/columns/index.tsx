@@ -1,7 +1,7 @@
 import { ColumnDef, Row } from '@tanstack/react-table';
 
 import Transfer from '@/components/buttons/transfer';
-import { LinkOnly } from '@/components/link';
+import { LinkOnly } from '@/components/others/link';
 
 import { IPaymentTableData, ITestDetailsEntry } from './columns.type';
 
@@ -49,9 +49,7 @@ export function test2Columns({
 		{
 			id: 'action_trx',
 			header: 'Test Trx', // TODO: Update header name
-			cell: (info) => (
-				<Transfer onClick={() => handleAgainstTrx(info.row)} />
-			),
+			cell: (info) => <Transfer onClick={() => handleAgainstTrx(info.row)} />,
 			size: 40,
 			meta: {
 				hidden: !actionTrxAccess,
@@ -62,9 +60,7 @@ export function test2Columns({
 		{
 			id: 'action_trx_against_order',
 			header: 'Trx Against Order',
-			cell: (info) => (
-				<Transfer onClick={() => handleAgainstOrder(info.row)} />
-			),
+			cell: (info) => <Transfer onClick={() => handleAgainstOrder(info.row)} />,
 			size: 40,
 			meta: {
 				hidden: !actionTrxAgainstOrderAccess,
@@ -87,10 +83,7 @@ export const test3Columns = (): ColumnDef<IPaymentTableData>[] => [
 		accessorKey: 'id',
 		header: 'ID',
 		cell: (info) => (
-			<LinkOnly
-				uri={`/template/entry-with-details/${info.getValue()}`}
-				title={`Details - ${info.getValue()}`}
-			/>
+			<LinkOnly uri={`/template/entry-with-details/${info.getValue()}`} title={`Details - ${info.getValue()}`} />
 		),
 	},
 	{

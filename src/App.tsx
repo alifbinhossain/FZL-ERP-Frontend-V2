@@ -1,5 +1,5 @@
 // prettier-ignore
-import { Toast } from '@/components/toast';
+import { Toast } from '@/components/others/toast';
 
 import { AuthProvider } from '@/context';
 import { router } from '@/routes/router';

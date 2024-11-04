@@ -1,7 +1,7 @@
 import { IRoute } from '@/types';
 
-import SidebarFile from './sidebar-file';
-import SidebarFolder from './sidebar-folder';
+import SidebarFile from './file';
+import SidebarFolder from './folder';
 
 const SidebarItem: React.FC<IRoute> = ({ path, name, children, disableCollapse }) => {
 	return children ? (

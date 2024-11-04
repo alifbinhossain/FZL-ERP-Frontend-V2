@@ -12,34 +12,25 @@ import { IPaymentTableData } from '../_config/columns/columns.type';
 import { type1FacetedFilters } from '../_config/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
 import { useTest } from '../_config/query'; // TODO: Import query
 
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 //TODO: Remove it when working with real data
-const fakePayments: IPaymentTableData[] = Array.from(
-	{ length: 10 },
-	(_, i) => ({
-		amount: 100 + i,
-		email: `a${i}@a.com`,
-		id: `${i + 1}`,
-		status: 'success',
-		created_at: getRandomPreviousDate(30),
-	})
-);
+const fakePayments: IPaymentTableData[] = Array.from({ length: 10 }, (_, i) => ({
+	amount: 100 + i,
+	email: `a${i}@a.com`,
+	id: `${i + 1}`,
+	status: 'success',
+	created_at: getRandomPreviousDate(30),
+}));
 
 // TODO: Update Component Name
 const EntryWithDetails = () => {
 	const navigate = useNavigate();
-	const { data, isLoading, url, deleteData, refetch } =
-		useTest<IPaymentTableData[]>(); // TODO: Update query
+	const { data, isLoading, url, deleteData, refetch } = useTest<IPaymentTableData[]>(); // TODO: Update query
 
 	// TODO: Update Page Info (Title, Url and Tab Name)
-	const pageInfo = useMemo(
-		() => new PageInfo('Entry With Details', url, 'template__entry'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Entry With Details', url, 'template__entry'), [url]);
 
 	const handleCreate = () => navigate('/template/entry-with-details/add'); // TODO: Update route
 
@@ -63,9 +54,7 @@ const EntryWithDetails = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IPaymentTableData>[]) => {
@@ -85,9 +74,7 @@ const EntryWithDetails = () => {
 	const columns = test3Columns(); // TODO: Update columns
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

@@ -1,7 +1,7 @@
 import axios, { AxiosHeaderValue } from 'axios';
 import Cookies from 'js-cookie';
 
-import { ShowToast } from '@/components/toast';
+import { ShowToast } from '@/components/others/toast';
 
 import { BASE_API } from './secret';
 

@@ -10,19 +10,14 @@ import { ISectionTableData } from '../_config/columns/columns.type';
 import { useMaterialSection } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 const Section = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
 		useMaterialSection<ISectionTableData[]>();
 
-	const pageInfo = useMemo(
-		() => new PageInfo('Section', url, 'store__section'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Section', url, 'store__section'), [url]);
 
 	// Add/Update Modal state
 	const [isOpenAddModal, setIsOpenAddModal] = useState(false);
@@ -31,9 +26,7 @@ const Section = () => {
 		setIsOpenAddModal(true);
 	};
 
-	const [updatedData, setUpdatedData] = useState<ISectionTableData | null>(
-		null
-	);
+	const [updatedData, setUpdatedData] = useState<ISectionTableData | null>(null);
 	const handleUpdate = (row: Row<ISectionTableData>) => {
 		setUpdatedData(row.original);
 		setIsOpenAddModal(true);
@@ -55,9 +48,7 @@ const Section = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<ISectionTableData>[]) => {
@@ -76,9 +67,7 @@ const Section = () => {
 	const columns = sectionColumns();
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

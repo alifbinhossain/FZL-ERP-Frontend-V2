@@ -3,8 +3,8 @@ import { CopyMinus, X } from 'lucide-react';
 import useLayout from '@/hooks/useLayout';
 import useSidebar from '@/hooks/useSidebar';
 
-import BrandLogo from '@/components/brand-logo';
-import TooltipWrapper from '@/components/tooltip-wrapper';
+import BrandLogo from '@/components/others/brand-logo';
+import TooltipWrapper from '@/components/others/tooltip-wrapper';
 import { buttonVariants } from '@/components/ui/button';
 
 const SidebarHeader = () => {

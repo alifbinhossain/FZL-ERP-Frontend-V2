@@ -7,35 +7,23 @@ import useAccess from '@/hooks/useAccess';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { stockColumns } from '../_config/columns';
-import {
-	IStockActionTrx,
-	IStockActionTrxAgainstOrder,
-	IStockTableData,
-} from '../_config/columns/columns.type';
+import { IStockActionTrx, IStockActionTrxAgainstOrder, IStockTableData } from '../_config/columns/columns.type';
 import { useMaterialInfo } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 const AgainstTrx = lazy(() => import('./material-trx'));
 const AgainstOrderTransfer = lazy(() => import('./against-order-transfer'));
 
 const Stock = () => {
-	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
-		useMaterialInfo<IStockTableData[]>();
+	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useMaterialInfo<IStockTableData[]>();
 
-	const pageInfo = useMemo(
-		() => new PageInfo('Store / Stock', url, 'store__stock'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('Store / Stock', url, 'store__stock'), [url]);
 
 	const pageAccess = useAccess(pageInfo.getTab() as string) as string[];
 	const actionTrxAccess = pageAccess.includes('click_action');
-	const actionTrxAgainstOrderAccess = pageAccess.includes(
-		'click_trx_against_order'
-	);
+	const actionTrxAgainstOrderAccess = pageAccess.includes('click_trx_against_order');
 
 	// Add/Update Modal state
 	const [isOpenAddModal, setIsOpenAddModal] = useState(false);
@@ -44,9 +32,7 @@ const Stock = () => {
 		setIsOpenAddModal(true);
 	};
 
-	const [updatedData, setUpdatedData] = useState<IStockTableData | null>(
-		null
-	);
+	const [updatedData, setUpdatedData] = useState<IStockTableData | null>(null);
 	const handleUpdate = (row: Row<IStockTableData>) => {
 		setUpdatedData(row.original);
 		setIsOpenAddModal(true);
@@ -68,9 +54,7 @@ const Stock = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IStockTableData>[]) => {
@@ -87,8 +71,7 @@ const Stock = () => {
 
 	// Action Trx Modal state
 	const [isOpenActionTrxModal, setIsOpenActionTrxModal] = useState(false);
-	const [updateActionTrxData, setUpdateActionTrxData] =
-		useState<IStockActionTrx | null>(null);
+	const [updateActionTrxData, setUpdateActionTrxData] = useState<IStockActionTrx | null>(null);
 
 	const handleAgainstTrx = (row: Row<IStockTableData>) => {
 		// TODO: Update Action Trx Data type
@@ -101,8 +84,7 @@ const Stock = () => {
 	};
 
 	// Action Against Order Modal state
-	const [isOpenActionAgainstOrderModal, setIsOpenActionAgainstOrderModal] =
-		useState(false);
+	const [isOpenActionAgainstOrderModal, setIsOpenActionAgainstOrderModal] = useState(false);
 	const [updateActionAgainstOrderData, setUpdateActionAgainstOrderData] =
 		useState<IStockActionTrxAgainstOrder | null>(null);
 
@@ -124,9 +106,7 @@ const Stock = () => {
 	});
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}

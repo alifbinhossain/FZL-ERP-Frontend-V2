@@ -1,7 +1,4 @@
-import { IResponse } from '@/types';
 import { ReloadIcon } from '@radix-ui/react-icons';
-import { UseMutationResult } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 
 import {
 	AlertDialog,
@@ -14,30 +11,7 @@ import {
 	AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 
-interface IDeleteModalProps {
-	deleteItem: {
-		id: string | null;
-		name: string | null;
-	} | null;
-	setDeleteItem: React.Dispatch<
-		React.SetStateAction<{
-			id: string;
-			name: string;
-		} | null>
-	>;
-	url: string;
-	deleteData: UseMutationResult<
-		IResponse<any>,
-		AxiosError<IResponse<any>, any>,
-		{
-			url: string;
-			isOnCloseNeeded?: boolean;
-			onClose?: (() => void) | undefined;
-		},
-		void
-	>;
-	onClose?: () => void;
-}
+import { IDeleteModalProps } from '../types';
 
 const DeleteModal: React.FC<IDeleteModalProps> = ({ deleteItem, setDeleteItem, url, deleteData, onClose }) => {
 	const handleConfirm = async () => {

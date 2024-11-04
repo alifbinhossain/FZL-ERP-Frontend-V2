@@ -10,19 +10,14 @@ import { IDesignationTableData } from '../_config/columns/columns.type';
 import { useHrDesignations } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete-modal'));
-const DeleteAllModal = lazy(
-	() => import('@/components/core/modal/delete-all-modal')
-);
+const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 const Designation = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } =
 		useHrDesignations<IDesignationTableData[]>();
 
-	const pageInfo = useMemo(
-		() => new PageInfo('HR/Designation', url, 'admin__user_designation'),
-		[url]
-	);
+	const pageInfo = useMemo(() => new PageInfo('HR/Designation', url, 'admin__user_designation'), [url]);
 
 	// Add/Update Modal state
 	const [isOpenAddModal, setIsOpenAddModal] = useState(false);
@@ -31,8 +26,7 @@ const Designation = () => {
 		setIsOpenAddModal(true);
 	};
 
-	const [updatedData, setUpdatedData] =
-		useState<IDesignationTableData | null>(null);
+	const [updatedData, setUpdatedData] = useState<IDesignationTableData | null>(null);
 
 	const handleUpdate = (row: Row<IDesignationTableData>) => {
 		setUpdatedData(row.original);
@@ -55,9 +49,7 @@ const Designation = () => {
 	};
 
 	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<
-		{ id: string; name: string; checked: boolean }[] | null
-	>(null);
+	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
 
 	// Delete All Row Handlers
 	const handleDeleteAll = (rows: Row<IDesignationTableData>[]) => {
@@ -76,9 +68,7 @@ const Designation = () => {
 	const columns = designationColumns();
 
 	return (
-		<PageProvider
-			pageName={pageInfo.getTab()}
-			pageTitle={pageInfo.getTabName()}>
+		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProvider
 				title={pageInfo.getTitle()}
 				columns={columns}
