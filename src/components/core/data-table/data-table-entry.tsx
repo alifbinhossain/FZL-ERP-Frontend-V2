@@ -1,7 +1,6 @@
 import { TableProvider } from '@/context';
 import { IToolbarOptions } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
-import { DateRange } from 'react-day-picker';
 
 interface IDataTableEntryProps<TData, TValue> {
 	title: string;

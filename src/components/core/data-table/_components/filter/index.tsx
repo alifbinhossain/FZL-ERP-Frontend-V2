@@ -14,7 +14,7 @@ import {
 	SheetTrigger,
 } from '@/components/ui/sheet';
 
-import TableColumnFilter from './table-column-filter';
+import TableColumnFilter from './column';
 
 const TableAllFilter = () => {
 	const { table } = useTable();

@@ -1,8 +1,8 @@
 import { UseFormWatch } from 'react-hook-form';
 
 import FieldActionButton from '@/components/buttons/field-action-button';
-import { FieldDef } from '@/components/core/form/form-dynamic-fields';
-import { IFormSelectOption } from '@/components/core/form/select';
+import { FieldDef } from '@/components/core/form/form-dynamic-fields/types';
+import { IFormSelectOption } from '@/components/core/form/types';
 
 import { useOtherThreadCountLength } from '@/lib/common-queries/other';
 

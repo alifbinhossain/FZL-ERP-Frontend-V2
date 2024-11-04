@@ -4,7 +4,7 @@ import usePage from '@/hooks/usePage';
 import HoverCardWrapper from '@/components/hover-card-wrapper';
 import DateTime from '@/components/ui/date-time';
 
-import TableCellAction from '../_components/table-cell-action';
+import TableCellAction from '../_components/cell-action';
 
 const useDefaultColumns = <TData, TValue>(): ColumnDef<TData, TValue>[] => {
 	const { deleteAccess, updateAccess } = usePage();

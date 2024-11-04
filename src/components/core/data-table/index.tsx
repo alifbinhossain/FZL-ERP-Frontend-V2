@@ -5,10 +5,10 @@ import { TableBody, TableCell, Table as TableComponent, TableHead, TableHeader, 
 
 import { cn } from '@/lib/utils';
 
-import { TableColumnHeader } from './_components/table-column-header';
-import { TablePagination } from './_components/table-pagination';
-import TableSkeleton from './_components/table-skeleton';
-import { TableToolbar } from './_components/table-toolbar';
+import { TableColumnHeader } from './_components/column-header';
+import { TablePagination } from './_components/pagination';
+import TableSkeleton from './_components/skeleton';
+import { TableToolbar } from './_components/toolbar';
 import { getCommonPinningStyles } from './_helpers/getCommonPinningStyle';
 
 function DataTable() {

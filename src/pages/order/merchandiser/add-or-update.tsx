@@ -7,7 +7,7 @@ import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
 import CoreForm from '@/components/core/form';
-import { IFormSelectOption } from '@/components/core/form/select';
+import { IFormSelectOption } from '@/components/core/form/types';
 import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 

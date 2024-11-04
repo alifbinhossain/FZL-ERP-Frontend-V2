@@ -4,7 +4,7 @@ import useTable from '@/hooks/useTable';
 
 import DebouncedInput from '@/components/ui/debounce-input';
 
-import TableTitle from './table-title';
+import TableTitle from '.';
 
 const TableTitleHeader = () => {
 	const { title, globalFilterValue, table } = useTable();

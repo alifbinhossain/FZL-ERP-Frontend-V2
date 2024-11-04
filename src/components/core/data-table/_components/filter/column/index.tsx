@@ -1,9 +1,9 @@
 import { Column } from '@tanstack/react-table';
 
-import DateFilter from './date-filter';
-import NumberFilter from './number.filter';
-import SelectFilter from './select-filter';
-import StringFilter from './string-filter';
+import DateFilter from './date';
+import NumberFilter from './number';
+import SelectFilter from './select';
+import StringFilter from './string';
 
 // Define the props interface for the component
 interface TableColumnFilterProps<T> {

@@ -11,14 +11,14 @@ import { Separator } from '@/components/ui/separator';
 
 import { cn } from '@/lib/utils';
 
-import TableAllFilter from './table-all-filter';
-import TableDateRange from './table-date-range';
-import TableExportCSV from './table-export-csv';
-import { TableFacetedFilter } from './table-faceted-filter';
-import TableRefresh from './table-refresh';
-import { TableRowDelete } from './table-row-delete';
-import TableTitle from './table-title';
-import { TableViewOptions } from './table-view-options';
+import TableDateRange from './date-range';
+import TableExportCSV from './export-csv';
+import { TableFacetedFilter } from './filter/faceted';
+import TableAllFilter from './filter';
+import TableRefresh from './refresh';
+import { TableRowDelete } from './row/delete';
+import TableTitle from './title';
+import { TableViewOptions } from './view-options';
 
 // Interface for ToolbarComponent props
 interface ToolbarComponentProps {

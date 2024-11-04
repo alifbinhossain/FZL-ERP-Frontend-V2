@@ -15,7 +15,7 @@ const TableDateRange = ({ start_date, end_date, onUpdate }: TTableDateRange) => 
 			initialDateTo={end_date}
 			align={'center'}
 			onUpdate={({ range }) => {
-				onUpdate({ range });
+				onUpdate({ range }) ;
 			}}
 		/>
 	);

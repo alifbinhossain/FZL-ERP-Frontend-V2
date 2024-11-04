@@ -23,7 +23,7 @@ import { max, min } from 'date-fns';
 import { DateRange } from 'react-day-picker';
 
 import DataTable from '@/components/core/data-table';
-import { TableRowSelection } from '@/components/core/data-table/_components/table-row-selection';
+import { TableRowSelection } from '@/components/core/data-table/_components/row/selection';
 import { dateRange } from '@/components/core/data-table/_helpers/dateRange';
 import { fuzzyFilter } from '@/components/core/data-table/_helpers/fuzzyFilter';
 import useDefaultColumns from '@/components/core/data-table/_helpers/useDefaultColumns';
