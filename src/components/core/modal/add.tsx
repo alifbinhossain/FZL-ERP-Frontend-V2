@@ -1,5 +1,3 @@
-import { DevTool } from '@hookform/devtools';
-
 import CoreForm from '@/components/core/form';
 import {
 	Dialog,
@@ -11,6 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
 
+import { DevTool } from '@/lib/react-hook-devtool';
 import { cn } from '@/lib/utils';
 
 import { IAddModalProps } from './types';

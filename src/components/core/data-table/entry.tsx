@@ -21,8 +21,8 @@ const DataTableEntry = <TData, TValue>({
 			columns={columns}
 			data={data}
 			enableRowSelection={false}
-			isEntry
 			toolbarOptions={toolbarOptions}
+			isEntry
 		/>
 	);
 };

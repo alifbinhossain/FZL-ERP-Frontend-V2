@@ -13,8 +13,8 @@ import { cn } from '@/lib/utils';
 
 import TableDateRange from './date-range';
 import TableExportCSV from './export-csv';
-import { TableFacetedFilter } from './filter/faceted';
 import TableAllFilter from './filter';
+import { TableFacetedFilter } from './filter/faceted';
 import TableRefresh from './refresh';
 import { TableRowDelete } from './row/delete';
 import TableTitle from './title';

@@ -9,22 +9,23 @@ import { bankColumns } from '../_config/columns';
 import { IBankTableData } from '../_config/columns/columns.type';
 import { useCommercialBank } from '../_config/query';
 
+//* Modals
 const AddOrUpdate = lazy(() => import('./add-or-update'));
 const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
-const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
 
 const CommercialBank = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useCommercialBank<IBankTableData[]>();
 
 	const pageInfo = useMemo(() => new PageInfo('Commercial/Bank', url, 'commercial__bank'), [url]);
 
-	// Add/Update Modal state
+	//* Add Modal
 	const [isOpenAddModal, setIsOpenAddModal] = useState(false);
 
 	const handleCreate = () => {
 		setIsOpenAddModal(true);
 	};
 
+	//* Update Modal
 	const [updatedData, setUpdatedData] = useState<IBankTableData | null>(null);
 
 	const handleUpdate = (row: Row<IBankTableData>) => {
@@ -32,14 +33,12 @@ const CommercialBank = () => {
 		setIsOpenAddModal(true);
 	};
 
-	// Delete Modal state
-	// Single Delete Item
+	//* Delete Modal
 	const [deleteItem, setDeleteItem] = useState<{
 		id: string;
 		name: string;
 	} | null>(null);
 
-	// Single Delete Handler
 	const handleDelete = (row: Row<IBankTableData>) => {
 		setDeleteItem({
 			id: row?.original?.uuid,
@@ -47,23 +46,7 @@ const CommercialBank = () => {
 		});
 	};
 
-	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
-
-	// Delete All Row Handlers
-	const handleDeleteAll = (rows: Row<IBankTableData>[]) => {
-		const selectedRows = rows.map((row) => row.original);
-
-		setDeleteItems(
-			selectedRows.map((row) => ({
-				id: row.uuid,
-				name: row.name,
-				checked: true,
-			}))
-		);
-	};
-
-	// Table Columns
+	//* Columns
 	const columns = bankColumns();
 
 	return (
@@ -76,8 +59,7 @@ const CommercialBank = () => {
 				handleCreate={handleCreate}
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}
-				handleRefetch={refetch}
-				handleDeleteAll={handleDeleteAll}>
+				handleRefetch={refetch}>
 				{renderSuspenseModals([
 					<AddOrUpdate
 						{...{
@@ -95,14 +77,6 @@ const CommercialBank = () => {
 						{...{
 							deleteItem,
 							setDeleteItem,
-							url,
-							deleteData,
-						}}
-					/>,
-					<DeleteAllModal
-						{...{
-							deleteItems,
-							setDeleteItems,
 							url,
 							deleteData,
 						}}

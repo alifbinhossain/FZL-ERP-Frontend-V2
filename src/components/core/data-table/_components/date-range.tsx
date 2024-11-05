@@ -5,7 +5,7 @@ import { DateRangePicker } from '@/components/ui/date-range-picker';
 type TTableDateRange = {
 	start_date: Date | string | undefined;
 	end_date: Date | string | undefined;
-	onUpdate: ({ range }: { range: DateRange }) => void;
+	onUpdate: (({ range }: { range: DateRange }) => void) | undefined;
 };
 
 const TableDateRange = ({ start_date, end_date, onUpdate }: TTableDateRange) => {
@@ -15,7 +15,8 @@ const TableDateRange = ({ start_date, end_date, onUpdate }: TTableDateRange) => 
 			initialDateTo={end_date}
 			align={'center'}
 			onUpdate={({ range }) => {
-				onUpdate({ range }) ;
+				if (!onUpdate) return;
+				onUpdate({ range });
 			}}
 		/>
 	);

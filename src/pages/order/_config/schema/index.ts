@@ -96,12 +96,8 @@ export const ORDER_SCHEMA = z.object({
 			color: STRING_REQUIRED,
 			size: NUMBER_DOUBLE_REQUIRED,
 			quantity: NUMBER_REQUIRED,
-			company_price: NUMBER_DOUBLE_REQUIRED.transform(
-				handelNumberDefaultValue
-			).default(0),
-			party_price: NUMBER_DOUBLE_REQUIRED.transform(
-				handelNumberDefaultValue
-			).default(0),
+			company_price: NUMBER_DOUBLE_REQUIRED.transform(handelNumberDefaultValue).default(0),
+			party_price: NUMBER_DOUBLE_REQUIRED.transform(handelNumberDefaultValue).default(0),
 			bleaching: STRING_REQUIRED,
 		})
 	),
@@ -223,6 +219,7 @@ export const MERCHANDISER_SCHEMA = z.object({
 });
 
 export const MERCHANDISER_NULL: Partial<IMerchandiser> = {
+	party_uuid: '',
 	name: '',
 	email: '',
 	phone: '',

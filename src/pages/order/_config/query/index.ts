@@ -1,7 +1,7 @@
 import useDateRange from '@/hooks/useDateRange';
 import useTQuery from '@/hooks/useTQuery';
 
-import addUrlParams from '@/utils/addUrlParams';
+import addUrlParams from '@/utils/routes/addUrlParams';
 
 import { orderQK } from './queryKeys';
 

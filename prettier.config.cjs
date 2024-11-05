@@ -37,6 +37,7 @@ module.exports = {
 		'^@/config/(.*)$',
 		'^@/lib/(.*)$',
 		'^@lib/(.*)$',
+		'^@/utils',
 		'^@utils/(.*)$',
 		'^@/utils/(.*)$',
 		'^@/registry/(.*)$',
@@ -51,10 +52,7 @@ module.exports = {
 	importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
 	importOrderMergeDuplicateImports: true,
 	importOrderCombineTypeAndValueImports: true,
-	plugins: [
-		'@ianvs/prettier-plugin-sort-imports',
-		'prettier-plugin-tailwindcss',
-	],
+	plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss'],
 	arrowParens: 'always',
 	bracketSpacing: true,
 };

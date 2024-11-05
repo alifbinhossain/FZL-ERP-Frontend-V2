@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { DevTool } from '@hookform/devtools';
 
 import CoreForm from '@/components/core/form';
 import { Form } from '@/components/ui/form';
+
+import { DevTool } from '@/lib/react-hook-devtool';
 
 import { IFormAddEditWrapperProps } from './types';
 

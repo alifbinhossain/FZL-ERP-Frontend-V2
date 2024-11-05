@@ -19,13 +19,13 @@ export function TableViewOptions<TData>({ table }: TableViewOptionsProps<TData>)
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button aria-label='View Options' variant='gradient' size='sm' className='hidden lg:flex'>
+				<Button aria-label='Column Options' variant='gradient' size='sm' className='hidden lg:flex'>
 					<Columns2 className='size-4' />
-					View
+					Column
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align='end' className='max-h-[400px] w-fit overflow-auto'>
-				<DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+				<DropdownMenuLabel>Toggle Columns</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				{table
 					.getAllColumns()
