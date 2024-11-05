@@ -1,14 +1,10 @@
 import { useMemo } from 'react';
-import { Column } from '@tanstack/react-table';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-interface ISelectFilterProps<TData, TValue> {
-	column: Column<TData, TValue>;
-	showLabel?: boolean;
-}
+import { IFilterProps } from '../../../types';
 
-function SelectFilter<TData, TValue>({ column, showLabel }: ISelectFilterProps<TData, TValue>) {
+function SelectFilter<TData, TValue>({ column, showLabel }: IFilterProps<TData, TValue>) {
 	// Memoize the select options to prevent unnecessary re-renders
 	const selectOptions = useMemo(
 		() => [

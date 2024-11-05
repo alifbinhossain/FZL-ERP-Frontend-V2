@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { PanelLeftOpenIcon, PanelRightOpenIcon } from 'lucide-react';
 
 import TooltipWrapper from '@/components/others/tooltip-wrapper';
-import { buttonVariants } from '@/components/ui/button';
 
 const SidebarCollapse = ({ isCollapsed }: { isCollapsed: boolean }) => {
 	return (

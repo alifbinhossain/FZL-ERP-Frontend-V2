@@ -1,14 +1,10 @@
 import { useMemo } from 'react';
-import { Column } from '@tanstack/react-table';
 
 import DebouncedInput from '@/components/ui/debounce-input';
 
-interface INumberFilterProps<TData, TValue> {
-	column: Column<TData, TValue>;
-	showLabel?: boolean;
-}
+import { IFilterProps } from '../../../types';
 
-function NumberFilter<TData, TValue>({ column, showLabel }: INumberFilterProps<TData, TValue>) {
+function NumberFilter<TData, TValue>({ column, showLabel }: IFilterProps<TData, TValue>) {
 	const columnFilterValue = column.getFilterValue();
 
 	const sortedUniqueValues: number[] = useMemo(

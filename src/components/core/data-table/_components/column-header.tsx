@@ -14,11 +14,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 
 import { cn } from '@/lib/utils';
 
+import { TableColumnHeaderProps } from '../types';
 import TableColumnFilter from './filter/column';
-
-interface TableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
-	column: Column<TData, TValue>;
-}
 
 export function TableColumnHeader<TData, TValue>({ column, className }: TableColumnHeaderProps<TData, TValue>) {
 	const title = column.columnDef.header as string;

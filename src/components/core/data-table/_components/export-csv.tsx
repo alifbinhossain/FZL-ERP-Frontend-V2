@@ -1,4 +1,3 @@
-import { getFlatHeader } from '@/utils';
 import { format } from 'date-fns';
 import { FileSpreadsheet } from 'lucide-react';
 import { CSVLink } from 'react-csv';
@@ -6,7 +5,11 @@ import useTable from '@/hooks/useTable';
 
 import { buttonVariants } from '@/components/ui/button';
 
-const TableExportCSV = () => {
+import { getFlatHeader } from '@/utils';
+
+import { TTableExportCSV } from '../types';
+
+const TableExportCSV = ({ start_date, end_date }: TTableExportCSV) => {
 	const { table, title, isEntry } = useTable();
 
 	const filteredRows = table._getFilteredRowModel?.().rows || [];
@@ -26,8 +29,9 @@ const TableExportCSV = () => {
 
 	const csvData = [csvHeaders, ...filteredRows.map((row) => csvHeadersId.map((column) => row.original[column]))];
 
-	const dateTime = format(new Date(), 'dd-MM-yyyy');
-	const filename = `${title.toLowerCase()} - ${dateTime}.csv`;
+	const startTime = format(start_date as Date, 'dd-MM-yyyy');
+	const endTime = format(end_date as Date, 'dd-MM-yyyy');
+	const filename = `${title.toLowerCase()} - ${startTime} to ${endTime}.csv`;
 
 	return (
 		<CSVLink

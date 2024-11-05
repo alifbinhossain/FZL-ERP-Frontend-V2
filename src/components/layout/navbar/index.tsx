@@ -3,7 +3,6 @@ import useLayout from '@/hooks/useLayout';
 
 import BrandLogo from '@/components/others/brand-logo';
 import GlobalBreadcrumbs from '@/components/others/global-breadcrumbs';
-
 import { cn } from '@/lib/utils';
 
 import SidebarCollapse from '../sidebar/collapse';

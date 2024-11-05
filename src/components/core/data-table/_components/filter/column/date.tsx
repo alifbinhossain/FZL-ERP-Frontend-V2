@@ -1,15 +1,11 @@
 import { useMemo } from 'react';
-import { Column } from '@tanstack/react-table';
 import { max, min } from 'date-fns';
 
 import { DateRangePicker } from '@/components/ui/date-range-picker';
 
-interface IDateFilterProps<TData, TValue> {
-	column: Column<TData, TValue>;
-	showLabel?: boolean;
-}
+import { IFilterProps } from '../../../types';
 
-function DateFilter<TData, TValue>({ column, showLabel }: IDateFilterProps<TData, TValue>) {
+function DateFilter<TData, TValue>({ column, showLabel }: IFilterProps<TData, TValue>) {
 	const columnFilterValue = column.getFilterValue() as [Date, Date];
 
 	const allDates: Date[] = useMemo(

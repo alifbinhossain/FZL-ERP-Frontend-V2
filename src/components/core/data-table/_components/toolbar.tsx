@@ -115,7 +115,7 @@ export function TableToolbar() {
 				)}
 				<Separator orientation='vertical' className='h-6' />
 
-				<ToolbarComponent option='export-csv' render={() => <TableExportCSV />} />
+				<ToolbarComponent option='export-csv' render={() => <TableExportCSV start_date={start_date} end_date={end_date} />} />
 			</div>
 		),
 		[table, facetedFilters, isFiltered, resetColumnFilters, start_date, end_date, onUpdate]

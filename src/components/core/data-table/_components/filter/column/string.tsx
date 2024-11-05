@@ -1,14 +1,10 @@
 import { useMemo } from 'react';
-import { Column } from '@tanstack/react-table';
 
 import DebouncedInput from '@/components/ui/debounce-input';
 
-interface IStringFilterProps<TData, TValue> {
-	column: Column<TData, TValue>;
-	showLabel?: boolean;
-}
+import { IFilterProps } from '../../../types';
 
-function StringFilter<TData, TValue>({ column, showLabel }: IStringFilterProps<TData, TValue>) {
+function StringFilter<TData, TValue>({ column, showLabel }: IFilterProps<TData, TValue>) {
 	const columnFilterValue = column.getFilterValue();
 
 	const sortedUniqueValues = useMemo(() => Array.from(column.getFacetedUniqueValues().keys()).sort(), [column]);

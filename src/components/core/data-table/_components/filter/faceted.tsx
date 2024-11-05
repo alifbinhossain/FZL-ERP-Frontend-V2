@@ -1,6 +1,4 @@
-import * as React from 'react';
 import { CheckIcon, PlusCircledIcon } from '@radix-ui/react-icons';
-import { Column } from '@tanstack/react-table';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -18,15 +16,7 @@ import { Separator } from '@/components/ui/separator';
 
 import { cn } from '@/lib/utils';
 
-interface TableFacetedFilterProps<TData, TValue> {
-	column?: Column<TData, TValue>;
-	title?: string;
-	options: {
-		label: string;
-		value: string;
-		icon?: React.ComponentType<{ className?: string }>;
-	}[];
-}
+import { TableFacetedFilterProps } from '../../types';
 
 export function TableFacetedFilter<TData, TValue>({ column, title, options }: TableFacetedFilterProps<TData, TValue>) {
 	const facets = column?.getFacetedUniqueValues();
