@@ -1,4 +1,5 @@
-import CoreForm from '@/components/core/form';
+import CoreForm from '@core/form';
+
 import {
 	Dialog,
 	DialogContent,

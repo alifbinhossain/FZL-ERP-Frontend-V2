@@ -31,6 +31,8 @@ module.exports = {
 		'^@/components/ui/(.*)$',
 		'^@/ui/(.*)$',
 		'^@/ui',
+		'^@core/(.*)$',
+		'^@core',
 		'',
 		'^types$',
 		'^@/types/(.*)$',

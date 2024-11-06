@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { IResponse } from '@/types';
-import { getDateTime } from '@/utils';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
-import CoreForm from '@/components/core/form';
-import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
+import { getDateTime } from '@/utils';
 
 import { ITypeTableData } from '../_config/columns/columns.type';
 import { useMaterialTypeByUUID } from '../_config/query';
@@ -21,9 +21,7 @@ interface IAddOrUpdateProps {
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	updatedData?: ITypeTableData | null;
-	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<ITypeTableData | null>
-	>;
+	setUpdatedData?: React.Dispatch<React.SetStateAction<ITypeTableData | null>>;
 	postData: UseMutationResult<
 		IResponse<any>,
 		AxiosError<IResponse<any>, any>,
@@ -112,21 +110,9 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			title={isUpdate ? 'Update Type' : 'Add Type'}
 			form={form}
 			onSubmit={onSubmit}>
-			<FormField
-				control={form.control}
-				name='name'
-				render={(props) => <CoreForm.Input {...props} />}
-			/>
-			<FormField
-				control={form.control}
-				name='short_name'
-				render={(props) => <CoreForm.Input {...props} />}
-			/>
-			<FormField
-				control={form.control}
-				name='remarks'
-				render={(props) => <CoreForm.Textarea {...props} />}
-			/>
+			<FormField control={form.control} name='name' render={(props) => <CoreForm.Input {...props} />} />
+			<FormField control={form.control} name='short_name' render={(props) => <CoreForm.Input {...props} />} />
+			<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 		</AddModal>
 	);
 };

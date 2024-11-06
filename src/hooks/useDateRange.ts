@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { addDays, format } from 'date-fns';
+import { addDays } from 'date-fns';
 import { DateRange } from 'react-day-picker';
 
 function useDateRange() {
@@ -22,8 +22,6 @@ function useDateRange() {
 	return {
 		start_date: startDate,
 		end_date: endDate,
-		formatted_start_date: format(startDate, 'yyyy-MM-dd') as string,
-		formatted_end_date: format(endDate, 'yyyy-MM-dd') as string,
 		onUpdate,
 	};
 }

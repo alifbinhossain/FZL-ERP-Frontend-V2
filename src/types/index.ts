@@ -60,3 +60,8 @@ export type IToolbarOptions =
 	| 'export-pdf'
 	| 'refresh'
 	| 'new-entry';
+
+export type IDeleteModal = {
+	id: string;
+	name: string;
+} | null;

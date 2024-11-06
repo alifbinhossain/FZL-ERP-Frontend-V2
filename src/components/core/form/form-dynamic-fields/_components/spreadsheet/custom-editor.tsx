@@ -1,10 +1,10 @@
 import 'handsontable/dist/handsontable.full.min.css';
 
 import { createRef, RefObject } from 'react';
+import { FieldDef } from '@core/form/form-dynamic-fields/types';
 import { BaseEditorComponent } from '@handsontable/react';
 import Handsontable from 'handsontable';
 
-import { FieldDef } from '@/components/core/form/form-dynamic-fields/types';
 import { Input } from '@/components/ui/input';
 import ReactSelect from '@/components/ui/react-select';
 

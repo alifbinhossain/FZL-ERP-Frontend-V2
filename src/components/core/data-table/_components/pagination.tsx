@@ -42,7 +42,6 @@ export function TablePagination() {
 					onChange={(index) => {
 						table.setPageIndex(index);
 					}}
-					initialPage={table.getState().pagination.pageIndex}
 					currentPage={table.getState().pagination.pageIndex}
 					totalPages={table.getPageCount()}
 				/>

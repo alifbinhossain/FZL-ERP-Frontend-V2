@@ -1,6 +1,6 @@
 import React from 'react';
+import CoreForm from '@core/form';
 
-import CoreForm from '@/components/core/form';
 import { FormField } from '@/components/ui/form';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';

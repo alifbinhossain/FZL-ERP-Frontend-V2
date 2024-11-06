@@ -1,17 +1,17 @@
 import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
-import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
 import { useNavigate } from 'react-router-dom';
 
+import { PageInfo } from '@/utils';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { orderColumns } from '../_config/columns';
 import { IOrderTableData } from '../_config/columns/columns.type';
 import { useThreadOrderInfo } from '../_config/query';
 
-const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
-const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
+const DeleteModal = lazy(() => import('@core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@core/modal/delete/all'));
 
 const ThreadOrder = () => {
 	const navigate = useNavigate();

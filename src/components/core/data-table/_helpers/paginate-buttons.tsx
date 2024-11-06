@@ -3,7 +3,6 @@ import ReactPaginate from 'react-paginate';
 import { buttonVariants } from '@/components/ui/button';
 
 interface IPaginatedProps {
-	initialPage: number;
 	totalPages: number;
 	onChange: (page: number) => void;
 	currentPage: number;
@@ -31,7 +30,6 @@ function PaginateButtons({ totalPages, onChange, currentPage }: IPaginatedProps)
 			containerClassName='flex gap-1.5 items-stretch'
 			breakLabel='...'
 			onPageChange={handlePageClick}
-			pageRangeDisplayed={2}
 			pageCount={totalPages}
 			renderOnZeroPageCount={null}
 		/>

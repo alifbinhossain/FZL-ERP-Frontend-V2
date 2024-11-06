@@ -1,28 +1,23 @@
 import { IResponse } from '@/types';
-import { getDateTime } from '@/utils';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useRHF from '@/hooks/useRHF';
 
-import CoreForm from '@/components/core/form';
-import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
+import { getDateTime } from '@/utils';
+
 import { IResetPassword } from '../_config/columns/columns.type';
-import {
-	IResetPasswordSchema,
-	RESET_PASSWORD_NULL,
-	RESET_PASSWORD_SCHEMA,
-} from '../_config/schema';
+import { IResetPasswordSchema, RESET_PASSWORD_NULL, RESET_PASSWORD_SCHEMA } from '../_config/schema';
 
 interface IResetPasswordProps {
 	url: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	updatedData?: IResetPassword | null;
-	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<IResetPassword | null>
-	>;
+	setUpdatedData?: React.Dispatch<React.SetStateAction<IResetPassword | null>>;
 	updateData: UseMutationResult<
 		IResponse<any>,
 		AxiosError<IResponse<any>, any>,
@@ -74,25 +69,13 @@ const ResetPassword: React.FC<IResetPasswordProps> = ({
 			<FormField
 				control={form.control}
 				name='pass'
-				render={(props) => (
-					<CoreForm.Input
-						label='Password'
-						type='password'
-						{...props}
-					/>
-				)}
+				render={(props) => <CoreForm.Input label='Password' type='password' {...props} />}
 			/>
 
 			<FormField
 				control={form.control}
 				name='repeatPass'
-				render={(props) => (
-					<CoreForm.Input
-						label={`Repeat Password`}
-						type={'password'}
-						{...props}
-					/>
-				)}
+				render={(props) => <CoreForm.Input label={`Repeat Password`} type={'password'} {...props} />}
 			/>
 		</AddModal>
 	);

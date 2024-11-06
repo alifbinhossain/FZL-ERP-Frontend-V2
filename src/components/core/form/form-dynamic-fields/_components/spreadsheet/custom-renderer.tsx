@@ -1,9 +1,9 @@
+import { FieldDef } from '@core/form/form-dynamic-fields/types';
 import { ErrorMessage } from '@hookform/error-message';
 import Handsontable from 'handsontable';
 import { ChevronDown } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 
-import { FieldDef } from '@/components/core/form/form-dynamic-fields/types';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { cn } from '@/lib/utils';

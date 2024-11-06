@@ -1,7 +1,6 @@
 import React from 'react';
+import DataTableEntry from '@core/data-table/entry';
 import useAccess from '@/hooks/useAccess';
-
-import DataTableEntry from '@/components/core/data-table/entry';
 
 import { orderEntryColumns } from '../../_config/columns';
 import { IOrderDetailsEntry } from '../../_config/columns/columns.type';

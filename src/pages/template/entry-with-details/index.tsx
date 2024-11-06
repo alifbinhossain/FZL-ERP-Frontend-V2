@@ -1,9 +1,9 @@
 import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
-import { getRandomPreviousDate, PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
 import { useNavigate } from 'react-router-dom';
 
+import { getRandomPreviousDate, PageInfo } from '@/utils';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { test3Columns } from '../_config/columns'; // TODO: Import columns
@@ -12,8 +12,8 @@ import { IPaymentTableData } from '../_config/columns/columns.type';
 import { type1FacetedFilters } from '../_config/columns/facetedFilters'; // TODO: Import faceted filters (Optional)
 import { useTest } from '../_config/query'; // TODO: Import query
 
-const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
-const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
+const DeleteModal = lazy(() => import('@core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@core/modal/delete/all'));
 
 //TODO: Remove it when working with real data
 const fakePayments: IPaymentTableData[] = Array.from({ length: 10 }, (_, i) => ({

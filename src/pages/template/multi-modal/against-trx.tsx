@@ -1,22 +1,18 @@
 import { IResponse } from '@/types';
-import { getDateTime, getTransactionArea } from '@/utils';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
-import CoreForm from '@/components/core/form';
-import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
+import { getDateTime, getTransactionArea } from '@/utils';
 
 import { IActionTrx } from '../_config/columns/columns.type'; // TODO: Import Columns Type
-import {
-	ITestStock,
-	TEST_STOCK_NULL,
-	TEST_STOCK_SCHEMA,
-} from '../_config/schema';
+import { ITestStock, TEST_STOCK_NULL, TEST_STOCK_SCHEMA } from '../_config/schema';
 
 // TODO: Import Schema
 
@@ -41,22 +37,12 @@ interface IAgainstTrxProps {
 	>;
 }
 
-const AgainstTrx: React.FC<IAgainstTrxProps> = ({
-	url,
-	open,
-	setOpen,
-	updatedData,
-	setUpdatedData,
-	postData,
-}) => {
+const AgainstTrx: React.FC<IAgainstTrxProps> = ({ url, open, setOpen, updatedData, setUpdatedData, postData }) => {
 	const isUpdate = !!updatedData;
 
 	const { user } = useAuth();
 
-	const form = useRHF(
-		TEST_STOCK_SCHEMA({ minStock: 1, maxStock: updatedData?.stock || 0 }),
-		TEST_STOCK_NULL
-	); // TODO: Update schema here
+	const form = useRHF(TEST_STOCK_SCHEMA({ minStock: 1, maxStock: updatedData?.stock || 0 }), TEST_STOCK_NULL); // TODO: Update schema here
 
 	const onClose = () => {
 		setUpdatedData?.(null);
@@ -120,11 +106,7 @@ const AgainstTrx: React.FC<IAgainstTrxProps> = ({
 				)}
 			/>
 
-			<FormField
-				control={form.control}
-				name='remarks'
-				render={(props) => <CoreForm.Textarea {...props} />}
-			/>
+			<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 		</AddModal>
 	);
 };

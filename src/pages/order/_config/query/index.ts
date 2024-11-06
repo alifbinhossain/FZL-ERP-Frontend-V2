@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import useTQuery from '@/hooks/useTQuery';
 
 import addUrlParams from '@/utils/routes/addUrlParams';
@@ -123,22 +124,23 @@ export const useOrderFactoryByUUID = <T>(uuid: string) =>
 // 		url: addUrlParams('/public/merchandiser', { limit, page }),
 // 	});
 // };
-
-type IUseOrderMerchandiserProps = {
-	formatted_start_date: string;
-	formatted_end_date: string;
+type IStartEndDateProps = {
+	start_date: Date;
+	end_date: Date;
 };
 
-export const useOrderMerchandiser = <T>({ formatted_start_date, formatted_end_date }: IUseOrderMerchandiserProps) => {
+const formatDates = ({ start_date, end_date }: IStartEndDateProps) => {
+	return {
+		start_date: format(start_date, 'yyyy-MM-dd') as string,
+		end_date: format(end_date, 'yyyy-MM-dd') as string,
+	};
+};
+
+export const useOrderMerchandiser = <T>({ start_date, end_date }: IStartEndDateProps) => {
+	const dates = formatDates({ start_date, end_date });
 	return useTQuery<T>({
-		queryKey: orderQK.merchandiserQuery({
-			start_date: formatted_start_date,
-			end_date: formatted_end_date,
-		}),
-		url: addUrlParams(`/public/merchandiser`, {
-			start_date: formatted_start_date,
-			end_date: formatted_end_date,
-		}),
+		queryKey: orderQK.merchandiserQuery(dates),
+		url: addUrlParams(`/public/merchandiser`, dates),
 	});
 };
 

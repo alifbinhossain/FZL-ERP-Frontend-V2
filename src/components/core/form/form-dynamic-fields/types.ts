@@ -1,6 +1,5 @@
+import { IFormSelectOption } from '@core/form/types';
 import { FieldArrayWithId, UseFormReturn } from 'react-hook-form';
-
-import { IFormSelectOption } from '@/components/core/form/types';
 
 type FieldReadonly = {
 	type: 'readOnly';
@@ -39,14 +38,7 @@ export type FieldDef = {
 	className?: string;
 	isLoading?: boolean;
 	hidden?: boolean;
-} & (
-	| FieldText
-	| FieldNumber
-	| FieldSelect
-	| FieldReadonly
-	| FieldCustom
-	| FieldJoinInputUnit
-);
+} & (FieldText | FieldNumber | FieldSelect | FieldReadonly | FieldCustom | FieldJoinInputUnit);
 
 export interface DynamicFieldsProps {
 	title: string;

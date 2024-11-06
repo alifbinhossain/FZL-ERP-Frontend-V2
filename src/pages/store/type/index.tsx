@@ -1,8 +1,8 @@
 import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
-import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
 
+import { PageInfo } from '@/utils';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { typeColumns } from '../_config/columns';
@@ -10,8 +10,8 @@ import { ITypeTableData } from '../_config/columns/columns.type';
 import { useMaterialType } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
-const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
+const DeleteModal = lazy(() => import('@core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@core/modal/delete/all'));
 
 const Type = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useMaterialType<ITypeTableData[]>();

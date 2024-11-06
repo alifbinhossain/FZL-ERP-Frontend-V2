@@ -1,9 +1,9 @@
 import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
-import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
 import useAccess from '@/hooks/useAccess';
 
+import { PageInfo } from '@/utils';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { stockColumns } from '../_config/columns';
@@ -11,8 +11,8 @@ import { IStockActionTrx, IStockActionTrxAgainstOrder, IStockTableData } from '.
 import { useMaterialInfo } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
-const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
+const DeleteModal = lazy(() => import('@core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@core/modal/delete/all'));
 const AgainstTrx = lazy(() => import('./material-trx'));
 const AgainstOrderTransfer = lazy(() => import('./against-order-transfer'));
 

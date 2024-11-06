@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { IResponse } from '@/types';
-import { getDateTime } from '@/utils';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
-import CoreForm from '@/components/core/form';
-import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
+import { getDateTime } from '@/utils';
 
 import { IPaymentTableData } from '../_config/columns/columns.type'; // TODO: Import columns type
 

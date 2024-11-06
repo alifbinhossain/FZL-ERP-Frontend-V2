@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { allFlatRoutes, allPrivateRoutes } from '@/routes';
 import { IResponse, IRoute } from '@/types';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { Search } from 'lucide-react';
@@ -8,8 +10,6 @@ import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import useRHF from '@/hooks/useRHF';
 
-import CoreForm from '@/components/core/form';
-import { AddModal } from '@/components/core/modal';
 import { Checkbox } from '@/components/ui/checkbox';
 import DebouncedInput from '@/components/ui/debounce-input';
 import { FormField } from '@/components/ui/form';

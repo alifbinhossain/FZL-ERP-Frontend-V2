@@ -1,5 +1,10 @@
 import { createContext, useLayoutEffect, useMemo, useState } from 'react';
 import { IResponse, ITableFacetedFilter, IToolbarOptions } from '@/types';
+import DataTable from '@core/data-table';
+import { TableRowSelection } from '@core/data-table/_components/row/selection';
+import { dateRange } from '@core/data-table/_helpers/dateRange';
+import { fuzzyFilter } from '@core/data-table/_helpers/fuzzyFilter';
+import useDefaultColumns from '@core/data-table/_helpers/useDefaultColumns';
 import { RankingInfo } from '@tanstack/match-sorter-utils';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import {
@@ -21,12 +26,6 @@ import {
 } from '@tanstack/react-table';
 import { max, min } from 'date-fns';
 import { DateRange } from 'react-day-picker';
-
-import DataTable from '@/components/core/data-table';
-import { TableRowSelection } from '@/components/core/data-table/_components/row/selection';
-import { dateRange } from '@/components/core/data-table/_helpers/dateRange';
-import { fuzzyFilter } from '@/components/core/data-table/_helpers/fuzzyFilter';
-import useDefaultColumns from '@/components/core/data-table/_helpers/useDefaultColumns';
 
 declare module '@tanstack/react-table' {
 	//allows us to define custom properties for our columns

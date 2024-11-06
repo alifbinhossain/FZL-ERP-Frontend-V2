@@ -1,20 +1,19 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import { getDateTime } from '@/utils';
+import CoreForm from '@core/form';
 import { useFieldArray } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
-import CoreForm from '@/components/core/form';
-
 import nanoid from '@/lib/nanoid';
+import { getDateTime } from '@/utils';
 
 import { usePurchaseDescription, usePurchaseDetailsByUUID } from '../../_config/query';
 import { IReceive, RECEIVE_NULL, RECEIVE_SCHEMA } from '../../_config/schema';
 import Header from './header';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 
-const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteModal = lazy(() => import('@core/modal/delete'));
 
 const AddOrUpdate = () => {
 	const { user } = useAuth();

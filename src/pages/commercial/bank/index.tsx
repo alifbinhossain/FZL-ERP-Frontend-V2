@@ -1,8 +1,8 @@
 import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
-import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
 
+import { PageInfo } from '@/utils';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { bankColumns } from '../_config/columns';
@@ -11,7 +11,7 @@ import { useCommercialBank } from '../_config/query';
 
 //* Modals
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
+const DeleteModal = lazy(() => import('@core/modal/delete'));
 
 const CommercialBank = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useCommercialBank<IBankTableData[]>();

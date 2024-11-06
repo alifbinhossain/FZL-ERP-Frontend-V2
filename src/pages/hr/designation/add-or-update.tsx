@@ -1,33 +1,27 @@
 import { useEffect } from 'react';
 import { IResponse } from '@/types';
-import { getDateTime } from '@/utils';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
-import CoreForm from '@/components/core/form';
-import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
+import { getDateTime } from '@/utils';
 
 import { IDesignationTableData } from '../_config/columns/columns.type';
 import { useHrDesignationByUUID, useHrUsers } from '../_config/query';
-import {
-	DESIGNATION_NULL,
-	DESIGNATION_SCHEMA,
-	IDesignation,
-} from '../_config/schema';
+import { DESIGNATION_NULL, DESIGNATION_SCHEMA, IDesignation } from '../_config/schema';
 
 interface IAddOrUpdateProps {
 	url: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	updatedData?: IDesignationTableData | null;
-	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<IDesignationTableData | null>
-	>;
+	setUpdatedData?: React.Dispatch<React.SetStateAction<IDesignationTableData | null>>;
 	postData: UseMutationResult<
 		IResponse<any>,
 		AxiosError<IResponse<any>, any>,
@@ -118,16 +112,8 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			title={isUpdate ? 'Update Designation' : 'Add Designation'}
 			form={form}
 			onSubmit={onSubmit}>
-			<FormField
-				control={form.control}
-				name='designation'
-				render={(props) => <CoreForm.Input {...props} />}
-			/>
-			<FormField
-				control={form.control}
-				name='remarks'
-				render={(props) => <CoreForm.Textarea {...props} />}
-			/>
+			<FormField control={form.control} name='designation' render={(props) => <CoreForm.Input {...props} />} />
+			<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 		</AddModal>
 	);
 };

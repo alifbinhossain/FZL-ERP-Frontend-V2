@@ -1,6 +1,5 @@
 import React from 'react';
-
-import DataTableEntry from '@/components/core/data-table/entry';
+import DataTableEntry from '@core/data-table/entry';
 
 import { receiveEntryColumns } from '../../_config/columns';
 import { IReceiveDetails } from '../../_config/columns/columns.type';

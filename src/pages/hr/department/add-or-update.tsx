@@ -1,37 +1,27 @@
 import { useEffect } from 'react';
 import { IResponse } from '@/types';
-import { getDateTime } from '@/utils';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
-import CoreForm from '@/components/core/form';
-import { AddModal } from '@/components/core/modal';
 import { FormField } from '@/components/ui/form';
 
 import nanoid from '@/lib/nanoid';
+import { getDateTime } from '@/utils';
 
 import { IDepartmentTableData } from '../_config/columns/columns.type';
-import {
-	useHrDepartmentsByUUID,
-	useHrDesignations,
-	useHrUsers,
-} from '../_config/query';
-import {
-	DEPARTMENT_NULL,
-	DEPARTMENT_SCHEMA,
-	IDepartment,
-} from '../_config/schema';
+import { useHrDepartmentsByUUID, useHrDesignations, useHrUsers } from '../_config/query';
+import { DEPARTMENT_NULL, DEPARTMENT_SCHEMA, IDepartment } from '../_config/schema';
 
 interface IAddOrUpdateProps {
 	url: string;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	updatedData?: IDepartmentTableData | null;
-	setUpdatedData?: React.Dispatch<
-		React.SetStateAction<IDepartmentTableData | null>
-	>;
+	setUpdatedData?: React.Dispatch<React.SetStateAction<IDepartmentTableData | null>>;
 	postData: UseMutationResult<
 		IResponse<any>,
 		AxiosError<IResponse<any>, any>,
@@ -70,9 +60,7 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 	const { user } = useAuth();
 	const { invalidateQuery: invalidateUsers } = useHrUsers();
 	const { invalidateQuery: invalidateDesignations } = useHrDesignations();
-	const { data } = useHrDepartmentsByUUID<IDepartmentTableData>(
-		updatedData?.uuid as string
-	);
+	const { data } = useHrDepartmentsByUUID<IDepartmentTableData>(updatedData?.uuid as string);
 
 	const form = useRHF(DEPARTMENT_SCHEMA, DEPARTMENT_NULL);
 
@@ -126,16 +114,8 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			title={isUpdate ? 'Update Department' : 'Add Department'}
 			form={form}
 			onSubmit={onSubmit}>
-			<FormField
-				control={form.control}
-				name='department'
-				render={(props) => <CoreForm.Input {...props} />}
-			/>
-			<FormField
-				control={form.control}
-				name='remarks'
-				render={(props) => <CoreForm.Textarea {...props} />}
-			/>
+			<FormField control={form.control} name='department' render={(props) => <CoreForm.Input {...props} />} />
+			<FormField control={form.control} name='remarks' render={(props) => <CoreForm.Textarea {...props} />} />
 		</AddModal>
 	);
 };

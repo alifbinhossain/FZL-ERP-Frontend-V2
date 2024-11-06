@@ -1,9 +1,10 @@
 import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
-import { PageInfo } from '@/utils';
+import { IDeleteModal } from '@/types';
 import { Row } from '@tanstack/react-table';
 import useDateRange from '@/hooks/useDateRange';
 
+import { PageInfo } from '@/utils';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { merchandiserColumns } from '../_config/columns';
@@ -11,32 +12,24 @@ import { IMerchandiserData } from '../_config/columns/columns.type';
 import { useOrderMerchandiser } from '../_config/query';
 
 const AddOrUpdate = lazy(() => import('./add-or-update'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
-const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
+const DeleteModal = lazy(() => import('@core/modal/delete'));
 
 const Merchandiser = () => {
-	const { start_date, end_date, formatted_start_date, formatted_end_date, onUpdate } = useDateRange();
+	const { start_date, end_date, onUpdate } = useDateRange();
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useOrderMerchandiser<
 		IMerchandiserData[]
-	>({
-		formatted_start_date,
-		formatted_end_date,
-	});
-
-	console.log({
-		formatted_start_date,
-		formatted_end_date,
-	});
+	>({ start_date, end_date });
 
 	const pageInfo = useMemo(() => new PageInfo('Merchandiser', url, 'order__merchandiser'), [url]);
 
-	// Add/Update Modal state
-	const [isOpenAddModal, setIsOpenAddModal] = useState(false);
+	//* Add Modal
+	const [isOpenAddModal, setIsOpenAddModal] = useState<boolean>(false);
 
 	const handleCreate = () => {
 		setIsOpenAddModal(true);
 	};
 
+	//* Update Modal
 	const [updatedData, setUpdatedData] = useState<IMerchandiserData | null>(null);
 
 	const handleUpdate = (row: Row<IMerchandiserData>) => {
@@ -44,14 +37,9 @@ const Merchandiser = () => {
 		setIsOpenAddModal(true);
 	};
 
-	// Delete Modal state
-	// Single Delete Item
-	const [deleteItem, setDeleteItem] = useState<{
-		id: string;
-		name: string;
-	} | null>(null);
+	//* Delete Modal
+	const [deleteItem, setDeleteItem] = useState<IDeleteModal>(null);
 
-	// Single Delete Handler
 	const handleDelete = (row: Row<IMerchandiserData>) => {
 		setDeleteItem({
 			id: row?.original?.uuid,
@@ -59,23 +47,7 @@ const Merchandiser = () => {
 		});
 	};
 
-	// Delete All Item
-	const [deleteItems, setDeleteItems] = useState<{ id: string; name: string; checked: boolean }[] | null>(null);
-
-	// Delete All Row Handlers
-	const handleDeleteAll = (rows: Row<IMerchandiserData>[]) => {
-		const selectedRows = rows.map((row) => row.original);
-
-		setDeleteItems(
-			selectedRows.map((row) => ({
-				id: row.uuid,
-				name: row.name,
-				checked: true,
-			}))
-		);
-	};
-
-	// Table Columns
+	//* Columns
 	const columns = merchandiserColumns();
 
 	return (
@@ -89,7 +61,6 @@ const Merchandiser = () => {
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
-				handleDeleteAll={handleDeleteAll}
 				start_date={start_date}
 				end_date={end_date}
 				onUpdate={onUpdate}>
@@ -110,14 +81,6 @@ const Merchandiser = () => {
 						{...{
 							deleteItem,
 							setDeleteItem,
-							url,
-							deleteData,
-						}}
-					/>,
-					<DeleteAllModal
-						{...{
-							deleteItems,
-							setDeleteItems,
 							url,
 							deleteData,
 						}}

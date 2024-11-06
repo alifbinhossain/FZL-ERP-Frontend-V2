@@ -22,7 +22,9 @@
 
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./src/*"],
+			"@core/*": ["./src/components/core/*"],
+			"@pages/*": ["./src/pages/*"],
 		},
 		"types": ["node"] // This is needed to resolve the "path" module issue
 	},

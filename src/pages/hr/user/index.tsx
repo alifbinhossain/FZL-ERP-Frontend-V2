@@ -1,9 +1,9 @@
 import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
-import { getDateTime, PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
 import useAccess from '@/hooks/useAccess';
 
+import { getDateTime, PageInfo } from '@/utils';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { userColumns } from '../_config/columns';
@@ -13,8 +13,8 @@ import { useHrUsers } from '../_config/query';
 const AddOrUpdate = lazy(() => import('./add-or-update'));
 const ResetPassword = lazy(() => import('./reset-password'));
 const PageAssign = lazy(() => import('./page-assign'));
-const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
-const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
+const DeleteModal = lazy(() => import('@core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@core/modal/delete/all'));
 const User = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useHrUsers<IUserTableData[]>();
 

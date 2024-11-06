@@ -1,17 +1,17 @@
 import { lazy, useMemo, useState } from 'react';
 import { PageProvider, TableProvider } from '@/context';
-import { PageInfo } from '@/utils';
 import { Row } from '@tanstack/react-table';
 import { useNavigate } from 'react-router-dom';
 
+import { PageInfo } from '@/utils';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { receiveColumns } from '../_config/columns';
 import { IReceiveTableData } from '../_config/columns/columns.type';
 import { usePurchaseDescription } from '../_config/query';
 
-const DeleteModal = lazy(() => import('@/components/core/modal/delete'));
-const DeleteAllModal = lazy(() => import('@/components/core/modal/delete/all'));
+const DeleteModal = lazy(() => import('@core/modal/delete'));
+const DeleteAllModal = lazy(() => import('@core/modal/delete/all'));
 
 const Receive = () => {
 	const navigate = useNavigate();

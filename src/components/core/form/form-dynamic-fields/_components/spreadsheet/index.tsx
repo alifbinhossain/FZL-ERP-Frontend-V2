@@ -1,7 +1,6 @@
+import { DynamicFieldsProps } from '@core/form/form-dynamic-fields/types';
 import { HotColumn, HotTable } from '@handsontable/react';
 import { registerAllModules } from 'handsontable/registry';
-
-import { DynamicFieldsProps } from '@/components/core/form/form-dynamic-fields/types';
 
 import CustomEditor from './custom-editor';
 import CustomRenderer from './custom-renderer';
