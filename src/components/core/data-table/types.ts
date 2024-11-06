@@ -3,10 +3,10 @@ import { IToolbarOptions } from '@/types';
 import { Column, ColumnDef } from '@tanstack/react-table';
 import { DateRange } from 'react-day-picker';
 
-type TStartEndDate = {
+interface TStartEndDate {
 	start_date: Date | string | undefined;
 	end_date: Date | string | undefined;
-};
+}
 
 export type TTableExportCSV = TStartEndDate;
 
@@ -21,18 +21,19 @@ export interface IDataTableEntryProps<TData, TValue> {
 	toolbarOptions?: 'none' | IToolbarOptions[];
 }
 
-type TDefaultColumn<TData, TValue> = {
+interface TDefaultColumn<TData, TValue> {
 	column: Column<TData, TValue>;
-};
+}
 
-export type TableColumnHeaderProps<TData, TValue> = React.HTMLAttributes<HTMLDivElement> &
-	TDefaultColumn<TData, TValue>;
+export interface TableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
+	column: Column<TData, TValue>;
+}
 
 export type IFilterProps<TData, TValue> = TDefaultColumn<TData, TValue> & {
 	showLabel?: boolean;
 };
 
-export type TableFacetedFilterProps<TData, TValue> = {
+export interface TableFacetedFilterProps<TData, TValue> {
 	column?: Column<TData, TValue>;
 	title?: string;
 	options: {
@@ -40,4 +41,4 @@ export type TableFacetedFilterProps<TData, TValue> = {
 		value: string;
 		icon?: React.ComponentType<{ className?: string }>;
 	}[];
-};
+}

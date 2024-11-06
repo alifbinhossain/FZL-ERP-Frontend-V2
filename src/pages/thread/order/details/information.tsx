@@ -13,7 +13,7 @@ const Information: React.FC<{ data: IOrderDetails }> = ({ data }) => {
 	const [checkSwatch, setCheckSwatch] = useState(true);
 
 	useEffect(() => {
-		data?.order_info_entry.map((item, i) => {
+		data?.order_info_entry.map((item) => {
 			if (Number(item?.company_price) <= 0 && Number(item?.party_price) <= 0) {
 				setCheck(false);
 			}

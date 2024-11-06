@@ -1,4 +1,3 @@
-import useDateRange from '@/hooks/useDateRange';
 import useTQuery from '@/hooks/useTQuery';
 
 import addUrlParams from '@/utils/routes/addUrlParams';
@@ -130,10 +129,7 @@ type IUseOrderMerchandiserProps = {
 	formatted_end_date: string;
 };
 
-export const useOrderMerchandiser = <T>({
-	formatted_start_date,
-	formatted_end_date,
-}: IUseOrderMerchandiserProps) => {
+export const useOrderMerchandiser = <T>({ formatted_start_date, formatted_end_date }: IUseOrderMerchandiserProps) => {
 	return useTQuery<T>({
 		queryKey: orderQK.merchandiserQuery({
 			start_date: formatted_start_date,

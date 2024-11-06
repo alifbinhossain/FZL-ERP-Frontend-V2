@@ -3,7 +3,6 @@ import { z } from 'zod';
 import {
 	BOOLEAN_DEFAULT_VALUE,
 	BOOLEAN_REQUIRED,
-	DATE_NULLABLE,
 	NUMBER_DOUBLE_REQUIRED,
 	NUMBER_REQUIRED,
 	STRING_NULLABLE,
@@ -47,9 +46,7 @@ export const THREAD_ORDER_INFO_ENTRY_NULL: Partial<IThreadOrderInfoEntry> = {
 	order_info_entry: [],
 };
 
-export type IThreadOrderInfoEntry = z.infer<
-	typeof THREAD_ORDER_INFO_ENTRY_SCHEMA
->;
+export type IThreadOrderInfoEntry = z.infer<typeof THREAD_ORDER_INFO_ENTRY_SCHEMA>;
 
 // Thread Count Length Schema
 export const THREAD_COUNT_LENGTH_SCHEMA = z.object({

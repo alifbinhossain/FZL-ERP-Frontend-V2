@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { allFlatRoutes, allPrivateRoutes } from '@/routes';
 import { IResponse, IRoute } from '@/types';
-import { flattenRoutes, getDateTime } from '@/utils';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { Search } from 'lucide-react';
@@ -17,6 +16,7 @@ import { FormField } from '@/components/ui/form';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { cn } from '@/lib/utils';
+import { flattenRoutes, getDateTime } from '@/utils';
 
 import { IPageAssign } from '../_config/columns/columns.type';
 import { useHrCanAccess } from '../_config/query';
@@ -40,36 +40,22 @@ interface IPageAssignProps {
 	>;
 }
 
-const PageAssign: React.FC<IPageAssignProps> = ({
-	url,
-	open,
-	setOpen,
-	updatedData,
-	setUpdatedData,
-	updateData,
-}) => {
+const PageAssign: React.FC<IPageAssignProps> = ({ url, open, setOpen, updatedData, setUpdatedData, updateData }) => {
 	const { data } = useHrCanAccess<any>(updatedData?.uuid as string);
 
 	const [searchPageName, setSearchPageName] = useState('');
 	const [selectPageName, setSelectPageName] = useState<string>('all');
-	const [filteredRoutes, setFilteredRoutes] =
-		useState<IRoute[]>(allFlatRoutes);
+	const [filteredRoutes, setFilteredRoutes] = useState<IRoute[]>(allFlatRoutes);
 	const ALL_PAGE_NAMES = allPrivateRoutes.map((item) => item.name);
 
 	const allPageActions = useMemo(() => {
-		return allFlatRoutes.filter(
-			(item) => item.actions !== undefined && item.actions.length > 0
-		);
+		return allFlatRoutes.filter((item) => item.actions !== undefined && item.actions.length > 0);
 	}, []);
 
 	const filteredPageActions = useMemo(() => {
 		return filteredRoutes
-			.filter(
-				(item) => item.actions !== undefined && item.actions.length > 0
-			)
-			.filter(({ page_name }) =>
-				page_name?.toLowerCase().includes(searchPageName.toLowerCase())
-			);
+			.filter((item) => item.actions !== undefined && item.actions.length > 0)
+			.filter(({ page_name }) => page_name?.toLowerCase().includes(searchPageName.toLowerCase()));
 	}, [filteredRoutes, searchPageName]);
 
 	const PAGE_ACTIONS_SCHEMA = allPageActions.reduce(
@@ -92,13 +78,7 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 		if (selectPageName === 'all') {
 			setFilteredRoutes(allFlatRoutes);
 		} else {
-			setFilteredRoutes(
-				flattenRoutes(
-					allPrivateRoutes.filter(
-						(item) => item.name === selectPageName
-					)
-				)
-			);
+			setFilteredRoutes(flattenRoutes(allPrivateRoutes.filter((item) => item.name === selectPageName)));
 		}
 	}, [selectPageName]);
 
@@ -118,7 +98,7 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 
 		const result: { [key: string]: boolean } = {};
 
-		Object.entries(data?.[0])?.forEach(([key, value]) => {
+		Object.entries(data?.[0])?.forEach(([_, value]) => {
 			const val = JSON.parse(value as string);
 
 			Object.entries(val).forEach(([k, v]: any) => {
@@ -129,9 +109,7 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 			});
 		});
 
-		const filterRoutes = allFlatRoutes?.filter(
-			(item) => item.actions !== undefined
-		);
+		const filterRoutes = allFlatRoutes?.filter((item) => item.actions !== undefined);
 
 		const PAGE_ACTIONS = filterRoutes?.reduce(
 			(
@@ -208,10 +186,7 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 
 			<Tabs value={selectPageName} className='w-full'>
 				<TabsList className='flex w-full justify-start bg-base-200'>
-					<TabsTrigger
-						type={'button'}
-						value={'all'}
-						onClick={() => setSelectPageName('all')}>
+					<TabsTrigger type={'button'} value={'all'} onClick={() => setSelectPageName('all')}>
 						All
 					</TabsTrigger>
 					{ALL_PAGE_NAMES.map((item) => (
@@ -245,25 +220,15 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 										to={path!}
 										className='font-semibold capitalize hover:underline'
 										target='_blank'>
-										{page_name
-											?.replace(/__/, ': ')
-											.replace(/_/g, ' ')}
+										{page_name?.replace(/__/, ': ').replace(/_/g, ' ')}
 									</Link>
 									<Checkbox
 										id={page_name + '___' + 'all'}
 										checked={
 											actions
 												?.map((action) =>
-													form.watch(
-														page_name +
-															'___' +
-															action
-													) == 'false' ||
-													!form.watch(
-														page_name +
-															'___' +
-															action
-													)
+													form.watch(page_name + '___' + action) == 'false' ||
+													!form.watch(page_name + '___' + action)
 														? false
 														: true
 												)
@@ -274,33 +239,19 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 										onCheckedChange={(value) => {
 											if (value) {
 												actions?.forEach((action) => {
-													form.setValue(
-														page_name +
-															'___' +
-															action,
-														true,
-														{
-															shouldTouch: true,
-															shouldDirty: true,
-															shouldValidate:
-																true,
-														}
-													);
+													form.setValue(page_name + '___' + action, true, {
+														shouldTouch: true,
+														shouldDirty: true,
+														shouldValidate: true,
+													});
 												});
 											} else {
 												actions?.forEach((action) => {
-													form.setValue(
-														page_name +
-															'___' +
-															action,
-														false,
-														{
-															shouldTouch: true,
-															shouldDirty: true,
-															shouldValidate:
-																true,
-														}
-													);
+													form.setValue(page_name + '___' + action, false, {
+														shouldTouch: true,
+														shouldDirty: true,
+														shouldValidate: true,
+													});
 												});
 											}
 										}}
@@ -309,25 +260,14 @@ const PageAssign: React.FC<IPageAssignProps> = ({
 
 								<div className='flex flex-wrap gap-2'>
 									{actions?.map((action) => (
-										<div
-											key={page_name + '___' + action}
-											className='rounded-md border p-1'>
+										<div key={page_name + '___' + action} className='rounded-md border p-1'>
 											<FormField
 												control={form.control}
-												name={
-													page_name + '___' + action
-												}
+												name={page_name + '___' + action}
 												render={(props) => (
 													<CoreForm.Checkbox
-														label={action.replace(
-															/_/g,
-															' '
-														)}
-														defaultChecked={form.getValues(
-															page_name +
-																'___' +
-																action
-														)}
+														label={action.replace(/_/g, ' ')}
+														defaultChecked={form.getValues(page_name + '___' + action)}
 														{...props}
 													/>
 												)}

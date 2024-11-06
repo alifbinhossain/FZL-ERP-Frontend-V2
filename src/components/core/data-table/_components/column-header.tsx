@@ -1,5 +1,4 @@
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, EyeNoneIcon } from '@radix-ui/react-icons';
-import { Column } from '@tanstack/react-table';
 import { ListFilter, Pin, PinOff } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
