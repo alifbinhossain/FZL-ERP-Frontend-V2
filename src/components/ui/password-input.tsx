@@ -15,14 +15,8 @@ const PasswordInput: React.FC<InputProps> = ({ ...props }) => {
 			{...props}
 			type={show ? 'text' : 'password'}
 			icon={
-				<span
-					onClick={toggleShow}
-					className='cursor-pointer text-secondary/60'>
-					{show ? (
-						<Eye className='size-4' />
-					) : (
-						<EyeOff className='size-4' />
-					)}
+				<span onClick={toggleShow} className='cursor-pointer text-secondary/60'>
+					{show ? <Eye className='size-4' /> : <EyeOff className='size-4' />}
 				</span>
 			}
 			iconPosition='right'

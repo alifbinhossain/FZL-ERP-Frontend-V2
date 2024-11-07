@@ -59,7 +59,8 @@ const CommercialBank = () => {
 				handleCreate={handleCreate}
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}
-				handleRefetch={refetch}>
+				handleRefetch={refetch}
+			>
 				{renderSuspenseModals([
 					<AddOrUpdate
 						{...{

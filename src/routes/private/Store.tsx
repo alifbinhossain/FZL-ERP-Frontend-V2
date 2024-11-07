@@ -8,9 +8,7 @@ const Section = lazy(() => import('@/pages/store/section'));
 const Type = lazy(() => import('@/pages/store/type'));
 const Vendor = lazy(() => import('@/pages/store/vendor'));
 const Receive = lazy(() => import('@/pages/store/receive'));
-const ReceiveAddOrUpdate = lazy(
-	() => import('@/pages/store/receive/add-or-update')
-);
+const ReceiveAddOrUpdate = lazy(() => import('@/pages/store/receive/add-or-update'));
 
 const ReceiveDetails = lazy(() => import('@/pages/store/receive/details'));
 
@@ -23,14 +21,7 @@ const StoreRoutes: IRoute[] = [
 				path: '/store/stock',
 				element: <Stock />,
 				page_name: 'store__stock',
-				actions: [
-					'create',
-					'read',
-					'update',
-					'delete',
-					'click_trx_against_order',
-					'click_action',
-				],
+				actions: ['create', 'read', 'update', 'delete', 'click_trx_against_order', 'click_action'],
 			},
 
 			{

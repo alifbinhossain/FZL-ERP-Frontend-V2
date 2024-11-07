@@ -1,12 +1,12 @@
 import 'handsontable/dist/handsontable.full.min.css';
 
 import { createRef, RefObject } from 'react';
-import { FieldDef } from '@core/form/form-dynamic-fields/types';
 import { BaseEditorComponent } from '@handsontable/react';
 import Handsontable from 'handsontable';
 
 import { Input } from '@/components/ui/input';
 import ReactSelect from '@/components/ui/react-select';
+import { FieldDef } from '@core/form/form-dynamic-fields/types';
 
 interface ICustomEditorProps {
 	field: FieldDef;
@@ -97,7 +97,8 @@ class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 					}}
 					ref={this.mainElementRef}
 					onMouseDown={this.stopMousedownPropagation as any}
-					id='editorElement'>
+					id='editorElement'
+				>
 					<ReactSelect
 						extraControlClassName='!rounded-none'
 						openMenuOnFocus
@@ -129,7 +130,8 @@ class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 					}}
 					ref={this.mainElementRef}
 					onMouseDown={this.stopMousedownPropagation as any}
-					id='editorElement'>
+					id='editorElement'
+				>
 					<Input
 						ref={this.inputElementRef}
 						className='w-full rounded-none border-none'

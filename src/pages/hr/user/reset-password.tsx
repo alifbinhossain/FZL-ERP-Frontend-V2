@@ -1,11 +1,11 @@
 import { IResponse } from '@/types';
-import CoreForm from '@core/form';
-import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useRHF from '@/hooks/useRHF';
 
 import { FormField } from '@/components/ui/form';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 
 import { getDateTime } from '@/utils';
 
@@ -65,7 +65,8 @@ const ResetPassword: React.FC<IResetPasswordProps> = ({
 			setOpen={onClose}
 			title={`Reset Password - ${updatedData?.name}`}
 			form={form}
-			onSubmit={onSubmit}>
+			onSubmit={onSubmit}
+		>
 			<FormField
 				control={form.control}
 				name='pass'

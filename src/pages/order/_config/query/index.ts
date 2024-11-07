@@ -3,32 +3,32 @@ import useTQuery from '@/hooks/useTQuery';
 
 import addUrlParams from '@/utils/routes/addUrlParams';
 
-import { orderQK } from './queryKeys';
+import QK from './queryKeys';
 
 // * Details * //
 export const useOrderDetails = <T>() =>
 	useTQuery<T>({
-		queryKey: orderQK.details(),
+		queryKey: QK.details(),
 		url: '/zipper/order/details',
 	});
 
 export const useOrderDetailsByQuery = <T>(query: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.detailsByQuery(query),
+		queryKey: QK.detailsByQuery(query),
 		url: `/zipper/order/details${query}`,
 		enabled: !!query,
 	});
 
 export const useOrderDetailsByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.detailsByUUID(uuid),
+		queryKey: QK.detailsByUUID(uuid),
 		url: `/zipper/order-detail/${uuid}`,
 		enabled: !!uuid,
 	});
 
 export const useOrderDetailsByOrderNumber = <T>(orderNumber: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.detailsByOrderNumber(orderNumber),
+		queryKey: QK.detailsByOrderNumber(orderNumber),
 		url: `/zipper/order/details/single-order/by/${orderNumber}`,
 		enabled: !!orderNumber,
 	});
@@ -36,13 +36,13 @@ export const useOrderDetailsByOrderNumber = <T>(orderNumber: string) =>
 // * Description * //
 export const useOrderDescription = <T>() =>
 	useTQuery<T>({
-		queryKey: orderQK.description(),
+		queryKey: QK.description(),
 		url: '/zipper/order-description',
 	});
 
 export const useOrderDescriptionByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.descriptionByUUID(uuid),
+		queryKey: QK.descriptionByUUID(uuid),
 		url: `/zipper/order-description/${uuid}`,
 		enabled: !!uuid,
 	});
@@ -50,13 +50,13 @@ export const useOrderDescriptionByUUID = <T>(uuid: string) =>
 // * Entry * //
 export const useOrderEntries = <T>() =>
 	useTQuery<T>({
-		queryKey: orderQK.entry(),
+		queryKey: QK.entry(),
 		url: '/zipper/order-entry',
 	});
 
 export const useOrderEntriesByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.entryByUUID(uuid),
+		queryKey: QK.entryByUUID(uuid),
 		url: `/zipper/order-entry/${uuid}`,
 		enabled: !!uuid,
 	});
@@ -64,13 +64,13 @@ export const useOrderEntriesByUUID = <T>(uuid: string) =>
 // * Buyer * //
 export const useOrderBuyer = <T>() =>
 	useTQuery<T>({
-		queryKey: orderQK.buyer(),
+		queryKey: QK.buyer(),
 		url: '/public/buyer',
 	});
 
 export const useOrderBuyerByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.buyerByUUID(uuid),
+		queryKey: QK.buyerByUUID(uuid),
 		url: `/public/buyer/${uuid}`,
 		enabled: !!uuid,
 	});
@@ -78,12 +78,12 @@ export const useOrderBuyerByUUID = <T>(uuid: string) =>
 //*Party */
 export const useOrderParty = <T>() =>
 	useTQuery<T>({
-		queryKey: orderQK.party(),
+		queryKey: QK.party(),
 		url: '/public/party',
 	});
 export const useOrderPartyByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.partyByUUID(uuid),
+		queryKey: QK.partyByUUID(uuid),
 		url: `/public/party/${uuid}`,
 		enabled: !!uuid,
 	});
@@ -91,13 +91,13 @@ export const useOrderPartyByUUID = <T>(uuid: string) =>
 // * Marketing * //
 export const useOrderMarketing = <T>() =>
 	useTQuery<T>({
-		queryKey: orderQK.marketing(),
+		queryKey: QK.marketing(),
 		url: '/public/marketing',
 	});
 
 export const useOrderMarketingByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.marketingByUUID(uuid),
+		queryKey: QK.marketingByUUID(uuid),
 		url: `/public/marketing/${uuid}`,
 		enabled: !!uuid,
 	});
@@ -105,13 +105,13 @@ export const useOrderMarketingByUUID = <T>(uuid: string) =>
 // * Factory * //
 export const useOrderFactory = <T>() =>
 	useTQuery<T>({
-		queryKey: orderQK.factory(),
+		queryKey: QK.factory(),
 		url: '/public/factory',
 	});
 
 export const useOrderFactoryByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.factoryByUUID(uuid),
+		queryKey: QK.factoryByUUID(uuid),
 		url: `/public/factory/${uuid}`,
 		enabled: !!uuid,
 	});
@@ -120,7 +120,7 @@ export const useOrderFactoryByUUID = <T>(uuid: string) =>
 // export const useOrderMerchandiser = <T>() => {
 // 	const { limit, page } = useQueryParams();
 // 	return useTQuery<T>({
-// 		queryKey: orderQK.merchandiserPagination({ limit, page }),
+// 		queryKey: QK.merchandiserPagination({ limit, page }),
 // 		url: addUrlParams('/public/merchandiser', { limit, page }),
 // 	});
 // };
@@ -129,24 +129,22 @@ type IStartEndDateProps = {
 	end_date: Date;
 };
 
-const formatDates = ({ start_date, end_date }: IStartEndDateProps) => {
-	return {
-		start_date: format(start_date, 'yyyy-MM-dd') as string,
-		end_date: format(end_date, 'yyyy-MM-dd') as string,
-	};
-};
+const formatDates = ({ start_date, end_date }: IStartEndDateProps) => ({
+	start_date: format(start_date, 'yyyy-MM-dd') as string,
+	end_date: format(end_date, 'yyyy-MM-dd') as string,
+});
 
 export const useOrderMerchandiser = <T>({ start_date, end_date }: IStartEndDateProps) => {
 	const dates = formatDates({ start_date, end_date });
 	return useTQuery<T>({
-		queryKey: orderQK.merchandiserQuery(dates),
+		queryKey: QK.merchandiser(dates),
 		url: addUrlParams(`/public/merchandiser`, dates),
 	});
 };
 
 export const useOrderMerchandiserByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.merchandiserByUUID(uuid),
+		queryKey: QK.merchandiserByUUID(uuid),
 		url: `/public/merchandiser/${uuid}`,
 		enabled: !!uuid,
 	});
@@ -154,12 +152,12 @@ export const useOrderMerchandiserByUUID = <T>(uuid: string) =>
 // * Properties * //
 export const useOrderProperties = <T>() =>
 	useTQuery<T>({
-		queryKey: orderQK.properties(),
+		queryKey: QK.properties(),
 		url: '/public/properties',
 	});
 export const useOrderPropertiesByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
-		queryKey: orderQK.propertiesByUUID(uuid),
+		queryKey: QK.propertiesByUUID(uuid),
 		url: `/public/properties/${uuid}`,
 		enabled: !!uuid,
 	});
@@ -167,13 +165,13 @@ export const useOrderPropertiesByUUID = <T>(uuid: string) =>
 // * Info * //
 export const useOrderInfo = <T>() =>
 	useTQuery<T>({
-		queryKey: orderQK.info(),
+		queryKey: QK.info(),
 		url: '/zipper/order-info',
 	});
 
 export const useOrderInfoByUUID = <T>(uuid: string) => {
 	useTQuery<T>({
-		queryKey: orderQK.infoByUUID(uuid),
+		queryKey: QK.infoByUUID(uuid),
 		url: `/zipper/order-info/${uuid}`,
 		enabled: !!uuid,
 	});

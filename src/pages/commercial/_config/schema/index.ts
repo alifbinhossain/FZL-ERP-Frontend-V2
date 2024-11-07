@@ -74,9 +74,7 @@ export const LC_SCHEMA = z.object({
 	ud_no: STRING_NULLABLE,
 	ud_received: STRING_NULLABLE,
 	at_sight: STRING_REQUIRED,
-	amd_date: STRING_NULLABLE.transform((value, originalValue) =>
-		String(originalValue).trim() === '' ? null : value
-	),
+	amd_date: STRING_NULLABLE.transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
 	amd_count: NUMBER_REQUIRED,
 	remarks: STRING_NULLABLE,
 	// pi: yup.array().of(

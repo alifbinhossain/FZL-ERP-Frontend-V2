@@ -15,7 +15,8 @@ const TableTitle: React.FC<TableTitleProps> = ({ title, subtitle, titleClassName
 					className={cn(
 						'text-xl font-semibold capitalize leading-tight text-primary md:text-2xl',
 						titleClassName
-					)}>
+					)}
+				>
 					{title}
 				</h1>
 				{subtitle && (

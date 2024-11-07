@@ -22,28 +22,16 @@ export const labDipQK = {
 
 	// * Order Against lab_dip RM Log * //
 	orderAgainstLabDipRMLog: () => [...labDipQK.all(), 'order-against-rm-log'],
-	orderAgainstLabDipRMLogByUUID: (uuid: string) => [
-		...labDipQK.orderAgainstLabDipRMLog(),
-		uuid,
-	],
+	orderAgainstLabDipRMLogByUUID: (uuid: string) => [...labDipQK.orderAgainstLabDipRMLog(), uuid],
 	// * Shade Recipe
 	shadeRecipe: () => [...labDipQK.all(), 'shade-recipe'],
 	shadeRecipeByUUID: (uuid: string) => [...labDipQK.shadeRecipe(), uuid],
 
 	// * Shade Recipe Description
-	shadeRecipeDescription: () => [
-		...labDipQK.all(),
-		'shade-recipe-description',
-	],
-	shadeRecipeDescriptionByUUID: (uuid: string) => [
-		...labDipQK.shadeRecipeDescription(),
-		uuid,
-	],
+	shadeRecipeDescription: () => [...labDipQK.all(), 'shade-recipe-description'],
+	shadeRecipeDescriptionByUUID: (uuid: string) => [...labDipQK.shadeRecipeDescription(), uuid],
 
 	// * Shade Recipe Entry
 	shadeRecipeEntry: () => [...labDipQK.all(), 'shade-recipe-entry'],
-	shadeRecipeEntryByUUID: (uuid: string) => [
-		...labDipQK.shadeRecipeEntry(),
-		uuid,
-	],
+	shadeRecipeEntryByUUID: (uuid: string) => [...labDipQK.shadeRecipeEntry(), uuid],
 };

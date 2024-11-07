@@ -1,5 +1,3 @@
-import CoreForm from '@core/form';
-
 import {
 	Dialog,
 	DialogContent,
@@ -9,6 +7,7 @@ import {
 	DialogTitle,
 } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
+import CoreForm from '@core/form';
 
 import { DevTool } from '@/lib/react-hook-devtool';
 import { cn } from '@/lib/utils';
@@ -37,7 +36,8 @@ const AddModal: React.FC<IAddModalProps> = ({
 						className={cn(!subtitle && 'sr-only')}
 						aria-label='Modal Subtitle'
 						aria-description='Modal Subtitle'
-						aria-describedby='Modal Subtitle'>
+						aria-describedby='Modal Subtitle'
+					>
 						{subtitle && subtitle}
 					</DialogDescription>
 				</DialogHeader>

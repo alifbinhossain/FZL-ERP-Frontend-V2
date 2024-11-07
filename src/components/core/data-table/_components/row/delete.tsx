@@ -17,7 +17,8 @@ export function TableRowDelete() {
 				handleDeleteAll!(selectedRows);
 			}}
 			size={'sm'}
-			variant={'outline-destructive'}>
+			variant={'outline-destructive'}
+		>
 			<Trash2 className='size-4' />
 			Delete ({selectedRows.length})
 		</Button>

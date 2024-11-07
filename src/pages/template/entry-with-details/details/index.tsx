@@ -8,9 +8,7 @@ import Information from './information';
 
 const DetailsPage = () => {
 	const { id } = useParams();
-	const { data, isLoading } = useTestDetailsByUUID<ITestDetails>( // TODO: update query and data type
-		id as string
-	);
+	const { data, isLoading } = useTestDetailsByUUID<ITestDetails>(id as string); // TODO: update query and data type
 
 	useEffect(() => {
 		document.title = 'Test Details'; // TODO: update page title

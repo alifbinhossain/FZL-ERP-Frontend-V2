@@ -61,7 +61,8 @@ const DeleteAllModal: React.FC<IDeleteAllModalProps> = ({ deleteItems, setDelete
 							deleteItems.map((item) => (
 								<li
 									key={item.id}
-									className='flex items-center gap-2 rounded-sm border border-destructive/10 bg-destructive/5 px-3 py-2 text-destructive'>
+									className='flex items-center gap-2 rounded-sm border border-destructive/10 bg-destructive/5 px-3 py-2 text-destructive'
+								>
 									<Checkbox
 										id={'item' + item.id}
 										checked={item.checked}
@@ -80,7 +81,8 @@ const DeleteAllModal: React.FC<IDeleteAllModalProps> = ({ deleteItems, setDelete
 									/>
 									<Label
 										htmlFor={'item' + item.id}
-										className={cn('text-sm', !item.checked && 'line-through')}>
+										className={cn('text-sm', !item.checked && 'line-through')}
+									>
 										{item.name}
 									</Label>
 								</li>
@@ -91,7 +93,8 @@ const DeleteAllModal: React.FC<IDeleteAllModalProps> = ({ deleteItems, setDelete
 					<AlertDialogCancel onClick={() => setDeleteItems(null)}>Cancel</AlertDialogCancel>
 					<AlertDialogAction
 						disabled={isLoading || !deleteItems?.filter((item) => item.checked).length}
-						onClick={handleConfirm}>
+						onClick={handleConfirm}
+					>
 						{isLoading && <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />}
 						{isLoading ? 'Please wait...' : 'Confirm'}
 					</AlertDialogAction>

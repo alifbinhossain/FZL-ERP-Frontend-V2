@@ -42,7 +42,8 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
 								'h-10 w-full text-left font-normal transition-none active:scale-100',
 								!field.value && 'text-muted-foreground',
 								className
-							)}>
+							)}
+						>
 							{field.value ? format(new Date(field.value), 'PPP') : <span>Pick a date</span>}
 							<CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
 						</Button>

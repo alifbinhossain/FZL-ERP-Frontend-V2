@@ -1,8 +1,8 @@
-import CoreForm from '@core/form';
-import { IFormSelectOption } from '@core/form/types';
 import { useFormContext } from 'react-hook-form';
 
 import { FormField } from '@/components/ui/form';
+import CoreForm from '@core/form';
+import { IFormSelectOption } from '@core/form/types';
 
 import { useOtherVendor } from '@/lib/common-queries/other';
 

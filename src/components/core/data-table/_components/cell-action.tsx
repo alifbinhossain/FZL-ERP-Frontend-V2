@@ -22,7 +22,8 @@ function TableCellAction<TData, TValue>({ info }: ITableCellActionProps<TData, T
 					onClick={() => handleUpdate?.(row)}
 					size={'icon'}
 					variant={'ghost'}
-					className='rounded-full'>
+					className='rounded-full'
+				>
 					<SquarePen className='size-4' />
 				</Button>
 			)}
@@ -32,7 +33,8 @@ function TableCellAction<TData, TValue>({ info }: ITableCellActionProps<TData, T
 					onClick={() => handleDelete?.(row)}
 					size={'icon'}
 					variant={'ghost-destructive'}
-					className='rounded-full'>
+					className='rounded-full'
+				>
 					<Trash2 className='size-4' />
 				</Button>
 			)}

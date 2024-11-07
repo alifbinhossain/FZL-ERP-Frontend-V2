@@ -1,11 +1,6 @@
 import { forwardRef } from 'react';
 import { ChevronDown, X } from 'lucide-react';
-import Select, {
-	ClassNamesConfig,
-	components,
-	Props,
-	StylesConfig,
-} from 'react-select';
+import Select, { ClassNamesConfig, components, Props, StylesConfig } from 'react-select';
 
 import { cn } from '@/lib/utils';
 
@@ -37,16 +32,14 @@ const classNames = (extraControlClassName?: string): ClassNamesConfig => ({
 	singleValue: () => 'grow',
 	multiValue: () => 'border border-input px-2 rounded bg-base-200',
 	valueContainer: () => 'flex flex-wrap gap-2',
-	menu: () =>
-		'bg-base overflow-hidden  rounded shadow-2xl text-sm border border-input p-1',
+	menu: () => 'bg-base overflow-hidden  rounded shadow-2xl text-sm border border-input p-1',
 	option: ({ isFocused, isSelected }) =>
 		cn(
 			'rounded px-3 py-1.5 text-sm text-foreground',
 			isFocused && 'bg-base-200',
 			isSelected && 'before:mr-1 before:content-["✔"]'
 		),
-	noOptionsMessage: () =>
-		'text-destructive text-sm p-2 bg-destructive/5 border border-destructive/20 rounded',
+	noOptionsMessage: () => 'text-destructive text-sm p-2 bg-destructive/5 border border-destructive/20 rounded',
 });
 
 export type Ref = any;
@@ -74,9 +67,7 @@ const ReactSelect = forwardRef<Ref, Props & { extraControlClassName?: string }>(
 				styles={selectStyles}
 				components={{
 					ClearIndicator: (props) => (
-						<components.ClearIndicator
-							className='mr-1 border-r border-r-input pr-1'
-							{...props}>
+						<components.ClearIndicator className='mr-1 border-r border-r-input pr-1' {...props}>
 							<X className='size-5 font-medium text-destructive' />
 						</components.ClearIndicator>
 					),

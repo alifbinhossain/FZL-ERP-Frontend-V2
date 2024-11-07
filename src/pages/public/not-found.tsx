@@ -35,13 +35,15 @@ export default function NotFound() {
 			<Template
 				icon={<Ban className='size-24 text-red-600' />}
 				title='not authorized'
-				subtitle='You must be logged in to access'>
+				subtitle='You must be logged in to access'
+			>
 				<Button
 					aria-label='Go To Login'
 					onClick={() => {
 						navigate('/login', { replace: true });
 					}}
-					className='w-full'>
+					className='w-full'
+				>
 					Go To Login
 				</Button>
 			</Template>
@@ -53,13 +55,15 @@ export default function NotFound() {
 			<Template
 				icon={<Ban className='size-24 text-red-600' />}
 				title='Page Not Found'
-				subtitle={`Sorry, the page you are looking for does not exist`}>
+				subtitle={`Sorry, the page you are looking for does not exist`}
+			>
 				<Button
 					aria-label='Go Home'
 					onClick={() => {
 						navigate(firstRoute?.path ?? '/login');
 					}}
-					className='w-full'>
+					className='w-full'
+				>
 					Go Home
 				</Button>
 			</Template>
@@ -70,6 +74,7 @@ export default function NotFound() {
 		<Template
 			icon={<Frown className='size-24 text-red-600' />}
 			title='No Page Assigned'
-			subtitle={`Sorry, no page has been assign to you. Talk to your system Admin`}></Template>
+			subtitle={`Sorry, no page has been assign to you. Talk to your system Admin`}
+		></Template>
 	);
 }

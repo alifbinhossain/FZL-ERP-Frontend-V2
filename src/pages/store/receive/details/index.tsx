@@ -8,9 +8,7 @@ import Information from './information';
 
 const DetailsPage = () => {
 	const { id } = useParams();
-	const { data, isLoading } = usePurchaseDetailsByUUID<IReceiveDetails>(
-		id as string
-	);
+	const { data, isLoading } = usePurchaseDetailsByUUID<IReceiveDetails>(id as string);
 
 	useEffect(() => {
 		document.title = 'Receive Details';

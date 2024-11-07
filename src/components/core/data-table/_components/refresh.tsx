@@ -38,7 +38,8 @@ const TableRefresh: React.FC<TableRefreshProps> = ({ handleRefetch }) => {
 				disabled={isFetching}
 				variant={'gradient'}
 				size={'sm'}
-				onClick={handleClick}>
+				onClick={handleClick}
+			>
 				<RefreshCw className={cn('size-4', isFetching && 'animate-spin')} />
 				Refresh
 			</Button>

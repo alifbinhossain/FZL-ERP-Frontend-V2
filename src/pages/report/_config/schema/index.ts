@@ -1,11 +1,6 @@
 import { z } from 'zod';
 
-import {
-	NUMBER_REQUIRED,
-	STRING_NULLABLE,
-	STRING_REQUIRED,
-	URL_REQUIRED,
-} from '@/utils/validators';
+import { NUMBER_REQUIRED, STRING_NULLABLE, STRING_REQUIRED, URL_REQUIRED } from '@/utils/validators';
 
 // Policy Schema
 export const POLICY_SCHEMA = z.object({

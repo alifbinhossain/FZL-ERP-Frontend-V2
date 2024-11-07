@@ -1,9 +1,9 @@
 import React from 'react';
-import CoreForm from '@core/form';
 
 import { FormField } from '@/components/ui/form';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import CoreForm from '@core/form';
 
 import { cn } from '@/lib/utils';
 
@@ -52,7 +52,8 @@ const DefaultDynamicFields: React.FC<Omit<DynamicFieldsProps, 'title' | 'viewAs'
 											return (
 												<TableCell
 													className={cn('first:pl-2 last:pr-2', fieldDef.className)}
-													key={fieldDef.accessorKey}>
+													key={fieldDef.accessorKey}
+												>
 													{fieldDef.type === 'readOnly' &&
 														field[fieldDef.accessorKey as keyof typeof field]}
 

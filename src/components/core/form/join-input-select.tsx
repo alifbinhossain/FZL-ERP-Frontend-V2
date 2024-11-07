@@ -59,14 +59,16 @@ const FormJoinInputSelect: React.FC<FormJoinInputSelectProps> = ({
 					}}
 					defaultValue={getValues(selectField.name)}
 					disabled={selectField?.isDisabled}
-					{...register(selectField.name)}>
+					{...register(selectField.name)}
+				>
 					<FormControl>
 						<SelectTrigger
 							className={buttonVariants({
 								variant: 'accent',
 								className:
 									'h-8 max-w-[100px] justify-between truncate rounded bg-gradient-to-r from-accent to-accent capitalize transition-none active:scale-100',
-							})}>
+							})}
+						>
 							<SelectValue placeholder={placeholder} />
 						</SelectTrigger>
 					</FormControl>

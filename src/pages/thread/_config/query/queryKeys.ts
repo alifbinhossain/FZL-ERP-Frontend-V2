@@ -12,18 +12,11 @@ export const threadQK = {
 	//Order-info
 	orderInfo: () => [...threadQK.all(), 'order-info'],
 	orderInfoByUUID: (uuid: string) => [...threadQK.orderInfo(), uuid],
-	orderInfoDetailsByUUID: (uuid: string) => [
-		...threadQK.orderInfo(),
-		'details',
-		uuid,
-	],
+	orderInfoDetailsByUUID: (uuid: string) => [...threadQK.orderInfo(), 'details', uuid],
 
 	//Order-info-entry
 	orderInfoEntry: () => [...threadQK.all(), 'order-info-entry'],
-	orderInfoEntryByUUID: (uuid: string) => [
-		...threadQK.orderInfoEntry(),
-		uuid,
-	],
+	orderInfoEntryByUUID: (uuid: string) => [...threadQK.orderInfoEntry(), uuid],
 
 	//Swatch
 	swatch: () => [...threadQK.all(), 'swatch'],
@@ -55,9 +48,5 @@ export const threadQK = {
 	// * Challan
 	challan: () => [...threadQK.all(), 'challan'],
 	challanByUUID: (uuid: string) => [...threadQK.all(), 'challan', uuid],
-	challanDetailsByUUID: (uuid: string) => [
-		...threadQK.challan(),
-		'details',
-		uuid,
-	],
+	challanDetailsByUUID: (uuid: string) => [...threadQK.challan(), 'details', uuid],
 };

@@ -130,7 +130,8 @@ const Information: React.FC<{ data: IOrderDetails }> = ({ data }) => {
 		<SectionContainer
 			title={'Information'}
 			contentClassName='grid grid-cols-1 lg:grid-cols-2'
-			buttons={renderButtons()}>
+			buttons={renderButtons()}
+		>
 			<TableList title='Order Details' items={orderDetails()} className='border-b lg:border-b-0 lg:border-r' />
 			<TableList title='Buyer Details' items={buyerDetails()} />
 		</SectionContainer>

@@ -70,7 +70,8 @@ const ThreadOrder = () => {
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
-				handleDeleteAll={handleDeleteAll}>
+				handleDeleteAll={handleDeleteAll}
+			>
 				{renderSuspenseModals([
 					<DeleteModal
 						{...{

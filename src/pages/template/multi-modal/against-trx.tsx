@@ -1,12 +1,12 @@
 import { IResponse } from '@/types';
-import CoreForm from '@core/form';
-import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
 import { FormField } from '@/components/ui/form';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 
 import nanoid from '@/lib/nanoid';
 import { getDateTime, getTransactionArea } from '@/utils';
@@ -78,7 +78,8 @@ const AgainstTrx: React.FC<IAgainstTrxProps> = ({ url, open, setOpen, updatedDat
 			setOpen={onClose}
 			title={'Trx Against ' + updatedData?.name} // TODO: Update title
 			form={form}
-			onSubmit={onSubmit}>
+			onSubmit={onSubmit}
+		>
 			{/* // TODO: Update form fields ⬇️ */}
 			<FormField
 				control={form.control}

@@ -44,7 +44,8 @@ const TableExportCSV = ({ start_date, end_date }: TTableExportCSV) => {
 				className: 'h-7',
 			})}
 			data={csvData}
-			filename={filename}>
+			filename={filename}
+		>
 			<FileSpreadsheet className='size-4' />
 			<span className='hidden lg:block'>Excel</span>
 		</CSVLink>

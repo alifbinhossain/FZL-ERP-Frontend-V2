@@ -18,7 +18,8 @@ const LoginForm = () => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='mx-auto mt-6 flex max-w-md flex-col space-y-6 sm:mt-10'>
+				className='mx-auto mt-6 flex max-w-md flex-col space-y-6 sm:mt-10'
+			>
 				<FormField
 					control={form.control}
 					name='email'

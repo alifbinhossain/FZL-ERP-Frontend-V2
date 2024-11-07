@@ -2,9 +2,7 @@ import { lazy } from 'react';
 import { IRoute } from '@/types';
 
 const ThreadOrder = lazy(() => import('@/pages/thread/order'));
-const ThreadOrderEntry = lazy(
-	() => import('@/pages/thread/order/add-or-update')
-);
+const ThreadOrderEntry = lazy(() => import('@/pages/thread/order/add-or-update'));
 const ThreadOrderDetails = lazy(() => import('@/pages/thread/order/details'));
 
 const ThreadRoutes: IRoute[] = [

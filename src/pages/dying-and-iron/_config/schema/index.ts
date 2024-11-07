@@ -39,9 +39,7 @@ export const DYEING_BATCH_PRODUCTION_NULL: Partial<IDyeingBatchProduction> = {
 	batch_entry: [],
 };
 
-export type IDyeingBatchProduction = z.infer<
-	typeof DYEING_BATCH_PRODUCTION_SCHEMA
->;
+export type IDyeingBatchProduction = z.infer<typeof DYEING_BATCH_PRODUCTION_SCHEMA>;
 
 // Dyeing Batch Schema
 export const DYEING_BATCH_SCHEMA = z.object({
@@ -116,20 +114,15 @@ export const DYEING_THREAD_CONNEING_NULL = {
 	],
 };
 
-export type IDyeingThreadConneing = z.infer<
-	typeof DYEING_THREAD_CONNEING_SCHEMA
->;
+export type IDyeingThreadConneing = z.infer<typeof DYEING_THREAD_CONNEING_SCHEMA>;
 
 // Dyeing Thread Batch Entry Transfer Schema
 export const DYEING_THREAD_BATCH_ENTRY_TRANSFER_SCHEMA = z.object({
 	transfer_quantity: NUMBER_REQUIRED.gt(0),
 });
-export const DYEING_THREAD_BATCH_ENTRY_TRANSFER_NULL: Partial<IDyeingThreadBatchEntryTransfer> =
-	{};
+export const DYEING_THREAD_BATCH_ENTRY_TRANSFER_NULL: Partial<IDyeingThreadBatchEntryTransfer> = {};
 
-export type IDyeingThreadBatchEntryTransfer = z.infer<
-	typeof DYEING_THREAD_BATCH_ENTRY_TRANSFER_SCHEMA
->;
+export type IDyeingThreadBatchEntryTransfer = z.infer<typeof DYEING_THREAD_BATCH_ENTRY_TRANSFER_SCHEMA>;
 
 // Dyeing Thread Batch Schema
 export const DYEING_THREAD_BATCH_SCHEMA = z.object({
@@ -165,32 +158,26 @@ export const DYEING_THREAD_BATCH_DYEING_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const DYEING_THREAD_BATCH_DYEING_NULL: Partial<IDyeingThreadBatchDyeing> =
-	{
-		dyeing_operator: '',
-		reason: '',
-		category: '',
-		status: '',
-		pass_by: '',
-		shift: '',
-		dyeing_supervisor: '',
-		remarks: '',
-	};
+export const DYEING_THREAD_BATCH_DYEING_NULL: Partial<IDyeingThreadBatchDyeing> = {
+	dyeing_operator: '',
+	reason: '',
+	category: '',
+	status: '',
+	pass_by: '',
+	shift: '',
+	dyeing_supervisor: '',
+	remarks: '',
+};
 
-export type IDyeingThreadBatchDyeing = z.infer<
-	typeof DYEING_THREAD_BATCH_DYEING_SCHEMA
->;
+export type IDyeingThreadBatchDyeing = z.infer<typeof DYEING_THREAD_BATCH_DYEING_SCHEMA>;
 
 // Dyeing Thread Batch Yarn Schema
 export const DYEING_THREAD_BATCH_YARN_SCHEMA = z.object({
 	yarn_quantity: NUMBER_REQUIRED.gt(0, 'More than 0'),
 });
-export const DYEING_THREAD_BATCH_YARN_NULL: Partial<IDyeingThreadBatchYarn> =
-	{};
+export const DYEING_THREAD_BATCH_YARN_NULL: Partial<IDyeingThreadBatchYarn> = {};
 
-export type IDyeingThreadBatchYarn = z.infer<
-	typeof DYEING_THREAD_BATCH_YARN_SCHEMA
->;
+export type IDyeingThreadBatchYarn = z.infer<typeof DYEING_THREAD_BATCH_YARN_SCHEMA>;
 
 // Thread Programs Schema
 export const THREAD_PROGRAMS_SCHEMA = z.object({
@@ -250,15 +237,12 @@ export const DYEING_PLANNING_HEADOFFICE_SCHEMA = z.object({
 	),
 });
 
-export const DYEING_PLANNING_HEADOFFICE_NULL: Partial<IDyeingPlanningHeadoffice> =
-	{
-		remarks: null,
-		planning_entry: [],
-	};
+export const DYEING_PLANNING_HEADOFFICE_NULL: Partial<IDyeingPlanningHeadoffice> = {
+	remarks: null,
+	planning_entry: [],
+};
 
-export type IDyeingPlanningHeadoffice = z.infer<
-	typeof DYEING_PLANNING_HEADOFFICE_SCHEMA
->;
+export type IDyeingPlanningHeadoffice = z.infer<typeof DYEING_PLANNING_HEADOFFICE_SCHEMA>;
 
 // Thread Machine Schema
 export const THREAD_MACHINE_SCHEMA = z.object({

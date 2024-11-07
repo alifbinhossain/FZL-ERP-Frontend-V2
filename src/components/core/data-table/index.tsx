@@ -17,19 +17,19 @@ function DataTable() {
 	const { getHeaderGroups, getRowModel, getAllColumns } = table;
 
 	const renderTableBody = useCallback(() => {
-		const columnsLength = getAllColumns().length;
+		const colSpan = getAllColumns().length;
 		const { rows } = getRowModel();
 		const hasAnyRows = rows.length > 0;
 
 		if (isLoading) {
-			return <TableSkeleton columnsLength={columnsLength} />;
+			return <TableSkeleton colSpan={colSpan} />;
 		}
 
 		if (!hasAnyRows) {
 			return (
 				<TableRow>
-					<TableCell colSpan={columnsLength} className='h-24 text-center'>
-						No results.
+					<TableCell colSpan={colSpan} className='h-24 animate-pulse text-center text-lg text-destructive'>
+						No Results
 					</TableCell>
 				</TableRow>
 			);
@@ -40,11 +40,13 @@ function DataTable() {
 				{row.getVisibleCells().map((cell) => (
 					<TableCell
 						key={cell.id}
+						className='text-[0.75rem]'
 						style={{
 							...getCommonPinningStyles({
 								column: cell.column,
 							}),
-						}}>
+						}}
+					>
 						{flexRender(cell.column.columnDef.cell, cell.getContext())}
 					</TableCell>
 				))}
@@ -73,7 +75,8 @@ function DataTable() {
 													column: header.column,
 													isHeader: true,
 												}),
-											}}>
+											}}
+										>
 											{header.isPlaceholder
 												? null
 												: flexRender(

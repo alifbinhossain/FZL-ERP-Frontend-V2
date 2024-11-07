@@ -33,7 +33,8 @@ const FormSelect: React.FC<FormSelectProps> = ({
 					defaultValue={field.value}
 					disabled={isDisabled}
 					{...field}
-					value={field?.value?.toString()}>
+					value={field?.value?.toString()}
+				>
 					<FormControl>
 						<SelectTrigger>
 							<SelectValue placeholder={placeholder} />

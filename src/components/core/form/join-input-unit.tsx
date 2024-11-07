@@ -54,7 +54,8 @@ const FormJoinInputUnit: React.FC<FormJoinInputUnitProps> = ({
 						variant: 'accent',
 						className:
 							'h-8 max-w-[100px] justify-between truncate rounded bg-gradient-to-r from-accent to-accent capitalize',
-					})}>
+					})}
+				>
 					{unit}
 				</span>
 			</div>

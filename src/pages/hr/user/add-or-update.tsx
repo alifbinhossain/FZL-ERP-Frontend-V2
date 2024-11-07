@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { IResponse } from '@/types';
-import CoreForm from '@core/form';
-import { IFormSelectOption } from '@core/form/types';
-import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
 import { FormField } from '@/components/ui/form';
+import CoreForm from '@core/form';
+import { IFormSelectOption } from '@core/form/types';
+import { AddModal } from '@core/modal';
 
 import { useOtherDepartment, useOtherDesignation } from '@/lib/common-queries/other';
 import nanoid from '@/lib/nanoid';
@@ -115,7 +115,8 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			setOpen={onClose}
 			title={isUpdate ? 'Update User' : 'Add User'}
 			form={form}
-			onSubmit={onSubmit}>
+			onSubmit={onSubmit}
+		>
 			<div className='grid grid-cols-2 gap-4'>
 				<FormField
 					control={form.control}

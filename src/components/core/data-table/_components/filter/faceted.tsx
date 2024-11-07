@@ -46,7 +46,8 @@ export function TableFacetedFilter<TData, TValue>({ column, title, options }: Ta
 											<Badge
 												variant='secondary'
 												key={option.value}
-												className='rounded-sm px-1 font-normal'>
+												className='rounded-sm px-1 font-normal'
+											>
 												{option.label}
 											</Badge>
 										))
@@ -76,14 +77,16 @@ export function TableFacetedFilter<TData, TValue>({ column, title, options }: Ta
 											const filterValues = Array.from(selectedValues);
 
 											column?.setFilterValue(filterValues.length ? filterValues : undefined);
-										}}>
+										}}
+									>
 										<div
 											className={cn(
 												'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-secondary',
 												isSelected
 													? 'bg-secondary text-primary-foreground'
 													: 'opacity-50 [&_svg]:invisible'
-											)}>
+											)}
+										>
 											<CheckIcon className={cn('h-4 w-4')} />
 										</div>
 										{option.icon && <option.icon className='mr-2 h-4 w-4 text-muted-foreground' />}
@@ -103,7 +106,8 @@ export function TableFacetedFilter<TData, TValue>({ column, title, options }: Ta
 								<CommandGroup>
 									<CommandItem
 										onSelect={() => column?.setFilterValue(undefined)}
-										className='justify-center text-center'>
+										className='justify-center text-center'
+									>
 										Clear filters
 									</CommandItem>
 								</CommandGroup>

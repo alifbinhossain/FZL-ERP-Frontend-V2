@@ -11,21 +11,21 @@ export const commercialQK = {
 	piCash: () => [...commercialQK.all(), 'pi-cash'],
 	piByUUID: (uuid: string) => [...commercialQK.pi(), uuid],
 	piDetailsByUUID: (uuid: string) => [...commercialQK.pi(), 'details', uuid],
-	piDetailsByPiID: (id: string) => [
+	piDetailsByPiID: (id: string) => [...commercialQK.pi(), 'details-by-id', id],
+	piByOrderInfo: (orderUUID: string, partyUUID: string, marketingUUID: string) => [
 		...commercialQK.pi(),
-		'details-by-id',
-		id,
+		'zipper',
+		orderUUID,
+		partyUUID,
+		marketingUUID,
 	],
-	piByOrderInfo: (
-		orderUUID: string,
-		partyUUID: string,
-		marketingUUID: string
-	) => [...commercialQK.pi(), 'zipper', orderUUID, partyUUID, marketingUUID],
-	piThreadByOrderInfo: (
-		orderUUID: string,
-		partyUUID: string,
-		marketingUUID: string
-	) => [...commercialQK.pi(), 'thread', orderUUID, partyUUID, marketingUUID],
+	piThreadByOrderInfo: (orderUUID: string, partyUUID: string, marketingUUID: string) => [
+		...commercialQK.pi(),
+		'thread',
+		orderUUID,
+		partyUUID,
+		marketingUUID,
+	],
 
 	// pi-entry
 	piEntry: () => [...commercialQK.all(), 'pi-entry'],
@@ -36,9 +36,5 @@ export const commercialQK = {
 	lcByQuery: (query: string) => [...commercialQK.all(), 'lcByQuery', query],
 	lcByUUID: (uuid: string) => [...commercialQK.lc(), uuid],
 	lcByPi: (uuid: string) => [...commercialQK.all(), 'lc-by-pi', uuid],
-	lcByNumber: (number: string) => [
-		...commercialQK.all(),
-		'lc-by-number',
-		number,
-	],
+	lcByNumber: (number: string) => [...commercialQK.all(), 'lc-by-number', number],
 };

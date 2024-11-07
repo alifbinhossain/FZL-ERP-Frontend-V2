@@ -31,9 +31,7 @@ export const SLIDER_SLIDER_ASSEMBLY_NULL: Partial<ISliderSliderAssembly> = {
 	slider_slider_assembly_details: [],
 };
 
-export type ISliderSliderAssembly = z.infer<
-	typeof SLIDER_SLIDER_ASSEMBLY_SCHEMA
->;
+export type ISliderSliderAssembly = z.infer<typeof SLIDER_SLIDER_ASSEMBLY_SCHEMA>;
 
 // Item Library Schema
 export const ITEM_LIBRARY_SCHEMA = z.object({
@@ -60,9 +58,7 @@ export const SLIDER_ITEM_TRANSACTION_NULL: Partial<ISliderItemTransaction> = {
 	remarks: null,
 };
 
-export type ISliderItemTransaction = z.infer<
-	typeof SLIDER_ITEM_TRANSACTION_SCHEMA
->;
+export type ISliderItemTransaction = z.infer<typeof SLIDER_ITEM_TRANSACTION_SCHEMA>;
 
 // Slider Assembly Stock Schema
 export const SLIDER_ASSEMBLY_STOCK_SCHEMA = z.object({
@@ -97,16 +93,13 @@ export const SLIDER_ASSEMBLY_PRODUCTION_ENTRY_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const SLIDER_ASSEMBLY_PRODUCTION_ENTRY_NULL: Partial<ISliderAssemblyProductionEntry> =
-	{
-		with_link: true,
-		wastage: 0,
-		remarks: null,
-	};
+export const SLIDER_ASSEMBLY_PRODUCTION_ENTRY_NULL: Partial<ISliderAssemblyProductionEntry> = {
+	with_link: true,
+	wastage: 0,
+	remarks: null,
+};
 
-export type ISliderAssemblyProductionEntry = z.infer<
-	typeof SLIDER_ASSEMBLY_PRODUCTION_ENTRY_SCHEMA
->;
+export type ISliderAssemblyProductionEntry = z.infer<typeof SLIDER_ASSEMBLY_PRODUCTION_ENTRY_SCHEMA>;
 
 // Slider Assembly Transaction Schema
 export const SLIDER_ASSEMBLY_TRANSACTION_SCHEMA = z.object({
@@ -115,14 +108,11 @@ export const SLIDER_ASSEMBLY_TRANSACTION_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const SLIDER_ASSEMBLY_TRANSACTION_NULL: Partial<ISliderAssemblyTransaction> =
-	{
-		remarks: null,
-	};
+export const SLIDER_ASSEMBLY_TRANSACTION_NULL: Partial<ISliderAssemblyTransaction> = {
+	remarks: null,
+};
 
-export type ISliderAssemblyTransaction = z.infer<
-	typeof SLIDER_ASSEMBLY_TRANSACTION_SCHEMA
->;
+export type ISliderAssemblyTransaction = z.infer<typeof SLIDER_ASSEMBLY_TRANSACTION_SCHEMA>;
 
 // Slider Die Casting Transfer Against Stock Schema
 export const SLIDER_DIE_CASTING_TRANSFER_AGAINST_STOCK_SCHEMA = z.object({
@@ -168,16 +158,13 @@ export const SLIDER_DIE_CASTING_TRANSFER_AGAINST_STOCK_SCHEMA = z.object({
 	),
 });
 
-export const SLIDER_DIE_CASTING_TRANSFER_AGAINST_STOCK_NULL: Partial<ISliderDieCastingTransferAgainstStock> =
-	{
-		order_description_uuid: null,
-		section: '',
-		stocks: [],
-	};
+export const SLIDER_DIE_CASTING_TRANSFER_AGAINST_STOCK_NULL: Partial<ISliderDieCastingTransferAgainstStock> = {
+	order_description_uuid: null,
+	section: '',
+	stocks: [],
+};
 
-export type ISliderDieCastingTransferAgainstStock = z.infer<
-	typeof SLIDER_DIE_CASTING_TRANSFER_AGAINST_STOCK_SCHEMA
->;
+export type ISliderDieCastingTransferAgainstStock = z.infer<typeof SLIDER_DIE_CASTING_TRANSFER_AGAINST_STOCK_SCHEMA>;
 
 // Slider Die Casting Transfer Against Stock Update Schema
 export const SLIDER_DIE_CASTING_TRANSFER_AGAINST_STOCK_UPDATE = z.object({
@@ -305,9 +292,7 @@ export const SLIDER_DIE_CASTING_STOCK_NULL: Partial<ISliderDieCastingStock> = {
 	is_logo_puller: false,
 };
 
-export type ISliderDieCastingStock = z.infer<
-	typeof SLIDER_DIE_CASTING_STOCK_SCHEMA
->;
+export type ISliderDieCastingStock = z.infer<typeof SLIDER_DIE_CASTING_STOCK_SCHEMA>;
 
 // Slider Die Casting Product Edit Schema
 export const SLIDER_DIE_CASTING_PRODUCT_EDIT_SCHEMA = z.object({
@@ -319,14 +304,11 @@ export const SLIDER_DIE_CASTING_PRODUCT_EDIT_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const SLIDER_DIE_CASTING_PRODUCT_EDIT_NULL: Partial<ISliderDieCastingProductEdit> =
-	{
-		remarks: null,
-	};
+export const SLIDER_DIE_CASTING_PRODUCT_EDIT_NULL: Partial<ISliderDieCastingProductEdit> = {
+	remarks: null,
+};
 
-export type ISliderDieCastingProductEdit = z.infer<
-	typeof SLIDER_DIE_CASTING_PRODUCT_EDIT_SCHEMA
->;
+export type ISliderDieCastingProductEdit = z.infer<typeof SLIDER_DIE_CASTING_PRODUCT_EDIT_SCHEMA>;
 
 // Slider Die Casting Schema
 export const SLIDER_DIE_CASTING_SCHEMA = z.object({

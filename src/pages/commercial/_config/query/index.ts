@@ -78,20 +78,12 @@ export const useCommercialPIByOrderInfo = <T>(
 	params: string
 ) =>
 	useTQuery<T>({
-		queryKey: commercialQK.piByOrderInfo(
-			orderInfoIds,
-			partyId,
-			marketingId
-		),
+		queryKey: commercialQK.piByOrderInfo(orderInfoIds, partyId, marketingId),
 
 		url: params
 			? `/commercial/pi-cash/details/by/order-info-ids/${orderInfoIds}/${partyId}/${marketingId}?${params}`
 			: `/commercial/pi-cash/details/by/order-info-ids/${orderInfoIds}/${partyId}/${marketingId}`,
-		enabled:
-			!!orderInfoIds &&
-			orderInfoIds.length > 0 &&
-			!!partyId &&
-			!!marketingId,
+		enabled: !!orderInfoIds && orderInfoIds.length > 0 && !!partyId && !!marketingId,
 	});
 
 export const useCommercialPThreadByOrderInfo = <T>(
@@ -101,20 +93,12 @@ export const useCommercialPThreadByOrderInfo = <T>(
 	params: string
 ) =>
 	useTQuery<T>({
-		queryKey: commercialQK.piThreadByOrderInfo(
-			orderInfoIds,
-			partyId,
-			marketingId
-		),
+		queryKey: commercialQK.piThreadByOrderInfo(orderInfoIds, partyId, marketingId),
 
 		url: params
 			? `/commercial/pi-cash/thread-details/by/order-info-ids/${orderInfoIds}/${partyId}/${marketingId}?${params}`
 			: `/commercial/pi-cash/thread-details/by/order-info-ids/${orderInfoIds}/${partyId}/${marketingId}`,
-		enabled:
-			!!orderInfoIds &&
-			orderInfoIds.length > 0 &&
-			!!partyId &&
-			!!marketingId,
+		enabled: !!orderInfoIds && orderInfoIds.length > 0 && !!partyId && !!marketingId,
 	});
 
 // * LC * //

@@ -3,27 +3,15 @@ export const metalQK = {
 
 	// * Transaction Log
 	metalTMTrxLog: () => [...metalQK.all(), 'tm-trx-log'],
-	metalTMTrxLogByUUID: (uuid: string) => [
-		...metalQK.all(),
-		'tm-trx-log',
-		uuid,
-	],
+	metalTMTrxLogByUUID: (uuid: string) => [...metalQK.all(), 'tm-trx-log', uuid],
 
 	// * PRODUCTION Log
 	metalTMProductionLog: () => [...metalQK.all(), 'tm-production-log'],
-	metalTMProductionLogByUUID: (uuid: string) => [
-		...metalQK.all(),
-		'tm-production-log',
-		uuid,
-	],
+	metalTMProductionLogByUUID: (uuid: string) => [...metalQK.all(), 'tm-production-log', uuid],
 
 	// * Tape Log
 	metalTMTapeLog: () => [...metalQK.all(), 'tm-tape-log'],
-	metalTMTapeLogByUUID: (uuid: string) => [
-		...metalQK.all(),
-		'tm-tape-log',
-		uuid,
-	],
+	metalTMTapeLogByUUID: (uuid: string) => [...metalQK.all(), 'tm-tape-log', uuid],
 
 	// * PRODUCTION
 	metalTMProduction: () => [...metalQK.all(), 'tm-production'],
@@ -37,40 +25,22 @@ export const metalQK = {
 	metalTMRMLogByUUID: (uuid: string) => [...metalQK.metalTMRMLog(), uuid],
 
 	// * Order Against Metal TM RM Log * //
-	orderAgainstMetalTMRMLog: () => [
-		...metalQK.all(),
-		'metalTM/order-against-rm-log',
-	],
-	orderAgainstMetalTMRMLogByUUID: (uuid: string) => [
-		...metalQK.orderAgainstMetalTMRMLog(),
-		uuid,
-	],
+	orderAgainstMetalTMRMLog: () => [...metalQK.all(), 'metalTM/order-against-rm-log'],
+	orderAgainstMetalTMRMLogByUUID: (uuid: string) => [...metalQK.orderAgainstMetalTMRMLog(), uuid],
 
 	// * Finishing
 
 	//*RM
 	metalFinishingRM: () => [...metalQK.all(), 'fin-rm'],
-	metalFinishingRMByUUID: (uuid: string) => [
-		...metalQK.metalFinishingRM(),
-		uuid,
-	],
+	metalFinishingRMByUUID: (uuid: string) => [...metalQK.metalFinishingRM(), uuid],
 
 	//*RM Log
 	metalFinishingRMLog: () => [...metalQK.all(), 'fin-rm-log'],
-	metalFinishingRMLogByUUID: (uuid: string) => [
-		...metalQK.metalFinishingRMLog(),
-		uuid,
-	],
+	metalFinishingRMLogByUUID: (uuid: string) => [...metalQK.metalFinishingRMLog(), uuid],
 
 	// * Order Against metalFinishing RM Log * //
-	orderAgainstMetalFinishingRMLog: () => [
-		...metalQK.all(),
-		'metalFinishing/order-against-rm-log',
-	],
-	orderAgainstMetalFinishingRMLogByUUID: (uuid: string) => [
-		...metalQK.orderAgainstMetalFinishingRMLog(),
-		uuid,
-	],
+	orderAgainstMetalFinishingRMLog: () => [...metalQK.all(), 'metalFinishing/order-against-rm-log'],
+	orderAgainstMetalFinishingRMLogByUUID: (uuid: string) => [...metalQK.orderAgainstMetalFinishingRMLog(), uuid],
 
 	// * Finishing  Production log
 	metalFinishingProdLog: () => [...metalQK.all(), 'finishingProdLog'],
@@ -84,19 +54,11 @@ export const metalQK = {
 
 	// * Transaction Log
 	metalTCTrxLog: () => [...metalQK.all(), 'tc-trx-log'],
-	metalTCTrxLogByUUID: (uuid: string) => [
-		...metalQK.all(),
-		'tc-trx-log',
-		uuid,
-	],
+	metalTCTrxLogByUUID: (uuid: string) => [...metalQK.all(), 'tc-trx-log', uuid],
 
 	// * PRODUCTION Log
 	metalTCProductionLog: () => [...metalQK.all(), 'tc-production-log'],
-	metalTCProductionLogByUUID: (uuid: string) => [
-		...metalQK.all(),
-		'tc-production-log',
-		uuid,
-	],
+	metalTCProductionLogByUUID: (uuid: string) => [...metalQK.all(), 'tc-production-log', uuid],
 
 	// * RM
 	metalTCRM: () => [...metalQK.all(), 'tc-rm'],
@@ -106,12 +68,6 @@ export const metalQK = {
 	metalTCRMLog: () => [...metalQK.all(), 'tc-rm-log'],
 	metalTCRMLogByUUID: (uuid: string) => [...metalQK.metalTCRMLog(), uuid],
 	// * Order Against metalTC RM Log * //
-	orderAgainstMetalTCRMLog: () => [
-		...metalQK.all(),
-		'metalTC/order-against-rm-log',
-	],
-	orderAgainstMetalTCRMLogByUUID: (uuid: string) => [
-		...metalQK.orderAgainstMetalTCRMLog(),
-		uuid,
-	],
+	orderAgainstMetalTCRMLog: () => [...metalQK.all(), 'metalTC/order-against-rm-log'],
+	orderAgainstMetalTCRMLogByUUID: (uuid: string) => [...metalQK.orderAgainstMetalTCRMLog(), uuid],
 };

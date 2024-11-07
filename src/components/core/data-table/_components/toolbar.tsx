@@ -108,14 +108,18 @@ export function TableToolbar() {
 						aria-label='Reset filters'
 						variant='outline-destructive'
 						onClick={resetColumnFilters}
-						className='h-8'>
+						className='h-8'
+					>
 						Reset
 						<Cross2Icon className='size-4' />
 					</Button>
 				)}
 				<Separator orientation='vertical' className='h-6' />
 
-				<ToolbarComponent option='export-csv' render={() => <TableExportCSV start_date={start_date} end_date={end_date} />} />
+				<ToolbarComponent
+					option='export-csv'
+					render={() => <TableExportCSV start_date={start_date} end_date={end_date} />}
+				/>
 			</div>
 		),
 		[table, facetedFilters, isFiltered, resetColumnFilters, start_date, end_date, onUpdate]
@@ -180,9 +184,8 @@ export function TableToolbar() {
 	return (
 		<div className={cn('mb-4 flex w-full flex-col overflow-hidden')}>
 			<div
-				className={cn(
-					'mb-4 flex w-full flex-col justify-between gap-2 border-b pb-4 lg:flex-row lg:items-end'
-				)}>
+				className={cn('mb-4 flex w-full flex-col justify-between gap-2 border-b pb-4 lg:flex-row lg:items-end')}
+			>
 				<TableTitle title={title} subtitle={subtitle} />
 				<DebouncedInput
 					icon={<SearchIcon className={cn('size-5 text-secondary/50')} />}

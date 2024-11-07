@@ -8,9 +8,7 @@ import Information from './information';
 
 const DetailsPage = () => {
 	const { id } = useParams();
-	const { data, isLoading } = useThreadOrderInfoDetailsByUUID<IOrderDetails>(
-		id as string
-	);
+	const { data, isLoading } = useThreadOrderInfoDetailsByUUID<IOrderDetails>(id as string);
 
 	useEffect(() => {
 		document.title = 'Thread Order Info';

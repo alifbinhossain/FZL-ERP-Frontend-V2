@@ -39,16 +39,14 @@ export type IMaterial = z.infer<typeof MATERIAL_SCHEMA>;
 
 // Material Trx Against Order
 
-export const MATERIAL_TRX_AGAINST_ORDER_SCHEMA = (
-	{ minStock, maxStock } = { minStock: 0, maxStock: 0 }
-) =>
+export const MATERIAL_TRX_AGAINST_ORDER_SCHEMA = ({ minStock, maxStock } = { minStock: 0, maxStock: 0 }) =>
 	z.object({
 		order_description_uuid: STRING_REQUIRED,
 		trx_to: STRING_REQUIRED,
-		trx_quantity: NUMBER_DOUBLE_REQUIRED.min(
-			minStock,
-			`Quantity can't be less than ${minStock}`
-		).max(maxStock, `Quantity can't be more than ${maxStock}`),
+		trx_quantity: NUMBER_DOUBLE_REQUIRED.min(minStock, `Quantity can't be less than ${minStock}`).max(
+			maxStock,
+			`Quantity can't be more than ${maxStock}`
+		),
 		remarks: STRING_NULLABLE,
 	});
 
@@ -60,20 +58,16 @@ export const MATERIAL_TRX_AGAINST_ORDER_NULL = {
 	trx_quantity: 0,
 	remarks: '',
 };
-export type IMaterialTrxAgainstOrder = z.infer<
-	typeof materialTrxAgainstOrderSchema
->;
+export type IMaterialTrxAgainstOrder = z.infer<typeof materialTrxAgainstOrderSchema>;
 
 // Material Stock
-export const MATERIAL_STOCK_SCHEMA = (
-	{ minStock, maxStock } = { minStock: 0, maxStock: 0 }
-) =>
+export const MATERIAL_STOCK_SCHEMA = ({ minStock, maxStock } = { minStock: 0, maxStock: 0 }) =>
 	z.object({
 		trx_to: STRING_REQUIRED,
-		trx_quantity: NUMBER_DOUBLE_REQUIRED.min(
-			minStock,
-			`Quantity can't be less than ${minStock}`
-		).max(maxStock, `Quantity can't be more than ${maxStock}`),
+		trx_quantity: NUMBER_DOUBLE_REQUIRED.min(minStock, `Quantity can't be less than ${minStock}`).max(
+			maxStock,
+			`Quantity can't be more than ${maxStock}`
+		),
 		remarks: STRING_NULLABLE,
 	});
 

@@ -1,10 +1,10 @@
-import { FieldDef } from '@core/form/form-dynamic-fields/types';
 import { ErrorMessage } from '@hookform/error-message';
 import Handsontable from 'handsontable';
 import { ChevronDown } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 
 import { Skeleton } from '@/components/ui/skeleton';
+import { FieldDef } from '@core/form/form-dynamic-fields/types';
 
 import { cn } from '@/lib/utils';
 
@@ -46,7 +46,8 @@ const CustomRenderer = (props: ICustomRendererProps) => {
 				<div
 					className={cn(
 						'bg-gradient block h-full min-h-6 w-full px-3 py-2 text-sm font-normal text-foreground'
-					)}>
+					)}
+				>
 					{watch(`${props.fieldName}.${props.row}.${props.field.accessorKey}`)}
 				</div>
 			)}

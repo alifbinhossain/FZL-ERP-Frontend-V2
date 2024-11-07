@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import CoreForm from '@core/form';
 
 import { Form } from '@/components/ui/form';
+import CoreForm from '@core/form';
 
 import { DevTool } from '@/lib/react-hook-devtool';
 

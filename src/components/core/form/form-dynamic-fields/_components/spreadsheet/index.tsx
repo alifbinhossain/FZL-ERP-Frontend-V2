@@ -1,6 +1,7 @@
-import { DynamicFieldsProps } from '@core/form/form-dynamic-fields/types';
 import { HotColumn, HotTable } from '@handsontable/react';
 import { registerAllModules } from 'handsontable/registry';
+
+import { DynamicFieldsProps } from '@core/form/form-dynamic-fields/types';
 
 import CustomEditor from './custom-editor';
 import CustomRenderer from './custom-renderer';
@@ -83,7 +84,8 @@ const SpreadsheetDynamicFields: React.FC<
 							<HotColumn
 								key={field.accessorKey}
 								data={field.accessorKey}
-								readOnly={field.type === 'custom'}>
+								readOnly={field.type === 'custom'}
+							>
 								<CustomEditor hot-editor field={field} />
 								<CustomRenderer hot-renderer field={field} fieldName={fieldName} />
 							</HotColumn>

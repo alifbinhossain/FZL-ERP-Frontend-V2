@@ -11,7 +11,7 @@ import { useOtherParty } from '@/lib/common-queries/other';
 import nanoid from '@/lib/nanoid';
 import { getDateTime } from '@/utils';
 
-import { IMerchandiserDataAddOrUpdateProps } from '../_config/columns/columns.type';
+import { IMerchandiserDataAddOrUpdateProps } from '../_config/columns/type';
 import { useOrderMerchandiserByUUID } from '../_config/query';
 import { IMerchandiser, MERCHANDISER_NULL, MERCHANDISER_SCHEMA } from '../_config/schema';
 
@@ -79,7 +79,8 @@ const AddOrUpdate: React.FC<IMerchandiserDataAddOrUpdateProps> = ({
 			setOpen={onClose}
 			title={isUpdate ? 'Update Merchandiser' : 'Add Merchandiser'}
 			form={form}
-			onSubmit={onSubmit}>
+			onSubmit={onSubmit}
+		>
 			<FormField
 				control={form.control}
 				name='party_uuid'

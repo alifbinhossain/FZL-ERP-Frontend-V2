@@ -27,21 +27,12 @@ export const dyeingQK = {
 
 	//* Thread Batch Entry
 	threadBatchEntry: () => [...dyeingQK.all(), 'thread-batch-entry'],
-	threadBatchEntryByUUID: (uuid: string) => [
-		...dyeingQK.threadBatchEntry(),
-		uuid,
-	],
+	threadBatchEntryByUUID: (uuid: string) => [...dyeingQK.threadBatchEntry(), uuid],
 
 	// * Order Against dyeing RM Log * //
 	orderAgainstDyeingRMLog: () => [...dyeingQK.all(), 'order-against-rm-log'],
-	orderAgainstDyeingRMLogByUUID: (uuid: string) => [
-		...dyeingQK.orderAgainstDyeingRMLog(),
-		uuid,
-	],
+	orderAgainstDyeingRMLogByUUID: (uuid: string) => [...dyeingQK.orderAgainstDyeingRMLog(), uuid],
 	//* Dyeing Transfer
 	dyeingTransfer: () => [...dyeingQK.all(), 'dyeing-transfer'],
-	dyeingTransferByUUID: (uuid: string) => [
-		...dyeingQK.dyeingTransfer(),
-		uuid,
-	],
+	dyeingTransferByUUID: (uuid: string) => [...dyeingQK.dyeingTransfer(), uuid],
 };

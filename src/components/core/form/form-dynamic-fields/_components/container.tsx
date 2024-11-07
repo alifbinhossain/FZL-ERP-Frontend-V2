@@ -23,7 +23,8 @@ const DynamicFieldContainer: React.FC<IProps> = ({ title, extraHeader, handleAdd
 							type='button'
 							variant={'gradient-accent'}
 							size={'xs'}
-							className='gap-1 rounded'>
+							className='gap-1 rounded'
+						>
 							<Plus className='size-4' />
 							New
 						</Button>

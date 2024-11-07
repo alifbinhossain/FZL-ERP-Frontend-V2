@@ -17,7 +17,8 @@ const BrandLogo: React.FC<IBrandLogoProps> = ({ className, ...props }) => {
 				className
 			)}
 			to={route.path!}
-			{...props}>
+			{...props}
+		>
 			FZL
 		</NavLink>
 	);

@@ -4,12 +4,8 @@ import { IRoute } from '@/types';
 const BasicAddUpdate = lazy(() => import('@/pages/template/basic-add-update'));
 const MultiModal = lazy(() => import('@/pages/template/multi-modal'));
 const Entry = lazy(() => import('@/pages/template/entry-with-details'));
-const EntryAddOrUpdate = lazy(
-	() => import('@/pages/template/entry-with-details/add-or-update')
-);
-const EntryDetails = lazy(
-	() => import('@/pages/template/entry-with-details/details')
-);
+const EntryAddOrUpdate = lazy(() => import('@/pages/template/entry-with-details/add-or-update'));
+const EntryDetails = lazy(() => import('@/pages/template/entry-with-details/details'));
 
 const TemplateRoutes: IRoute[] = [
 	{
@@ -27,14 +23,7 @@ const TemplateRoutes: IRoute[] = [
 				path: '/template/multi-modal',
 				element: <MultiModal />,
 				page_name: 'template__multi_modal',
-				actions: [
-					'read',
-					'create',
-					'update',
-					'delete',
-					'click_action',
-					'click_trx_against_order',
-				],
+				actions: ['read', 'create', 'update', 'delete', 'click_action', 'click_trx_against_order'],
 			},
 			{
 				name: 'Entry With Details',

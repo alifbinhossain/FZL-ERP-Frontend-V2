@@ -1,8 +1,8 @@
 import { ColumnDef } from '@tanstack/react-table';
 
-import { IMerchandiserData } from './columns.type';
+import { IMerchandiserData } from './type';
 
-// Merchandiser Column
+//* Merchandiser
 export const merchandiserColumns = (): ColumnDef<IMerchandiserData>[] => [
 	{
 		accessorKey: 'name',

@@ -67,12 +67,14 @@ const GlobalBreadcrumbs = () => {
 								initial='initial'
 								animate='animate'
 								className='flex flex-wrap items-center gap-1.5 sm:gap-2.5'
-								key={index + 'item'}>
+								key={index + 'item'}
+							>
 								<BreadcrumbItem>
 									<BreadcrumbLink
 										aria-label='breadcrumb'
 										className={cn('text-secondary')}
-										href={item.href}>
+										href={item.href}
+									>
 										{item.label}
 									</BreadcrumbLink>
 								</BreadcrumbItem>
@@ -84,7 +86,8 @@ const GlobalBreadcrumbs = () => {
 								initial='initial'
 								animate='animate'
 								className='flex flex-wrap items-center gap-1.5 sm:gap-2.5'
-								key={index + 'item'}>
+								key={index + 'item'}
+							>
 								<BreadcrumbItem key={index + 'item-label'}>{item.label}</BreadcrumbItem>
 								<BreadcrumbSeparator />
 							</motion.span>

@@ -1,5 +1,6 @@
-import { IFormSelectOption } from '@core/form/types';
 import { FieldArrayWithId, UseFormReturn } from 'react-hook-form';
+
+import { IFormSelectOption } from '@core/form/types';
 
 type FieldReadonly = {
 	type: 'readOnly';

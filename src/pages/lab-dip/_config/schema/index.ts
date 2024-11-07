@@ -79,10 +79,7 @@ export const SHADE_RECIPE_SCHEMA = z.object({
 		z.object({
 			uuid: STRING_OPTIONAL,
 			material_uuid: STRING_REQUIRED,
-			quantity: NUMBER_DOUBLE_REQUIRED.gt(
-				0,
-				'Quantity must be greater than 0'
-			),
+			quantity: NUMBER_DOUBLE_REQUIRED.gt(0, 'Quantity must be greater than 0'),
 			remarks: STRING_NULLABLE,
 		})
 	),

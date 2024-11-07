@@ -1,10 +1,10 @@
 import { IRoute } from '@/types';
-import { matchUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
 import useLayout from '@/hooks/useLayout';
 
 import { cn } from '@/lib/utils';
+import { matchUrl } from '@/utils';
 
 const variants = {
 	animate: {
@@ -39,7 +39,8 @@ const SidebarFile: React.FC<IRoute> = ({ path, name }) => {
 							? 'bg-gradient-to-r from-accent/10 to-accent/30 font-medium text-primary-foreground'
 							: 'text-primary-foreground/70 hover:bg-secondary/20 hover:text-primary-foreground'
 					)
-				}>
+				}
+			>
 				<span className='block w-full truncate'>{name}</span>
 
 				{matchUrl(path!, pathname) ? (

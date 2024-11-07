@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import CoreForm from '@core/form';
-import { AddModal } from '@core/modal';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
 import { FormField } from '@/components/ui/form';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 
 import nanoid from '@/lib/nanoid';
 import { getDateTime } from '@/utils';
@@ -76,7 +76,8 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			setOpen={onClose}
 			title={isUpdate ? 'Update Bank' : 'Add Bank'}
 			form={form}
-			onSubmit={onSubmit}>
+			onSubmit={onSubmit}
+		>
 			<FormField control={form.control} name='name' render={(props) => <CoreForm.Input {...props} />} />
 			<FormField control={form.control} name='swift_code' render={(props) => <CoreForm.Input {...props} />} />
 			<FormField control={form.control} name='routing_no' render={(props) => <CoreForm.Input {...props} />} />

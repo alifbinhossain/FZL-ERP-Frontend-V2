@@ -27,14 +27,8 @@ export const materialQK = {
 	stockToSFGByUUID: (uuid: string) => [...materialQK.stockToSGF(), uuid],
 
 	// trx against order description
-	trxAgainstOrderDescription: () => [
-		...materialQK.all(),
-		'trx-against-order-description',
-	],
-	trxAgainstOrderDescriptionByUUID: (uuid: string) => [
-		...materialQK.trxAgainstOrderDescription(),
-		uuid,
-	],
+	trxAgainstOrderDescription: () => [...materialQK.all(), 'trx-against-order-description'],
+	trxAgainstOrderDescriptionByUUID: (uuid: string) => [...materialQK.trxAgainstOrderDescription(), uuid],
 };
 
 // Purchase Query Keys

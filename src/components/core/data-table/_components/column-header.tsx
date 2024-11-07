@@ -31,7 +31,8 @@ export function TableColumnHeader<TData, TValue>({ column, className }: TableCol
 						aria-label='Sort Column'
 						variant='ghost'
 						size='sm'
-						className='-ml-3 h-7 active:scale-100 data-[state=open]:bg-base-300'>
+						className='-ml-3 h-7 active:scale-100 data-[state=open]:bg-base-300'
+					>
 						<span>{title}</span>
 						{column.getIsSorted() === 'desc' ? (
 							<ArrowDownIcon className='size-4' />
@@ -62,7 +63,8 @@ export function TableColumnHeader<TData, TValue>({ column, className }: TableCol
 								} else {
 									column.pin('left');
 								}
-							}}>
+							}}
+						>
 							{column.getIsPinned() === 'left' ? (
 								<PinOff className='mr-2 size-3.5 text-muted-foreground/70' />
 							) : (

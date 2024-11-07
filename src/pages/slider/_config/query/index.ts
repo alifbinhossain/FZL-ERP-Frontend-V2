@@ -93,9 +93,7 @@ export const useSliderDieCastingTransferAgainstStock = <T>() =>
 		url: '/slider/trx-against-stock',
 	});
 
-export const useSliderDieCastingTransferAgainstStockByUUID = <T>(
-	uuid: string
-) =>
+export const useSliderDieCastingTransferAgainstStockByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
 		queryKey: sliderQK.sliderDieCastingByStockByUUID(uuid),
 		url: `/slider/trx-against-stock/${uuid}`,
@@ -109,9 +107,7 @@ export const useSliderDieCastingTransferAgainstOrder = <T>() =>
 		url: '/slider/die-casting-transaction',
 	});
 
-export const useSliderDieCastingTransferAgainstOrderByUUID = <T>(
-	uuid: string
-) =>
+export const useSliderDieCastingTransferAgainstOrderByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
 		queryKey: sliderQK.sliderDieCastingByOrderByUUID(uuid),
 		url: `/slider/die-casting-transaction/${uuid}`,

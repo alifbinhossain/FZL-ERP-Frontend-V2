@@ -1,9 +1,10 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import CoreForm from '@core/form';
 import { useFieldArray } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
+
+import CoreForm from '@core/form';
 
 import nanoid from '@/lib/nanoid';
 import { getDateTime } from '@/utils';
@@ -208,7 +209,8 @@ const AddOrUpdate = () => {
 		<CoreForm.AddEditWrapper
 			title={isUpdate ? 'Edit Test' : 'Add Test'} // TODO: Update title
 			form={form}
-			onSubmit={onSubmit}>
+			onSubmit={onSubmit}
+		>
 			<Header />
 			<CoreForm.DynamicFields
 				title='Employees' // TODO: Update title

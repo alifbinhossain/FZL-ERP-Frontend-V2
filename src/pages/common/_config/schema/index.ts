@@ -23,9 +23,7 @@ export const COMMON_COIL_TO_DYEING_LOG_NULL: Partial<ICommonCoilToDyeingLog> = {
 	remarks: null,
 };
 
-export type ICommonCoilToDyeingLog = z.infer<
-	typeof COMMON_COIL_TO_DYEING_LOG_SCHEMA
->;
+export type ICommonCoilToDyeingLog = z.infer<typeof COMMON_COIL_TO_DYEING_LOG_SCHEMA>;
 
 // Tape or Coil Production Log Schema
 export const TAPE_OR_COIL_PRODUCTION_LOG_SCHEMA = z.object({
@@ -34,15 +32,12 @@ export const TAPE_OR_COIL_PRODUCTION_LOG_SCHEMA = z.object({
 	remarks: STRING_NULLABLE,
 });
 
-export const TAPE_OR_COIL_PRODUCTION_LOG_NULL: Partial<ITapeOrCoilProductionLog> =
-	{
-		wastage: 0,
-		remarks: null,
-	};
+export const TAPE_OR_COIL_PRODUCTION_LOG_NULL: Partial<ITapeOrCoilProductionLog> = {
+	wastage: 0,
+	remarks: null,
+};
 
-export type ITapeOrCoilProductionLog = z.infer<
-	typeof TAPE_OR_COIL_PRODUCTION_LOG_SCHEMA
->;
+export type ITapeOrCoilProductionLog = z.infer<typeof TAPE_OR_COIL_PRODUCTION_LOG_SCHEMA>;
 
 // Tape to Coil Transaction Schema
 export const TAPE_TO_COIL_TRX_SCHEMA = z.object({
@@ -146,9 +141,7 @@ export const UPDATE_DYEING_TRANSFER_NULL: Partial<IUpdateDyeingTransfer> = {
 	remarks: null,
 };
 
-export type IUpdateDyeingTransfer = z.infer<
-	typeof UPDATE_DYEING_TRANSFER_SCHEMA
->;
+export type IUpdateDyeingTransfer = z.infer<typeof UPDATE_DYEING_TRANSFER_SCHEMA>;
 
 // Tape Required Schema
 export const TAPE_REQUIRED_SCHEMA = z.object({
@@ -180,9 +173,7 @@ export const TAPE_STOCK_TRX_TO_DYING_NULL: Partial<ITapeStockTrxToDying> = {
 	remarks: null,
 };
 
-export type ITapeStockTrxToDying = z.infer<
-	typeof TAPE_STOCK_TRX_TO_DYING_SCHEMA
->;
+export type ITapeStockTrxToDying = z.infer<typeof TAPE_STOCK_TRX_TO_DYING_SCHEMA>;
 
 // Dyeing Transfer From Stock Schema
 export const DYEING_TRANSFER_FROM_STOCK_SCHEMA = z.object({
@@ -196,14 +187,11 @@ export const DYEING_TRANSFER_FROM_STOCK_SCHEMA = z.object({
 	),
 });
 
-export const DYEING_TRANSFER_FROM_STOCK_NULL: Partial<IDyeingTransferFromStock> =
-	{
-		dyeing_transfer_entry: [],
-	};
+export const DYEING_TRANSFER_FROM_STOCK_NULL: Partial<IDyeingTransferFromStock> = {
+	dyeing_transfer_entry: [],
+};
 
-export type IDyeingTransferFromStock = z.infer<
-	typeof DYEING_TRANSFER_FROM_STOCK_SCHEMA
->;
+export type IDyeingTransferFromStock = z.infer<typeof DYEING_TRANSFER_FROM_STOCK_SCHEMA>;
 
 // Tape Production Schema
 export const TAPE_PROD_SCHEMA = z.object({

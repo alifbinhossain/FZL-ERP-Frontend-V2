@@ -1,65 +1,52 @@
 import { IParams } from '@/types';
 
-export const orderQK = {
+const QK = {
 	all: () => ['order'],
 
 	// details
-	details: () => [...orderQK.all(), 'details'],
-	detailsByQuery: (query: string) => [
-		...orderQK.all(),
-		'detailsByQuery',
-		query,
-	],
-	detailsByUUID: (uuid: string) => [...orderQK.details(), uuid],
-	detailsByOrderNumber: (orderNumber: string) => [
-		...orderQK.details(),
-		orderNumber,
-	],
-	detailsByOrderDescription: (orderNumber: string, uuid: string) => [
-		...orderQK.details(),
-		orderNumber,
-		uuid,
-	],
+	details: () => [...QK.all(), 'details'],
+	detailsByQuery: (query: string) => [...QK.all(), 'detailsByQuery', query],
+	detailsByUUID: (uuid: string) => [...QK.details(), uuid],
+	detailsByOrderNumber: (orderNumber: string) => [...QK.details(), orderNumber],
+	detailsByOrderDescription: (orderNumber: string, uuid: string) => [...QK.details(), orderNumber, uuid],
 
 	// Description
-	description: () => [...orderQK.all(), 'description'],
-	descriptionByUUID: (uuid: string) => [...orderQK.description(), uuid],
+	description: () => [...QK.all(), 'description'],
+	descriptionByUUID: (uuid: string) => [...QK.description(), uuid],
 
 	// Entry
-	entry: () => [...orderQK.all(), 'entries'],
-	entryByUUID: (uuid: string) => [...orderQK.entry(), uuid],
+	entry: () => [...QK.all(), 'entries'],
+	entryByUUID: (uuid: string) => [...QK.entry(), uuid],
 
 	// info
-	info: () => [...orderQK.all(), 'info'],
-	infoByID: (id: string) => [...orderQK.info(), id],
-	infoByUUID: (uuid: string) => [...orderQK.info(), uuid],
+	info: () => [...QK.all(), 'info'],
+	infoByID: (id: string) => [...QK.info(), id],
+	infoByUUID: (uuid: string) => [...QK.info(), uuid],
 
 	// buyers
-	buyer: () => [...orderQK.all(), 'buyer'], // [order, buyer]
-	buyerByUUID: (uuid: string) => [...orderQK.buyer(), uuid], // [order, buyer, uuid]
+	buyer: () => [...QK.all(), 'buyer'], // [order, buyer]
+	buyerByUUID: (uuid: string) => [...QK.buyer(), uuid], // [order, buyer, uuid]
 
 	// marketing
-	marketing: () => [...orderQK.all(), 'marketing'],
-	marketingByUUID: (uuid: string) => [...orderQK.marketing(), uuid],
+	marketing: () => [...QK.all(), 'marketing'],
+	marketingByUUID: (uuid: string) => [...QK.marketing(), uuid],
 
 	// marketing
-	factory: () => [...orderQK.all(), 'factory'],
-	factoryByUUID: (uuid: string) => [...orderQK.factory(), uuid],
+	factory: () => [...QK.all(), 'factory'],
+	factoryByUUID: (uuid: string) => [...QK.factory(), uuid],
 
 	// merchandisers
-	merchandiser: () => [...orderQK.all(), 'merchandisers'],
-	merchandiserQuery: ({ start_date, end_date }: IParams) => [
-		...orderQK.merchandiser(),
-		start_date,
-		end_date,
-	],
-	merchandiserByUUID: (uuid: string) => [...orderQK.merchandiser(), uuid],
+	merchandiserDefault: () => [...QK.all(), 'merchandisers'],
+	merchandiser: ({ start_date, end_date }: IParams) => [...QK.merchandiserDefault(), start_date, end_date],
+	merchandiserByUUID: (uuid: string) => [...QK.merchandiserDefault(), uuid],
 
 	//Party
-	party: () => [...orderQK.all(), 'party'],
-	partyByUUID: (uuid: string) => [...orderQK.party(), uuid],
+	party: () => [...QK.all(), 'party'],
+	partyByUUID: (uuid: string) => [...QK.party(), uuid],
 
 	//properties
-	properties: () => [...orderQK.all(), 'properties'],
-	propertiesByUUID: (uuid: string) => [...orderQK.party(), uuid],
+	properties: () => [...QK.all(), 'properties'],
+	propertiesByUUID: (uuid: string) => [...QK.party(), uuid],
 };
+
+export default QK;

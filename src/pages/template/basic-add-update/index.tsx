@@ -93,7 +93,8 @@ const BasicAddUpdate = () => {
 				handleRefetch={refetch}
 				handleDeleteAll={handleDeleteAll}
 				// TODO: Update facetedFilters (OPTIONAL)
-				facetedFilters={type1FacetedFilters}>
+				facetedFilters={type1FacetedFilters}
+			>
 				{renderSuspenseModals([
 					<AddOrUpdate
 						{...{

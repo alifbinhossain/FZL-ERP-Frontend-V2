@@ -28,7 +28,8 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
 						size: 'sm',
 						className: 'gap-1.5 rounded transition-none active:scale-100',
 					})
-			)}>
+			)}
+		>
 			<FormControl className=''>
 				<Checkbox
 					className={cn(
@@ -48,7 +49,8 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
 						'flex items-center gap-1 capitalize',
 						isBoxed && 'cursor-pointer text-white',
 						labelClassName
-					)}>
+					)}
+				>
 					{label || field.name.replace('_', ' ')}{' '}
 					{optional ? <span className='text-xs'>(Optional)</span> : ''}
 				</FormLabel>

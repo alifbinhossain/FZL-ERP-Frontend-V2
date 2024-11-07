@@ -70,9 +70,7 @@ export const useOrderAgainstNylonMetallicFinishingRMLog = <T>() =>
 		queryKey: nylonQK.orderAgainstNylonFinishingRMLog(),
 		url: '/zipper/material-trx-against-order/multiple/by/n_t_cutting,n_stopper',
 	});
-export const useOrderAgainstNylonMetallicFinishingRMLogByUUID = <T>(
-	uuid: string
-) =>
+export const useOrderAgainstNylonMetallicFinishingRMLogByUUID = <T>(uuid: string) =>
 	useTQuery<T>({
 		queryKey: nylonQK.orderAgainstNylonFinishingRMLogByUUID(uuid),
 		url: `/zipper/material-trx-against-order/multiple/by/n_t_cutting,n_stopper${uuid}`,

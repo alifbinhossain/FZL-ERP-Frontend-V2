@@ -54,46 +54,30 @@ export const useDeliveryPackingListByUUID = <T>(uuid: string) =>
 		enabled: !!uuid,
 	});
 
-export const useDeliveryPackingListDetailsByUUID = <T>(
-	uuid: string,
-	query?: string
-) =>
+export const useDeliveryPackingListDetailsByUUID = <T>(uuid: string, query?: string) =>
 	useTQuery<T>({
 		queryKey: deliveryQk.deliveryPackingListDetailsByUUID(uuid),
 		url: `/delivery/packing-list/details/${uuid}?${query}`,
 		enabled: !!uuid,
 	});
-export const useDeliveryPackingListEntryByPackingListUUID = <T>(
-	packing_list_uuids: string[]
-) =>
+export const useDeliveryPackingListEntryByPackingListUUID = <T>(packing_list_uuids: string[]) =>
 	useTQuery<T>({
-		queryKey:
-			deliveryQk.deliveryPackingListEntryByPackingListUUIDS(
-				packing_list_uuids
-			),
+		queryKey: deliveryQk.deliveryPackingListEntryByPackingListUUIDS(packing_list_uuids),
 
 		url: `/delivery/packing-list-entry/by/multi-packing-list-uuid/${packing_list_uuids?.join(',')}`,
 		enabled: !!packing_list_uuids && packing_list_uuids?.length > 0,
 	});
 
-export const useDeliveryChallanEntryForPackingListByPackingListUUID = <T>(
-	packing_list_uuids: string[]
-) =>
+export const useDeliveryChallanEntryForPackingListByPackingListUUID = <T>(packing_list_uuids: string[]) =>
 	useTQuery<T>({
-		queryKey:
-			deliveryQk.deliveryChallanEntryForPackingListByPackingListUUIDS(
-				packing_list_uuids
-			),
+		queryKey: deliveryQk.deliveryChallanEntryForPackingListByPackingListUUIDS(packing_list_uuids),
 		url: `/delivery/challan-entry-for-packing-list-multi/by/${packing_list_uuids?.join(',')}`,
 		enabled: !!packing_list_uuids && packing_list_uuids?.length > 0,
 	});
 
-export const useDeliveryPackingListByOrderInfoUUID = <T>(
-	order_info_uuid: string
-) =>
+export const useDeliveryPackingListByOrderInfoUUID = <T>(order_info_uuid: string) =>
 	useTQuery<T>({
-		queryKey:
-			deliveryQk.deliveryPackingListByOrderInfoUUID(order_info_uuid),
+		queryKey: deliveryQk.deliveryPackingListByOrderInfoUUID(order_info_uuid),
 		url: `/delivery/order-for-packing-list/${order_info_uuid}`,
 		enabled: !!order_info_uuid,
 	});

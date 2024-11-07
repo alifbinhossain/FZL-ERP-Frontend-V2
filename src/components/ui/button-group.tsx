@@ -10,11 +10,7 @@ interface ButtonGroupProps {
 	children: ReactElement<ButtonProps>[];
 }
 
-export const ButtonGroup = ({
-	className,
-	orientation = 'horizontal',
-	children,
-}: ButtonGroupProps) => {
+export const ButtonGroup = ({ className, orientation = 'horizontal', children }: ButtonGroupProps) => {
 	const totalButtons = Children.count(children);
 	const isHorizontal = orientation === 'horizontal';
 	const isVertical = orientation === 'vertical';
@@ -28,7 +24,8 @@ export const ButtonGroup = ({
 					'w-fit': isVertical,
 				},
 				className
-			)}>
+			)}
+		>
 			{Children.map(children, (child, index) => {
 				const isFirst = index === 0;
 				const isLast = index === totalButtons - 1;

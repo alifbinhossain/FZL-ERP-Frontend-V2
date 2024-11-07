@@ -17,7 +17,8 @@ const StatusButton: React.FC<StatusButtonProps> = ({ value = 0, buttonProps }) =
 				className='size-6 rounded-full'
 				size={'icon'}
 				variant={value ? 'destructive' : 'accent'}
-				{...buttonProps}>
+				{...buttonProps}
+			>
 				{value ? <X className='size-4' /> : <Check className='size-4' />}
 			</Button>
 		);
@@ -28,7 +29,8 @@ const StatusButton: React.FC<StatusButtonProps> = ({ value = 0, buttonProps }) =
 			className='size-6 rounded-full'
 			size={'icon'}
 			variant={value === 0 ? 'destructive' : 'accent'}
-			{...buttonProps}>
+			{...buttonProps}
+		>
 			{value === 0 ? <X className='size-4' /> : <Check className='size-4' />}
 		</Button>
 	);

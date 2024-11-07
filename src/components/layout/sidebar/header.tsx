@@ -20,7 +20,8 @@ const SidebarHeader = () => {
 
 				<button
 					className='btn btn-square btn-ghost btn-sm absolute right-4 top-4 text-white md:hidden'
-					onClick={() => setSidebarOpen(false)}>
+					onClick={() => setSidebarOpen(false)}
+				>
 					<X />
 				</button>
 			</div>
@@ -34,7 +35,8 @@ const SidebarHeader = () => {
 						className={buttonVariants({
 							variant: 'default',
 							size: 'icon',
-						})}>
+						})}
+					>
 						<CopyMinus className='size-4' />
 					</motion.button>
 				</TooltipWrapper>

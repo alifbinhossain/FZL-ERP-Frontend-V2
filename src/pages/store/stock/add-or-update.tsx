@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { IResponse } from '@/types';
-import CoreForm from '@core/form';
-import { IFormSelectOption } from '@core/form/types';
-import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
 
 import { FormField } from '@/components/ui/form';
+import CoreForm from '@core/form';
+import { IFormSelectOption } from '@core/form/types';
+import { AddModal } from '@core/modal';
 
 import { useOtherMaterialSection, useOtherMaterialType } from '@/lib/common-queries/other';
 import nanoid from '@/lib/nanoid';
@@ -121,7 +121,8 @@ const AddOrUpdate: React.FC<IAddOrUpdateProps> = ({
 			title={isUpdate ? 'Update Stock' : 'Add Stock'}
 			form={form}
 			onSubmit={onSubmit}
-			className='max-w-4xl'>
+			className='max-w-4xl'
+		>
 			<CoreForm.Section className='lg:grid-cols-2'>
 				<FormField
 					control={form.control}

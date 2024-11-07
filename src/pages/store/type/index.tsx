@@ -76,7 +76,8 @@ const Type = () => {
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
-				handleDeleteAll={handleDeleteAll}>
+				handleDeleteAll={handleDeleteAll}
+			>
 				{renderSuspenseModals([
 					<AddOrUpdate
 						{...{

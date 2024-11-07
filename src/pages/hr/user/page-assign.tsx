@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { allFlatRoutes, allPrivateRoutes } from '@/routes';
 import { IResponse, IRoute } from '@/types';
-import CoreForm from '@core/form';
-import { AddModal } from '@core/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { Search } from 'lucide-react';
@@ -14,6 +12,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import DebouncedInput from '@/components/ui/debounce-input';
 import { FormField } from '@/components/ui/form';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import CoreForm from '@core/form';
+import { AddModal } from '@core/modal';
 
 import { cn } from '@/lib/utils';
 import { flattenRoutes, getDateTime } from '@/utils';
@@ -172,7 +172,8 @@ const PageAssign: React.FC<IPageAssignProps> = ({ url, open, setOpen, updatedDat
 			setOpen={onClose}
 			title={'Page Assign : ' + updatedData?.name}
 			form={form}
-			onSubmit={onSubmit}>
+			onSubmit={onSubmit}
+		>
 			<DebouncedInput
 				icon={<Search className='size-4 text-secondary/50' />}
 				width='mb-4'
@@ -195,7 +196,8 @@ const PageAssign: React.FC<IPageAssignProps> = ({ url, open, setOpen, updatedDat
 							className={cn('capitalize')}
 							onClick={() => setSelectPageName(item)}
 							key={item}
-							value={item}>
+							value={item}
+						>
 							{item}
 						</TabsTrigger>
 					))}
@@ -214,12 +216,14 @@ const PageAssign: React.FC<IPageAssignProps> = ({ url, open, setOpen, updatedDat
 								key={page_name}
 								className={cn(
 									'flex flex-col gap-2 rounded-md border p-3 pt-2 transition-colors duration-300 ease-in-out hover:bg-base-150'
-								)}>
+								)}
+							>
 								<div className='flex items-center justify-between'>
 									<Link
 										to={path!}
 										className='font-semibold capitalize hover:underline'
-										target='_blank'>
+										target='_blank'
+									>
 										{page_name?.replace(/__/, ': ').replace(/_/g, ' ')}
 									</Link>
 									<Checkbox

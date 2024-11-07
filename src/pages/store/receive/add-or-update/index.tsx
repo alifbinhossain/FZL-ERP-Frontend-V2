@@ -1,9 +1,10 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import CoreForm from '@core/form';
 import { useFieldArray } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '@/hooks/useAuth';
 import useRHF from '@/hooks/useRHF';
+
+import CoreForm from '@core/form';
 
 import nanoid from '@/lib/nanoid';
 import { getDateTime } from '@/utils';

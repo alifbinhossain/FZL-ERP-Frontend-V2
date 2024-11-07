@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { IRoute } from '@/types';
-import { confirmRouteMatch } from '@/utils';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import useSidebar from '@/hooks/useSidebar';
 
 import { cn } from '@/lib/utils';
+import { confirmRouteMatch } from '@/utils';
 
 import SidebarFile from './file';
 

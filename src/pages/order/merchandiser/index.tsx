@@ -8,9 +8,10 @@ import { PageInfo } from '@/utils';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { merchandiserColumns } from '../_config/columns';
-import { IMerchandiserData } from '../_config/columns/columns.type';
+import { IMerchandiserData } from '../_config/columns/type';
 import { useOrderMerchandiser } from '../_config/query';
 
+//* Modals
 const AddOrUpdate = lazy(() => import('./add-or-update'));
 const DeleteModal = lazy(() => import('@core/modal/delete'));
 
@@ -63,7 +64,8 @@ const Merchandiser = () => {
 				handleRefetch={refetch}
 				start_date={start_date}
 				end_date={end_date}
-				onUpdate={onUpdate}>
+				onUpdate={onUpdate}
+			>
 				{renderSuspenseModals([
 					<AddOrUpdate
 						{...{

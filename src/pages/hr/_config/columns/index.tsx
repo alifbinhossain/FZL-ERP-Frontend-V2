@@ -4,11 +4,7 @@ import PageAssign from '@/components/buttons/page-assign';
 import ResetPassword from '@/components/buttons/reset-password';
 import { Switch } from '@/components/ui/switch';
 
-import {
-	IDepartmentTableData,
-	IDesignationTableData,
-	IUserTableData,
-} from './columns.type';
+import { IDepartmentTableData, IDesignationTableData, IUserTableData } from './columns.type';
 
 // Department Columns
 export const departmentColumns = (): ColumnDef<IDepartmentTableData>[] => [
@@ -53,10 +49,7 @@ export function userColumns({
 			enableColumnFilter: false,
 			cell: (info) => {
 				return (
-					<Switch
-						checked={Number(info.getValue()) === 1}
-						onCheckedChange={() => handleStatus(info.row)}
-					/>
+					<Switch checked={Number(info.getValue()) === 1} onCheckedChange={() => handleStatus(info.row)} />
 				);
 			},
 			size: 40,
@@ -68,9 +61,7 @@ export function userColumns({
 			accessorKey: 'name',
 			header: 'Name',
 			enableColumnFilter: false,
-			cell: (info) => (
-				<span className='capitalize'>{info.getValue<string>()}</span>
-			),
+			cell: (info) => <span className='capitalize'>{info.getValue<string>()}</span>,
 		},
 		{
 			accessorKey: 'email',
@@ -88,9 +79,7 @@ export function userColumns({
 				return (
 					<div className='flex flex-col'>
 						<span className='capitalize'>{department}</span>
-						<span className='text-xs capitalize text-gray-400'>
-							{designation}
-						</span>
+						<span className='text-xs capitalize text-gray-400'>{designation}</span>
 					</div>
 				);
 			},
@@ -107,9 +96,7 @@ export function userColumns({
 			),
 			enableColumnFilter: false,
 			enableSorting: false,
-			cell: (info) => (
-				<ResetPassword onClick={() => handleResetPassword(info.row)} />
-			),
+			cell: (info) => <ResetPassword onClick={() => handleResetPassword(info.row)} />,
 			size: 40,
 			meta: {
 				hidden: !resetPasswordAccess,
@@ -128,9 +115,7 @@ export function userColumns({
 			),
 			enableColumnFilter: false,
 			enableSorting: false,
-			cell: (info) => (
-				<PageAssign onClick={() => handlePageAssign(info.row)} />
-			),
+			cell: (info) => <PageAssign onClick={() => handlePageAssign(info.row)} />,
 			size: 40,
 			meta: {
 				hidden: !pageAssignAccess,

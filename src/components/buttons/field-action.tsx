@@ -17,7 +17,8 @@ const FieldActionButton = ({ handleCopy, handleRemove, index }: FieldActionButto
 					onClick={() => handleCopy(index)}
 					type='button'
 					size={'icon'}
-					variant={'ghost'}>
+					variant={'ghost'}
+				>
 					<Copy className='size-4' />
 				</Button>
 			)}
@@ -27,7 +28,8 @@ const FieldActionButton = ({ handleCopy, handleRemove, index }: FieldActionButto
 					onClick={() => handleRemove(index)}
 					type='button'
 					size={'icon'}
-					variant={'ghost-destructive'}>
+					variant={'ghost-destructive'}
+				>
 					<Trash2 className='size-4' />
 				</Button>
 			)}

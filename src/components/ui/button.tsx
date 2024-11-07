@@ -9,26 +9,20 @@ const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				default:
-					'bg-primary text-primary-foreground hover:bg-primary/90',
-				destructive:
-					'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-				outline:
-					'border border-border bg-background hover:bg-base-200 hover:text-base-content',
+				default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+				destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+				outline: 'border border-border bg-background hover:bg-base-200 hover:text-base-content',
 
 				'outline-destructive':
 					'border border-destructive/20 bg-background text-destructive hover:bg-destructive hover:text-destructive-foreground',
 
 				accent: 'bg-accent text-accent-foreground hover:bg-accent/90',
-				secondary:
-					'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+				secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
 				ghost: 'text-foreground hover:bg-base-300',
-				'ghost-destructive':
-					'text-destructive hover:bg-destructive/10 ',
+				'ghost-destructive': 'text-destructive hover:bg-destructive/10 ',
 				link: 'text-primary underline-offset-4 hover:underline',
 				gradient: 'bg-gradient text-foreground border',
-				'gradient-accent':
-					'!bg-gradient-to-r !from-accent/80 !to-accent/70 !text-accent-foreground',
+				'gradient-accent': '!bg-gradient-to-r !from-accent/80 !to-accent/70 !text-accent-foreground',
 			},
 			size: {
 				default: 'h-10 px-4 py-2',
@@ -63,28 +57,11 @@ export interface ButtonProps
 
 export type ButtonIconProps = IconProps | IconRefProps;
 
-const Button = React.forwardRef<
-	HTMLButtonElement,
-	ButtonProps & ButtonIconProps
->(
-	(
-		{
-			className,
-			variant,
-			size,
-			asChild = false,
-			Icon,
-			iconPlacement,
-			...props
-		},
-		ref
-	) => {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps & ButtonIconProps>(
+	({ className, variant, size, asChild = false, Icon, iconPlacement, ...props }, ref) => {
 		const Comp = asChild ? Slot : 'button';
 		return (
-			<Comp
-				className={cn(buttonVariants({ variant, size, className }))}
-				ref={ref}
-				{...props}>
+			<Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
 				{Icon && iconPlacement === 'left' && (
 					<div className='w-5 pr-2 transition-all duration-200'>
 						<Icon />
