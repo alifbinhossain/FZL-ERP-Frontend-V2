@@ -38,6 +38,7 @@ export type IRoute = RouteObject & {
 	page_name?: string;
 	actions?: string[];
 	disableCollapse?: boolean;
+	page_type?: 'library' | 'entry' | 'update' | 'normal' | 'custom';
 };
 
 export type ITableFacetedFilter = {

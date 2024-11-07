@@ -13,6 +13,7 @@ const OrderRoutes: IRoute[] = [
 				element: <Merchandiser />,
 				page_name: 'order__merchandiser',
 				actions: ['create', 'read', 'update', 'delete'],
+				page_type: 'library',
 			},
 		],
 	},

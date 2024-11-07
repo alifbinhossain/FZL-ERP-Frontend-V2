@@ -23,7 +23,7 @@ const variants = {
 	},
 };
 
-const SidebarFile: React.FC<IRoute> = ({ path, name }) => {
+const SidebarFile: React.FC<IRoute> = ({ path, name, page_type }) => {
 	const { setSidebarOpen } = useLayout();
 	const { pathname } = useLocation();
 
@@ -41,7 +41,14 @@ const SidebarFile: React.FC<IRoute> = ({ path, name }) => {
 					)
 				}
 			>
-				<span className='block w-full truncate'>{name}</span>
+				<span className='block w-full truncate'>
+					{page_type === 'library' && (
+						<>
+							{name}
+							<sup className='rounded-full bg-blue-800 px-2 py-0.5 text-xs text-blue-200'>lib</sup>
+						</>
+					)}
+				</span>
 
 				{matchUrl(path!, pathname) ? (
 					<motion.div className='absolute inset-0 h-full w-[3px] bg-accent' layoutId='active-sidebar-item' />

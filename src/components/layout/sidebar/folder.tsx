@@ -10,7 +10,7 @@ import { confirmRouteMatch } from '@/utils';
 
 import SidebarFile from './file';
 
-// Animation definitions for the sidebar folder
+//* Animation definitions for the sidebar folder
 const variants = {
 	animate: {
 		y: 0,
@@ -28,7 +28,7 @@ const variants = {
 	},
 };
 
-// Animation definitions for the folder's children
+//* Animation definitions for the folder's children
 const childVariants = {
 	open: {
 		y: 0,
@@ -50,7 +50,7 @@ const childVariants = {
 };
 
 const SidebarFolder: React.FC<IRoute> = (props) => {
-	// Destructure props
+	//* Destructure props
 	const { path, name, children, disableCollapse } = props;
 
 	const {
@@ -59,13 +59,13 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 		setIsCloseAll,
 	} = useSidebar();
 
-	// State for folder openness
+	//* State for folder openness
 	const [isOpen, setIsOpen] = useState(false);
 
-	// Check if the current route matches the folder's path
+	//* Check if the current route matches the folder's path
 	const routeMatch = useMemo(() => confirmRouteMatch(props, pathname), [props, pathname]);
 
-	// Update folder state based on route match and close-all state
+	//* Update folder state based on route match and close-all state
 	useEffect(() => {
 		if (routeMatch === true && !isCloseAll) {
 			setIsOpen(true);
@@ -76,12 +76,12 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 		}
 	}, [path, isCloseAll, routeMatch]);
 
-	// If the folder is disabled from collapsing, render the file component
+	//* If the folder is disabled from collapsing, render the file component
 	if (disableCollapse) {
 		return <SidebarFile path={path} name={name} />;
 	}
 
-	// Determine the folder's class based on its state
+	//* Determine the folder's class based on its state
 	const folderClassName = cn(
 		'group relative z-10 flex w-full items-center justify-between gap-2 rounded-none rounded-r-md border-l-[3px] px-4 py-2 text-sm text-primary-foreground',
 		isOpen && !isCloseAll
@@ -89,7 +89,7 @@ const SidebarFolder: React.FC<IRoute> = (props) => {
 			: 'border-transparent text-primary-foreground/70 hover:bg-secondary/20 hover:text-primary-foreground'
 	);
 
-	// Handle folder click
+	//* Handle folder click
 	const handleClick = () => {
 		setIsOpen((prev) => !prev);
 		setIsCloseAll(false);
