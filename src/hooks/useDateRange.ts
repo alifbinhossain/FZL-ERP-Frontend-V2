@@ -12,7 +12,7 @@ function useDateRange() {
 	useEffect(() => {
 		startDate.setHours(0, 0, 0, 0);
 		endDate.setHours(23, 59, 59, 999);
-	}, []);
+	}, [startDate, endDate]);
 
 	const onUpdate = ({ range }: { range: DateRange }) => {
 		setStartDate(range?.from || new Date());
