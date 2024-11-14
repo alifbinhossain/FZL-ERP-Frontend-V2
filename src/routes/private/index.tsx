@@ -1,10 +1,10 @@
+import OrderRoutes from '@/pages/order/_config/routes';
 import { IRoute } from '@/types';
 import { cloneDeep } from 'lodash';
 
 import CommercialRoutes from './Commercial';
 import { DashboardRoutes } from './Dashboard';
 import HrRoutes from './Hr';
-import OrderRoutes from './Order';
 import StoreRoutes from './Store';
 import TemplateRoutes from './Template';
 import ThreadRoutes from './Thread';
