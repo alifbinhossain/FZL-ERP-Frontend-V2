@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FC } from 'react';
+import { format } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -10,6 +11,7 @@ import { Label } from './label';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
 import { ScrollArea } from './scroll-area';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select';
+import SingleDatePicker from './single-date-picker';
 import { Switch } from './switch';
 
 export interface DateRangePickerProps {
@@ -411,70 +413,20 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 							)}
 							<div className='flex flex-col gap-2'>
 								<div className='flex gap-2'>
-									<DateInput
-										value={range.from}
-										onChange={(date) => {
-											const toDate = range.to == null || date > range.to ? date : range.to;
-											setRange((prevRange) => ({
-												...prevRange,
-												from: date,
-												to: toDate,
-											}));
-										}}
+									<SingleDatePicker
+										disableIcon
+										className='justify-center'
+										selected={range?.from}
+										onSelect={(date) => setRange((prevRange) => ({ ...prevRange, from: date }))}
 									/>
 									<div className='py-1'>-</div>
-									<DateInput
-										value={range.to}
-										onChange={(date) => {
-											const fromDate = date < range.from ? date : range.from;
-											setRange((prevRange) => ({
-												...prevRange,
-												from: fromDate,
-												to: date,
-											}));
-										}}
+									<SingleDatePicker
+										disableIcon
+										className='justify-center'
+										selected={range?.to || new Date()}
+										onSelect={(date) => setRange((prevRange) => ({ ...prevRange, to: date }))}
 									/>
 								</div>
-								{rangeCompare != null && (
-									<div className='flex gap-2'>
-										<DateInput
-											value={rangeCompare?.from}
-											onChange={(date) => {
-												if (rangeCompare) {
-													const compareToDate =
-														rangeCompare.to == null || date > rangeCompare.to
-															? date
-															: rangeCompare.to;
-													setRangeCompare((prevRangeCompare) => ({
-														...prevRangeCompare,
-														from: date,
-														to: compareToDate,
-													}));
-												} else {
-													setRangeCompare({
-														from: date,
-														to: new Date(),
-													});
-												}
-											}}
-										/>
-										<div className='py-1'>-</div>
-										<DateInput
-											value={rangeCompare?.to}
-											onChange={(date) => {
-												if (rangeCompare && rangeCompare.from) {
-													const compareFromDate =
-														date < rangeCompare.from ? date : rangeCompare.from;
-													setRangeCompare({
-														...rangeCompare,
-														from: compareFromDate,
-														to: date,
-													});
-												}
-											}}
-										/>
-									</div>
-								)}
 							</div>
 						</div>
 
