@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { IToolbarOptions } from '@/types';
 import { Cross2Icon } from '@radix-ui/react-icons';
+import { isValid } from 'date-fns';
 import { CirclePlus, SearchIcon } from 'lucide-react';
 import usePage from '@/hooks/usePage';
 import useTable from '@/hooks/useTable';
@@ -60,7 +61,14 @@ export function TableToolbar() {
 		start_date,
 		end_date,
 		onUpdate,
+		initialDateRange,
 	} = useTable();
+
+	const column = table.getColumn('created_at');
+	const columnFilterValue = column?.getFilterValue() as [Date, Date];
+
+	const startDate = start_date || columnFilterValue?.[0] || initialDateRange[0];
+	const endDate = end_date || columnFilterValue?.[1] || initialDateRange[1];
 
 	const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -85,7 +93,9 @@ export function TableToolbar() {
 				<ToolbarComponent option='view' render={() => <TableViewOptions table={table} />} />
 				<ToolbarComponent
 					option='date-range'
-					render={() => <TableDateRange start_date={start_date} end_date={end_date} onUpdate={onUpdate} />}
+					render={() => (
+						<TableDateRange table={table} start_date={startDate} end_date={endDate} onUpdate={onUpdate} />
+					)}
 				/>
 				<ToolbarComponent
 					option='faceted-filter'
@@ -118,11 +128,14 @@ export function TableToolbar() {
 
 				<ToolbarComponent
 					option='export-csv'
-					render={() => <TableExportCSV start_date={start_date} end_date={end_date} />}
+					render={() =>
+						isValid(startDate) &&
+						isValid(endDate) && <TableExportCSV start_date={startDate} end_date={endDate} />
+					}
 				/>
 			</div>
 		),
-		[table, facetedFilters, isFiltered, resetColumnFilters, start_date, end_date, onUpdate]
+		[table, facetedFilters, isFiltered, resetColumnFilters, onUpdate, startDate, endDate]
 	);
 
 	/**
