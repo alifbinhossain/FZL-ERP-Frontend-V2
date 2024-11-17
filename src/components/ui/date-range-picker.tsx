@@ -438,10 +438,10 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 										setPreset(value);
 									}}
 								>
-									<SelectTrigger className='mx-auto w-[180px]'>
+									<SelectTrigger className='mx-auto w-[200px]'>
 										<SelectValue placeholder='Select...' />
 									</SelectTrigger>
-									<SelectContent>
+									<SelectContent className='z-[999]'>
 										{PRESETS.map((preset) => (
 											<SelectItem key={preset.name} value={preset.name}>
 												{preset.label}

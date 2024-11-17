@@ -15,6 +15,7 @@ const ResetPassword = lazy(() => import('./reset-password'));
 const PageAssign = lazy(() => import('./page-assign'));
 const DeleteModal = lazy(() => import('@core/modal/delete'));
 const DeleteAllModal = lazy(() => import('@core/modal/delete/all'));
+
 const User = () => {
 	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useHrUsers<IUserTableData[]>();
 
