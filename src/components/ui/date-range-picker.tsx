@@ -498,7 +498,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 							}}
 							variant='destructive'
 						>
-							Clear All
+							Clear Filter
 						</Button>
 					)}
 
