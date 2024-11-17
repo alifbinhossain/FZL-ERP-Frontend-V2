@@ -61,6 +61,8 @@ export function TableToolbar() {
 		start_date,
 		end_date,
 		onUpdate,
+		onClear,
+		isClear,
 		initialDateRange,
 	} = useTable();
 
@@ -94,7 +96,14 @@ export function TableToolbar() {
 				<ToolbarComponent
 					option='date-range'
 					render={() => (
-						<TableDateRange table={table} start_date={startDate} end_date={endDate} onUpdate={onUpdate} />
+						<TableDateRange
+							table={table}
+							start_date={startDate}
+							end_date={endDate}
+							onUpdate={onUpdate}
+							onClear={onClear}
+							isClear={isClear}
+						/>
 					)}
 				/>
 				<ToolbarComponent
@@ -135,7 +144,7 @@ export function TableToolbar() {
 				/>
 			</div>
 		),
-		[table, facetedFilters, isFiltered, resetColumnFilters, onUpdate, startDate, endDate]
+		[table, facetedFilters, isFiltered, resetColumnFilters, onUpdate, startDate, endDate, onClear, isClear]
 	);
 
 	/**

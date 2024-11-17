@@ -21,8 +21,13 @@ export type IResponse<T> = {
 };
 
 export type IParams = {
-	start_date: Date | string;
-	end_date: Date | string;
+	start_date: Date | string | undefined;
+	end_date: Date | string | undefined;
+};
+
+export type IStartEndDateProps = {
+	start_date: Date | undefined;
+	end_date: Date | undefined;
 };
 
 export type IUser = {

@@ -13,6 +13,8 @@ export type TTableExportCSV = TStartEndDate;
 export type TTableDateRange<T> = TStartEndDate & {
 	table: Table<T>;
 	onUpdate: (({ range }: { range: DateRange }) => void) | undefined;
+	onClear?: () => void;
+	isClear?: boolean;
 };
 
 export interface IDataTableEntryProps<TData, TValue> {

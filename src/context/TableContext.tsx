@@ -67,6 +67,8 @@ interface ITableContext<TData> {
 	start_date?: Date | string;
 	end_date?: Date | string;
 	onUpdate?: ({ range }: { range: DateRange }) => void;
+	onClear?: () => void;
+	isClear?: boolean;
 }
 
 export const TableContext = createContext({} as ITableContext<any>);
@@ -92,6 +94,8 @@ interface ITableProviderProps<TData, TValue> {
 	start_date?: Date | string;
 	end_date?: Date | string;
 	onUpdate?: ({ range }: { range: DateRange }) => void;
+	onClear?: () => void;
+	isClear?: boolean;
 }
 
 function TableProvider<TData, TValue>({
@@ -115,6 +119,8 @@ function TableProvider<TData, TValue>({
 	start_date,
 	end_date,
 	onUpdate,
+	onClear,
+	isClear,
 }: ITableProviderProps<TData, TValue>) {
 	const [isMounted, setIsMounted] = useState(false);
 
@@ -210,6 +216,8 @@ function TableProvider<TData, TValue>({
 			start_date,
 			end_date,
 			onUpdate,
+			onClear,
+			isClear,
 		}),
 		[
 			title,
@@ -232,6 +240,8 @@ function TableProvider<TData, TValue>({
 			start_date,
 			end_date,
 			onUpdate,
+			onClear,
+			isClear,
 		]
 	);
 

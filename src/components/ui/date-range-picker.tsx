@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState, type FC } from 'react';
-import { format } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
 import { Button } from './button';
 import { Calendar } from './calendar';
-import { DateInput } from './date-input';
 import { Label } from './label';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
 import { ScrollArea } from './scroll-area';
@@ -31,6 +29,8 @@ export interface DateRangePickerProps {
 	locale?: string;
 	/** Option for showing compare feature */
 	showCompare?: boolean;
+
+	onClear?: () => void;
 }
 
 const formatDate = (date: Date, locale: string = 'en-us'): string => {
@@ -93,6 +93,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 	align = 'end',
 	locale = 'en-US',
 	showCompare = false,
+	onClear,
 }): JSX.Element => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -371,7 +372,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 			<PopoverContent align={align} className='w-auto p-0'>
 				<div className='flex'>
 					<div className='gap flex flex-col'>
-						<div className='flex flex-col items-center justify-center gap-2 border-b px-8 py-4 lg:flex-row lg:items-start'>
+						<div className='flex flex-col items-center justify-center gap-2 border-b px-8 py-3 lg:flex-row lg:items-start'>
 							{showCompare && (
 								<div className='flex items-center space-x-2 py-1 pr-4'>
 									<Switch
@@ -485,32 +486,51 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 					</div>
 				</div>
 
-				<div className='flex justify-end gap-4 border-t px-4 py-4'>
-					<Button
-						aria-label='Cancel'
-						onClick={() => {
-							setIsOpen(false);
-							resetValues();
-						}}
-						variant='outline'
-					>
-						Cancel
-					</Button>
-					<Button
-						aria-label='Apply'
-						variant={'accent'}
-						onClick={() => {
-							setIsOpen(false);
-							if (
-								!areRangesEqual(range, openedRangeRef.current) ||
-								!areRangesEqual(rangeCompare, openedRangeCompareRef.current)
-							) {
-								onUpdate?.({ range, rangeCompare });
-							}
-						}}
-					>
-						Apply
-					</Button>
+				<div className='flex items-center justify-between border-t p-3'>
+					{onClear && (
+						<Button
+							size={'sm'}
+							aria-label='Cancel'
+							onClick={() => {
+								setIsOpen(false);
+								resetValues();
+								onClear();
+							}}
+							variant='destructive'
+						>
+							Clear All
+						</Button>
+					)}
+
+					<div className='flex flex-1 justify-end gap-4'>
+						<Button
+							size={'sm'}
+							aria-label='Cancel'
+							onClick={() => {
+								setIsOpen(false);
+								resetValues();
+							}}
+							variant='outline'
+						>
+							Cancel
+						</Button>
+						<Button
+							size={'sm'}
+							aria-label='Apply'
+							variant={'accent'}
+							onClick={() => {
+								setIsOpen(false);
+								if (
+									!areRangesEqual(range, openedRangeRef.current) ||
+									!areRangesEqual(rangeCompare, openedRangeCompareRef.current)
+								) {
+									onUpdate?.({ range, rangeCompare });
+								}
+							}}
+						>
+							Apply
+						</Button>
+					</div>
 				</div>
 			</PopoverContent>
 		</Popover>

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -19,6 +19,8 @@ interface IProps {
 }
 
 const SingleDatePicker: React.FC<IProps> = ({ selected, onSelect, disableIcon = false, className, size = 'sm' }) => {
+	if (!selected || !isValid(selected)) return;
+
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
