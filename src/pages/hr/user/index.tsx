@@ -17,7 +17,13 @@ const DeleteModal = lazy(() => import('@core/modal/delete'));
 const DeleteAllModal = lazy(() => import('@core/modal/delete/all'));
 
 const User = () => {
-	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useHrUsers<IUserTableData[]>();
+	const [status, setStatus] = useState<boolean | undefined>(undefined);
+	const handleChangeStatus = () => setStatus(!status);
+	const handleClearStatus = () => setStatus(undefined);
+
+	const { data, isLoading, url, deleteData, postData, updateData, refetch } = useHrUsers<IUserTableData[]>({
+		status,
+	});
 
 	const pageInfo = useMemo(() => new PageInfo('Admin/User', url, 'admin__user'), [url]);
 
@@ -124,6 +130,14 @@ const User = () => {
 				columns={columns}
 				data={data ?? []}
 				isLoading={isLoading}
+				advanceFilters={[
+					{
+						label: 'Status',
+						state: status,
+						onStateChange: handleChangeStatus,
+						clear: handleClearStatus,
+					},
+				]}
 				handleCreate={handleCreate}
 				handleUpdate={handleUpdate}
 				handleDelete={handleDelete}

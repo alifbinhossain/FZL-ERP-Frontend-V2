@@ -21,8 +21,9 @@ export type IResponse<T> = {
 };
 
 export type IParams = {
-	start_date: Date | string | undefined;
-	end_date: Date | string | undefined;
+	start_date?: Date | string | undefined;
+	end_date?: Date | string | undefined;
+	status?: boolean | undefined;
 };
 
 export type IStartEndDateProps = {
@@ -59,12 +60,20 @@ export type ITableFacetedFilter = {
 	}[];
 };
 
+export type ITableAdvanceFilter = {
+	state: boolean | undefined;
+	label: string;
+	onStateChange: () => void;
+	clear: () => void;
+};
+
 export type IToolbarOptions =
 	| 'all'
 	| 'all-filter'
 	| 'view'
 	| 'date-range'
 	| 'faceted-filter'
+	| 'advance-filter'
 	| 'export-csv'
 	| 'export-pdf'
 	| 'refresh'

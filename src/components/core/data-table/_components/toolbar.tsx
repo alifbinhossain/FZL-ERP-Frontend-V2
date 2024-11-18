@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils';
 import TableDateRange from './date-range';
 import TableExportCSV from './export-csv';
 import TableAllFilter from './filter';
+import TableAdvanceFilters from './filter/advance';
 import { TableFacetedFilter } from './filter/faceted';
 import TableRefresh from './refresh';
 import { TableRowDelete } from './row/delete';
@@ -57,6 +58,7 @@ export function TableToolbar() {
 		handleRefetch,
 		globalFilterValue,
 		facetedFilters,
+		advanceFilters,
 		isEntry,
 		start_date,
 		end_date,
@@ -122,6 +124,14 @@ export function TableToolbar() {
 						})
 					}
 				/>
+				<ToolbarComponent
+					option='advance-filter'
+					render={() =>
+						advanceFilters && advanceFilters?.length > 0 ? (
+							<TableAdvanceFilters filters={advanceFilters} />
+						) : null
+					}
+				/>
 				{isFiltered && (
 					<Button
 						aria-label='Reset filters'
@@ -144,7 +154,18 @@ export function TableToolbar() {
 				/>
 			</div>
 		),
-		[table, facetedFilters, isFiltered, resetColumnFilters, onUpdate, startDate, endDate, onClear, isClear]
+		[
+			table,
+			facetedFilters,
+			advanceFilters,
+			isFiltered,
+			resetColumnFilters,
+			onUpdate,
+			startDate,
+			endDate,
+			onClear,
+			isClear,
+		]
 	);
 
 	/**

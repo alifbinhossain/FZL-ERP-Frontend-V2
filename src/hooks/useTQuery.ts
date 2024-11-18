@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { api } from '@/lib/api';
 
 interface IUseTQuery {
-	queryKey: (string | number | Date | undefined)[];
+	queryKey: (string | number | boolean | Date | undefined)[];
 	url: string;
 	enabled?: boolean;
 }

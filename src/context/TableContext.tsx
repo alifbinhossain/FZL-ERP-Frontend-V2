@@ -1,5 +1,5 @@
 import { createContext, useLayoutEffect, useMemo, useState } from 'react';
-import { IResponse, ITableFacetedFilter, IToolbarOptions } from '@/types';
+import { IResponse, ITableAdvanceFilter, ITableFacetedFilter, IToolbarOptions } from '@/types';
 import { RankingInfo } from '@tanstack/match-sorter-utils';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import {
@@ -61,6 +61,7 @@ interface ITableContext<TData> {
 	initialDateRange: [Date | string, Date | string];
 	globalFilterValue?: string;
 	facetedFilters?: ITableFacetedFilter[];
+	advanceFilters?: ITableAdvanceFilter[];
 	toolbarOptions?: 'none' | IToolbarOptions[];
 	enableRowSelection?: boolean;
 	enableDefaultColumns?: boolean;
@@ -89,6 +90,7 @@ interface ITableProviderProps<TData, TValue> {
 	handleRefetch?: (options?: RefetchOptions) => Promise<QueryObserverResult<IResponse<any>, Error>>;
 	handleDeleteAll?: (rows: Row<TData>[]) => void;
 	facetedFilters?: ITableFacetedFilter[];
+	advanceFilters?: ITableAdvanceFilter[];
 	toolbarOptions?: 'none' | IToolbarOptions[];
 	defaultVisibleColumns?: VisibilityState;
 	start_date?: Date | string;
@@ -114,6 +116,7 @@ function TableProvider<TData, TValue>({
 	handleRefetch,
 	handleDeleteAll,
 	facetedFilters,
+	advanceFilters,
 	toolbarOptions = ['all'],
 	defaultVisibleColumns = {},
 	start_date,
@@ -210,6 +213,7 @@ function TableProvider<TData, TValue>({
 			initialDateRange: [minDate, maxDate],
 			globalFilterValue: globalFilter,
 			facetedFilters,
+			advanceFilters,
 			toolbarOptions: toolbarOptions.length > 0 ? toolbarOptions : ['all'],
 			enableRowSelection,
 			enableDefaultColumns,
@@ -234,6 +238,7 @@ function TableProvider<TData, TValue>({
 			maxDate,
 			globalFilter,
 			facetedFilters,
+			advanceFilters,
 			toolbarOptions,
 			enableRowSelection,
 			enableDefaultColumns,
