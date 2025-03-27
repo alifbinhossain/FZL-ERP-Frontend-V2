@@ -30,6 +30,7 @@ interface TDefaultColumn<TData, TValue> {
 
 export interface TableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
 	column: Column<TData, TValue>;
+	isSSR?: boolean;
 }
 
 export type IFilterProps<TData, TValue> = TDefaultColumn<TData, TValue> & {

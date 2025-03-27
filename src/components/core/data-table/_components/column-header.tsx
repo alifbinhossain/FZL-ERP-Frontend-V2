@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
 import { TableColumnHeaderProps } from '../types';
 import TableColumnFilter from './filter/column';
 
-export function TableColumnHeader<TData, TValue>({ column, className }: TableColumnHeaderProps<TData, TValue>) {
+export function TableColumnHeader<TData, TValue>({ column, className, isSSR }: TableColumnHeaderProps<TData, TValue>) {
 	const title = column.columnDef.header as string;
 
 	if (!column.getCanSort()) {
@@ -44,16 +44,20 @@ export function TableColumnHeader<TData, TValue>({ column, className }: TableCol
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align='start'>
-					<DropdownMenuItem onClick={() => column.toggleSorting(false)}>
-						<ArrowUpIcon className='mr-2 size-3.5 text-muted-foreground/70' />
-						Asc
-					</DropdownMenuItem>
-					<DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-						<ArrowDownIcon className='mr-2 size-3.5 text-muted-foreground/70' />
-						Desc
-					</DropdownMenuItem>
+					{!isSSR && (
+						<>
+							<DropdownMenuItem onClick={() => column.toggleSorting(false)}>
+								<ArrowUpIcon className='mr-2 size-3.5 text-muted-foreground/70' />
+								Asc
+							</DropdownMenuItem>
+							<DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+								<ArrowDownIcon className='mr-2 size-3.5 text-muted-foreground/70' />
+								Desc
+							</DropdownMenuItem>
 
-					<DropdownMenuSeparator />
+							<DropdownMenuSeparator />
+						</>
+					)}
 
 					{column.getCanPin() && (
 						<DropdownMenuItem

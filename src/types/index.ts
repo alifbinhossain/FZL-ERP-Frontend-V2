@@ -18,6 +18,7 @@ export type IToast = {
 export type IResponse<T> = {
 	toast: IToast;
 	data: T;
+	pagination: IPagination;
 };
 
 export type IParams = {
@@ -83,3 +84,20 @@ export type IDeleteModal = {
 	id: string;
 	name: string;
 } | null;
+
+export type IPaginationQuery = {
+	page: string;
+	limit: string;
+	sort: string;
+	orderby: 'asc' | 'desc';
+	q: string;
+	[key: string]: string | number | undefined;
+};
+
+export type IPagination = {
+	total_record: number;
+	current_page: number;
+	total_page: number;
+	next_page: number | null;
+	prev_page: number | null;
+};
