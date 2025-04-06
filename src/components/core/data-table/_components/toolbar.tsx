@@ -149,7 +149,15 @@ export function TableToolbar() {
 					option='export-csv'
 					render={() =>
 						isValid(startDate) &&
-						isValid(endDate) && <TableExportCSV start_date={startDate} end_date={endDate} />
+						isValid(endDate) && (
+							<TableExportCSV
+								table={table}
+								title={title}
+								isEntry={isEntry}
+								start_date={startDate}
+								end_date={endDate}
+							/>
+						)
 					}
 				/>
 			</div>
@@ -165,6 +173,8 @@ export function TableToolbar() {
 			endDate,
 			onClear,
 			isClear,
+			isEntry,
+			title,
 		]
 	);
 

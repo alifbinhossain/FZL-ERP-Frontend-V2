@@ -8,6 +8,7 @@ import { PageInfo } from '@/utils';
 import renderSuspenseModals from '@/utils/renderSuspenseModals';
 
 import { orderDetailsColumns } from '../_config/columns';
+import { orderDetailsFilters } from '../_config/columns/filter';
 import { IOrderDetails } from '../_config/columns/type';
 import { useOrderDetails2 } from '../_config/query';
 
@@ -69,6 +70,8 @@ const OrderDetails = () => {
 	return (
 		<PageProvider pageName={pageInfo.getTab()} pageTitle={pageInfo.getTabName()}>
 			<TableProviderSSR
+				start_date={params.start_date ? new Date(params.start_date) : undefined}
+				end_date={params.end_date ? new Date(params.end_date) : undefined}
 				title={pageInfo.getTitle()}
 				pagination={pagination!}
 				columns={columns}
@@ -79,6 +82,7 @@ const OrderDetails = () => {
 				handleDelete={handleDelete}
 				handleRefetch={refetch}
 				handleDeleteAll={handleDeleteAll}
+				filterOptions={orderDetailsFilters}
 			>
 				{renderSuspenseModals([
 					<DeleteModal

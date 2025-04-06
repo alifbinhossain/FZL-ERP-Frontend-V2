@@ -61,6 +61,13 @@ export type ITableFacetedFilter = {
 	}[];
 };
 
+export type ITableFilterOptionSSR<T> = {
+	accessor: keyof T;
+	label: string;
+	type: 'select' | 'checkbox' | 'radio' | 'date-range' | 'date' | 'text';
+	apiUrl?: string;
+};
+
 export type ITableAdvanceFilter = {
 	state: boolean | undefined;
 	label: string;
@@ -91,6 +98,8 @@ export type IPaginationQuery = {
 	sort: string;
 	orderby: 'asc' | 'desc';
 	q: string;
+	start_date: string | undefined;
+	end_date: string | undefined;
 	[key: string]: string | number | undefined;
 };
 

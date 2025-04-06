@@ -3,20 +3,20 @@ import useTableSSR from '@/hooks/useTableSSR';
 
 import { TableColumnHeader } from '@/components/core/data-table/_components/column-header';
 import TableSkeleton from '@/components/core/data-table/_components/skeleton';
-import { TableToolbar } from '@/components/core/data-table/_components/toolbar';
 import { getCommonPinningStyles } from '@/components/core/data-table/_helpers/getCommonPinningStyle';
 import { TableBody, TableCell, Table as TableComponent, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import { cn } from '@/lib/utils';
 
 import { TablePagination } from './_components/pagination';
+import Toolbar from './_components/toolbar';
 
 const DataTableSSR = () => {
 	const { table, isEntry, isLoading } = useTableSSR();
 
 	return (
 		<div>
-			{/* <TableToolbar /> */}
+			<Toolbar />
 			<div className={cn('overflow-hidden border border-secondary/10', isEntry ? 'rounded-b-md' : 'rounded-md')}>
 				<TableComponent>
 					<TableHeader>

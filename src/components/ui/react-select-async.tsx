@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
-import { ChevronDown, X } from 'lucide-react';
+import { ChevronDown, Option, X } from 'lucide-react';
 import Select, { ClassNamesConfig, components, Props, StylesConfig } from 'react-select';
+import AsyncSelect, { AsyncProps } from 'react-select/async';
 
 import { cn } from '@/lib/utils';
 
@@ -44,7 +45,12 @@ const classNames = (extraControlClassName?: string): ClassNamesConfig => ({
 
 export type Ref = any;
 
-const ReactSelect = forwardRef<Ref, Props & { extraControlClassName?: string }>(
+interface Option {
+	label: string;
+	value: string;
+}
+
+const ReactSelectAsync = forwardRef<Ref, AsyncProps<Option, any, any> & { extraControlClassName?: string }>(
 	(
 		{
 			options,
@@ -59,12 +65,12 @@ const ReactSelect = forwardRef<Ref, Props & { extraControlClassName?: string }>(
 		ref
 	) => {
 		return (
-			<Select
+			<AsyncSelect
 				ref={ref}
 				unstyled
 				classNamePrefix={'react-select-'}
-				classNames={classNames(extraControlClassName)}
-				styles={selectStyles}
+				classNames={classNames(extraControlClassName) as any}
+				styles={selectStyles as any}
 				components={{
 					ClearIndicator: (props) => (
 						<components.ClearIndicator className='mr-1 border-r border-r-input pr-1' {...props}>
@@ -101,4 +107,4 @@ const ReactSelect = forwardRef<Ref, Props & { extraControlClassName?: string }>(
 	}
 );
 
-export default ReactSelect;
+export default ReactSelectAsync;

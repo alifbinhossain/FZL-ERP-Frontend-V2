@@ -1,7 +1,21 @@
 import { createContext, useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import { IPagination, IPaginationQuery, IResponse } from '@/types';
+import { IPagination, IPaginationQuery, IResponse, ITableFilterOptionSSR } from '@/types';
+import { RankingInfo } from '@tanstack/match-sorter-utils';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
-import { ColumnDef, getCoreRowModel, Row, Table, useReactTable, VisibilityState } from '@tanstack/react-table';
+import {
+	ColumnDef,
+	ColumnFiltersState,
+	FilterFn,
+	getCoreRowModel,
+	getFacetedRowModel,
+	getFacetedUniqueValues,
+	getFilteredRowModel,
+	Row,
+	RowData,
+	Table,
+	useReactTable,
+	VisibilityState,
+} from '@tanstack/react-table';
 import { max, min } from 'date-fns';
 import { DateRange } from 'react-day-picker';
 import { useSearchParams } from 'react-router-dom';
@@ -12,11 +26,31 @@ import { dateRange } from '@core/data-table/_helpers/dateRange';
 import { fuzzyFilter } from '@core/data-table/_helpers/fuzzyFilter';
 import useDefaultColumns from '@core/data-table/_helpers/useDefaultColumns';
 
+declare module '@tanstack/react-table' {
+	//allows us to define custom properties for our columns
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	interface ColumnMeta<TData extends RowData, TValue> {
+		filterVariant?: 'text' | 'range' | 'select' | 'dateRange';
+		hidden?: boolean;
+		disableFullFilter?: boolean;
+	}
+
+	//add fuzzy filter to the filterFns
+	interface FilterFns {
+		fuzzy: FilterFn<unknown>;
+		dateRange: FilterFn<unknown>;
+	}
+	interface FilterMeta {
+		itemRank: RankingInfo;
+	}
+}
+
 interface ITableContextSSR<TData> {
 	title: string;
 	subtitle?: string;
 	pagination: IPagination;
 	handleSearchParams: (params: Partial<IPaginationQuery>) => void;
+	clearSearchParams: () => void;
 	isEntry?: boolean;
 	table: Table<TData>;
 	isLoading?: boolean;
@@ -33,6 +67,8 @@ interface ITableContextSSR<TData> {
 	onUpdate?: ({ range }: { range: DateRange }) => void;
 	onClear?: () => void;
 	isClear?: boolean;
+	filterOptions?: ITableFilterOptionSSR<any>[];
+	isFiltered?: boolean;
 }
 
 export const TableContextSSR = createContext({} as ITableContextSSR<any>);
@@ -59,6 +95,7 @@ interface ITableProviderProps<TData, TValue> {
 	onUpdate?: ({ range }: { range: DateRange }) => void;
 	onClear?: () => void;
 	isClear?: boolean;
+	filterOptions?: ITableFilterOptionSSR<any>[];
 }
 
 function TableProviderSSR<TData, TValue>({
@@ -83,21 +120,25 @@ function TableProviderSSR<TData, TValue>({
 	onUpdate,
 	onClear,
 	isClear,
+	filterOptions,
 }: ITableProviderProps<TData, TValue>) {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const [isMounted, setIsMounted] = useState(false);
+	const [isFiltered, setIsFiltered] = useState(false);
 
 	// react table hook, and other codes...
 	const tableData = useMemo(() => data, [data]);
 	const tableColumns = useMemo(() => columns, [columns]);
-	const defaultColumns = useDefaultColumns<TData, TValue>();
+	const defaultColumns = useDefaultColumns<TData, TValue>({ isSSR: true });
 	const renderColumns = enableDefaultColumns ? tableColumns.concat(defaultColumns) : tableColumns;
 
 	const visibleColumns = renderColumns.filter((column) => !column.meta?.hidden);
 
 	const [rowSelection, setRowSelection] = useState({});
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(defaultVisibleColumns);
+
+	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
 	// Fix error on react table, when the table is not mounted
 	useLayoutEffect(() => {
@@ -109,11 +150,33 @@ function TableProviderSSR<TData, TValue>({
 			searchParams.forEach((value, key) => {
 				if (Object.keys(params).includes(key)) searchParams.delete(key);
 			});
-			Object.entries(params).forEach(([key, value]) => searchParams.append(key, String(value)));
+			Object.entries(params).forEach(([key, value]) => {
+				if (key !== 'limit' && key !== 'page') {
+					setIsFiltered(true);
+				}
+				searchParams.append(key, String(value));
+			});
 			setSearchParams(searchParams);
 		},
 		[searchParams, setSearchParams]
 	);
+
+	const clearSearchParams = useCallback(() => {
+		searchParams.forEach((value, key) => searchParams.delete(key));
+		setSearchParams({});
+		setIsFiltered(false);
+	}, [searchParams, setSearchParams]);
+
+	useEffect(() => {
+		// set the isFiltered state based on the search params if the table is mounted
+		if (isMounted) {
+			const params: any = {};
+			searchParams.forEach((value, key) => {
+				if (key !== 'limit' && key !== 'page') params[key] = value;
+			});
+			setIsFiltered(Object.keys(params).length > 0 ? true : false);
+		}
+	}, [searchParams, isMounted]);
 
 	const table = useReactTable({
 		data: tableData,
@@ -124,6 +187,7 @@ function TableProviderSSR<TData, TValue>({
 		state: {
 			columnVisibility,
 			rowSelection,
+			columnFilters,
 		},
 		enableRowSelection: true,
 		filterFns: {
@@ -132,11 +196,21 @@ function TableProviderSSR<TData, TValue>({
 		},
 		globalFilterFn: 'fuzzy',
 		onRowSelectionChange: setRowSelection,
+		onColumnFiltersChange: setColumnFilters,
 		onColumnVisibilityChange: setColumnVisibility,
 		getCoreRowModel: getCoreRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
+		getFacetedRowModel: getFacetedRowModel(),
+		getFacetedUniqueValues: getFacetedUniqueValues(),
 	});
 
 	const allDates: Date[] = [];
+	const createdColumn = table.getColumn('created_at');
+	const uniqueCreatedValues = createdColumn?.getFacetedUniqueValues();
+
+	uniqueCreatedValues?.forEach((key, value) => {
+		allDates.push(new Date(value));
+	});
 
 	const minDate = min(allDates);
 	const maxDate = max(allDates);
@@ -150,6 +224,7 @@ function TableProviderSSR<TData, TValue>({
 			isLoading,
 			table,
 			handleSearchParams,
+			clearSearchParams,
 			handleCreate,
 			handleUpdate,
 			handleDelete,
@@ -163,6 +238,8 @@ function TableProviderSSR<TData, TValue>({
 			onUpdate,
 			onClear,
 			isClear,
+			filterOptions,
+			isFiltered,
 		}),
 		[
 			title,
@@ -172,6 +249,7 @@ function TableProviderSSR<TData, TValue>({
 			isLoading,
 			table,
 			handleSearchParams,
+			clearSearchParams,
 			handleCreate,
 			handleUpdate,
 			handleDelete,
@@ -186,6 +264,8 @@ function TableProviderSSR<TData, TValue>({
 			onUpdate,
 			onClear,
 			isClear,
+			filterOptions,
+			isFiltered,
 		]
 	);
 
