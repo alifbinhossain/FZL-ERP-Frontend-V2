@@ -15,11 +15,16 @@ const DataTableSSR = () => {
 	const { table, isEntry, isLoading } = useTableSSR();
 
 	return (
-		<div>
+		<div className='flex h-full flex-col'>
 			<Toolbar />
-			<div className={cn('overflow-hidden border border-secondary/10', isEntry ? 'rounded-b-md' : 'rounded-md')}>
+			<div
+				className={cn(
+					'relative flex-1 overflow-auto border border-secondary/10',
+					isEntry ? 'rounded-b-md' : 'rounded-md'
+				)}
+			>
 				<TableComponent>
-					<TableHeader>
+					<TableHeader className='sticky left-0 right-0 top-0 z-20'>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {

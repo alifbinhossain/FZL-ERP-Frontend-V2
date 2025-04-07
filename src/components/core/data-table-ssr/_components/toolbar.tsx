@@ -16,6 +16,7 @@ import TableExportCSV from '../../data-table/_components/export-csv';
 import TableRefresh from '../../data-table/_components/refresh';
 import { TableViewOptions } from '../../data-table/_components/view-options';
 import TableFilter from './filter';
+import { TableOrderBy } from './order-by';
 
 const Toolbar = () => {
 	const { createAccess } = usePage();
@@ -51,6 +52,7 @@ const Toolbar = () => {
 			<div className='flex flex-1 items-center space-x-2'>
 				{filterOptions && <TableFilter options={filterOptions} />}
 				<TableViewOptions table={table} />
+				<TableOrderBy table={table} />
 				<TableDateRange
 					isSSR
 					table={table}

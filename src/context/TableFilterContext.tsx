@@ -34,7 +34,9 @@ const TableFilterProvider: React.FC<IFilterProviderProps> = ({ children, default
 	);
 
 	const isFiltered = useCallback(
-		() => filters.length > 0 && filters.some((filter) => filter.value !== ''),
+		() =>
+			filters.length > 0 &&
+			filters.some((filter) => filter.value !== '' && filter.value !== null && filter.value !== undefined),
 		[filters]
 	);
 

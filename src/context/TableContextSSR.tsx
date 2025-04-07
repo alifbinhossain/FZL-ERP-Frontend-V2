@@ -147,15 +147,17 @@ function TableProviderSSR<TData, TValue>({
 
 	const handleSearchParams = useCallback(
 		(params: Partial<IPaginationQuery>) => {
-			searchParams.forEach((value, key) => {
-				if (Object.keys(params).includes(key)) searchParams.delete(key);
-			});
 			Object.entries(params).forEach(([key, value]) => {
 				if (key !== 'limit' && key !== 'page') {
 					setIsFiltered(true);
 				}
+
+				if (searchParams.has(key)) searchParams.delete(key);
+
 				searchParams.append(key, String(value));
 			});
+
+			searchParams.sort();
 			setSearchParams(searchParams);
 		},
 		[searchParams, setSearchParams]

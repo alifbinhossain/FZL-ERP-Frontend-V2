@@ -52,6 +52,12 @@ export const orderDetailsColumns = (): ColumnDef<IOrderDetails>[] => [
 		cell: (info) => info.getValue(),
 	},
 	{
+		accessorKey: 'item_description',
+		header: 'Item Description',
+		enableColumnFilter: false,
+		cell: (info) => info.getValue(),
+	},
+	{
 		accessorKey: 'party_name',
 		header: 'Party',
 		enableColumnFilter: false,

@@ -95,8 +95,8 @@ export type IDeleteModal = {
 export type IPaginationQuery = {
 	page: string;
 	limit: string;
-	sort: string;
 	orderby: 'asc' | 'desc';
+	sort: string;
 	q: string;
 	start_date: string | undefined;
 	end_date: string | undefined;

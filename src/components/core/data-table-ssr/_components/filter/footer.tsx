@@ -25,6 +25,8 @@ const Footer = () => {
 			</Button>
 			<Button
 				onClick={() => {
+					clearSearchParams();
+
 					const params: any = {};
 					Object.keys(filters).forEach((key: any) => {
 						if (filters[key].name && filters[key].value) {

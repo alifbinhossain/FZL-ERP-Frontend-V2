@@ -21,7 +21,7 @@ export const type1FacetedFilters: ITableFacetedFilter[] = [
 
 export const orderDetailsFilters: ITableFilterOptionSSR<IOrderDetails>[] = [
 	{
-		accessor: 'order_number',
+		accessor: 'order_info_uuid',
 		label: 'Order Number',
 		type: 'select',
 		apiUrl: '/other/order/info/value/label',
