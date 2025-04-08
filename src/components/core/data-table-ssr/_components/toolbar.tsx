@@ -88,7 +88,19 @@ const Toolbar = () => {
 				)}
 			</div>
 		),
-		[table, endDate, startDate, isClear, onClear, onUpdate, isEntry, title, filterOptions]
+		[
+			table,
+			endDate,
+			startDate,
+			isClear,
+			onClear,
+			onUpdate,
+			isEntry,
+			title,
+			filterOptions,
+			clearSearchParams,
+			isFiltered,
+		]
 	);
 
 	/**
@@ -96,7 +108,7 @@ const Toolbar = () => {
 	 */
 	const renderRightSection = useCallback(
 		() => (
-			<div className='flex gap-4'>
+			<div className='flex h-fit gap-4'>
 				{handleRefetch && <TableRefresh handleRefetch={handleRefetch} />}
 				{createAccess && (
 					<Button aria-label='Create new entry' onClick={handleCreate} variant='accent' size='sm'>

@@ -19,12 +19,12 @@ const DataTableSSR = () => {
 			<Toolbar />
 			<div
 				className={cn(
-					'relative flex-1 overflow-auto border border-secondary/10',
+					'border-secondary/10 relative max-h-fit flex-1 overflow-auto border',
 					isEntry ? 'rounded-b-md' : 'rounded-md'
 				)}
 			>
 				<TableComponent>
-					<TableHeader className='sticky left-0 right-0 top-0 z-20'>
+					<TableHeader className='sticky top-0 right-0 left-0 z-20'>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
@@ -56,7 +56,7 @@ const DataTableSSR = () => {
 							</TableRow>
 						))}
 					</TableHeader>
-					<TableBody className='divide-y-[1px] divide-secondary/10'>
+					<TableBody className='divide-secondary/10 divide-y-[1px]'>
 						{isLoading ? (
 							<TableSkeleton colSpan={table.getAllColumns().length} />
 						) : table.getRowModel().rows?.length ? (
