@@ -4,6 +4,7 @@ import useTableSSR from '@/hooks/useTableSSR';
 
 import PaginateButtons from '@/components/core/data-table/_helpers/paginate-buttons';
 import { Button } from '@/components/ui/button';
+import DebouncedInput from '@/components/ui/debounce-input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export function TablePagination() {
@@ -20,25 +21,42 @@ export function TablePagination() {
 					</div>
 				) : null}
 				<div className='flex flex-1 items-center justify-between space-x-6 lg:space-x-8'>
-					<div className='flex items-center space-x-2'>
-						<p className='text-sm font-medium'>Rows per page</p>
-						<Select
-							value={searchParams.get('limit') || '10'}
-							onValueChange={(value) => {
-								handleSearchParams({ limit: value });
-							}}
-						>
-							<SelectTrigger aria-label='Rows per page' className='h-8 w-[70px]'>
-								<SelectValue placeholder={searchParams.get('limit') || '10'} />
-							</SelectTrigger>
-							<SelectContent side='top'>
-								{[10, 20, 30, 40, 50].map((pageSize) => (
-									<SelectItem key={pageSize} value={`${pageSize}`}>
-										{pageSize}
-									</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
+					<div className='flex items-center space-x-4'>
+						<div className='flex items-center space-x-2'>
+							<p className='text-sm font-medium'>Rows per page</p>
+							<Select
+								value={searchParams.get('limit') || '10'}
+								onValueChange={(value) => {
+									handleSearchParams({ limit: value });
+								}}
+							>
+								<SelectTrigger aria-label='Rows per page' className='h-8 w-[70px]'>
+									<SelectValue placeholder={searchParams.get('limit') || '10'} />
+								</SelectTrigger>
+								<SelectContent side='top'>
+									{[10, 20, 30, 40, 50].map((pageSize) => (
+										<SelectItem key={pageSize} value={`${pageSize}`}>
+											{pageSize}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+						</div>
+
+						<div className='flex items-center space-x-2'>
+							<p className='text-sm font-medium'>Go to page</p>
+							<DebouncedInput
+								type='number'
+								value={searchParams.get('page') || ''}
+								min={1}
+								max={pagination?.total_page}
+								onChange={(value) => {
+									handleSearchParams({ page: value.toString() });
+								}}
+								className='h-8 w-20 border'
+								placeholder='1'
+							/>
+						</div>
 					</div>
 
 					<PaginateButtons
