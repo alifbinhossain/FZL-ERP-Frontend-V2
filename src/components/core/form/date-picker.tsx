@@ -33,7 +33,7 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
 			)}
 
 			<Popover>
-				<PopoverTrigger asChild>
+				<PopoverTrigger>
 					<FormControl>
 						<Button
 							type='button'

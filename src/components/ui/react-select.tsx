@@ -24,7 +24,7 @@ const classNames = (extraControlClassName?: string): ClassNamesConfig => ({
 			'bg-gradient min-h-10 rounded-md border border-input px-3 py-2 text-sm text-foreground',
 			isFocused && 'outline outline-2 outline-offset-2 outline-secondary',
 			isDisabled &&
-				'cursor-not-allowed border-destructive/50 !from-destructive/5 !to-destructive/5 text-destructive',
+				'cursor-not-allowed border-destructive/50 from-destructive/5! to-destructive/5! text-destructive',
 			extraControlClassName
 		),
 	placeholder: () => 'text-muted-foreground text-sm',
@@ -100,58 +100,5 @@ const ReactSelect = forwardRef<Ref, Props & { extraControlClassName?: string }>(
 		);
 	}
 );
-
-// const ReactSelect: React.FC<Props & { extraControlClassName?: string }> = ({
-// 	options,
-// 	placeholder,
-// 	isMulti = false,
-// 	isClearable = true,
-// 	isSearchable = true,
-// 	isDisabled = false,
-// 	extraControlClassName,
-// 	...props
-// }) => {
-// 	return (
-// 		<Select
-// 			unstyled
-// 			classNamePrefix={'react-select-'}
-// 			classNames={classNames(extraControlClassName)}
-// 			styles={selectStyles}
-// 			components={{
-// 				ClearIndicator: (props) => (
-// 					<components.ClearIndicator
-// 						className='mr-1 border-r border-r-input pr-1'
-// 						{...props}>
-// 						<X className='size-5 font-medium text-destructive' />
-// 					</components.ClearIndicator>
-// 				),
-
-// 				MultiValueRemove: (props) => (
-// 					<components.MultiValueRemove {...props}>
-// 						<X className='ml-1 size-4 font-medium text-destructive' />
-// 					</components.MultiValueRemove>
-// 				),
-
-// 				DropdownIndicator: (props) => (
-// 					<components.DropdownIndicator {...props}>
-// 						<ChevronDown
-// 							className={cn(
-// 								'size-5 transform text-secondary/50 transition-transform duration-300',
-// 								props.selectProps.menuIsOpen && 'rotate-90'
-// 							)}
-// 						/>
-// 					</components.DropdownIndicator>
-// 				),
-// 			}}
-// 			isMulti={isMulti}
-// 			isDisabled={isDisabled}
-// 			isClearable={isClearable}
-// 			isSearchable={isSearchable}
-// 			options={options}
-// 			placeholder={placeholder}
-// 			{...props}
-// 		/>
-// 	);
-// };
 
 export default ReactSelect;

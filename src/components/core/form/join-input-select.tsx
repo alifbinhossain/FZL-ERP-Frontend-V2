@@ -66,7 +66,7 @@ const FormJoinInputSelect: React.FC<FormJoinInputSelectProps> = ({
 							className={buttonVariants({
 								variant: 'accent',
 								className:
-									'h-8 max-w-[100px] justify-between truncate rounded bg-gradient-to-r from-accent to-accent capitalize transition-none active:scale-100',
+									'h-8 max-w-[100px] justify-between truncate rounded bg-linear-to-r from-accent to-accent capitalize transition-none active:scale-100',
 							})}
 						>
 							<SelectValue placeholder={placeholder} />

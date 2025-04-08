@@ -1,6 +1,7 @@
-import { IStartEndDateProps } from '@/types';
+import { IPaginationQuery, IStartEndDateProps } from '@/types';
 import useTQuery from '@/hooks/useTQuery';
 
+import addQueryParams from '@/utils/addQueryParams';
 import { formatQueryDates } from '@/utils/formatDate';
 import addUrlParams from '@/utils/routes/addUrlParams';
 
@@ -11,6 +12,12 @@ export const useOrderDetails = <T>() =>
 	useTQuery<T>({
 		queryKey: QK.details(),
 		url: '/zipper/order/details',
+	});
+
+export const useOrderDetails2 = <T>(pagination: IPaginationQuery) =>
+	useTQuery<T>({
+		queryKey: QK.details2(pagination),
+		url: addQueryParams('/v2/zipper/order/details', pagination),
 	});
 
 export const useOrderDetailsByQuery = <T>(query: string) =>

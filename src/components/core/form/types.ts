@@ -160,7 +160,7 @@ export interface FormCheckboxProps extends CheckboxProps {
 // * form-add-edit-wrapper
 export interface IFormAddEditWrapperProps {
 	children: React.ReactNode;
-	form: UseFormReturn<any, any, undefined>;
+	form: UseFormReturn<any, any, any>;
 	onSubmit(values: any): void;
 	title?: string;
 }

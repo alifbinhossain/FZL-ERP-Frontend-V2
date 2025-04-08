@@ -1,4 +1,4 @@
-import { IResponse } from '@/types';
+import { IPaginationQuery, IResponse } from '@/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { api } from '@/lib/api';
 
 interface IUseTQuery {
-	queryKey: (string | number | boolean | Date | undefined)[];
+	queryKey: (string | number | boolean | Date | undefined | IPaginationQuery)[];
 	url: string;
 	enabled?: boolean;
 }
@@ -134,6 +134,7 @@ const useTQuery = <T>({ queryKey, url, enabled = true }: IUseTQuery) => {
 		// * Data
 		data: data?.data,
 		toast: data?.toast,
+		pagination: data?.pagination,
 
 		// * States
 		isLoading: isLoading,

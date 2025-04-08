@@ -61,7 +61,7 @@ export interface IDeleteModalProps {
 }
 
 export interface IAddModalProps {
-	form: UseFormReturn<any, any, undefined>;
+	form: UseFormReturn<any, any, any>;
 	onSubmit(values: any): void;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;

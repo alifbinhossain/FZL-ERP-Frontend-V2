@@ -1,10 +1,11 @@
-import { IParams } from '@/types';
+import { IPaginationQuery, IParams } from '@/types';
 
 const QK = {
 	all: () => ['order'],
 
 	// details
 	details: () => [...QK.all(), 'details'],
+	details2: (pagination: IPaginationQuery) => [...QK.all(), 'details', 'v2', ...Object.values(pagination)],
 	detailsByQuery: (query: string) => [...QK.all(), 'detailsByQuery', query],
 	detailsByUUID: (uuid: string) => [...QK.details(), uuid],
 	detailsByOrderNumber: (orderNumber: string) => [...QK.details(), orderNumber],

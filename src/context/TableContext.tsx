@@ -130,7 +130,7 @@ function TableProvider<TData, TValue>({
 	// react table hook, and other codes...
 	const tableData = useMemo(() => data, [data]);
 	const tableColumns = useMemo(() => columns, [columns]);
-	const defaultColumns = useDefaultColumns<TData, TValue>();
+	const defaultColumns = useDefaultColumns<TData, TValue>({ isSSR: false });
 	const renderColumns = enableDefaultColumns ? tableColumns.concat(defaultColumns) : tableColumns;
 
 	const visibleColumns = renderColumns.filter((column) => !column.meta?.hidden);

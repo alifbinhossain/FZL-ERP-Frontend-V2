@@ -11,7 +11,7 @@ interface IProps extends Pick<DynamicFieldsProps, 'handleAdd' | 'extraHeader' | 
 
 const DynamicFieldContainer: React.FC<IProps> = ({ title, extraHeader, handleAdd, children }) => {
 	return (
-		<div className='overflow-hidden rounded-md shadow-sm'>
+		<div className='overflow-hidden rounded-md shadow-xs'>
 			<div className='flex items-center justify-between bg-primary py-2 pl-4 pr-2'>
 				<h3 className='text-lg font-medium text-primary-foreground'>{title || 'Dynamic Fields'}</h3>
 

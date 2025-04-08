@@ -149,7 +149,15 @@ export function TableToolbar() {
 					option='export-csv'
 					render={() =>
 						isValid(startDate) &&
-						isValid(endDate) && <TableExportCSV start_date={startDate} end_date={endDate} />
+						isValid(endDate) && (
+							<TableExportCSV
+								table={table}
+								title={title}
+								isEntry={isEntry}
+								start_date={startDate}
+								end_date={endDate}
+							/>
+						)
 					}
 				/>
 			</div>
@@ -165,6 +173,8 @@ export function TableToolbar() {
 			endDate,
 			onClear,
 			isClear,
+			isEntry,
+			title,
 		]
 	);
 
@@ -197,7 +207,7 @@ export function TableToolbar() {
 
 	if (isEntry) {
 		return (
-			<div className='flex items-center justify-between overflow-hidden rounded-t-md bg-primary px-4 py-3'>
+			<div className='bg-primary flex items-center justify-between overflow-hidden rounded-t-md px-4 py-3'>
 				<div className='flex items-center justify-between gap-4'>
 					<TableTitle
 						title={title}
@@ -217,7 +227,7 @@ export function TableToolbar() {
 					icon={<SearchIcon className={cn('size-5 text-white/50')} />}
 					value={globalFilterValue ?? ''}
 					onChange={setGlobalFilter}
-					className={cn('bg-gradient-accent h-10 w-full border-accent/10 lg:max-w-[300px]')}
+					className={cn('bg-gradient-accent border-accent/10 h-10 w-full lg:max-w-[300px]')}
 					placeholder='Search...'
 				/>
 			</div>
@@ -231,7 +241,7 @@ export function TableToolbar() {
 			>
 				<TableTitle title={title} subtitle={subtitle} />
 				<DebouncedInput
-					icon={<SearchIcon className={cn('size-5 text-secondary/50')} />}
+					icon={<SearchIcon className={cn('text-secondary/50 size-5')} />}
 					value={globalFilterValue ?? ''}
 					onChange={setGlobalFilter}
 					className={cn('h-10 w-full lg:max-w-[300px]')}
