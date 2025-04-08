@@ -1,7 +1,10 @@
 import { useCallback } from 'react';
+import { TableFilterProvider } from '@/context';
+import { ITableFilter } from '@/context/TableFilterContext';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { isValid } from 'date-fns';
 import { CirclePlus } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import usePage from '@/hooks/usePage';
 import useTableSSR from '@/hooks/useTableSSR';
 
@@ -16,6 +19,7 @@ import TableExportCSV from '../../data-table/_components/export-csv';
 import TableRefresh from '../../data-table/_components/refresh';
 import { TableViewOptions } from '../../data-table/_components/view-options';
 import TableFilter from './filter';
+import PinFilters from './filter/pin-filters';
 import { TableOrderBy } from './order-by';
 
 const Toolbar = () => {
@@ -38,11 +42,17 @@ const Toolbar = () => {
 		clearSearchParams,
 	} = useTableSSR();
 
+	const [searchParams] = useSearchParams();
+
 	const column = table.getColumn('created_at');
 	const columnFilterValue = column?.getFilterValue() as [Date, Date];
 
 	const startDate = start_date || columnFilterValue?.[0] || initialDateRange[0];
 	const endDate = end_date || columnFilterValue?.[1] || initialDateRange[1];
+
+	const defaultFilterValues: ITableFilter[] = [];
+
+	searchParams.forEach((value, key) => defaultFilterValues.push({ name: key, value }));
 
 	/**
 	 * Renders the left section of the toolbar
@@ -122,19 +132,24 @@ const Toolbar = () => {
 	);
 
 	return (
-		<div className={cn('mb-4 flex w-full flex-col overflow-hidden')}>
-			<div
-				className={cn('mb-4 flex w-full flex-col justify-between gap-2 border-b pb-4 lg:flex-row lg:items-end')}
-			>
-				<TableTitle title={title} subtitle={subtitle} />
-			</div>
-			{
+		<TableFilterProvider defaultValues={defaultFilterValues}>
+			<div className={cn('mb-4 flex w-full flex-col overflow-hidden')}>
+				<div
+					className={cn(
+						'mb-4 flex w-full flex-col justify-between gap-2 border-b pb-4 lg:flex-row lg:items-end'
+					)}
+				>
+					<TableTitle title={title} subtitle={subtitle} />
+				</div>
+
 				<div className={cn('flex items-center justify-between')}>
 					{renderLeftSection()}
 					{renderRightSection()}
 				</div>
-			}
-		</div>
+
+				<PinFilters />
+			</div>
+		</TableFilterProvider>
 	);
 };
 

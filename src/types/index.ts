@@ -66,6 +66,7 @@ export type ITableFilterOptionSSR<T> = {
 	label: string;
 	type: 'select' | 'checkbox' | 'radio' | 'date-range' | 'date' | 'text';
 	apiUrl?: string;
+	isPinned?: boolean;
 };
 
 export type ITableAdvanceFilter = {
