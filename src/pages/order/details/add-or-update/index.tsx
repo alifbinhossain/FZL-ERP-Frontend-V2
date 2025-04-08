@@ -1,4 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
+import { useTest, useTestByUUID } from '@/pages/template/_config/query';
+import { ITest3, TEST_NULL_3, TEST_SCHEMA_3 } from '@/pages/template/_config/schema';
 import { useFieldArray } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '@/hooks/useAuth';
@@ -9,8 +11,6 @@ import CoreForm from '@core/form';
 import nanoid from '@/lib/nanoid';
 import { getDateTime } from '@/utils';
 
-import { useTest, useTestByUUID } from '../../_config/query';
-import { ITest3, TEST_NULL_3, TEST_SCHEMA_3 } from '../../_config/schema';
 import Header from './header';
 import useGenerateFieldDefs from './useGenerateFieldDefs';
 

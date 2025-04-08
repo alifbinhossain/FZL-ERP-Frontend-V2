@@ -100,7 +100,7 @@ class CustomEditor extends BaseEditorComponent<ICustomEditorProps> {
 					id='editorElement'
 				>
 					<ReactSelect
-						extraControlClassName='!rounded-none'
+						extraControlClassName='rounded-none!'
 						openMenuOnFocus
 						autoFocus
 						ref={this.selectElementRef}

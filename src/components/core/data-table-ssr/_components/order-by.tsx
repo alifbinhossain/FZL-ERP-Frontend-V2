@@ -23,8 +23,8 @@ export function TableOrderBy<TData>({ table }: TableViewOptionsProps<TData>) {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button aria-label='Column Options' variant='gradient' size='sm' className='hidden lg:flex'>
+			<DropdownMenuTrigger>
+				<Button aria-label='Sort By' variant='gradient' size='sm' className='hidden lg:flex'>
 					{searchParams.get('orderby') === 'asc' ? (
 						<ArrowDownAZ className='size-4' />
 					) : searchParams.get('orderby') === 'desc' ? (

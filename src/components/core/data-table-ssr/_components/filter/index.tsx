@@ -57,7 +57,7 @@ function TableFilter<T>({ options }: { options: ITableFilterOptionSSR<T>[] }) {
 	return (
 		<TableFilterProvider defaultValues={defaultValues}>
 			<Sheet>
-				<SheetTrigger asChild>
+				<SheetTrigger>
 					<Button aria-label='Filters All Columns' variant='gradient' size='sm' className='hidden lg:flex'>
 						<MixerHorizontalIcon className='size-4' />
 						Filters

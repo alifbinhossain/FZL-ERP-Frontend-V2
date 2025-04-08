@@ -1,11 +1,12 @@
 import React from 'react';
+import { ITestDetails } from '@/pages/template/_config/columns/columns.type';
 
 import SectionContainer from '@/components/others/section-container';
 import TableList, { ITableListItems } from '@/components/others/table-list';
 
 import { formatDateTable } from '@/utils/formatDate';
 
-import { ITestDetails } from '../../_config/columns/columns.type'; // TODO: update data type
+// TODO: update data type
 
 const Information: React.FC<{ data: ITestDetails }> = ({ data }) => {
 	// TODO: update the renderItems to match the data type

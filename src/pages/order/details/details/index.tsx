@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
+import { ITestDetails } from '@/pages/template/_config/columns/columns.type'; // TODO: replace with details data type
+
+import { useTestDetailsByUUID } from '@/pages/template/_config/query'; // TODO: replace with details query
 import { useParams } from 'react-router-dom';
 
-import { ITestDetails } from '../../_config/columns/columns.type'; // TODO: replace with details data type
-import { useTestDetailsByUUID } from '../../_config/query'; // TODO: replace with details query
 import EntryTable from './entry-table';
 import Information from './information';
 

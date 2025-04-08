@@ -45,7 +45,7 @@ const SpreadsheetDynamicFields: React.FC<
 				autoColumnSize={false}
 				autoRowSize={false}
 				customBorders={true}
-				headerClassName='h-8 flex items-center whitespace-nowrap !px-3 text-left align-middle text-sm font-medium tracking-wide text-primary first:pl-6 dark:text-neutral-400 [&:has([role=checkbox])]:pr-0 bg-base-200'
+				headerClassName='h-8 flex items-center whitespace-nowrap px-3! text-left align-middle text-sm font-medium tracking-wide text-primary first:pl-6 dark:text-neutral-400 [&:has([role=checkbox])]:pr-0 bg-base-200'
 				afterChange={(changes) => {
 					changes?.forEach(([row, prop, oldValue, newValue]) => {
 						const field = fieldDefs.find((field) => field.accessorKey === prop);

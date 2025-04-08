@@ -1,26 +1,29 @@
+'use client';
+
 import * as React from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { Check } from 'lucide-react';
+import { CheckIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
-const Checkbox = React.forwardRef<
-	React.ElementRef<typeof CheckboxPrimitive.Root>,
-	React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
-	<CheckboxPrimitive.Root
-		ref={ref}
-		className={cn(
-			'peer h-4 w-4 shrink-0 rounded-sm border border-secondary/30 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-base-300 data-[state=checked]:text-secondary',
-			className
-		)}
-		{...props}
-	>
-		<CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
-			<Check className='h-4 w-4' />
-		</CheckboxPrimitive.Indicator>
-	</CheckboxPrimitive.Root>
-));
-Checkbox.displayName = CheckboxPrimitive.Root.displayName;
+function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
+	return (
+		<CheckboxPrimitive.Root
+			data-slot='checkbox'
+			className={cn(
+				'peer size-4 shrink-0 rounded-[4px] border border-neutral-200 shadow-xs outline-hidden transition-shadow focus-visible:border-neutral-950 focus-visible:ring-[3px] focus-visible:ring-neutral-950/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-red-500 aria-invalid:ring-red-500/20 data-[state=checked]:border-neutral-900 data-[state=checked]:bg-neutral-900 data-[state=checked]:text-neutral-50 dark:border-neutral-800 dark:bg-neutral-200/30 dark:dark:bg-neutral-800/30 dark:focus-visible:border-neutral-300 dark:focus-visible:ring-neutral-300/50 dark:aria-invalid:border-red-900 dark:aria-invalid:ring-red-500/40 dark:aria-invalid:ring-red-900/20 dark:dark:aria-invalid:ring-red-900/40 dark:data-[state=checked]:border-neutral-50 dark:dark:data-[state=checked]:bg-neutral-50 dark:data-[state=checked]:bg-neutral-50 dark:data-[state=checked]:bg-neutral-900 dark:data-[state=checked]:text-neutral-900',
+				className
+			)}
+			{...props}
+		>
+			<CheckboxPrimitive.Indicator
+				data-slot='checkbox-indicator'
+				className='flex items-center justify-center text-current transition-none'
+			>
+				<CheckIcon className='size-3.5' />
+			</CheckboxPrimitive.Indicator>
+		</CheckboxPrimitive.Root>
+	);
+}
 
 export { Checkbox };

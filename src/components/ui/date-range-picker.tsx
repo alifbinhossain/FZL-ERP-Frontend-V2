@@ -314,7 +314,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 			size={'sm'}
 			className={cn(
 				'flex w-full justify-start text-left',
-				isSelected && 'pointer-events-none bg-primary text-primary-foreground'
+				isSelected && 'bg-primary text-primary-foreground pointer-events-none'
 			)}
 			variant='ghost'
 			onClick={() => {
@@ -349,7 +349,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 				setIsOpen(open);
 			}}
 		>
-			<PopoverTrigger asChild>
+			<PopoverTrigger>
 				<Button aria-label='Open date range picker' size={'sm'} variant='gradient'>
 					<CalendarIcon className='size-4' />
 					<div className='text-right'>
@@ -431,7 +431,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 							</div>
 						</div>
 
-						<div className='flex flex-col items-center justify-center bg-base-150 py-4 lg:flex-row lg:items-start lg:py-0'>
+						<div className='bg-base-150 flex flex-col items-center justify-center py-4 lg:flex-row lg:items-start lg:py-0'>
 							{isSmallScreen && (
 								<Select
 									defaultValue={selectedPreset}
@@ -442,7 +442,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 									<SelectTrigger className='mx-auto w-[200px]'>
 										<SelectValue placeholder='Select...' />
 									</SelectTrigger>
-									<SelectContent className='z-[999]'>
+									<SelectContent className='z-999'>
 										{PRESETS.map((preset) => (
 											<SelectItem key={preset.name} value={preset.name}>
 												{preset.label}

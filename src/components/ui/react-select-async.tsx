@@ -25,7 +25,7 @@ const classNames = (extraControlClassName?: string): ClassNamesConfig => ({
 			'bg-gradient min-h-10 rounded-md border border-input px-3 py-2 text-sm text-foreground',
 			isFocused && 'outline outline-2 outline-offset-2 outline-secondary',
 			isDisabled &&
-				'cursor-not-allowed border-destructive/50 !from-destructive/5 !to-destructive/5 text-destructive',
+				'cursor-not-allowed border-destructive/50 from-destructive/5! to-destructive/5! text-destructive',
 			extraControlClassName
 		),
 	placeholder: () => 'text-muted-foreground text-sm',

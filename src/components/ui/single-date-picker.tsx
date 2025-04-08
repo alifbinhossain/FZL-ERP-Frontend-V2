@@ -21,14 +21,18 @@ interface IProps {
 const SingleDatePicker: React.FC<IProps> = ({ selected, onSelect, disableIcon = false, className, size = 'sm' }) => {
 	if (!selected || !isValid(selected)) return;
 
+	console.log({
+		selected,
+	});
+
 	return (
 		<Popover>
-			<PopoverTrigger asChild>
+			<PopoverTrigger>
 				<Button
 					size={size}
 					variant={'outline'}
 					className={cn(
-						'min-w-[140px] max-w-fit justify-start text-left font-normal transition-none active:scale-100',
+						'max-w-fit min-w-[140px] justify-start text-left font-normal transition-none active:scale-100',
 						!selected && 'text-muted-foreground',
 						className
 					)}
@@ -41,6 +45,7 @@ const SingleDatePicker: React.FC<IProps> = ({ selected, onSelect, disableIcon = 
 				<Calendar
 					mode='single'
 					selected={selected}
+					defaultMonth={selected}
 					onSelect={(date) => {
 						if (!date) return;
 						onSelect(date);

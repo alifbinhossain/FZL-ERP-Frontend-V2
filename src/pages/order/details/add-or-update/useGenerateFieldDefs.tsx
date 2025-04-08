@@ -1,10 +1,9 @@
+import { ITest3 } from '@/pages/template/_config/schema';
 import { UseFormWatch } from 'react-hook-form';
 
 import FieldActionButton from '@/components/buttons/field-action';
 import { FieldDef } from '@core/form/form-dynamic-fields/types';
 import { IFormSelectOption } from '@core/form/types';
-
-import { ITest3 } from '../../_config/schema';
 
 interface IGenerateFieldDefsProps {
 	copy: (index: number) => void;

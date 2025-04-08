@@ -26,12 +26,12 @@ export function TableColumnHeader<TData, TValue>({ column, className, isSSR }: T
 	return (
 		<div className={cn('flex items-center', className)}>
 			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
+				<DropdownMenuTrigger>
 					<Button
 						aria-label='Sort Column'
 						variant='ghost'
 						size='sm'
-						className='-ml-3 h-7 active:scale-100 data-[state=open]:bg-base-300'
+						className='data-[state=open]:bg-base-300 -ml-3 h-7 active:scale-100'
 					>
 						<span>{title}</span>
 						{column.getIsSorted() === 'desc' ? (
@@ -47,11 +47,11 @@ export function TableColumnHeader<TData, TValue>({ column, className, isSSR }: T
 					{!isSSR && (
 						<>
 							<DropdownMenuItem onClick={() => column.toggleSorting(false)}>
-								<ArrowUpIcon className='mr-2 size-3.5 text-muted-foreground/70' />
+								<ArrowUpIcon className='text-muted-foreground/70 mr-2 size-3.5' />
 								Asc
 							</DropdownMenuItem>
 							<DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-								<ArrowDownIcon className='mr-2 size-3.5 text-muted-foreground/70' />
+								<ArrowDownIcon className='text-muted-foreground/70 mr-2 size-3.5' />
 								Desc
 							</DropdownMenuItem>
 
@@ -70,9 +70,9 @@ export function TableColumnHeader<TData, TValue>({ column, className, isSSR }: T
 							}}
 						>
 							{column.getIsPinned() === 'left' ? (
-								<PinOff className='mr-2 size-3.5 text-muted-foreground/70' />
+								<PinOff className='text-muted-foreground/70 mr-2 size-3.5' />
 							) : (
-								<Pin className={'mr-2 size-3.5 text-muted-foreground/70'} />
+								<Pin className={'text-muted-foreground/70 mr-2 size-3.5'} />
 							)}
 							<span>{column.getIsPinned() === 'left' ? 'Unpin' : 'Pin to left'}</span>
 						</DropdownMenuItem>
@@ -80,7 +80,7 @@ export function TableColumnHeader<TData, TValue>({ column, className, isSSR }: T
 
 					{column.getCanHide() && (
 						<DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
-							<EyeNoneIcon className='mr-2 size-3.5 text-muted-foreground/70' />
+							<EyeNoneIcon className='text-muted-foreground/70 mr-2 size-3.5' />
 							Hide
 						</DropdownMenuItem>
 					)}
@@ -89,12 +89,12 @@ export function TableColumnHeader<TData, TValue>({ column, className, isSSR }: T
 
 			{column.getCanFilter() ? (
 				<Popover>
-					<PopoverTrigger asChild>
+					<PopoverTrigger>
 						<Button aria-label='Column Filter' variant='ghost' size={'icon'}>
 							<ListFilter className='size-4' />
 						</Button>
 					</PopoverTrigger>
-					<PopoverContent className='w-fit bg-background p-2'>
+					<PopoverContent className='bg-background w-fit p-2'>
 						<TableColumnFilter column={column} />
 					</PopoverContent>
 				</Popover>

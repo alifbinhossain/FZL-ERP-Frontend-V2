@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-	'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-95  duration-100',
+	'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-95  duration-100',
 	{
 		variants: {
 			variant: {
@@ -49,34 +49,38 @@ interface IconRefProps {
 	iconPlacement?: undefined;
 }
 
-export interface ButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-		VariantProps<typeof buttonVariants> {
+export interface ButtonProps extends React.ComponentProps<'button'>, VariantProps<typeof buttonVariants> {
 	asChild?: boolean;
 }
 
 export type ButtonIconProps = IconProps | IconRefProps;
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps & ButtonIconProps>(
-	({ className, variant, size, asChild = false, Icon, iconPlacement, ...props }, ref) => {
-		const Comp = asChild ? Slot : 'button';
-		return (
-			<Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
-				{Icon && iconPlacement === 'left' && (
-					<div className='w-5 pr-2 transition-all duration-200'>
-						<Icon />
-					</div>
-				)}
-				{props.children}
-				{Icon && iconPlacement === 'right' && (
-					<div className='w-5 pr-2 transition-all duration-200'>
-						<Icon />
-					</div>
-				)}
-			</Comp>
-		);
-	}
-);
-Button.displayName = 'Button';
+function Button({
+	className,
+	variant,
+	size,
+	asChild = false,
+	Icon,
+	iconPlacement,
+	...props
+}: ButtonProps & ButtonIconProps) {
+	const Comp = asChild ? Slot : 'button';
+
+	return (
+		<Comp data-slot='button' className={cn(buttonVariants({ variant, size, className }))} {...props}>
+			{Icon && iconPlacement === 'left' && (
+				<div className='w-5 pr-2 transition-all duration-200'>
+					<Icon />
+				</div>
+			)}
+			{props.children}
+			{Icon && iconPlacement === 'right' && (
+				<div className='w-5 pr-2 transition-all duration-200'>
+					<Icon />
+				</div>
+			)}
+		</Comp>
+	);
+}
 
 export { Button, buttonVariants };
