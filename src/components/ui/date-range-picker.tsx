@@ -431,7 +431,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 							</div>
 						</div>
 
-						<div className='bg-base-150 flex flex-col items-center justify-center py-4 lg:flex-row lg:items-start lg:py-0'>
+						<div className='flex flex-col items-center justify-center bg-white py-4 lg:flex-row lg:items-start lg:py-0'>
 							{isSmallScreen && (
 								<Select
 									defaultValue={selectedPreset}
