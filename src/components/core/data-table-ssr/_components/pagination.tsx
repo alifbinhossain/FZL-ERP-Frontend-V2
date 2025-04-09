@@ -46,6 +46,7 @@ export function TablePagination() {
 						<div className='flex items-center space-x-2'>
 							<p className='text-sm font-medium'>Go to page</p>
 							<DebouncedInput
+								disabled={pagination?.total_page === 1}
 								type='number'
 								value={searchParams.get('page') || ''}
 								min={1}
