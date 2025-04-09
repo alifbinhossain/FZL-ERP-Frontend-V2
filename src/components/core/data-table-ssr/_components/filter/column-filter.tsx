@@ -47,6 +47,8 @@ function TableColumnFilter<T>({ option, isPin }: { option: ITableFilterOptionSSR
 		}
 	};
 
+	const isPinned = pinFilters && pinFilters?.find((f) => f.accessor === option.accessor);
+
 	return (
 		<div className='flex min-w-[200px] flex-col gap-0.5'>
 			<div className='flex items-center justify-between gap-2'>
@@ -54,17 +56,10 @@ function TableColumnFilter<T>({ option, isPin }: { option: ITableFilterOptionSSR
 				<Button
 					onClick={() => handlePinning(option)}
 					className='size-8 rounded-full p-0'
-					variant={'ghost'}
+					variant={isPinned ? 'ghost-destructive' : 'ghost'}
 					size={'icon'}
 				>
-					<Pin
-						className={cn(
-							'size-4',
-							pinFilters && pinFilters?.find((f) => f.accessor === option.accessor)
-								? 'text-destructive rotate-45'
-								: 'text-muted-foreground'
-						)}
-					/>
+					<Pin className={cn('size-4', isPinned ? 'text-destructive rotate-45' : 'text-muted-foreground')} />
 				</Button>
 			</div>
 			{renderFilter()}
