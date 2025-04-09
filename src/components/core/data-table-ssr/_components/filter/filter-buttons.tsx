@@ -4,14 +4,14 @@ import useTableSSR from '@/hooks/useTableSSR';
 
 import { Button } from '@/components/ui/button';
 
-const Footer = () => {
+const FilterButtons = () => {
 	const { handleSearchParams, clearSearchParams } = useTableSSR();
 	const { filters, isFiltered, clearFilters } = useTableFilter();
 
 	if (!isFiltered()) return null;
 
 	return (
-		<div className='flex w-full items-center justify-between gap-2'>
+		<div className='flex w-full items-center gap-4'>
 			<Button
 				onClick={() => {
 					clearFilters();
@@ -44,4 +44,4 @@ const Footer = () => {
 	);
 };
 
-export default Footer;
+export default FilterButtons;

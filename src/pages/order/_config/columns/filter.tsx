@@ -25,6 +25,7 @@ export const orderDetailsFilters: ITableFilterOptionSSR<IOrderDetails>[] = [
 		label: 'Order Number',
 		type: 'select',
 		apiUrl: '/other/order/info/value/label',
+		isPinned: true,
 	},
 	{
 		accessor: 'marketing_uuid',

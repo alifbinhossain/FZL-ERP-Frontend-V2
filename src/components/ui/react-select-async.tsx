@@ -22,10 +22,10 @@ const selectStyles: StylesConfig = {
 const classNames = (extraControlClassName?: string): ClassNamesConfig => ({
 	control: ({ isFocused, isDisabled }) =>
 		cn(
-			'bg-gradient min-h-10 rounded-md border border-input px-3 py-2 text-sm text-foreground',
-			isFocused && 'outline outline-2 outline-offset-2 outline-secondary',
+			'bg-gradient border-input text-foreground min-h-10 rounded-md border px-3 py-2 text-sm',
+			isFocused && 'outline-secondary outline outline-2 outline-offset-2',
 			isDisabled &&
-				'cursor-not-allowed border-destructive/50 from-destructive/5! to-destructive/5! text-destructive',
+				'border-destructive/50 from-destructive/5! to-destructive/5! text-destructive cursor-not-allowed',
 			extraControlClassName
 		),
 	placeholder: () => 'text-muted-foreground text-sm',
@@ -36,7 +36,7 @@ const classNames = (extraControlClassName?: string): ClassNamesConfig => ({
 	menu: () => 'bg-base overflow-hidden  rounded shadow-2xl text-sm border border-input p-1',
 	option: ({ isFocused, isSelected }) =>
 		cn(
-			'rounded px-3 py-1.5 text-sm text-foreground',
+			'text-foreground rounded px-3 py-1.5 text-sm',
 			isFocused && 'bg-base-200',
 			isSelected && 'before:mr-1 before:content-["✔"]'
 		),
@@ -73,14 +73,14 @@ const ReactSelectAsync = forwardRef<Ref, AsyncProps<Option, any, any> & { extraC
 				styles={selectStyles as any}
 				components={{
 					ClearIndicator: (props) => (
-						<components.ClearIndicator className='mr-1 border-r border-r-input pr-1' {...props}>
-							<X className='size-5 font-medium text-destructive' />
+						<components.ClearIndicator className='border-r-input mr-1 border-r pr-1' {...props}>
+							<X className='text-destructive size-5 font-medium' />
 						</components.ClearIndicator>
 					),
 
 					MultiValueRemove: (props) => (
 						<components.MultiValueRemove {...props}>
-							<X className='ml-1 size-4 font-medium text-destructive' />
+							<X className='text-destructive ml-1 size-4 font-medium' />
 						</components.MultiValueRemove>
 					),
 
@@ -88,7 +88,7 @@ const ReactSelectAsync = forwardRef<Ref, AsyncProps<Option, any, any> & { extraC
 						<components.DropdownIndicator {...props}>
 							<ChevronDown
 								className={cn(
-									'size-5 transform text-secondary/50 transition-transform duration-300',
+									'text-secondary/50 size-5 transform transition-transform duration-300',
 									props.selectProps.menuIsOpen && 'rotate-90'
 								)}
 							/>

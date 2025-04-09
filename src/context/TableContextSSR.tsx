@@ -69,6 +69,10 @@ interface ITableContextSSR<TData> {
 	isClear?: boolean;
 	filterOptions?: ITableFilterOptionSSR<any>[];
 	isFiltered?: boolean;
+	pinFilters: [] | ITableFilterOptionSSR<any>[];
+	setPinFilters: React.Dispatch<React.SetStateAction<ITableFilterOptionSSR<any>[] | []>>;
+	addPinFilter: (filter: ITableFilterOptionSSR<any>) => void;
+	removePinFilter: (filter: ITableFilterOptionSSR<any>) => void;
 }
 
 export const TableContextSSR = createContext({} as ITableContextSSR<any>);
@@ -123,7 +127,9 @@ function TableProviderSSR<TData, TValue>({
 	filterOptions,
 }: ITableProviderProps<TData, TValue>) {
 	const [searchParams, setSearchParams] = useSearchParams();
-
+	const [pinFilters, setPinFilters] = useState<ITableFilterOptionSSR<any>[] | []>(
+		filterOptions?.filter((f) => f.isPinned) || []
+	);
 	const [isMounted, setIsMounted] = useState(false);
 	const [isFiltered, setIsFiltered] = useState(false);
 
@@ -139,6 +145,23 @@ function TableProviderSSR<TData, TValue>({
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(defaultVisibleColumns);
 
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
+	const addPinFilter = useCallback(
+		(filter: ITableFilterOptionSSR<any>) => {
+			const exist = pinFilters.find((f) => f.accessor === filter.accessor);
+			if (exist) {
+				setPinFilters((prev) => prev.filter((f) => f.accessor !== filter.accessor));
+				setPinFilters((prev) => [...prev, filter]);
+			} else {
+				setPinFilters((prev) => [...prev, filter]);
+			}
+		},
+		[pinFilters]
+	);
+
+	const removePinFilter = useCallback((filter: ITableFilterOptionSSR<any>) => {
+		setPinFilters((prev) => prev.filter((f) => f.accessor !== filter.accessor));
+	}, []);
 
 	// Fix error on react table, when the table is not mounted
 	useLayoutEffect(() => {
@@ -242,6 +265,10 @@ function TableProviderSSR<TData, TValue>({
 			isClear,
 			filterOptions,
 			isFiltered,
+			pinFilters,
+			setPinFilters,
+			addPinFilter,
+			removePinFilter,
 		}),
 		[
 			title,
@@ -268,6 +295,9 @@ function TableProviderSSR<TData, TValue>({
 			isClear,
 			filterOptions,
 			isFiltered,
+			pinFilters,
+			addPinFilter,
+			removePinFilter,
 		]
 	);
 

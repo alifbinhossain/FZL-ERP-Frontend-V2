@@ -5,7 +5,7 @@ import useTQuery from '@/hooks/useTQuery';
 import { IFormSelectOption } from '@/components/core/form/types';
 import ReactSelectAsync from '@/components/ui/react-select-async';
 
-function Select<T>({ label, accessor, apiUrl }: ITableFilterOptionSSR<T>) {
+function Select<T>({ label, accessor, apiUrl, isPin }: ITableFilterOptionSSR<T> & { isPin?: boolean }) {
 	const { addFilter, filters } = useTableFilter();
 
 	const { data } = useTQuery<IFormSelectOption[]>({
@@ -21,6 +21,10 @@ function Select<T>({ label, accessor, apiUrl }: ITableFilterOptionSSR<T>) {
 
 	return (
 		<ReactSelectAsync
+			menuPortalTarget={isPin ? document.body : undefined}
+			styles={{ menuPortal: (base) => ({ ...base, zIndex: 999999999999999 }) }}
+			name={label}
+			id={label}
 			onChange={(option: any) => {
 				addFilter(accessor as string, option?.value as string);
 			}}
