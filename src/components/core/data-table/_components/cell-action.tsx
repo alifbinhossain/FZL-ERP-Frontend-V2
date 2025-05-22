@@ -19,7 +19,7 @@ function TableCellAction<TData, TValue>({ info, isSSR }: ITableCellActionProps<T
 
 	return (
 		<div className='flex w-full items-center justify-center gap-1'>
-			{updateAccess && (
+			{updateAccess && (isSSR ? handleUpdateSSR : handleUpdate) && (
 				<Button
 					aria-label='Edit Row'
 					onClick={() => (isSSR ? handleUpdateSSR?.(row) : handleUpdate?.(row))}
@@ -30,7 +30,7 @@ function TableCellAction<TData, TValue>({ info, isSSR }: ITableCellActionProps<T
 					<SquarePen className='size-4' />
 				</Button>
 			)}
-			{deleteAccess && (
+			{deleteAccess && (isSSR ? handleDeleteSSR : handleDelete) && (
 				<Button
 					aria-label='Delete Row'
 					onClick={() => (isSSR ? handleDeleteSSR?.(row) : handleDelete?.(row))}

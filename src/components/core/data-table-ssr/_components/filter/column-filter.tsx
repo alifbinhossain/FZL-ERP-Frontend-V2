@@ -59,7 +59,10 @@ function TableColumnFilter<T>({ option, isPin }: { option: ITableFilterOptionSSR
 					variant={isPinned ? 'ghost-destructive' : 'ghost'}
 					size={'icon'}
 				>
-					<Pin className={cn('size-4', isPinned ? 'text-destructive rotate-45' : 'text-muted-foreground')} />
+					<Pin
+						fill={isPinned ? 'currentColor' : 'none'}
+						className={cn('size-4', isPinned ? 'text-destructive rotate-45' : 'text-muted-foreground')}
+					/>
 				</Button>
 			</div>
 			{renderFilter()}
